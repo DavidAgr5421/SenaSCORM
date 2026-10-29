@@ -13,7 +13,7 @@ function disable_console_logs(){
 $( document ).ready(function()
 {
 
-    disable_console_logs();
+    // disable_console_logs();
 
     if(Miles_are_we_scorm())
     {

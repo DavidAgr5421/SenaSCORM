@@ -278,6 +278,38 @@ def find_course_root_and_entry(extracted_dir: Path):
     return extracted_dir, "index.html", parse_manifest_info(extracted_dir / "imsmanifest.xml")
 
 
+def patch_course_for_web(course_root: Path):
+    """Aplica parches de compatibilidad web para que los paquetes SCORM funcionen en iframes modernos sin errores."""
+    try:
+        # 1. Doohan.js: No silenciar console.log / console.error para facilitar depuracion
+        doohan = course_root / "static" / "application" / "js" / "Doohan.js"
+        if doohan.exists():
+            c = doohan.read_text(encoding="utf-8", errors="ignore")
+            if "disable_console_logs();" in c:
+                c = c.replace("disable_console_logs();", "// disable_console_logs();")
+                doohan.write_text(c, encoding="utf-8")
+
+        # 2. SCORM APIWrapper: Proteger llamadas a win.parent contra excepciones cross-origin
+        for wrapper in course_root.rglob("*APIWrapper*.js"):
+            c = wrapper.read_text(encoding="utf-8", errors="ignore")
+            if "function findAPI(win)" in c and "/* patched */" not in c:
+                c = c.replace("function findAPI(win)\n{", "function findAPI(win)\n{\n   /* patched */ try {")
+                c = c.replace("return win.API_1484_11;\n}", "return win.API_1484_11;\n   } catch(e) { return null; }\n}")
+                wrapper.write_text(c, encoding="utf-8")
+
+        # 3. Mediaelement: Evitar caidas por lectura de window.parent.location
+        for me in course_root.rglob("mediaelement*.js"):
+            c = me.read_text(encoding="utf-8", errors="ignore")
+            if "a.isInIframe=window.location!=window.parent.location;" in c:
+                c = c.replace(
+                    "a.isInIframe=window.location!=window.parent.location;",
+                    "try{a.isInIframe=window.location!=window.parent.location}catch(e){a.isInIframe=true};"
+                )
+                me.write_text(c, encoding="utf-8")
+    except Exception:
+        pass
+
+
 # --- PANEL IZQUIERDO (AZUL OSCURO VERDE): SUBIR ARCHIVO Y VISUALIZACION ---
 with st.sidebar:
     st.markdown('<div class="sidebar-title">Configuracion y Carga</div>', unsafe_allow_html=True)
@@ -328,12 +360,15 @@ with st.sidebar:
                     z.extractall(target_extract)
                 if zip_path.exists():
                     zip_path.unlink()
+                patch_course_for_web(target_extract)
 
         course_root, entry_filename, course_info = find_course_root_and_entry(target_extract)
+        patch_course_for_web(course_root)
         current_course_dir = course_root
         st.caption(f"Cargado: {uploaded_zip.name}")
 
     elif use_sample and sample_path.exists():
+        patch_course_for_web(sample_path)
         current_course_dir = sample_path
         course_info = parse_manifest_info(sample_path / "imsmanifest.xml")
         entry_filename = course_info.get("entry_file", "index.html")
@@ -382,6 +417,20 @@ with col_viewer:
         f"{public_url}?view=embed",
         height=viewer_height,
         width="stretch"
+    )
+
+    st.markdown(
+        f'''
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; padding: 8px 12px; background-color: #F8FAF9; border: 1px solid #E2ECE5; border-radius: 6px;">
+            <span style="font-size: 0.8rem; color: #475569;">
+                Si tu navegador restringe marcos incrustados o deseas maxima comodidad:
+            </span>
+            <a href="{public_url}" target="_blank" style="font-size: 0.8rem; font-weight: 700; color: #007832; text-decoration: underline;">
+                Abrir curso en pestaña directa
+            </a>
+        </div>
+        ''',
+        unsafe_allow_html=True
     )
 
 with col_info:
