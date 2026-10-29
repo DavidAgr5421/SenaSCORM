@@ -3,51 +3,43 @@ title: Visualizador SCORM LMS SENA
 emoji: 📦
 colorFrom: green
 colorTo: green
-sdk: docker
-app_port: 7860
+sdk: static
 pinned: false
 ---
 
-# Visualizador SCORM LMS SENA
+# Visualizador SCORM LMS SENA (Estatico 100% Gratuito)
 
-Aplicacion web de alto rendimiento basada en Python y Docker para reproducir, examinar y validar paquetes educativos **SCORM (1.2 y 2004 4th Edition)** y recursos HTML5 interactivos directamente en el navegador.
+Plataforma web estatica de alto rendimiento para reproducir, examinar y validar paquetes educativos **SCORM (1.2 y 2004 4th Edition)** y recursos HTML5 interactivos directamente en el navegador, **sin costo, sin backend y sin consumir almacenamiento en servidores**.
 
 ---
 
 ## Caracteristicas
 
-- **Servidor nativo sin bloqueos de sandbox:** Reproduce actividades interactivas, grabaciones de voz, reproduccion de audio HTML5 y ejercicios de arrastrar y soltar (*drag & drop*) sin restricciones de iframe ni dependencias de proxies.
-- **Carga dinamica de paquetes .ZIP:** Zona interactiva de arrastre y soltado para cargar cualquier archivo comprimido exportado desde LMS, SENA, Articulate Storyline, Adobe Captivate, iSpring o Moodle.
-- **Lector automatico de manifiesto (`imsmanifest.xml`):** Extrae organizacion, version/estandar SCORM, titulo, jerarquia de temas y archivo de entrada automaticamente.
+- **100% Estatico y Gratuito:** Compatible con Hugging Face Spaces (`sdk: static`), GitHub Pages, Vercel o Netlify.
+- **Descompresion en memoria con Service Worker:** El usuario arrastra un archivo `.zip` y la libreria `JSZip` junto con un Service Worker sirven todos los recursos (audios, scripts, JSON, XML) directamente desde la memoria RAM del navegador.
+- **Cero consumo de almacenamiento:** No se guarda ningun archivo en el servidor.
 - **Curso integrado de muestra:** Incluye el objeto de aprendizaje del SENA (*English Dot Works Nivel 5 - Welcome Home Party*).
-- **Parches web automaticos:** Neutraliza automaticamente llamadas a consolas silenciadas o verificaciones cross-origin en navegadores modernos.
-- **Estilo minimalista SENA:** Paleta institucional verde (#39A900, #007832) y blanco, panel lateral oscuro (#0A2421) y sin emojis.
+- **Lector automatico de manifiesto (`imsmanifest.xml`):** Extrae organizacion, version SCORM, titulo y jerarquia de lecciones en tiempo real mediante el DOMParser del navegador.
+- **Diseño institucional SENA:** Paleta minimalista verde (#39A900, #007832) y blanco, panel lateral oscuro (#0A2421), sin emojis.
 
 ---
 
-## Despliegue en Hugging Face Spaces (Docker)
+## Como publicar en Hugging Face Spaces (Gratis)
 
-1. Entra en [Hugging Face Spaces](https://huggingface.co/spaces) y haz clic en **"Create new Space"**.
+1. Entra a [huggingface.co/spaces](https://huggingface.co/spaces) y haz clic en **"Create new Space"**.
 2. Asigna un nombre al Space (ejemplo: `sena-scorm-viewer`).
-3. En **Space SDK**, selecciona **Docker** (Blank).
+3. En **Space SDK**, selecciona **Static** (es 100% gratuito).
 4. Elige visibilidad **Public**.
-5. Conecta tu repositorio de GitHub `DavidAgr5421/SenaSCORM` o haz `git push` a la URL del Space.
-6. ¡Listo! Hugging Face compilara el contenedor Docker y abrira la aplicacion en el puerto `7860` con certificado HTTPS publico.
+5. Conecta tu repositorio de GitHub `DavidAgr5421/SenaSCORM` (o haz `git push` a la URL del Space).
+6. ¡Listo! Al ser estatico, Hugging Face lo desplegara en 5 segundos sin necesidad de compilar Docker ni pagar nada.
 
 ---
 
 ## Ejecucion en local
 
-### Con Python:
-```bash
-pip install -r requirements.txt
-python -m uvicorn main:app --port 7860 --reload
-```
-Abre en tu navegador: `http://localhost:7860`
+Simplemente puedes usar cualquier servidor HTTP local simple:
 
-### Con Docker:
 ```bash
-docker build -t sena-scorm .
-docker run -p 7860:7860 sena-scorm
+python -m http.server 8000
 ```
-Abre en tu navegador: `http://localhost:7860`
+Y abre en tu navegador: `http://localhost:8000`

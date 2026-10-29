@@ -1,159 +1,11 @@
-import os
-import shutil
-import zipfile
-import hashlib
-import xml.etree.ElementTree as ET
-from pathlib import Path
-from typing import Dict, Any
-
-from starlette.applications import Starlette
-from starlette.routing import Route, Mount
-from starlette.responses import HTMLResponse, JSONResponse, Response
-from starlette.staticfiles import StaticFiles
-from starlette.middleware import Middleware
-from starlette.middleware.cors import CORSMiddleware
-
-BASE_DIR = Path(__file__).resolve().parent
-STATIC_DIR = BASE_DIR / "static"
-COURSES_DIR = STATIC_DIR / "courses"
-UPLOADS_DIR = BASE_DIR / "uploads"
-
-COURSES_DIR.mkdir(parents=True, exist_ok=True)
-UPLOADS_DIR.mkdir(parents=True, exist_ok=True)
-
-
-def parse_manifest_info(manifest_path: Path) -> Dict[str, Any]:
-    """Extrae metadatos del archivo imsmanifest.xml sin emojis."""
-    info = {
-        "is_scorm": False,
-        "title": "Contenido interactivo",
-        "version": "Contenido Web",
-        "organization": "SENA",
-        "hierarchy": [],
-        "entry_file": "index.html"
-    }
-
-    if not manifest_path.exists():
-        return info
-
-    try:
-        tree = ET.parse(manifest_path)
-        root = tree.getroot()
-        info["is_scorm"] = True
-
-        for elem in root.iter():
-            if elem.tag.endswith("schemaversion") and elem.text:
-                info["version"] = f"SCORM {elem.text.strip()}"
-                break
-
-        for org in root.iter():
-            if org.tag.endswith("organization"):
-                title_elem = org.find("./{*}title")
-                if title_elem is not None and title_elem.text:
-                    info["organization"] = title_elem.text.strip()
-                break
-
-        titles = []
-        for elem in root.iter():
-            if elem.tag.endswith("title") and elem.text:
-                t = elem.text.strip()
-                if t and t not in titles:
-                    titles.append(t)
-        if titles:
-            info["hierarchy"] = titles
-            info["title"] = titles[-1]
-
-        for resource in root.iter():
-            if resource.tag.endswith("resource"):
-                href = resource.attrib.get("href")
-                if href:
-                    clean_href = href.strip().lstrip("/").lstrip("./")
-                    if clean_href:
-                        info["entry_file"] = clean_href
-                    break
-    except Exception:
-        pass
-
-    return info
-
-
-def find_course_root_and_entry(target_dir: Path):
-    """Encuentra la carpeta raiz real del curso y su archivo inicial."""
-    manifests = list(target_dir.rglob("imsmanifest.xml"))
-    if manifests:
-        root_dir = manifests[0].parent
-        manifest_info = parse_manifest_info(manifests[0])
-        entry = manifest_info.get("entry_file", "index.html")
-        if (root_dir / entry).exists():
-            return root_dir, entry, manifest_info
-
-    common_entries = [
-        "index.html", "index_lms.html", "story.html",
-        "launcher.html", "player.html", "default.html", "presentation.html"
-    ]
-    for root, _, files in os.walk(target_dir):
-        root_path = Path(root)
-        for cand in common_entries:
-            if cand in files:
-                m_info = parse_manifest_info(root_path / "imsmanifest.xml")
-                m_info["entry_file"] = cand
-                return root_path, cand, m_info
-
-    html_files = list(target_dir.rglob("*.html"))
-    if html_files:
-        chosen = html_files[0]
-        return chosen.parent, chosen.name, parse_manifest_info(chosen.parent / "imsmanifest.xml")
-
-    return target_dir, "index.html", parse_manifest_info(target_dir / "imsmanifest.xml")
-
-
-def patch_course_for_web(course_root: Path):
-    """Aplica parches de compatibilidad web para que los scripts del curso ejecuten sin errores."""
-    try:
-        # 1. Doohan.js: No silenciar console.log / console.error
-        doohan = course_root / "static" / "application" / "js" / "Doohan.js"
-        if doohan.exists():
-            c = doohan.read_text(encoding="utf-8", errors="ignore")
-            if "disable_console_logs();" in c:
-                c = c.replace("disable_console_logs();", "// disable_console_logs();")
-                doohan.write_text(c, encoding="utf-8")
-
-        # 2. SCORM APIWrapper: Evitar errores cross-origin al buscar API en win.parent
-        for wrapper in course_root.rglob("*APIWrapper*.js"):
-            c = wrapper.read_text(encoding="utf-8", errors="ignore")
-            if "function findAPI(win)" in c and "/* patched */" not in c:
-                c = c.replace("function findAPI(win)\n{", "function findAPI(win)\n{\n   /* patched */ try {")
-                c = c.replace("return win.API_1484_11;\n}", "return win.API_1484_11;\n   } catch(e) { return null; }\n}")
-                wrapper.write_text(c, encoding="utf-8")
-
-        # 3. Mediaelement: Evitar SecurityError por window.parent.location
-        for me in course_root.rglob("mediaelement*.js"):
-            c = me.read_text(encoding="utf-8", errors="ignore")
-            if "a.isInIframe=window.location!=window.parent.location;" in c:
-                c = c.replace(
-                    "a.isInIframe=window.location!=window.parent.location;",
-                    "try{a.isInIframe=window.location!=window.parent.location}catch(e){a.isInIframe=true};"
-                )
-                me.write_text(c, encoding="utf-8")
-    except Exception:
-        pass
-
-
-# Parchear curso de muestra integrado
-sample_course_path = COURSES_DIR / "sena_eng_n5"
-if sample_course_path.exists():
-    patch_course_for_web(sample_course_path)
-
-
-# Endpoints HTTP
-async def index_page(request):
-    """Genera la interfaz web minimalista en tonos verde SENA y blanco."""
-    html_content = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visualizador SCORM LMS SENA</title>
+    <!-- JSZip para descompresion en memoria en el navegador sin almacenamiento de servidor -->
+    <script src="static/js/jszip.min.js"></script>
     <style>
         :root {
             --sena-green: #39A900;
@@ -222,7 +74,7 @@ async def index_page(request):
             background-color: var(--panel-card);
             border: 2px dashed #20554E;
             border-radius: 8px;
-            padding: 20px 14px;
+            padding: 22px 14px;
             text-align: center;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -287,12 +139,13 @@ async def index_page(request):
             display: inline-block;
             font-size: 0.72rem;
             font-weight: 700;
-            padding: 4px 8px;
+            padding: 5px 10px;
             border-radius: 4px;
             background-color: #16403B;
             color: #8CEAB1;
             margin-bottom: 16px;
             border: 1px solid #20554E;
+            word-break: break-all;
         }
 
         /* AREA CENTRAL: Visor y Tarjetas a la derecha */
@@ -484,7 +337,7 @@ async def index_page(request):
         <div id="upload-status" class="status-badge">Curso de muestra activo</div>
 
         <div class="sidebar-section-title" style="margin-top: 10px;">Visualizacion</div>
-        <a id="btn-fullscreen" href="/courses/sample/index.html" target="_blank" class="btn-action">Pantalla completa</a>
+        <a id="btn-fullscreen" href="./static/courses/sena_eng_n5/index.html" target="_blank" class="btn-action">Pantalla completa</a>
         <button id="btn-reload" class="btn-action btn-secondary" onclick="reloadViewer()">Reiniciar visor</button>
         <button id="btn-sample" class="btn-action btn-secondary" onclick="loadSampleCourse()">Cargar curso muestra</button>
     </div>
@@ -502,13 +355,13 @@ async def index_page(request):
                 <div class="iframe-container">
                     <div id="loader" class="loading-overlay">
                         <div class="spinner"></div>
-                        <div style="font-size: 0.85rem; font-weight: 600; color: #007832;">Procesando y cargando leccion...</div>
+                        <div id="loader-text" style="font-size: 0.85rem; font-weight: 600; color: #007832;">Descomprimiendo paquete en memoria...</div>
                     </div>
-                    <iframe id="scorm-frame" src="/courses/sample/index.html"></iframe>
+                    <iframe id="scorm-frame" src="./static/courses/sena_eng_n5/index.html"></iframe>
                 </div>
                 <div class="viewer-footer">
-                    <span>Marco de reproduccion interactivo directo sin restricciones.</span>
-                    <a id="footer-link" href="/courses/sample/index.html" target="_blank">Abrir en pestaña nueva</a>
+                    <span>Reproduccion directa en navegador sin almacenamiento en servidor.</span>
+                    <a id="footer-link" href="./static/courses/sena_eng_n5/index.html" target="_blank">Abrir en pestaña nueva</a>
                 </div>
             </div>
 
@@ -552,11 +405,21 @@ async def index_page(request):
         const fileInput = document.getElementById('file-input');
         const iframe = document.getElementById('scorm-frame');
         const loader = document.getElementById('loader');
+        const loaderText = document.getElementById('loader-text');
         const statusBadge = document.getElementById('upload-status');
         const btnFullscreen = document.getElementById('btn-fullscreen');
         const footerLink = document.getElementById('footer-link');
 
-        // Drag and drop events
+        const CACHE_NAME = 'scorm-virtual-cache-v1';
+
+        // Registro de Service Worker para interceptar peticiones de recursos en memoria
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js')
+                .then(reg => console.log('Service Worker registrado correctamente'))
+                .catch(err => console.warn('Aviso: Service Worker no disponible en este contexto:', err));
+        }
+
+        // Eventos Drag and Drop
         dropzone.addEventListener('dragover', (e) => {
             e.preventDefault();
             dropzone.classList.add('dragover');
@@ -570,49 +433,216 @@ async def index_page(request):
             e.preventDefault();
             dropzone.classList.remove('dragover');
             if (e.dataTransfer.files.length > 0) {
-                handleFileUpload(e.dataTransfer.files[0]);
+                processZipFile(e.dataTransfer.files[0]);
             }
         });
 
         fileInput.addEventListener('change', (e) => {
             if (e.target.files.length > 0) {
-                handleFileUpload(e.target.files[0]);
+                processZipFile(e.target.files[0]);
             }
         });
 
-        function handleFileUpload(file) {
+        // Tipos MIME comunes
+        function getMime(filename) {
+            const ext = filename.split('.').pop().toLowerCase();
+            const map = {
+                'html': 'text/html; charset=utf-8',
+                'htm': 'text/html; charset=utf-8',
+                'js': 'application/javascript; charset=utf-8',
+                'json': 'application/json; charset=utf-8',
+                'css': 'text/css; charset=utf-8',
+                'xml': 'application/xml; charset=utf-8',
+                'png': 'image/png',
+                'jpg': 'image/jpeg',
+                'jpeg': 'image/jpeg',
+                'gif': 'image/gif',
+                'svg': 'image/svg+xml',
+                'mp3': 'audio/mpeg',
+                'wav': 'audio/wav',
+                'ogg': 'audio/ogg',
+                'woff': 'font/woff',
+                'woff2': 'font/woff2',
+                'ttf': 'font/ttf',
+                'eot': 'application/vnd.ms-fontobject'
+            };
+            return map[ext] || 'application/octet-stream';
+        }
+
+        async function processZipFile(file) {
             if (!file.name.toLowerCase().endsWith('.zip')) {
                 alert('Por favor selecciona un archivo con extension .zip');
                 return;
             }
 
             loader.style.display = 'flex';
-            statusBadge.textContent = 'Subiendo ' + file.name + '...';
+            loaderText.textContent = 'Leyendo y procesando archivo comprimido...';
+            statusBadge.textContent = 'Procesando ' + file.name;
 
-            const formData = new FormData();
-            formData.append('file', file);
+            try {
+                if ('serviceWorker' in navigator) {
+                    await navigator.serviceWorker.ready;
+                }
 
-            fetch('/api/upload', {
-                method: 'POST',
-                body: formData
-            })
-            .then(res => {
-                if (!res.ok) throw new Error('Error al procesar el paquete');
-                return res.json();
-            })
-            .then(data => {
+                const zip = await JSZip.loadAsync(file);
+                const cache = await caches.open(CACHE_NAME);
+
+                // Limpiar cache anterior
+                const existingKeys = await cache.keys();
+                await Promise.all(existingKeys.map(k => cache.delete(k)));
+
+                let manifestXml = null;
+                let rootPrefix = '';
+                const rawPaths = Object.keys(zip.files);
+
+                // Detectar archivo imsmanifest.xml
+                const manifestEntry = rawPaths.find(p => p.replace(/\\/g, '/').toLowerCase().endsWith('imsmanifest.xml'));
+                if (manifestEntry) {
+                    manifestXml = await zip.files[manifestEntry].async('string');
+                    const normalizedManifest = manifestEntry.replace(/\\/g, '/');
+                    const lastSlash = normalizedManifest.lastIndexOf('/');
+                    if (lastSlash !== -1) {
+                        rootPrefix = normalizedManifest.substring(0, lastSlash + 1);
+                    }
+                }
+
+                // Parsear manifiesto
+                const courseInfo = parseManifest(manifestXml);
+
+                // Si no hay entry_file del manifiesto, buscar un index.html
+                let entryFile = courseInfo.entry_file || 'index.html';
+                if (!courseInfo.entry_file) {
+                    const htmlMatch = rawPaths.find(p => p.replace(/\\/g, '/').toLowerCase().endsWith('index.html'));
+                    entryFile = htmlMatch ? htmlMatch.replace(/\\/g, '/').replace(rootPrefix, '') : 'index.html';
+                }
+                entryFile = entryFile.replace(/^(\.\/|\/)+/, '');
+
+                // Guardar cada archivo en el CacheStorage para que el Service Worker lo sirva
+                const baseUrl = new URL('./scorm-virtual/', window.location.href).href;
+                let processedCount = 0;
+                const totalFiles = rawPaths.filter(p => !zip.files[p].dir).length;
+
+                for (const rawPath of rawPaths) {
+                    const zipObj = zip.files[rawPath];
+                    if (zipObj.dir) continue;
+
+                    let path = rawPath.replace(/\\/g, '/');
+
+                    // Ruta relativa a la raiz del curso
+                    let relPath = path;
+                    if (rootPrefix && relPath.startsWith(rootPrefix)) {
+                        relPath = relPath.substring(rootPrefix.length);
+                    }
+                    relPath = relPath.replace(/^(\.\/|\/)+/, '');
+
+                    let fileData;
+                    // Aplicar parches de compatibilidad en memoria a scripts criticos
+                    if (relPath.endsWith('Doohan.js')) {
+                        let txt = await zipObj.async('string');
+                        txt = txt.replace('disable_console_logs();', '// disable_console_logs();');
+                        fileData = new Blob([txt], { type: 'application/javascript; charset=utf-8' });
+                    } else if (relPath.includes('APIWrapper') && relPath.endsWith('.js')) {
+                        let txt = await zipObj.async('string');
+                        txt = txt.replace('function findAPI(win)\n{', 'function findAPI(win)\n{\n try {');
+                        txt = txt.replace('return win.API_1484_11;\n}', 'return win.API_1484_11;\n } catch(e) { return null; }\n}');
+                        fileData = new Blob([txt], { type: 'application/javascript; charset=utf-8' });
+                    } else if (relPath.includes('mediaelement') && relPath.endsWith('.js')) {
+                        let txt = await zipObj.async('string');
+                        txt = txt.replace('a.isInIframe=window.location!=window.parent.location;', 'try{a.isInIframe=window.location!=window.parent.location}catch(e){a.isInIframe=true};');
+                        fileData = new Blob([txt], { type: 'application/javascript; charset=utf-8' });
+                    } else {
+                        fileData = await zipObj.async('blob');
+                    }
+
+                    const targetUrl = baseUrl + relPath;
+                    const response = new Response(fileData, {
+                        status: 200,
+                        headers: {
+                            'Content-Type': getMime(relPath),
+                            'Access-Control-Allow-Origin': '*'
+                        }
+                    });
+
+                    await cache.put(targetUrl, response);
+                    processedCount++;
+                    if (processedCount % 50 === 0) {
+                        loaderText.textContent = `Preparando archivos: ${processedCount} / ${totalFiles}`;
+                    }
+                }
+
+                const viewerUrl = baseUrl + entryFile;
                 loader.style.display = 'none';
                 statusBadge.textContent = 'Cargado: ' + file.name;
-                updateCourseView(data);
-            })
-            .catch(err => {
+
+                // Actualizar interfaz
+                updateUI({
+                    url: viewerUrl,
+                    title: courseInfo.title,
+                    version: courseInfo.version,
+                    organization: courseInfo.organization,
+                    entry_file: entryFile,
+                    hierarchy: courseInfo.hierarchy
+                });
+
+            } catch (err) {
+                console.error(err);
                 loader.style.display = 'none';
-                statusBadge.textContent = 'Error en carga';
-                alert('Error al descomprimir el archivo: ' + err.message);
-            });
+                statusBadge.textContent = 'Error al procesar';
+                alert('No se pudo procesar el archivo comprimido: ' + err.message);
+            }
         }
 
-        function updateCourseView(data) {
+        function parseManifest(xmlString) {
+            const info = {
+                title: 'Contenido interactivo',
+                version: 'Contenido Web',
+                organization: 'SENA',
+                entry_file: 'index.html',
+                hierarchy: []
+            };
+
+            if (!xmlString) return info;
+
+            try {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(xmlString, "application/xml");
+
+                const schemaVer = doc.querySelector('schemaversion');
+                if (schemaVer && schemaVer.textContent) {
+                    info.version = 'SCORM ' + schemaVer.textContent.trim();
+                }
+
+                const orgTitle = doc.querySelector('organization > title');
+                if (orgTitle && orgTitle.textContent) {
+                    info.organization = orgTitle.textContent.trim();
+                }
+
+                const allTitles = Array.from(doc.querySelectorAll('title'))
+                    .map(el => el.textContent.trim())
+                    .filter(t => t.length > 0);
+                
+                const uniqueTitles = [...new Set(allTitles)];
+                if (uniqueTitles.length > 0) {
+                    info.hierarchy = uniqueTitles;
+                    info.title = uniqueTitles[uniqueTitles.length - 1];
+                }
+
+                const resource = doc.querySelector('resource[href]');
+                if (resource) {
+                    let href = resource.getAttribute('href');
+                    if (href) {
+                        href = href.replace(/^(\.|\/)+/, '');
+                        info.entry_file = href;
+                    }
+                }
+            } catch (e) {
+                console.warn('Error al parsear imsmanifest:', e);
+            }
+
+            return info;
+        }
+
+        function updateUI(data) {
             iframe.src = data.url;
             btnFullscreen.href = data.url;
             footerLink.href = data.url;
@@ -645,92 +675,21 @@ async def index_page(request):
         }
 
         function loadSampleCourse() {
-            loader.style.display = 'flex';
-            fetch('/api/course-info/sample')
-            .then(res => res.json())
-            .then(data => {
-                loader.style.display = 'none';
-                statusBadge.textContent = 'Curso de muestra activo';
-                updateCourseView(data);
-            })
-            .catch(() => {
-                loader.style.display = 'none';
+            statusBadge.textContent = 'Curso de muestra activo';
+            updateUI({
+                url: './static/courses/sena_eng_n5/index.html',
+                title: 'Welcome Home Party',
+                version: 'SCORM 2004 4th Edition',
+                organization: 'Sena',
+                entry_file: 'index.html',
+                hierarchy: [
+                    'Sena',
+                    'Level A2.2',
+                    'John Comes Home for a Visit',
+                    'Welcome Home Party'
+                ]
             });
         }
     </script>
 </body>
 </html>
-"""
-    return HTMLResponse(content=html_content)
-
-
-async def get_sample_info(request):
-    if not sample_course_path.exists():
-        return JSONResponse({"error": "Curso de muestra no encontrado"}, status_code=404)
-    manifest = sample_course_path / "imsmanifest.xml"
-    info = parse_manifest_info(manifest)
-    info["url"] = "/courses/sample/index.html"
-    return JSONResponse(info)
-
-
-async def upload_scorm_zip(request):
-    """Recibe un archivo .zip, lo descomprime y devuelve la informacion y url del visor."""
-    form = await request.form()
-    file = form.get("file")
-    if not file or not hasattr(file, "filename"):
-        return JSONResponse({"error": "No se envio ningun archivo"}, status_code=400)
-
-    filename = file.filename
-    if not filename.lower().endswith(".zip"):
-        return JSONResponse({"error": "El archivo debe tener extension .zip"}, status_code=400)
-
-    contents = await file.read()
-    file_hash = hashlib.md5(contents).hexdigest()[:10]
-    target_extract = UPLOADS_DIR / file_hash
-
-    if not target_extract.exists():
-        target_extract.mkdir(parents=True, exist_ok=True)
-        zip_path = target_extract / "upload.zip"
-        with open(zip_path, "wb") as f:
-            f.write(contents)
-        try:
-            with zipfile.ZipFile(zip_path, "r") as z:
-                z.extractall(target_extract)
-        finally:
-            if zip_path.exists():
-                zip_path.unlink()
-
-    patch_course_for_web(target_extract)
-    course_root, entry_file, info = find_course_root_and_entry(target_extract)
-    patch_course_for_web(course_root)
-
-    relative_subpath = course_root.relative_to(UPLOADS_DIR).as_posix()
-    public_url = f"/courses/uploads/{relative_subpath}/{entry_file}"
-
-    info["url"] = public_url
-    info["course_id"] = file_hash
-    info["filename"] = filename
-    return JSONResponse(info)
-
-
-# Configurar rutas y montajes
-routes = [
-    Route("/", endpoint=index_page, methods=["GET"]),
-    Route("/api/course-info/sample", endpoint=get_sample_info, methods=["GET"]),
-    Route("/api/upload", endpoint=upload_scorm_zip, methods=["POST"]),
-]
-
-if sample_course_path.exists():
-    routes.append(
-        Mount("/courses/sample", app=StaticFiles(directory=str(sample_course_path), html=True), name="sample")
-    )
-
-routes.append(
-    Mount("/courses/uploads", app=StaticFiles(directory=str(UPLOADS_DIR), html=True), name="uploads")
-)
-
-middleware = [
-    Middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
-]
-
-app = Starlette(debug=False, routes=routes, middleware=middleware)

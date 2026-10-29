@@ -1,6 +1,6 @@
 @echo off
 echo ========================================================
-echo   Iniciando Visor SCORM LMS SENA (Python Uvicorn)...
+echo   Iniciando Visor SCORM LMS SENA (Servidor Estatico)...
 echo ========================================================
-python -m uvicorn main:app --host 0.0.0.0 --port 7860
+python -m http.server 8000
 pause
