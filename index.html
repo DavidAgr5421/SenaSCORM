@@ -679,7 +679,7 @@
                     }
 
                     const targetUrl = baseUrl + relPath;
-                    const response = new Response(fileData, {
+                    const createResponse = () => new Response(fileData, {
                         status: 200,
                         headers: {
                             'Content-Type': getMime(relPath),
@@ -687,14 +687,14 @@
                         }
                     });
 
-                    await cache.put(targetUrl, response);
+                    await cache.put(targetUrl, createResponse());
                     if (targetUrl !== targetUrl.toLowerCase()) {
-                        await cache.put(targetUrl.toLowerCase(), response.clone());
+                        await cache.put(targetUrl.toLowerCase(), createResponse());
                     }
                     if (targetUrl.endsWith('.JSON')) {
-                        await cache.put(targetUrl.slice(0, -5) + '.json', response.clone());
+                        await cache.put(targetUrl.slice(0, -5) + '.json', createResponse());
                     } else if (targetUrl.endsWith('.json')) {
-                        await cache.put(targetUrl.slice(0, -5) + '.JSON', response.clone());
+                        await cache.put(targetUrl.slice(0, -5) + '.JSON', createResponse());
                     }
 
                     processedCount++;
