@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import os
 import zipfile
 import hashlib
@@ -182,8 +183,8 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Rutas base
-BASE_DIR = Path(__file__).resolve().parent
+# Rutas base seguras
+BASE_DIR = Path(__file__).resolve().parent if "__file__" in globals() else Path.cwd().resolve()
 STATIC_DIR = BASE_DIR / "static"
 COURSES_DIR = STATIC_DIR / "courses"
 UPLOADS_DIR = STATIC_DIR / "uploads"
@@ -237,7 +238,9 @@ def parse_manifest_info(manifest_path: Path):
             if resource.tag.endswith("resource"):
                 href = resource.attrib.get("href")
                 if href:
-                    info["entry_file"] = href
+                    clean_href = href.strip().lstrip("/").lstrip("./")
+                    if clean_href:
+                        info["entry_file"] = clean_href
                     break
     except Exception:
         pass
@@ -333,15 +336,19 @@ with st.sidebar:
     elif use_sample and sample_path.exists():
         current_course_dir = sample_path
         course_info = parse_manifest_info(sample_path / "imsmanifest.xml")
-        entry_filename = course_info["entry_file"]
+        entry_filename = course_info.get("entry_file", "index.html")
         st.caption("Curso de muestra activo")
 
     else:
         current_course_dir = sample_path
         course_info = parse_manifest_info(sample_path / "imsmanifest.xml")
-        entry_filename = course_info["entry_file"]
+        entry_filename = course_info.get("entry_file", "index.html")
 
-    # Ruta relativa al servidor estatico
+    # Asegurar que entry_filename no este vacio
+    if not entry_filename:
+        entry_filename = "index.html"
+
+    # Ruta relativa al servidor estatico de Streamlit (/app/static/...)
     relative_to_static = current_course_dir.relative_to(STATIC_DIR).as_posix()
     public_url = f"/app/static/{relative_to_static}/{entry_filename}"
 
@@ -369,13 +376,21 @@ st.markdown("""
 col_viewer, col_info = st.columns([3.3, 1.0], gap="medium")
 
 with col_viewer:
-    st.markdown('<div class="viewer-frame-container">', unsafe_allow_html=True)
-    if hasattr(st, "iframe"):
-        st.iframe(public_url, height=viewer_height)
-    else:
-        import streamlit.components.v1 as components
-        components.iframe(public_url, height=viewer_height)
-    st.markdown('</div>', unsafe_allow_html=True)
+    # Incrustacion con components.html: maxima compatibilidad en local y en Streamlit Cloud
+    components.html(
+        f"""
+        <div style="width: 100%; height: {viewer_height}px; border: 1px solid #E2ECE5; border-radius: 8px; overflow: hidden; background-color: #FFFFFF;">
+            <iframe 
+                id="scorm-iframe"
+                src="{public_url}" 
+                style="width: 100%; height: 100%; border: none; display: block;" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; microphone" 
+                allowfullscreen>
+            </iframe>
+        </div>
+        """,
+        height=viewer_height + 15,
+    )
 
 with col_info:
     st.markdown('<div class="info-panel-title">Informacion del paquete</div>', unsafe_allow_html=True)
