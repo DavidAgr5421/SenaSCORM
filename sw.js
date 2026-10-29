@@ -8,40 +8,8 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
-    event.waitUntil(
-        caches.keys().then((keys) => {
-            return Promise.all(
-                keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
-            );
-        }).then(() => self.clients.claim())
-    );
+    event.waitUntil(self.clients.claim());
 });
-
-// Tipos MIME comunes
-function getMimeType(path) {
-    const ext = path.split('.').pop().toLowerCase();
-    const mimeMap = {
-        'html': 'text/html; charset=utf-8',
-        'htm': 'text/html; charset=utf-8',
-        'js': 'application/javascript; charset=utf-8',
-        'json': 'application/json; charset=utf-8',
-        'css': 'text/css; charset=utf-8',
-        'xml': 'application/xml; charset=utf-8',
-        'png': 'image/png',
-        'jpg': 'image/jpeg',
-        'jpeg': 'image/jpeg',
-        'gif': 'image/gif',
-        'svg': 'image/svg+xml',
-        'mp3': 'audio/mpeg',
-        'wav': 'audio/wav',
-        'ogg': 'audio/ogg',
-        'woff': 'font/woff',
-        'woff2': 'font/woff2',
-        'ttf': 'font/ttf',
-        'eot': 'application/vnd.ms-fontobject'
-    };
-    return mimeMap[ext] || 'application/octet-stream';
-}
 
 self.addEventListener('fetch', (event) => {
     const url = new URL(event.request.url);
@@ -61,17 +29,51 @@ self.addEventListener('fetch', (event) => {
                 }
 
                 let response = await cache.match(cleanUrl);
-                if (response) {
-                    return response;
+                if (response) return response;
+
+                // 1. Intentar busqueda alternativa en minusculas
+                response = await cache.match(cleanUrl.toLowerCase());
+                if (response) return response;
+
+                // 2. Intentar alternar extension .json / .JSON
+                if (cleanUrl.endsWith('.JSON')) {
+                    response = await cache.match(cleanUrl.slice(0, -5) + '.json');
+                    if (response) return response;
+                } else if (cleanUrl.endsWith('.json')) {
+                    response = await cache.match(cleanUrl.slice(0, -5) + '.JSON');
+                    if (response) return response;
                 }
 
-                // Intentar busqueda alternativa si termina sin extension
+                // 3. Si termina sin extension, probar /index.html
                 if (!cleanUrl.includes('.')) {
                     response = await cache.match(cleanUrl + '/index.html');
                     if (response) return response;
                 }
 
-                // Fallback para etiquetas de audio vacias o rutas no encontradas
+                // 4. Buscar recorriendo todas las keys si hubo variacion de mayusculas en directorios
+                const keys = await cache.keys();
+                const cleanLower = cleanUrl.toLowerCase();
+                const matchedKey = keys.find(k => k.url.toLowerCase() === cleanLower);
+                if (matchedKey) {
+                    response = await cache.match(matchedKey);
+                    if (response) return response;
+                }
+
+                // Fallbacks seguros segun tipo de archivo para no romper parsers
+                if (cleanLower.endsWith('.json')) {
+                    return new Response('{}', {
+                        status: 200,
+                        headers: { 'Content-Type': 'application/json; charset=utf-8', 'Access-Control-Allow-Origin': '*' }
+                    });
+                }
+
+                if (cleanLower.endsWith('.js')) {
+                    return new Response('/* script no encontrado */', {
+                        status: 200,
+                        headers: { 'Content-Type': 'application/javascript; charset=utf-8', 'Access-Control-Allow-Origin': '*' }
+                    });
+                }
+
                 return new Response('/* Recurso no encontrado en paquete virtual */', {
                     status: 200,
                     headers: { 'Content-Type': 'text/plain', 'Access-Control-Allow-Origin': '*' }

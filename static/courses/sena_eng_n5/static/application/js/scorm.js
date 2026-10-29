@@ -9,7 +9,9 @@ function FindObjectiveIndex(objectiveId){
       }
    }
 
-   alert("ERROR - could not find objective: " + objectiveId);
+   // Registrar objetivo dinamicamente en vez de alertar error
+   doSetValue("cmi.objectives." + objCount + ".id", objectiveId);
+   return objCount;
 }
 
 //SCORM requires time to be formatted in a specific way

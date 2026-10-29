@@ -1,6 +1,7 @@
 // Virtual SCORM LMS Adapter Injection
 (function() {
     var defaultLaunchData = '{"course_name": "", "level_name": "SENA", "client_id": 1, "client_config": "default", "sco_number": "5505", "unit_name": "English", "product_type": "sena", "lang": "eng"}';
+    var defaultObjectives = ['primary', 'secondary_1', 'secondary_2', 'secondary_3', 'secondary_4', 'secondary_5', 'secondary_6', 'secondary_7', 'secondary_8'];
     var getParentData = function() {
         try {
             if (window.parent && window.parent.__currentScormData) {
@@ -9,7 +10,7 @@
         } catch(e) {}
         return null;
     };
-    var store = { values: {}, suspend: '' };
+    var store = { values: {}, suspend: '', objectives: defaultObjectives.slice() };
     var mock2004 = {
         Initialize: function(p) { return 'true'; },
         Terminate: function(p) { return 'true'; },
@@ -28,6 +29,15 @@
             if (elem === 'cmi.entry') return 'ab-initio';
             if (elem === 'cmi.mode') return 'normal';
             if (elem === 'cmi.credit') return 'credit';
+            if (elem === 'cmi.objectives._count') {
+                return String(parentData && parentData.objectives ? parentData.objectives.length : store.objectives.length);
+            }
+            var objMatch = elem.match(/^cmi\.objectives\.(\d+)\.id$/);
+            if (objMatch) {
+                var idx = parseInt(objMatch[1], 10);
+                var list = (parentData && parentData.objectives) ? parentData.objectives : store.objectives;
+                return list[idx] || '';
+            }
             return store.values[elem] || '';
         },
         SetValue: function(elem, val) {
@@ -38,6 +48,14 @@
                 if (elem === 'cmi.suspend_data') parentData.suspend_data = String(val);
             }
             if (elem === 'cmi.suspend_data') store.suspend = String(val);
+            var objMatch = elem.match(/^cmi\.objectives\.(\d+)\.id$/);
+            if (objMatch) {
+                var idx = parseInt(objMatch[1], 10);
+                if (parentData && parentData.objectives) {
+                    parentData.objectives[idx] = String(val);
+                }
+                store.objectives[idx] = String(val);
+            }
             return 'true';
         },
         Commit: function(p) { return 'true'; },

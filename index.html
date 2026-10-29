@@ -419,6 +419,17 @@
             lesson_status: 'incomplete',
             lesson_location: '',
             entry: 'ab-initio',
+            objectives: [
+                'primary',
+                'secondary_1',
+                'secondary_2',
+                'secondary_3',
+                'secondary_4',
+                'secondary_5',
+                'secondary_6',
+                'secondary_7',
+                'secondary_8'
+            ],
             values: {}
         };
 
@@ -439,7 +450,14 @@
                 if (elem === "cmi.mode") return 'normal';
                 if (elem === "cmi.credit") return 'credit';
                 if (elem === "cmi.location") return window.__currentScormData.lesson_location || '';
-                if (elem === "cmi.objectives._count") return '0';
+                if (elem === "cmi.objectives._count") {
+                    return String(window.__currentScormData.objectives.length);
+                }
+                const objMatch = elem.match(/^cmi\.objectives\.(\d+)\.id$/);
+                if (objMatch) {
+                    const idx = parseInt(objMatch[1], 10);
+                    return window.__currentScormData.objectives[idx] || '';
+                }
                 if (elem === "cmi.interactions._count") return '0';
                 return window.__currentScormData.values[elem] || '';
             },
@@ -449,6 +467,11 @@
                 if (elem === "cmi.suspend_data") window.__currentScormData.suspend_data = String(val);
                 if (elem === "cmi.completion_status") window.__currentScormData.lesson_status = String(val);
                 if (elem === "cmi.location") window.__currentScormData.lesson_location = String(val);
+                const objMatch = elem.match(/^cmi\.objectives\.(\d+)\.id$/);
+                if (objMatch) {
+                    const idx = parseInt(objMatch[1], 10);
+                    window.__currentScormData.objectives[idx] = String(val);
+                }
                 return "true";
             },
             Commit: function(p) { return "true"; },
@@ -526,7 +549,9 @@
 
         fileInput.addEventListener('change', (e) => {
             if (e.target.files.length > 0) {
-                processZipFile(e.target.files[0]);
+                const file = e.target.files[0];
+                fileInput.value = '';
+                processZipFile(file);
             }
         });
 
@@ -645,6 +670,10 @@
                         let txt = await zipObj.async('string');
                         txt = txt.replace('a.isInIframe=window.location!=window.parent.location;', 'try{a.isInIframe=window.location!=window.parent.location}catch(e){a.isInIframe=true};');
                         fileData = new Blob([txt], { type: 'application/javascript; charset=utf-8' });
+                    } else if (relPath.endsWith('scorm.js') || (relPath.includes('scorm') && relPath.endsWith('.js'))) {
+                        let txt = await zipObj.async('string');
+                        txt = txt.replace(/alert\s*\(\s*["']ERROR - could not find objective:[^)]*\);?/g, 'doSetValue("cmi.objectives." + objCount + ".id", objectiveId); return objCount;');
+                        fileData = new Blob([txt], { type: 'application/javascript; charset=utf-8' });
                     } else {
                         fileData = await zipObj.async('blob');
                     }
@@ -659,25 +688,43 @@
                     });
 
                     await cache.put(targetUrl, response);
+                    if (targetUrl !== targetUrl.toLowerCase()) {
+                        await cache.put(targetUrl.toLowerCase(), response.clone());
+                    }
+                    if (targetUrl.endsWith('.JSON')) {
+                        await cache.put(targetUrl.slice(0, -5) + '.json', response.clone());
+                    } else if (targetUrl.endsWith('.json')) {
+                        await cache.put(targetUrl.slice(0, -5) + '.JSON', response.clone());
+                    }
+
                     processedCount++;
                     if (processedCount % 50 === 0) {
                         loaderText.textContent = `Preparando archivos: ${processedCount} / ${totalFiles}`;
                     }
                 }
 
-                const viewerUrl = baseUrl + entryFile;
+                const viewerUrl = baseUrl + entryFile + '?_v=' + Date.now();
                 loader.style.display = 'none';
                 statusBadge.textContent = 'Cargado: ' + file.name;
 
-                // Actualizar interfaz
-                updateUI({
-                    url: viewerUrl,
-                    title: courseInfo.title,
-                    version: courseInfo.version,
-                    organization: courseInfo.organization,
-                    entry_file: entryFile,
-                    hierarchy: courseInfo.hierarchy
-                });
+                // Reiniciar estado SCORM para nueva leccion
+                window.__currentScormData.values = {};
+                window.__currentScormData.suspend_data = '';
+                window.__currentScormData.lesson_status = 'incomplete';
+                window.__currentScormData.lesson_location = '';
+
+                // Forzar refresco limpio del iframe
+                iframe.src = 'about:blank';
+                setTimeout(() => {
+                    updateUI({
+                        url: viewerUrl,
+                        title: courseInfo.title,
+                        version: courseInfo.version,
+                        organization: courseInfo.organization,
+                        entry_file: entryFile,
+                        hierarchy: courseInfo.hierarchy
+                    });
+                }, 60);
 
             } catch (err) {
                 console.error(err);
@@ -743,6 +790,28 @@
                 if (lmsData) {
                     info.dataFromLMS = lmsData;
                     window.__currentScormData.launch_data = lmsData;
+                }
+
+                // Extraer objetivos del manifiesto para evitar errores en scorm.js
+                const extractedObjectives = [];
+                const primaryObj = doc.querySelector('primaryObjective[objectiveID]');
+                if (primaryObj) {
+                    const pid = primaryObj.getAttribute('objectiveID');
+                    if (pid) extractedObjectives.push(pid);
+                }
+                doc.querySelectorAll('objective[objectiveID]').forEach(o => {
+                    const id = o.getAttribute('objectiveID');
+                    if (id && !extractedObjectives.includes(id)) {
+                        extractedObjectives.push(id);
+                    }
+                });
+                if (extractedObjectives.length > 0) {
+                    window.__currentScormData.objectives = extractedObjectives;
+                } else {
+                    window.__currentScormData.objectives = [
+                        'primary', 'secondary_1', 'secondary_2', 'secondary_3',
+                        'secondary_4', 'secondary_5', 'secondary_6', 'secondary_7', 'secondary_8'
+                    ];
                 }
             } catch (e) {
                 console.warn('Error al parsear imsmanifest:', e);
