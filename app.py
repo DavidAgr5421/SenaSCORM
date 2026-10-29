@@ -376,20 +376,12 @@ st.markdown("""
 col_viewer, col_info = st.columns([3.3, 1.0], gap="medium")
 
 with col_viewer:
-    # Incrustacion con components.html: maxima compatibilidad en local y en Streamlit Cloud
-    components.html(
-        f"""
-        <div style="width: 100%; height: {viewer_height}px; border: 1px solid #E2ECE5; border-radius: 8px; overflow: hidden; background-color: #FFFFFF;">
-            <iframe 
-                id="scorm-iframe"
-                src="{public_url}" 
-                style="width: 100%; height: 100%; border: none; display: block;" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; microphone" 
-                allowfullscreen>
-            </iframe>
-        </div>
-        """,
-        height=viewer_height + 15,
+    # Incrustacion directa con st.iframe nativo de Streamlit
+    # El parametro ?view=embed evita que el servidor confunda la ruta con un archivo local en Linux
+    st.iframe(
+        f"{public_url}?view=embed",
+        height=viewer_height,
+        width="stretch"
     )
 
 with col_info:
