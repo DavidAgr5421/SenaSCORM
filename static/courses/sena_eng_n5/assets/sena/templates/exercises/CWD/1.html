@@ -1,0 +1,155 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/CWD/1.css'}">
+<span class="edit_container"></span>
+<div data-bind="template: { name: 'instructions_container_ko_template'}"></div>
+
+<div class="row cwd_input2">
+    <input class="cwd_input" tabindex="5" data-bind="value: cwd_input_response, valueUpdate: 'input', event: { blur: input_blur() }"></input>
+</div>
+
+<div class="row">
+    <div data-bind="css: {'cwd-center': (stimuli_ids().length == 0 || stimuli_ids()[0] == 0)}">
+        <div class="cwd-table-wrapper col-xs-6 ttt-response-container">
+            <table class="cwd-table">
+                <tbody>
+                    <!-- ko foreach: grid() -->
+                        <tr>
+                        <!-- ko foreach: cols() -->
+                            <!-- ko if: question().length > 0 -->
+                                <td tabindex="1" class="text-uppercase cwd-cell text-center cwd-letter-cell" data-bind="css: {'cwd-cell-filled' : letter().length > 0, 'cwd-typing': typing() , 'cwd-hover-background' : $parents[1].hover_id().id() == question()[position().index()].id() && position().first(), 'cwd-disabled' : $parents[1].showing_answer() || $parents[1].feedback_showing_answer(), 'cwd-active' : !$parents[1].showing_answer() && !$parents[1].feedback_showing_answer()}, click: $parents[1].cwd_click_letter.bind(null, $index(), $parentContext.$index(), question)">
+                                    <span class="cwd-letter" data-bind="text: letter()"> </span>
+                                </td>
+                            <!-- /ko -->
+                            <!-- ko if: question().length == 0 -->
+                                <td class="info cwd-cell">
+                                    <strong><span data-bind="text: letter(), css : {'cwd-label-cell' : position().label()}"> </span></strong>
+                                </td>
+                            <!-- /ko -->
+                        <!-- /ko -->
+                        </tr>
+                    <!-- /ko -->
+                </tbody>
+            </table>
+        </div>
+        <div class="cwd-questions col-xs-6 ttt-question-container"> 
+            <div class="clue-list">
+                <strong><span class="cwd-direction-title" data-bind="text:$root.localization.CWD_down"></span></strong>
+                <!-- ko foreach: questions() -->
+                    <!-- ko foreach: responses()[1]._data() -->
+                        <!-- ko if: type() == "direction" -->
+                            <!-- ko if: content() == 0 -->
+                                <!-- ko foreach: $parent._data() -->
+                                     <!-- ko if: type() == "question" -->
+                                        <!-- ko foreach: contents() -->
+                                            <!-- ko if: type() == "text" -->
+                                                <div class="cwd-clue" data-bind="click: function() { if(!$parents[3].feedback_showing_answer()){ $parents[3].type_letter($parents[2].id()); $parents[3].new_attempted_word().id($parentContext.$parentContext.$parentContext.$index())}  },css: {'cwd-highlighted' : $parents[3].new_attempted_word().id() == $parentContext.$parentContext.$parentContext.$index(), 'cwd-answered' : $parents[2].state() > 1, 'link-cursor' : !$parents[3].feedback_showing_answer() }">
+                                                    <div class="clue-index"><div class="full-center" data-bind="text: ($parentContext.$parentContext.$parentContext.$index() + 1)"></div> </div>
+                                                    <div class="clue-text" data-bind="text: content()"> </div>
+                                                    <div class="response-feedback-question cwd-response" data-bind="css: $parents[3].state_css(), visible: (!$parents[3].showing_answer() && $parents[3].state() == 2) || ($parents[3].showing_answer() && $parents[3].state() == 4)">
+                                                        <!-- ko if: $parents[2].state_css() == 'response-correct' && $parents[2].state() >= 1 && $parents[3].checked_answer() -->
+                                                            <span class="response-correct glyphicon glyphicon-ok"> </span>
+                                                        <!-- /ko -->
+                                                        <!-- ko if: ($parents[2].state_css() == 'response-incorrect' || $parents[2].state_css() == 'response-default') && ($parents[2].state() >= 1 && $parents[3].checked_answer()) -->
+                                                            <span class="response-incorrect glyphicon glyphicon-remove"></span>
+                                                        <!-- /ko -->
+                                                    </div>
+                                                </div>
+                                            <!-- /ko -->
+                                            <!-- ko if: type() == "image" -->
+                                                <div class="cwd-clue cwd-clue-img" data-bind="click: function() { if(!$parents[3].feedback_showing_answer()){ $parents[3].type_letter($parents[2].id()); $parents[3].new_attempted_word().id($parentContext.$parentContext.$parentContext.$index())}  },css: {'cwd-highlighted' : $parents[3].new_attempted_word().id() == $parentContext.$parentContext.$parentContext.$index(), 'cwd-answered' : $parents[2].state() > 1, 'link-cursor' : !$parents[3].feedback_showing_answer() }">
+                                                    <div class="clue-index"><div class="full-center" data-bind="text: ($parentContext.$parentContext.$parentContext.$index() + 1)"></div> </div>
+                                                    <img class="clue-img img-responsive link-cursor" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}, click: function() { $parents[3].type_letter($parents[2].id()) }" />
+                                                    <div class="response-feedback-question cwd-response" data-bind="css: $parents[3].state_css(), visible: (!$parents[3].showing_answer() && $parents[3].state() == 2) || ($parents[3].showing_answer() && $parents[3].state() == 4)">
+                                                        <!-- ko if: $parents[2].state_css() == 'response-correct' && $parents[2].state() >= 1 && $parents[3].checked_answer() -->
+                                                            <span class="response-correct glyphicon glyphicon-ok"> </span>
+                                                        <!-- /ko -->
+                                                        <!-- ko if: ($parents[2].state_css() == 'response-incorrect' || $parents[2].state_css() == 'response-default') && ($parents[2].state() >= 1 && $parents[3].checked_answer()) -->
+                                                            <span class="response-incorrect glyphicon glyphicon-remove"></span>
+                                                        <!-- /ko -->
+                                                    </div>
+                                                </div>
+                                            <!-- /ko -->
+                                            <!-- ko if: type() == "audio" -->
+                                                <div class="cwd-clue" data-bind="click: function() { if(!$parents[3].feedback_showing_answer()){ $parents[3].type_letter($parents[2].id()); $parents[3].new_attempted_word().id($parentContext.$parentContext.$parentContext.$index())}  },css: {'cwd-highlighted' : $parents[3].new_attempted_word().id() == $parentContext.$parentContext.$parentContext.$index(), 'cwd-answered' : $parents[2].state() > 1, 'link-cursor' : !$parents[3].feedback_showing_answer() }">
+                                                    <div class="clue-index"><div class="full-center" data-bind="text: ($parentContext.$parentContext.$parentContext.$index() + 1)"></div> </div>
+                                                    <div class="clue-audio link-cursor sena-btn default-audio-button" data-bind="template: { name: 'audio_ko_template', data: $data }"></div>
+                                                    <div class="response-feedback-question cwd-response" data-bind="css: $parents[3].state_css(), visible: (!$parents[3].showing_answer() && $parents[3].state() == 2) || ($parents[3].showing_answer() && $parents[3].state() == 4)">
+                                                        <!-- ko if: $parents[2].state_css() == 'response-correct' && $parents[2].state() >= 1 && $parents[3].checked_answer() -->
+                                                            <span class="response-correct glyphicon glyphicon-ok"> </span>
+                                                        <!-- /ko -->
+                                                        <!-- ko if: ($parents[2].state_css() == 'response-incorrect' || $parents[2].state_css() == 'response-default') && ($parents[2].state() >= 1 && $parents[3].checked_answer()) -->
+                                                            <span class="response-incorrect glyphicon glyphicon-remove"></span>
+                                                        <!-- /ko -->
+                                                    </div>
+                                                </div>
+                                            <!-- /ko -->
+                                        <!-- /ko -->
+                                     <!-- /ko -->
+                                <!-- /ko -->
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+            </div>
+            <div class="clue-list">
+               <strong><span class="cwd-direction-title" data-bind="text:$root.localization.CWD_across"></span></strong>
+                <!-- ko foreach: questions() -->
+                    <!-- ko foreach: responses()[1]._data() -->
+                        <!-- ko if: type() == "direction" -->
+                            <!-- ko if: content() == 1 -->
+                                <!-- ko foreach: $parent._data() -->
+                                     <!-- ko if: type() == "question" -->
+                                        <!-- ko foreach: contents() -->
+                                            <!-- ko if: type() == "text" -->
+                                                <div class="cwd-clue" data-bind="click: function() { if(!$parents[3].feedback_showing_answer()){ $parents[3].type_letter($parents[2].id()); $parents[3].new_attempted_word().id($parentContext.$parentContext.$parentContext.$index())}  },css: {'cwd-highlighted' : $parents[3].new_attempted_word().id() == $parentContext.$parentContext.$parentContext.$index(), 'cwd-answered' : $parents[2].state() > 1, 'link-cursor' : !$parents[3].feedback_showing_answer() }">
+                                                    <div class="clue-index"><div class="full-center" data-bind="text: ($parentContext.$parentContext.$parentContext.$index() + 1)"></div> </div>
+                                                    <div class="clue-text" data-bind="text: content()"> </div>
+                                                    <div class="response-feedback-question cwd-response" data-bind="css: $parents[3].state_css(), visible: (!$parents[3].showing_answer() && $parents[3].state() == 2) || ($parents[3].showing_answer() && $parents[3].state() == 4)">
+                                                        <!-- ko if: $parents[2].state_css() == 'response-correct' && $parents[2].state() >= 1 && $parents[3].checked_answer() -->
+                                                            <span class="response-correct glyphicon glyphicon-ok"> </span>
+                                                        <!-- /ko -->
+                                                        <!-- ko if: ($parents[2].state_css() == 'response-incorrect' || $parents[2].state_css() == 'response-default') && ($parents[2].state() >= 1 && $parents[3].checked_answer()) -->
+                                                            <span class="response-incorrect glyphicon glyphicon-remove"></span>
+                                                        <!-- /ko -->
+                                                    </div>
+                                                </div>
+                                            <!-- /ko -->
+                                            <!-- ko if: type() == "image" -->
+                                                 <div class="cwd-clue cwd-clue-img" data-bind="click: function() { if(!$parents[3].feedback_showing_answer()){ $parents[3].type_letter($parents[2].id()); $parents[3].new_attempted_word().id($parentContext.$parentContext.$parentContext.$index())}  },css: {'cwd-highlighted' : $parents[3].new_attempted_word().id() == $parentContext.$parentContext.$parentContext.$index(), 'cwd-answered' : $parents[2].state() > 1, 'link-cursor' : !$parents[3].feedback_showing_answer() }">
+                                                    <div class="clue-index"><div class="full-center" data-bind="text: ($parentContext.$parentContext.$parentContext.$index() + 1)"></div> </div>
+                                                    <img class="clue-img img-responsive link-cursor" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}, click: function() { $parents[3].type_letter($parents[2].id()) }" />
+                                                    <div class="response-feedback-question cwd-response" data-bind="css: $parents[3].state_css(), visible: (!$parents[3].showing_answer() && $parents[3].state() == 2) || ($parents[3].showing_answer() && $parents[3].state() == 4)">
+                                                        <!-- ko if: $parents[2].state_css() == 'response-correct' && $parents[2].state() >= 1 && $parents[3].checked_answer() -->
+                                                            <span class="response-correct glyphicon glyphicon-ok"> </span>
+                                                        <!-- /ko -->
+                                                        <!-- ko if: ($parents[2].state_css() == 'response-incorrect' || $parents[2].state_css() == 'response-default') && ($parents[2].state() >= 1 && $parents[3].checked_answer()) -->
+                                                            <span class="response-incorrect glyphicon glyphicon-remove"></span>
+                                                        <!-- /ko -->
+                                                    </div>
+                                                </div>
+                                            <!-- /ko -->
+                                            <!-- ko if: type() == "audio" -->
+                                                 <div class="cwd-clue" data-bind="click: function() { if(!$parents[3].feedback_showing_answer()){ $parents[3].type_letter($parents[2].id()); $parents[3].new_attempted_word().id($parentContext.$parentContext.$parentContext.$index())}  },css: {'cwd-highlighted' : $parents[3].new_attempted_word().id() == $parentContext.$parentContext.$parentContext.$index(), 'cwd-answered' : $parents[2].state() > 1, 'link-cursor' : !$parents[3].feedback_showing_answer() }">
+                                                    <div class="clue-index"><div class="full-center" data-bind="text: ($parentContext.$parentContext.$parentContext.$index() + 1)"></div> </div>
+                                                    <div class="clue-audio link-cursor sena-btn default-audio-button" data-bind="template: { name: 'audio_ko_template', data: $data }"></div>
+                                                    <div class="response-feedback-question cwd-response" data-bind="css: $parents[3].state_css(), visible: (!$parents[3].showing_answer() && $parents[3].state() == 2) || ($parents[3].showing_answer() && $parents[3].state() == 4)">
+                                                        <!-- ko if: $parents[2].state_css() == 'response-correct' && $parents[2].state() >= 1 && $parents[3].checked_answer() -->
+                                                            <span class="response-correct glyphicon glyphicon-ok"> </span>
+                                                        <!-- /ko -->
+                                                        <!-- ko if: ($parents[2].state_css() == 'response-incorrect' || $parents[2].state_css() == 'response-default') && ($parents[2].state() >= 1 && $parents[3].checked_answer()) -->
+                                                            <span class="response-incorrect glyphicon glyphicon-remove"></span>
+                                                        <!-- /ko -->
+                                                    </div>
+                                                </div>
+                                            <!-- /ko -->
+                                        <!-- /ko -->
+                                     <!-- /ko -->
+                                <!-- /ko -->
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+            </div>
+        </div>
+    </div>
+
+</div>

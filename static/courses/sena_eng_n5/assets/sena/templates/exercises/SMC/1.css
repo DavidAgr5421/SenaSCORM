@@ -1,0 +1,34 @@
+.SMC-question{             
+    padding-top:10px;
+}
+
+.SMC-question td{
+    vertical-align: bottom;
+    padding: 10px;
+}
+
+.SMC-response{          
+    margin-bottom:15px;
+    margin-left: -40px;
+}
+
+div.SMC-response-feedback{          
+    width:30px;
+    display:inline-block;
+    float:left;
+}
+
+div.response-checkbox
+{
+    margin-right:10px;
+    float:left;
+}
+
+img.SMC-image {
+   border:1px solid black;
+}
+
+.smc-player
+{
+    padding-left: 12px;
+}

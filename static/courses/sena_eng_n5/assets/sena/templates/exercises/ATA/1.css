@@ -1,0 +1,100 @@
+/*textarea
+{
+	resize:none; 
+}
+*/
+
+.ATA-exercise
+{
+	padding: 0 3rem;
+}
+
+.ATA-question
+{
+    margin-bottom: 2rem;
+}
+
+.ATA-btn {
+    width: 30rem;
+}
+
+.ATA-spacing {
+
+}
+
+.ATA-paragraph {
+    padding-bottom: 30px;
+    line-height: 2em;
+}
+
+.ATA-line {
+    border-top: 2px dotted black;
+    margin-top: 60px;
+}
+
+
+.ATA-info {
+    width: 500px;
+}
+
+.ATA-exercise .punctuation,
+.ATA-exercise .wh-question,
+.ATA-exercise .verb,
+.ATA-exercise .noun,
+.ATA-exercise .adjective,
+.ATA-exercise .aof,
+.ATA-exercise .quantifier,
+.ATA-exercise .preposition
+{
+    border-radius: 0.25em;
+    padding: 0 0.166666em;
+    background-color: #ccc;
+}
+
+.ATA-exercise .explanation-outline
+{
+    border: 0.1rem solid blue;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.4em;
+}
+
+.ATA-exercise .explanation
+{
+    color: blue;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 0.9em;
+}
+
+.ATA-exercise .wh-question:after,
+.ATA-exercise .verb:after,
+.ATA-exercise .noun:after,
+.ATA-exercise .adjective:after,
+.ATA-exercise .aof:after,
+.ATA-exercise .quantifier:after,
+.ATA-exercise .preposition:after
+{
+    vertical-align: super;
+    font-style: italic;
+    font-size: 0.6em;
+    font-weight: 600;
+    margin-left: 0.25em;
+}
+
+.ATA-exercise .verb:after { content: 'verb' }
+.ATA-exercise .noun:after { content: 'noun' }
+.ATA-exercise .adjective:after { content: 'adj.' }
+.ATA-exercise .aof:after { content: 'a. of f.' }
+.ATA-exercise .quantifier:after { content: 'quan.' }
+.ATA-exercise .preposition:after { content: 'prep.' }
+
+.ATA-exercise .punctuation
+{
+    font-weight: 900;
+    color: red;
+}
+
+.ATA-exercise .wh-question
+{
+    background-color: #FC7323;
+}

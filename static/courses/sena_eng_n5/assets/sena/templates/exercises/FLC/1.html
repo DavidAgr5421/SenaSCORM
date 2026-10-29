@@ -1,0 +1,47 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/FLC/1.css'}">
+<span class="edit_container"></span>
+<div data-bind="template: { name: 'instructions_container_ko_template'}"></div>
+
+<div class="flc-counter-reset">
+	<!-- ko foreach:questions() -->
+<!-- 		<div class="col-md-2 col-sm-3 col-xs-4"> -->
+			<div class="link-cursor flc-card-container " data-bind="with: $data">
+                <!-- ko if: _data()[0].contents()[0].audio()!='' -->
+                    <audio class="audio_player" preload="none" data-bind="template: {name: 'audio_src_ko_template', data: _data()[0].contents()[0].audio()}">
+                    
+                    </audio>
+                    <span></span> 
+                <!-- /ko -->
+
+				<div class="flc-click flc-panel" data-bind="css: 'card-' + id()">
+ 					<div class="flc-front flc-cards paused_audio" data-bind="click: function(){ $parents[1].on_click_card(id()); if(_data()[0].contents()[0].audio()!=''){play_audio($element);} $parents[1].toggle_card(id());}, style: { backgroundImage: 'url(assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +_data()[0].contents()[0].image() + ')' }">
+
+						<!-- ko if: _data()[0].contents()[0].audio()!='' -->
+							<audio class="audio_player" preload="none" data-bind="template: {name: 'audio_src_ko_template', data: _data()[0].contents()[0].audio()}">
+
+							</audio>
+							<span></span> 
+						<!-- /ko -->
+						
+					</div>
+					<div class="flc-back flc-cards paused_audio" data-bind="click: function(){if(_data()[0].contents()[0].audio()!=''){play_audio($element);} $parents[1].toggle_card(id());}">
+						<!-- ko if: _data()[0].contents()[0].audio()!='' -->
+							<audio class="audio_player" preload="none" data-bind="template: {name: 'audio_src_ko_template', data: _data()[0].contents()[0].audio()}">
+
+							</audio>
+							<span></span> 
+						<!-- /ko -->
+
+						<div class="inner-card">
+							<h4>
+								<span data-bind="text: _data()[0].contents()[0].name()"></span><br/>
+								<small data-bind="text: _data()[0].contents()[0].text_lg()"></small>
+							</h4>
+							<span data-bind="text: _data()[0].contents()[0].text_sm()"></span>
+						</div>
+					</div>
+				</div>
+            </div>  
+<!-- 		</div> -->
+	<!-- /ko -->
+</div>

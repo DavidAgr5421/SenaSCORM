@@ -1,0 +1,8 @@
+div [class^="SFL-response"] {
+    border:1px dashed black;
+    padding:3px;
+}
+
+.pep-dpa{
+    background-color:#F2F2F2;
+}

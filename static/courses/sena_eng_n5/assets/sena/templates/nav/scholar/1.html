@@ -1,0 +1,34 @@
+<div class="nav-bar row" id="nav_bar" data-bind="visible: nav_bar_showing()">
+    <div class="nav-buttons pull-right">
+        <ul class="list-inline nav-controls-list">
+            <!-- ko if: show_group_nav() == true && $root.exercise_group_types()[viewModel.labs()[viewModel.selected_lab()].selected_group()].count() > 1 && !(selected_group() == 5 && selected_group_current_exercise_idx() >= $root.exercise_group_types()[$root.labs()[$root.selected_lab()].selected_group()].count()-1) && viewModel._data.test() == 'false' -->
+                <li data-bind="css: {'nav-active': !($root.at_group_start()), 'nav-disabled': $root.at_group_start()}, click: function() {  if(!($root.at_group_start()) && !is_sliding() ){change_group_exercise((selected_group_current_exercise_idx()-1)); sfx_player('navigate-sub');}}">
+                    <span class="nav-back-btn glyphicon glyphicon-chevron-left"></span>
+                </li>
+                
+                <!-- ko if: selected_group() !== 5 -->
+                    <li class="nav-controls"><p class="text-center"  data-bind="text: (selected_group_current_exercise_idx()+1) + ' '+ $root.localization.of() +' '+ $root.exercise_group_types()[$root.labs()[$root.selected_lab()].selected_group()].count()"></p></li>
+                <!-- /ko -->
+                <!-- ko if: selected_group() == 5 -->
+                    <li class="nav-controls"><p class="text-center"  data-bind="text: (selected_group_current_exercise_idx()+1) + ' '+ $root.localization.of() +' '+ ($root.exercise_group_types()[$root.labs()[$root.selected_lab()].selected_group()].count()-1)"></p></li>
+                <!-- /ko -->
+
+                <li data-bind="css: {'nav-active': !($root.at_group_end()), 'nav-disabled': $root.at_group_end()}, click: function() {  if(!($root.at_group_end()) && !is_sliding() ){change_group_exercise((selected_group_current_exercise_idx()+1)); sfx_player('navigate-sub');}}">
+                    <span class="nav-forward-btn glyphicon glyphicon-chevron-right"></span>
+                </li>
+            <!-- /ko -->
+            <!-- ko if: viewModel._data.test() == 'true' || $root._data.test() == 'PT' -->
+                <li data-bind="css: {'nav-active': !$root.at_achievement_start(), 'nav-disabled': $root.at_achievement_start()}, click: function() {  if(!($root.at_achievement_start()) && !is_sliding() ){ $root.previous_exercise(); sfx_player('navigate-sub');}}">
+                    <span class="nav-back-btn glyphicon glyphicon-chevron-left"></span>
+                </li>
+                
+                <li class="nav-controls"><p class="text-center"  data-bind="text: $root.nav_string()"></p></li>
+
+                <li data-bind="css: {'nav-active': !($root.at_achievement_end()), 'nav-disabled': $root.at_achievement_end()}, click: function() {  if(!($root.at_achievement_end()) && !is_sliding() ){ $root.next_exercise(); sfx_player('navigate-sub');}}">
+                    <span class="nav-forward-btn glyphicon glyphicon-chevron-right"></span>
+                </li>
+            <!-- /ko -->
+        </ul>
+    </div>
+</div>
+

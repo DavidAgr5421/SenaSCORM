@@ -1,0 +1,40 @@
+.TYP-sticky-note
+{
+    width: 60%;
+    min-height: calc(100vh - 36rem);
+    min-width: calc(100vh - 36rem);
+    margin: 0 auto;
+    border: 1px solid #695f00;
+    padding: 3rem 1rem 1rem;
+    border-bottom-right-radius: 4px;
+    background-color: #f2e0a1;
+    box-shadow: 0 .5rem .5rem rgba(0,0,0,0.2);
+    background: 
+        linear-gradient(
+            135deg,
+            rgba(0, 0, 0, 0) 50%,
+            hsla(52, 100%, 90%, 1) 50%,
+            hsla(52, 100%, 87%, 1) 100% )
+            bottom right / 3rem 3rem no-repeat,
+        linear-gradient(
+            to bottom, 
+            hsla(52, 100%, 75%, 1) 0%, 
+            hsla(52, 100%, 80%, 1) 100%) 
+            top left / 100% 100% no-repeat,
+        #FFEF82;
+}
+
+.TYP-sticky-note input.TYP_input
+{
+    box-shadow: none;
+    background: transparent;
+    border-radius: 0;
+    border-bottom-width: 0.15rem;
+    width: 14rem;
+}
+
+.TYP-sticky-note .run-on-question:after
+{
+    left: -4rem;
+}
+

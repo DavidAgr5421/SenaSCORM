@@ -1,0 +1,94 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/DFL/1.css'}">
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/DFL/timeline.css'}">
+<span class="edit_container"></span>
+<div data-bind="template: { name: 'instructions_container_ko_template'}"></div>
+
+<div class="DFL-exercise">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <!-- ko foreach:questions() -->
+                <!-- ko foreach:responses() -->
+                    <!-- ko foreach:_data() -->
+                        <!-- ko if: $parent.id() != 0 -->
+                            <div data-bind="css: 'DFL-drop-container drop-container_'+$parents[1].id()+'_'+$parents[1].id()+'_'+$parents[3].id()">
+                                <div data-bind="css:'starting-drop-target drop-target DFL-starting-drop DFL-droper_'+$parents[1].id()+' DFL-drop_'+$parents[2].id()+'_'+$parents[1].id()+'_'+$parents[3].id()">
+                                </div>
+                            </div>
+                        <!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+            <!-- /ko -->
+        </div>
+    </div>
+    <div class="timeline row">
+    	<div class="timeline-bar"></div>
+    	<div class="timeline-start">
+    		<span class="glyphicon glyphicon-chevron-left"></span>
+    	</div>
+    	<div class="timeline-end">
+    		<span class="glyphicon glyphicon-chevron-right"></span>
+    	</div>
+    </div>
+    <div class="row">
+        <!-- ko foreach:questions() -->
+            <div data-bind="css: get_question_columns($parentContext.$data)">
+				<div class="DFL-question-container" data-bind="css: 'drop-container_'+'_'+id()+'_'+$parents[1].id()">			
+					<!-- ko foreach: _data() -->
+						<!-- ko if: type() == "question" -->
+							<div class="response-feedback DFL-response-feedback-question" data-bind="template: { name: 'data_level_question_feedback_ko_template' }, css: $parents[0].state_css()"></div>
+							<div class="timeline-tick"></div>
+							<!-- ko foreach: contents() -->
+								<!-- ko if: type() == "text" -->
+									<div class="DFL-text-container" data-bind="css: { 'DFL-question-border-radius' : $index() == 0, 'DFL-question-bottom-border' : $index() == $parent.contents().length - 1 }">
+										<strong><span class="DFL-text" data-bind="html: content()"> </span></strong>
+									</div>
+								<!-- /ko -->
+								<!-- ko if: type() == "image" -->
+									<div class="DFL-image-container">
+										<img class="img-responsive " data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+									</div>
+								<!-- /ko -->
+								<!-- ko if: type() == "audio" -->
+									<div class="DFL-audio-container">
+										<div class="link-cursor sena-btn default-audio-button DFL-audio-button" data-bind="template: { name: 'audio_ko_template', data: $data }"></div>
+									</div>
+								<!-- /ko -->
+							<!-- /ko -->
+						<!-- /ko -->
+					<!-- /ko -->
+					<div class ='drop-target DFL-drop' data-bind="attr{id: $index()}"> </div>
+				</div>				
+            </div>    
+        <!-- /ko -->        
+    </div>
+</div>
+
+<div class="DFL-response-container response_container">
+	<!-- ko foreach:questions() -->
+		<!-- ko if: product_helper_check_rec_question(_data()) == false -->
+			<!-- ko foreach: responses() -->                    
+				<!-- ko foreach: _data() -->
+					<!-- ko if: $parent.id() != 0 -->
+						<!-- ko if: type() == "text" -->
+							<style data-bind="attr: { id: 'DFL-drag-'+$parents[2].id()+'-'+$parents[1].id()+'-'+$parents[0].id()}"> </style>
+							<div class="link-cursor pep DFL-response DFL-text-response " data-bind="attr: { id: $parentContext.$parentContext.$index() }, css:'DFL-drag-'+$parents[2].id()+'-'+$parents[1].id()+'-'+$parents[0].id()">
+								<span class="DFL-content DFL-letter" data-bind="html:content()"></span>
+							</div>
+						<!-- /ko -->
+						<!-- ko if: type() == "image" -->
+							<style data-bind="attr: { id: 'DFL-drag-'+$parents[2].id()+'-'+$parents[1].id()+'-'+$parents[0].id()}"> </style>
+							<div class="link-cursor pep DFL-img-response " data-bind="attr: { id: $parentContext.$parentContext.$index() }, css:'DFL-drag-'+$parents[2].id()+'-'+$parents[1].id()+'-'+$parents[0].id()">
+								<div class=" DFL-image-border-wrapper">
+									<div class="DFL-image-border">
+										<img class="DFL-content DFL-image" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+									</div>
+								</div>
+							</div>
+						<!-- /ko -->
+					<!-- /ko -->
+				<!-- /ko -->
+			<!-- /ko -->  
+		<!-- /ko -->  
+	<!-- /ko -->
+</div>  
+

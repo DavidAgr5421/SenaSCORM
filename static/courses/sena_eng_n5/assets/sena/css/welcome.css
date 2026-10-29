@@ -1,0 +1,55 @@
+.welcome-img 
+{
+    padding-bottom:10px;
+    background-size: contain;
+}
+
+.welcome-start {
+    color:#01b5bd;
+    font-weight: bold;
+}
+
+#framework_welcome 
+{
+    background-color:#FFFFFF;    
+    overflow:auto;
+    overflow-x:hidden;
+}
+
+.welcome-img-text
+{
+    text-align:center;
+}
+
+.welcome-body-text
+{
+    font-size:16px;   
+}
+
+.welcome-header-text
+{
+    color: #01b5bd; 
+    padding-left:29px;
+    font-weight:normal;
+    margin-bottom:10px;
+}
+
+.welcome-header-border
+{
+    border-bottom:solid 1px #B2B2B2;   
+    margin-left:14px;
+    margin-right:10px;
+    margin-bottom:20px;
+}
+
+.welcome-start-btn:hover, .welcome-start-btn:focus
+{
+    background-color:#FFFFFF;
+    color: #3B9387;
+    border: solid 1px #3B9387;
+}
+
+.exam_strong {
+    font-weight: bold;
+    color: #01b5bd;
+}

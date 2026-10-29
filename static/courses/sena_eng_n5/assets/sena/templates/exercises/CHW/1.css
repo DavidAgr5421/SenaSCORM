@@ -1,0 +1,112 @@
+.CHW-question {
+    margin-bottom: 10px;
+    margin-left: 3rem;
+    position: relative;
+}
+.CHW-question-col
+{
+    padding-left: 0;
+}
+
+.btn-chw-container {
+    display: inline-block;
+    padding-right: 10px;
+}
+.btn-chw {
+    border: 1px solid #727676;
+    border-radius: 5px !important;
+    text-transform: uppercase;
+    text-align: center;
+    background-color: #EAF5F3;
+    width: 80px;
+    height: 30px;
+    box-shadow: 0 1.2px 0px rgba(0,0,0,0.5);
+    font-size: 1.3rem;
+}
+#main.cmn .btn-chw {
+    background-color: #ffedeb;
+}
+#main.fr .btn-chw {
+    background-color: #feeded;
+}
+#main.pt .btn-chw {
+    background-color: #e0fee4;
+}
+#main.es .btn-chw {
+    background-color: #f3eff9;
+}
+
+.btn-chw:hover {
+    background-color: #116C5F;
+    color: white;
+    font-weight: bold;
+}
+#main.cmn .btn-chwhover {
+    background-color: #a93800;
+}
+#main.fr .btn-chwhover {
+    background-color: #b7211a;
+}
+#main.pt .btn-chwhover {
+    background-color: #196d2c;
+}
+#main.es .btn-chwhover {
+    background-color: #7946a6;
+}
+
+.btn-chw:focus,
+.btn-chw.focus,
+.btn-chw:active,
+.chw-selected,
+.btn-chw.active {
+    background-color: #116C5F;
+    color: white;
+    font-weight: bold;
+    outline: none;
+}
+#main.cmn .btn-chw:focus,
+#main.cmn .btn-chw.focus,
+#main.cmn .btn-chw:active,
+#main.cmn .chw-selected,
+#main.cmn .btn-chw.active {
+    background-color: #a93800;
+}
+#main.fr .btn-chw:focus,
+#main.fr .btn-chw.focus,
+#main.fr .btn-chw:active,
+#main.fr .chw-selected,
+#main.fr .btn-chw.active {
+    background-color: #b7211a;
+}
+#main.pt .btn-chw:focus,
+#main.pt .btn-chw.focus,
+#main.pt .btn-chw:active,
+#main.pt .chw-selected,
+#main.pt .btn-chw.active {
+    background-color: #196d2c;
+}
+#main.es .btn-chw:focus,
+#main.es .btn-chw.focus,
+#main.es .btn-chw:active,
+#main.es .chw-selected,
+#main.es .btn-chw.active {
+    background-color: #7946a6;
+}
+
+.CHW-exercise {
+    padding-bottom: 150px;
+}
+
+.CHW-audio {
+    max-width: 60%;
+}
+
+.chw-question-position{
+    display: inline-block;
+    margin: 0;
+}
+
+.chw-question-text{
+    vertical-align: top;
+    /* padding-left: 1.5rem; */
+}

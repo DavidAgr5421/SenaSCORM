@@ -1,0 +1,20 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/EXT/1.css'}">
+<span class="edit_container"></span>
+<div data-bind="template: { name: 'instructions_container_ko_template'}"></div>
+<!-- ko foreach:questions() -->
+    <!-- ko foreach: responses() -->
+        <!-- ko if: correct() -->
+            <!-- ko if: !selected() -->
+                <center>
+                    <button class="sena-btn" data-bind="click:function(){selected(1)}">Start game</button>
+                </center>
+            <!-- /ko -->
+            <!-- ko if: selected() -->
+                <!-- ko foreach: _data() -->
+                        <iframe class="col-xs-12 ext-iframe" frameBorder="0" data-bind="attr:{src:'assets/'+ lms_config.product_type + '/scos/'+$root.sco_number+'/media/external_exe/'+content()}"></iframe>
+                    <!-- /ko -->
+                <!-- /ko -->
+            <!-- /ko -->
+        <!-- /ko -->
+    <!-- /ko -->
+<!-- /ko -->

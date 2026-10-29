@@ -1,0 +1,15 @@
+span.SLWG-paragraph{
+    line-height:1.8;
+}
+
+span .selected.SLWG-response {
+     color:#01b5bd;
+}
+
+span .SLWG-response:hover {
+     color:#666666;
+}
+
+span .selected.SLWG-response:hover {
+     color:#01b5bd;
+}

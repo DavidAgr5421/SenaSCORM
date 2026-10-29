@@ -1,0 +1,131 @@
+.ex-row {
+	height: 100%;
+}
+
+.nav-arrow-col {
+	height: 100%;
+}
+
+.exercise-controls{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    background-color: #E6E7E8;
+    border-bottom:solid 1px #B2B2B2;
+}
+
+div.clear-test-container { 
+    padding-right: 25px;
+}
+
+div.clear-show-container button.left-btn {
+    border-top-right-radius:0px;
+    border-bottom-right-radius:0px;
+}
+
+div.clear-show-container button.center-btn {
+    margin-left:-4px;
+    border-left:1px solid #CCCCCC;
+    border-radius:0px;    
+}
+
+div.clear-show-container button.right-btn {
+    margin-left:-4px;
+    border-left:1px solid #CCCCCC;
+    border-top-left-radius:0px;
+    border-bottom-left-radius:0px;
+}
+
+
+span.btn-divider{
+    border-left:solid 1px #B2B2B2;
+}
+
+div.check-answer-container{
+    display:inline; 
+    padding-top:2px;
+    padding-right:30px;
+    padding-left:50px;
+    float:right;
+}
+
+div.clear-show-container{
+    padding-top:2px;
+    display:inline;
+    float:right;    
+}
+
+div.exercise-controls-container{
+    padding-right:0px;
+}
+
+.exercise-submit-btn {
+	width: 100%;
+    margin-top: 1.75rem;
+}
+
+.exercise-attempt-prompt
+{
+    font-size: 0.8em;
+    line-height: 1.5em;
+    font-weight: 700;
+    color: #238276;
+    text-align: center;
+}
+
+.exercise-hide-feedback-text
+{
+	visibility: hidden;
+}
+
+.exercise-learning-skills {
+    position: relative;
+    top: 0.3rem;
+}
+
+.exercise-nav-btn,
+.exercise-submit
+{
+	display: inline-block;
+    vertical-align: middle;
+}
+
+.exercise-submit
+{
+    width: 18rem;
+}
+
+
+.exercise-nav-btn {
+    padding-top: 1rem !important;
+    float: right;
+}
+
+.exercise-bar {
+	background-color: rgba(255,255,255,0.75);
+    position: absolute;
+    left: 0;
+	bottom: 0;
+	height: 6rem;
+	width: 100%;
+	z-index: 1002;
+    -webkit-border-radius: 0 0 1rem 1rem;
+    -moz-border-radius: 0 0 1rem 1rem;
+    border-radius: 0 0 1rem 1rem;
+}
+
+.exercise-edit-buttons {
+}
+
+.exercise-edit-btn {
+}
+
+.edit-activity
+{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: rgba(1, 181, 189, 0.65);
+    z-index: 100;
+    margin: 10px;
+}

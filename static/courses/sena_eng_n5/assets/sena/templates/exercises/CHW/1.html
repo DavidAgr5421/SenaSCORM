@@ -1,0 +1,72 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/CHW/1.css'}">
+<span class="edit_container"></span>
+<div data-bind="template: { name: 'instructions_container_ko_template'}"></div>
+
+<div class="row CHW-exercise counter-reset">
+    <!-- ko foreach: questions() -->
+        <div class="row">
+            <div class="CHW-question">
+                <!-- ko foreach: _data() -->
+                    <!-- ko if: type() == "question" -->
+                        <!-- ko ifnot: product_helper_check_rec_question($parent._data()) -->
+                            <div data-bind="template: { name: 'question_counter_ko_template'}"></div>
+                            <div class="response-feedback response-feedback-question" data-bind="template: { name: 'data_level_question_feedback_ko_template' }, css: $parents[0].state_css()"></div>
+                        <!-- /ko -->
+                        <div class="CHW-question-col col-md-8 col-sm-8 col-xs-8">
+                            <!-- ko foreach: contents() -->
+                                <!-- ko if: type() == "image" || type() == "image-lg" || type() == "image-md" || type() == "image-sm"-->
+                                    <div class="chw-question-position col-xs-4">
+                                        <div class="exe-image-border-wrapper">
+                                            <div class="exe-image-border">
+                                                <img class="img-responsive exe-image" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                <!-- /ko -->
+                                <!-- ko if: type() == "text" -->
+                                    <span class="chw-question-text" data-bind="html: content()"></span>
+                                <!-- /ko -->
+                                <!-- ko if: type() == "audio" -->
+                                    <div class="CHW-audio chw-question-position">
+                                        <div data-bind="template: { name: 'audio_ko_template', data: $data }" class="sena-btn default-audio-button"></div>
+                                    </div>
+                                <!-- /ko -->
+                            <!-- /ko -->
+                        </div>
+                    <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if: product_helper_check_rec_question(_data()) -->
+                    <div class="CHW-question col-xs-offset-3 col-xs-6">
+                        <div data-bind="template: { name: 'rec_ko_template' }"></div>
+                    </div>
+                <!-- /ko --> 
+                <div class="btn-group btn-group-chw col-md-3 col-sm-3 col-xs-3" role="group" aria-label="..." data-bind="visible: !product_helper_check_rec_question(_data())">
+                    <!-- ko foreach:responses() -->
+                        <!-- ko foreach: _data() -->
+                            <!-- ko if: type() == "text" -->
+                                <div class="btn-chw-container ">
+                                    <!-- ko if:content().toLowerCase() == "true" -->
+                                        <!-- ko if:$parents[2].feedback_showing_answer() -->
+                                            <span class="btn btn-default btn-xs btn-chw" data-bind="value: $index(),css: { 'chw-selected': $parents[1].selected_response() == $parent.id()}, text: $root.localization.true()"> </span>        
+                                        <!-- /ko -->
+                                        <!-- ko ifnot:$parents[2].feedback_showing_answer() -->
+                                            <span class="btn btn-default btn-xs btn-chw" data-bind="click:  function() {$parents[1].select_response($parent.id);}, value: $index(),css: { 'chw-selected': $parents[1].selected_response() == $parent.id()}, text: $root.localization.true()"> </span> 
+                                        <!-- /ko -->
+                                    <!-- /ko -->
+                                    <!-- ko if:content().toLowerCase() != "true" -->
+                                        <!-- ko if:$parents[2].feedback_showing_answer() -->
+                                            <span class="btn btn-default btn-xs btn-chw" data-bind="value: $index(),css: { 'chw-selected': $parents[1].selected_response() == $parent.id()}, text: $root.localization.false()"> </span>
+                                        <!-- /ko -->
+                                        <!-- ko ifnot:$parents[2].feedback_showing_answer() -->
+                                            <span class="btn btn-default btn-xs btn-chw" data-bind="click:  function() {$parents[1].select_response($parent.id);}, value: $index(),css: { 'chw-selected': $parents[1].selected_response() == $parent.id()}, text: $root.localization.false()"> </span>
+                                        <!-- /ko -->
+                                    <!-- /ko -->
+                                </div>
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->
+                </div>
+            </div>
+        </div> 
+    <!-- /ko -->
+</div>

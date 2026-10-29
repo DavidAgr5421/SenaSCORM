@@ -1,0 +1,228 @@
+@media (max-width: 496px) {
+	.flc-cards-words {
+		float: none !important;
+	}
+	.flc-col {
+		width: 100% !important;
+		padding-left: 25% !important;
+	}
+}
+
+.card-text-child{
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+}
+
+.flc-question-padding{
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+	margin-left: 1rem;
+	margin-right: 1rem;
+}
+
+.flc-questions
+{ 
+	padding-left: 1rem;
+	position: relative;
+}
+.dotted-line{
+	margin-left: 1rem;
+	margin-right: 1rem;
+	border-width: 1px;
+	border-bottom-style: dashed; 
+}
+.flc-image{
+	min-height: 23rem;
+    width: 15.1rem;
+}
+.flc-cards{
+	background-color: rgb(2, 84, 72);
+	width: 100%;
+	height: 100%;
+	border-radius: 1.4rem;
+	border: 1rem solid rgb(2, 84, 72);
+	background-size: cover;
+    box-shadow: 0rem 0.2rem 0.2rem rgba(0,0,0,0.3);
+
+}
+.flc-cards-words{
+	margin-bottom: 15px;
+	background-color:#eaf5f3;
+	float:right;
+	position: relative;
+	width:17.25rem;
+	min-height:25rem;
+	display: inline-block;
+	border: 0.1rem solid;
+    border-radius: 0.5rem;
+    border-color: #9f9f9f;
+    border-bottom-width: 0px;
+    box-shadow: 0rem 0.2rem 0rem #333333;
+    display: inline-block;
+}
+.flc-text{
+	padding-bottom: 0.5rem;
+	position: relative;
+}
+.flc-text-word-part{
+	color: #666666;
+}
+.card-top-padding{
+	margin-top: 2rem;
+}
+.flc-card-container{
+	width: 17rem;
+	height: 25rem;
+	display: inline-block;
+	position: relative;
+	margin: 0 0.8rem 1.6rem 0.8rem;
+	perspective: 200rem;
+	-webkit-perspective: 200rem;
+}
+.inner-card{
+	margin: 0.5rem;
+	margin-top: 2.5rem;
+}
+
+.flc-counter-reset {
+  counter-reset: flc-counter;
+  text-align: center;
+}
+.flc-question-counter {
+  	counter-increment: flc-counter;
+  	float:left;
+}
+.flc-question-counter:before {
+  	content: counter(flc-counter);
+    font-weight: bold;
+}
+.flc-feedback{
+	right: 1rem;
+    top: 0rem;
+}
+
+span.flc-response-correct {
+    color:#139b48;
+    text-shadow:
+    -0.1rem -0.0rem 0 #fff,
+    0.0rem -0.1rem 0 #fff,
+    -0.1rem 0.0rem 0 #fff,
+    0.0rem 0.1rem 0 #fff,
+    -0.0rem -0.1rem 0 #fff,
+    0.1rem -0.0rem 0 #fff,
+    -0.0rem 0.1rem 0 #fff,
+    0.1rem 0.0rem 0 #fff;
+    font-size: 1.5rem;
+}
+/* -- make sure to declare a default for every property that you want animated -- */
+/* -- general styles, including Y axis rotation -- */
+.flc-panel .flc-front {
+	position: absolute;
+	backface-visibility: visible;
+	-moz-backface-visibility: visible;
+	backface-visibility: visible;
+
+	-webkit-transform: rotateX(0deg) rotateY(0deg);
+		 -moz-transform: rotateX(0deg) rotateY(0deg);
+					transform: rotateX(0deg) rotateY(0deg);
+
+	-webkit-transform-style: preserve-3d;
+		 -moz-transform-style: preserve-3d;
+					transform-style: preserve-3d;
+
+/* 	-webkit-backface-visibility: hidden;
+		 -moz-backface-visibility: hidden;
+					backface-visibility: hidden; */
+
+	/* -- transition is the magic sauce for animation -- */
+	-webkit-transition: webkit-transform .4s ease-in-out;
+					transition: transform .4s ease-in-out;
+}
+.flc-panel.flc-flip .flc-front {
+	-webkit-transform: rotateY(180deg);
+		 -moz-transform: rotateY(180deg);
+					transform: rotateY(180deg);
+}
+
+.flc-panel .flc-back {
+	position: absolute;
+	background-color: rgba(255,255,255,0.85);
+
+	-webkit-transform: rotateY(-180deg);
+		 -moz-transform: rotateY(-179deg); /* setting to 180 causes an unnatural-looking half-flip */
+					transform: rotateY(-179deg);
+
+	-webkit-transform-style: preserve-3d;
+		 -moz-transform-style: preserve-3d;
+					transform-style: preserve-3d;
+
+	-webkit-backface-visibility: hidden;
+		 -moz-backface-visibility: hidden;
+					backface-visibility: hidden;
+
+	/* -- transition is the magic sauce for animation -- */
+	-webkit-transition: webkit-transform .4s ease-in-out;
+					transition: transform .4s ease-in-out;
+}
+
+.flc-panel.flc-flip .flc-back {
+	-webkit-transform: rotateX(0deg) rotateY(0deg);
+		 -moz-transform: rotateX(0deg) rotateY(0deg);
+					transform: rotateX(0deg) rotateY(0deg);
+}
+
+/* -- X axis rotation for click panel -- */
+.flc-click .flc-front {
+	cursor: pointer;
+	-webkit-transform: rotateY(0deg);
+		 -moz-transform: rotateY(0deg);
+					transform: rotateY(0deg);
+}
+.flc-click.flip .flc-front {
+	-webkit-transform: rotateY(180deg);
+		 -moz-transform: rotateY(180deg);
+					transform: rotateY(180deg);
+}
+.flc-click .flc-back {
+	cursor: pointer;
+	-webkit-transform: rotateY(-180deg);
+		 -moz-transform: rotateY(-180deg);
+					transform: rotateY(-180deg);
+}
+.flc-click.flc-flip .flc-back {
+	-webkit-transform: rotateY(0deg);
+		 -moz-transform: rotateY(0deg);
+					transform: rotateY(0deg);
+}
+.flc-card-border {
+	border-color: rgb(2, 84, 72);
+}
+
+.flc-cards h4
+{
+	font-weight: 900;
+	margin-bottom: 1.6rem;
+	color: rgb(2, 84, 72);
+}
+
+/* Variable Colours */
+
+.flc-card-container:nth-child(6n+1) .flc-cards { border-color: #CC002B }
+.flc-card-container:nth-child(6n+1) .flc-cards h4     { color: #CC002B }
+
+.flc-card-container:nth-child(6n+2) .flc-cards { border-color: #0A4DA6 }
+.flc-card-container:nth-child(6n+2) .flc-cards h4     { color: #0A4DA6 }
+
+.flc-card-container:nth-child(6n+3) .flc-cards { border-color: #007E0B }
+.flc-card-container:nth-child(6n+3) .flc-cards h4     { color: #007E0B }
+
+.flc-card-container:nth-child(6n+4) .flc-cards { border-color: #7900CC }
+.flc-card-container:nth-child(6n+4) .flc-cards h4     { color: #7900CC }
+
+.flc-card-container:nth-child(6n+5) .flc-cards { border-color: #DA751D }
+.flc-card-container:nth-child(6n+5) .flc-cards h4     { color: #DA751D }
+
+.flc-card-container:nth-child(6n+6) .flc-cards { border-color: #C23B77 }
+.flc-card-container:nth-child(6n+6) .flc-cards h4     { color: #C23B77 }
+

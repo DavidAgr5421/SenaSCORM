@@ -1,0 +1,120 @@
+.MMM-question{             
+    margin-bottom: 2rem;
+	margin-left: 3rem;
+}
+
+.MMM-response{          
+    margin-bottom:10px;
+    position: relative;
+}
+
+.MMM-response-center{
+    text-align:center;
+}
+
+.MMM-col
+{
+	position: relative;
+	padding-left: 0;
+}
+
+.MMM-row
+{
+	line-height: 1.9;
+}
+
+.MMM-question-col .default-audio-button
+{
+	width: 100%;
+}
+
+.MMM-label
+{
+	margin: 0;
+}
+
+.MMM-label input[type='checkbox']
+{
+	display: none;
+}
+
+.MMM-label .MMM-response-text
+{
+	border: 0.2rem solid hsla(0, 0%, 0%, 0.3);
+	font-weight: normal;
+	border-radius: 0.4rem;
+	padding: 0.1em 0.25em;
+}
+
+.MMM-label .MMM-response-text:before
+{
+	position: relative;
+	top: 1px;
+	display: inline-block;
+	font-family: 'Glyphicons Halflings';
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	color: hsla(0, 0%, 0%, 0.3);
+	content: "\e157";
+	padding: 0 0.2em 0 0.1em;
+}
+
+.MMM-label input[type='checkbox']:checked + .MMM-response-text:before
+{
+	color: inherit;
+	content: "\e013";
+}
+
+.MMM-label input[type='checkbox']:enabled + .MMM-response-text:hover
+{
+	cursor: pointer;
+	background-color: hsla(0, 0%, 0%, 0.1);
+}
+
+.MMM-label input[type='checkbox']:checked + .MMM-response-text
+{
+	border-color: #238276;
+	color: #238276;
+	background-color: hsla(0, 0%, 100%, 0.9);
+}
+#main.cmn .MMM-label input[type='radio']:checked + .MMM-response-text{
+	border-color: #d34800;
+	color: #d34800;
+}
+#main.fr .MMM-label input[type='radio']:checked + .MMM-response-text{
+	border-color: #e42c23;
+	color: #e42c23;
+}
+#main.pt .MMM-label input[type='radio']:checked + .MMM-response-text{
+	border-color: #22893a;
+	color: #22893a;
+}
+#main.es .MMM-label input[type='radio']:checked + .MMM-response-text{
+	border-color: #935ec6;
+	color: #935ec6;
+}
+
+
+.MMM-label input[type='checkbox']:enabled:checked + .MMM-response-text:hover
+{
+	background-color: #e9f3f1;
+}
+#main.cmn .MMM-label input[type='radio']:enabled:checked + .MMM-response-text:hover{
+	background-color: #ffedeb;
+}
+#main.fr .MMM-label input[type='radio']:enabled:checked + .MMM-response-text:hover{
+	background-color: #feeded;
+}
+#main.pt .MMM-label input[type='radio']:enabled:checked + .MMM-response-text:hover{
+	background-color: #e0fee4;
+}
+#main.es .MMM-label input[type='radio']:enabled:checked + .MMM-response-text:hover{
+	background-color: #f3eff9;
+}
+
+.MMM-response-wrapper{
+	min-width: 9rem;
+}

@@ -1,0 +1,33 @@
+.dws-area{
+    text-align: center;
+}
+
+.dws-header{
+    color: #3A8C81;
+    font-size: 4rem;
+}
+#main.cmn .dws-header{
+    color: #e85000;
+    font-size: 4rem;
+}
+#main.fr .dws-header{
+    color: #f73931;
+    font-size: 4rem;
+}
+#main.pt .dws-header{
+    color: #279740;
+    font-size: 4rem;
+}
+#main.es .dws-header{
+    color: #9d6fcd;
+    font-size: 4rem;
+}
+
+.dws-line{
+    font-size: 2.5rem;
+}
+
+img.dws-pdf{
+    max-width: 72px;
+    max-height: 76px;
+}

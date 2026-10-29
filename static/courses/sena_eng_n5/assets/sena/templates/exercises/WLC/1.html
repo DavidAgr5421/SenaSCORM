@@ -1,0 +1,121 @@
+<span class="edit_container"></span>
+
+<div class="wlc-top-wrapper" data-bind="css: { 'wlc-test': $root._data.test() == 'true'}"> <!-- this is needed. do not remove -->
+
+	<div class="wlc-middle-stuff-wrapper"> 
+		<div class="row">
+			<div class="col-xs-6">
+				<!-- ko foreach: _data() -->
+					<!-- ko if: type() == "free_type_text_area" -->
+						<!-- ko ifnot: content() === '' -->
+							<div class="dr1-intro" data-bind="html: content"></div>
+						<!-- /ko -->
+					<!-- /ko -->
+				<!-- /ko -->
+			</div>
+			<div class="col-xs-6 text-center">
+				<!-- ko ifnot: img_path() === '' -->
+				<img data-bind="attr:{src:'assets/' + lms_config.product_type + '/scos/'+$root.sco_number+'/media/image/'+ img_path()}"  class="img-responsive dr1-image">
+				<!-- /ko -->
+			</div>
+		</div>
+	</div>
+
+	<div class="welcome-group-bar container-fluid"> <!-- front -->
+		<div class="wlc-table-wrapper">
+			<div class="row wlc-table-row">
+				<div class="col-group col-xs-12 col-md-8 wlc-table-cell">
+					<section class="col-xs-6">
+						<!-- ko if: $root._data.test() == 'true' -->
+							<h3><span data-bind="text:$root.localization.instructions"></span>:</h3>
+                                <ul>
+                                    <li><span data-bind="text:$root.localization.WLC_icon_nav"></span></li>
+                                    <li><span data-bind="html:$root.localization.WLC_when_finished"></span></li>
+                                </ul>
+						<!-- /ko -->
+                        <!-- ko if: $root._data.test() == 'PT' -->
+                            <h3><span data-bind="text:$root.localization.instructions"></span>:</h3>
+                                <ul>
+                                    <li><span data-bind="text:$root.localization.WLC_icon_nav"></span></li>
+                                    <li><span data-bind="html:$root.localization.WLC_PT_when_finished"></span></li>
+                                    <li><span data-bind="html:$root.localization.WLC_PT_submit_any"></span></li>
+                                </ul>
+                        <!-- /ko -->
+						<!-- ko if: $root._data.test() == 'false' -->
+							<h3><span data-bind="text:$root.localization.can_do_statements"></span>:</h3>
+    						<!-- ko foreach: _data() -->
+    							<!-- ko if: type() == "instructions" -->
+    								<ul data-bind="foreach:contents()">
+    									<!-- ko if: type() == 'Learning Outcomes' -->
+    										<li data-bind="html: content()"></li>
+    									<!-- /ko -->
+    								</ul>
+    							<!-- /ko -->
+    						<!-- /ko -->
+                        <!-- /ko -->
+					</section>
+					<section class="col-xs-6">
+                        <!-- ko if: $root._data.test() == 'true' -->
+                            <h3><span data-bind="text:$root.localization.important"></span>!</h3>
+                                <ul>
+                                    <li><span data-bind="html:$root.localization.WLC_answer_questions"></span></li>
+                                    <li><span data-bind="html:$root.localization.WLC_cant_make_change"></span></li>
+                                    <!-- ko foreach: _data() -->
+                                        <!-- ko if: type() == "instructions" -->
+                                            <!-- ko foreach:contents() -->
+                                                <!-- ko if: type() == 'Free Header Item' -->
+                                                <li data-bind="html: content()"></li>
+                                                <!-- /ko -->
+                                            <!-- /ko -->
+                                        <!-- /ko -->
+                                    <!-- /ko -->
+                                </ul>
+                        <!-- /ko -->
+                        <!-- ko if: $root._data.test() == 'PT' -->
+                            <h3><span data-bind="text:$root.localization.important"></span>!</h3>
+                                <ul>
+                                    <li><span data-bind="html:$root.localization.WLC_cant_make_change"></span></li>
+                                    <li><span data-bind="html:$root.localization.WLC_PT_question_count"></span></li>
+                                </ul>
+                        <!-- /ko -->
+                        <!-- ko if: $root._data.test() == 'false' -->
+    						<!-- ko foreach: _data() -->
+    							<!-- ko if: type() == "free_header_text" -->
+    								<h3 data-bind="text: content"></h3>
+    							<!-- /ko -->
+    						<!-- /ko -->
+    						
+    						<!-- ko foreach: _data() -->
+    							<!-- ko if: type() == "instructions" -->
+    								<ul data-bind="foreach:contents()">
+    									<!-- ko if: type() == 'Free Header Item' -->
+    									<li data-bind="html: content()"></li>
+    									<!-- /ko -->
+    								</ul>
+    							<!-- /ko -->
+                            <!-- /ko -->
+						<!-- /ko -->
+					</section>
+				</div>
+                <!-- ko if: $root.number_of_sco_groups() > 1 -->
+                    <div class="col-group col-xs-12 col-md-4 wlc-table-cell">
+                        <!-- ko foreach: $root.exercise_group_types() -->
+                            <!-- ko if: group == "Content" -->
+                                <button class="button-lets-explore" data-bind="click: $root.labs()[$root.selected_lab()].change_group.bind(null, 1)"> 
+                                    <span data-bind="text:$root.localization.lets_explore"></span>
+                                </button>
+                            <!-- /ko -->
+                            <!-- ko if: $root._data.test() == 'true' || $root._data.test() == 'PT' -->
+									<!-- ko if: group == "Activity 1" -->
+										<button class="button-check-your-progress" data-bind="click: function() { if($root.finished_test() == false){$root.labs()[$root.selected_lab()].change_group(1);}}"> 
+											<span data-bind="text:$root.localization.start_test"></span>
+										</button>
+									<!-- /ko -->
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    </div>
+                <!-- /ko -->
+			</div>
+		</div>
+	</div>
+</div>

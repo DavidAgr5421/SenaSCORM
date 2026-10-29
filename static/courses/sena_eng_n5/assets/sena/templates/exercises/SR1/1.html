@@ -1,0 +1,42 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/SR1/1.css'}">
+<span class="edit_container"></span>
+<div data-bind="template: { name: 'instructions_container_ko_template'}"></div>
+
+<div class="SR1-exercise-wrapper counter-reset">
+    <div class="row SR1-exercise">
+        <!-- ko foreach: questions() -->
+            <!-- ko if: product_helper_check_rec_question(_data()) == false -->
+                <div class="col-xs-3 SR1-col">
+                    <!-- ko foreach: _data() -->
+                        <!-- ko if: type() == "question" -->
+                            <div data-bind="template: { name: 'question_counter_ko_template'}"></div>
+                        <!-- /ko -->
+                    <!-- /ko -->
+                    <!-- ko foreach: responses() -->
+                        <!-- ko if: $index() == 1 -->
+                            <!-- ko foreach: _data() -->
+                                <div type="button" class="link-cursor sena-btn sena-btn-md default-audio-button" data-bind="template: { name: 'audio_ko_template', data: $data }, click: function() {if ($parent.selected() == 0) {$parents[1].select_response($parent.id);}}"></div>
+                           <!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->
+                </div>
+                <div class="col-xs-5 SR1-col">
+                    <!-- ko foreach: _data() -->
+                        <!-- ko if: type() == "question" -->
+                            <!-- ko foreach: contents() -->
+                                <!-- ko if: type() == "text" -->
+                                    <div class="SR1-text" data-bind="html: content()"></div>
+                                <!-- /ko -->
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->
+                </div>
+            <!-- /ko -->
+            <!-- ko if: product_helper_check_rec_question(_data()) -->
+                <div class="col-xs-4 SR1-col sena-btn-md" data-bind="template: { name: 'rec_ko_template' }"></div>
+                <div class="clearfix"></div>
+            <!-- /ko -->
+            
+        <!-- /ko -->
+    </div>
+</div>

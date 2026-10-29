@@ -1,0 +1,292 @@
+li.success {
+    background-image: url("../../../assets/sena/icons/results_checkmark_icon.png");
+}
+
+li.danger {
+    background-image: url("../../../assets/sena/icons/results_x_icon.png");
+}
+
+.nav-fixed-bottom{
+    margin-bottom:0px;
+}
+
+.nav-fixed-bottom li{    
+    -moz-box-sizing: border-box !important;
+    background-color: #fff;
+    background-position: 80% 50%;
+    background-repeat: no-repeat;
+    color: #000;
+    cursor: pointer;
+    display: inline-block;
+    float: none;
+    height: 28px;
+    line-height: 28px;
+    margin-right: 0px;    
+    padding-right: 7px;
+    padding-left: 7px;
+    width: 62px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.nav-fixed-bottom li.active{    
+    background-color:#01b5bd;
+    color:#fff;
+}
+
+.nav-items{    
+    padding-top:10px;
+    margin-left: 11px;
+    display:block;
+    float:left;
+    display: none;
+}
+
+.act-nav-items {
+    padding-right:20px;
+    padding-top:10px;
+    padding-left:20px;
+    display:block;
+    float:left;
+}
+
+.nav-items :focus {outline:0 !important;}
+
+.nav-home {
+    float: left;
+    padding-top: 13px;
+    padding-left: 10px;
+}
+
+#scholar_nav{
+    width: 100%;
+    left: 0;
+    bottom: 0;
+}
+
+.nav-bar div{
+    height: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.nav-buttons ul{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-buttons ul li{
+    height: 50px;
+    float: left;
+    color: #238276;
+}
+#main.cmn .nav-buttons ul li{
+    color: #d34800;
+}
+#main.fr .nav-buttons ul li{
+    color: #e42c23;
+}
+#main.pt .nav-buttons ul li{
+    color: #22893a;
+}
+#main.es .nav-buttons ul li{
+    color: #935ec6;
+}
+
+.nav-active{
+    cursor: pointer;
+    opacity: 1;
+}
+
+.nav-disabled{
+    cursor: default; 
+    opacity: 0.3;
+}
+
+.nav-buttons ul li span{
+    font-size: 45px;
+}
+
+.nav-buttons ul li p{
+    font-size: 20px;
+    margin: 10px 0 0 0;
+    font-weight: bold;
+}
+
+.nav-end-test {
+    padding-left: 20px;
+    padding-top: 15px;
+    border-left: 1px solid #666;
+    height:52px;
+}
+
+
+
+.nav-back-btn{
+
+}
+
+.nav-forward-btn{
+
+}
+
+.act-nav-buttons{
+    padding-left:20px;
+    border-left: 1px solid #666;
+    height:52px;
+    width:160px;
+    float:right;
+}
+
+.oed-nav-button {
+    margin-top:8px;
+    color:#3cbc33;
+    background-color:#fff;
+}
+
+button.nav-tip{
+    padding-left:30px;
+    padding-right:10px;
+    background-color:#fff;
+    color:#3cbc33;
+    background-repeat: no-repeat;
+    background-position: 20% 50%;
+    background-image: url("../../../assets/sena/icons/tip_icon.png");
+}
+
+button.nav-tip:hover{
+    background-color:#3cbc33;
+    color:white;
+    background-image: url("../../../assets/sena/icons/tip_icon-over.png");
+}
+
+button.nav-tip:disabled{
+    background-color:#fff;
+    color:#9B99AA;
+}
+
+button.oed-send{
+    padding-left:30px;
+    padding-right:10px;
+    background-color:#fff;
+    color:#3cbc33;
+    background-repeat: no-repeat;
+    background-position: 15% 50%;
+    background-image: url("../../../assets/sena/icons/send-icon.png");
+}
+
+button.oed-send:hover{
+    background-color:#01b5bd;
+    color:white;
+    background-image: url("../../../assets/sena/icons/send-icon-over.png");
+}
+
+button.oed-send:disabled{
+    background-color:#fff;
+    color:#9B99AA;
+}
+
+button.oed-grading-chart{
+    padding-left:35px;
+    padding-right:10px;
+    background-color:#fff;
+    color:#01b5bd;
+    background-repeat: no-repeat;
+    background-position: 10% 50%;
+    background-image: url("../../../assets/sena/icons/grading_chart_icon.png");
+}
+
+button.oed-grading-chart:hover{
+    background-color:#01b5bd;
+    color:white;
+    background-image: url("../../../assets/sena/icons/grading_chart_icon-over.png");
+}
+
+button.oed-grading-chart:disabled{
+    background-color:#fff;
+    color:#9B99AA;
+}
+
+button.oed-save{
+    padding-left:30px;
+    padding-right:10px;
+    background-color:#fff;
+    color:#01b5bd;
+    background-repeat: no-repeat;
+    background-position: 15% 50%;
+    background-image: url("../../../assets/sena/icons/save_icon.png");
+}
+
+button.oed-save:hover{
+    background-color:#01b5bd;
+    color:white;
+    background-image: url("../../../assets/sena/icons/save_icon-over.png");
+}
+
+button.oed-save:disabled{
+    background-color:#fff;
+    color:#9B99AA;
+}
+
+button.oed-goto-writing{
+    padding-left:40px;
+    padding-right:10px;
+    background-color:#01b5bd;
+    color:#fff;
+    background-repeat: no-repeat;
+    background-position: 5% 50%;
+    background-image: url("../../../assets/sena/icons/lessonNav_next_button-over.png");
+}
+
+button.oed-goto-writing.disabled{
+    background-color:#fff;
+    color:#9B99AA;
+}
+
+button.oed-goto-writing.disabled:hover{
+    background-color:#fff;
+    color:#9B99AA;
+}
+
+button.oed-goto-writing:hover{
+    background-image: url("../../../assets/sena/icons/lessonNav_next_button-over.png");
+    background-color:white;
+    color:#01b5bd;
+}
+
+button.oed-goto-writing:disabled{
+    background-color:#fff;
+    color:#9B99AA;
+}
+.outer-scrollbar {
+    width: 500px;
+}
+
+.nav-scroll-items { white-space:nowrap; }
+
+.horizontal-handle2 {
+    height: 10px;
+}
+
+.nav-scrollbar {
+    overflow: hidden;
+    overflow-y: hidden;
+    height: 50px;
+    padding-bottom: 0px;
+}
+
+.horizontal-handle  {
+    width: 100%;
+    height: 10px;
+    background-color: #01b5bd;
+    border-radius: 4px;
+    border: solid 1px #7F7F7F;
+}
+
+.horizontal-track {
+    width: 100%;
+    height: 10px;
+}

@@ -1,0 +1,64 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/MT1/2.css'}">
+<span class="edit_container"></span>
+<div data-bind="template: { name: 'instructions_container_ko_template'}"></div>
+
+<div class='MT1-2-exercise counter-reset' data-bind="attr:{ style: 'padding-bottom:'+drag_drop_container_height()+'px;'}">
+    <!-- ko foreach:questions() -->
+        <div class="row MT1-2-drop-hover MT1-2-questions" data-bind="attr{id: 'MT1-2'+$parent.id()+'_'+id()}, css : { 'MT1-2-no-container' : $data._data()[0].contents()[0].type() == 'rec'}">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <!-- ko foreach:_data() -->
+                    <!-- ko if: type() == "question" -->
+                        <!-- ko if : product_helper_check_rec_question($parent._data()) == false -->
+                            <div data-bind="template: { name: 'question_counter_ko_template'}"></div>
+                            <div class="response-feedback response-feedback-question" data-bind="template: { name: 'data_level_question_feedback_ko_template' }, css: $parents[0].state_css(), visible: (!$parents[1].feedback_showing_answer() && $parents[1].state() == 2) || ($parents[1].feedback_showing_answer() && $parents[1].state() == 4)"></div>
+                        <!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+
+                <!-- ko if: product_helper_check_rec_question(_data()) -->
+                    <div class="MT1-2-question pull-left">
+                        <div class="col-xs-6 col-xs-offset-3 MT1-2-button vertical-center" data-bind="template: { name: 'rec_ko_template' }">
+        
+                        </div>
+                    </div>
+                <!-- /ko -->                
+                
+                <!-- ko foreach:_data() -->
+                    <!-- ko if: type() == "question" && product_helper_check_rec_question($parent._data()) == false -->
+                        <div class="MT1-2-drop-area pull-left">
+                            <div data-bind="css: 'MT1-2-drop-container drop-container_'+$parents[1].id()+'_'+$parent.id()+'_'+$parents[2].id()">
+                                <div data-bind="css:'MT1-2-drop-hover drop-target MT1-2-drop MT1-2-drop_'+$parents[1].id()+'_'+$parent.id()+'_'+$parents[2].id(), attr{id: $parent.id() }">
+                                    <div data-bind=" visible: $parents[1].checked_answer()" ></div>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- /ko -->
+                <!-- /ko -->
+            </div>
+        </div>
+    <!-- /ko -->
+    
+    <div class=" MT1-2-response-container response_container" data-bind="attr{id: 'response_container_'+id()+'_'+$parent.id(), style: 'height: 0px;width:0px;'}">         
+        <!-- ko foreach:questions() -->
+            <!-- ko if: product_helper_check_rec_question(_data()) == false -->
+                <div class="MT1-2-center"data-bind="css: 'link-cursor pep MT1-2-response', attr{id: id()}">
+                    <!-- ko foreach: responses() -->
+                        <!-- ko if:$index() == 1 -->
+                            <!-- ko foreach: _data() -->
+                                <!-- ko if: type() == "text" -->
+                                    <span class="" data-bind="html:content()"></span>
+                                <!-- /ko -->
+                                <!-- ko if: type() == "image" && checkResourceExist('assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()) -->
+                                    <img class="MT1-2-image img-responsive MT1-2-response-image" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+                                <!-- /ko -->
+                                <div class="pull-right MT1-2-icon">
+                                    <span class="sena-icon sena-icon-vertical-drag vertical-center"> </span>
+                                </div>
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->
+                </div>  
+            <!-- /ko -->
+        <!-- /ko -->      
+    </div>   
+</div>

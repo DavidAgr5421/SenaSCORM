@@ -1,0 +1,100 @@
+.learning_skills
+{
+/* 	display: inline-block; */
+	position: relative;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	font-size: 4rem;
+}
+
+.learning_skills > ul
+{
+	background-color: transparent;
+	color: white;
+	padding: 0;
+	position: relative;
+	white-space: nowrap;
+	
+}
+
+.learning_skills li
+{
+	display: inline-block;
+	position: relative;
+	width: 1em;
+	height: 1em;
+	overflow: hidden;
+	text-align: center;
+	line-height: 1em;
+	margin-left: -0.4em;
+	list-style-type: none;
+	font-size: 1em;
+	background-position: center;
+	background-size: 80%;
+	background-repeat: no-repeat;
+	background-color: #121212;
+	border-radius: 1em;
+}
+
+.learning_skills li.active
+{
+	background-size: 95%;
+}
+
+.learning_skills li:first-child
+{
+	margin-left: 0em;
+}
+
+.learning_skills li:nth-child(2n+2)
+{
+	top: 0.3em;
+}
+
+.learning_skills .ls_placeholders > li
+{
+	background-color: #121212;
+	border-radius: 1em;
+}
+
+.learning_skills .ls_icons
+{
+/* 	position: absolute; */
+	left: 0;
+	opacity: 0.85;
+}
+
+.ls_icons .reading { 
+	background-image: url('../icons/skills/reading.png');
+	background-size: 35px;
+}
+.ls_icons .writing { 
+	background-image: url('../icons/skills/writing.png');
+	background-size: 35px;
+}
+.ls_icons .listening { 
+	background-image: url('../icons/skills/listening.png');
+	background-size: 35px;
+}
+.ls_icons .speaking { 
+	background-image: url('../icons/skills/speaking.png');
+	background-size: 35px; 
+}
+
+.ls_icons .reading.active { 
+	background-image: url('../icons/skills/reading.active.png');
+	background-size: 35px; 
+}
+.ls_icons .writing.active { 
+	background-image: url('../icons/skills/writing.active.png');
+	background-size: 35px;
+}
+.ls_icons .listening.active { 
+	background-image: url('../icons/skills/listening.active.png');
+	background-size: 35px;
+}
+.ls_icons .speaking.active { 
+	background-image: url('../icons/skills/speaking.active.png');
+	background-size: 35px;
+}

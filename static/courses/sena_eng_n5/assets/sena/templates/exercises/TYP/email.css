@@ -1,0 +1,127 @@
+.TYP-email
+{
+    border: .1rem solid #116C5F; /* dark */
+    padding: 1rem;
+    border-radius: .5rem;
+    box-shadow: 0 .5rem .5rem rgba(0,0,0,0.2);
+    background: white;
+}
+#main.cmn .TYP-email { border-color: #a93800 }
+#main.fr .TYP-email  { border-color: #b7211a }
+#main.pt .TYP-email  { border-color: #196d2c }
+#main.es .TYP-email  { border-color: #7946a6 }
+
+.TYP-email input.TYP_input
+{
+    box-shadow: none;
+    background: transparent;
+    border-radius: 0;
+    border-bottom: 0.15rem solid #3B9387;
+    width: 14rem;
+}
+
+#main.cmn .TYP-email input.TYP_input,
+#main.fr .TYP-email input.TYP_input,
+#main.pt .TYP-email input.TYP_input  
+{ 
+    box-shadow: none;
+    background: transparent;
+}
+
+
+#main.cmn .TYP-email input.TYP_input { border-bottom-color: #e85000 }
+#main.fr .TYP-email input.TYP_input  { border-bottom-color: #f73931 }
+#main.pt .TYP-email input.TYP_input  { border-bottom-color: #279740 }
+#main.es .TYP-email input.TYP_input  { border-bottom-color: #9d6fcd }
+
+.TYP-email .run-on-question:after
+{
+    left: -4rem;
+}
+
+.TYP-email .run-on-question:before
+{
+    margin-top: 0;
+}
+
+
+.TYP-email > .title-bar
+{
+    background: #238276; /* base */
+    background: linear-gradient(to bottom, #238276 0%, #116C5F 100%); /* base to dark */
+    color: white;
+    margin: -1rem -1rem 0;
+    padding: 0 1rem;
+    border-radius: .4rem .4rem 0 0;
+    /* line-height: 1.4em; */
+    font-size: 0.9em;
+    line-height: 2em;
+}
+#main.cmn .TYP-email > .title-bar 
+{
+    background: #d34800;
+    background: linear-gradient(to bottom, #d34800 0%, #a93800 100%);
+}
+#main.fr .TYP-email > .title-bar  
+{
+    background: #e42c23;
+    background: linear-gradient(to bottom, #e42c23 0%, #b7211a 100%);
+}
+#main.pt .TYP-email > .title-bar  
+{
+    background: #22893a;
+    background: linear-gradient(to bottom, #22893a 0%, #196d2c 100%);
+}
+#main.es .TYP-email > .title-bar  
+{
+    background: #935ec6;
+    background: linear-gradient(to bottom, #935ec6 0%, #7946a6 100%);
+}
+
+
+.TYP-email .input-group
+{
+    margin: 0 -1rem;
+    border-bottom: .1rem solid #2eaa9a;
+}
+#main.cmn .TYP-email .input-group { border-bottom-color: #e85000 }
+#main.fr .TYP-email .input-group  { border-bottom-color: #f73931 }
+#main.pt .TYP-email .input-group  { border-bottom-color: #279740 }
+#main.es .TYP-email .input-group  { border-bottom-color: #9d6fcd }
+
+.TYP-email .input-group-addon
+{
+    border-radius: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: white;
+    color: #2eaa9a;
+}
+#main.cmn .TYP-email .input-group-addon { color: #e85000 }
+#main.fr .TYP-email .input-group-addon  { color: #f73931 }
+#main.pt .TYP-email .input-group-addon  { color: #279740 }
+#main.es .TYP-email .input-group-addon  { color: #9d6fcd }
+
+.TYP-email .input-group-addon,
+.TYP-email .input-group input[type="text"]
+{
+    border: none;
+    font-size: 1.6rem;
+}
+
+.TYP-email .input-group input[type="text"]
+{
+    font-weight: 600;
+    color: #025449; /* darkest */ 
+}
+#main.cmn .TYP-email .input-group input[type="text"] { color: #812900 }
+#main.fr .TYP-email .input-group input[type="text"]  { color: #8c1711 }
+#main.pt .TYP-email .input-group input[type="text"]  { color: #115220 }
+#main.es .TYP-email .input-group input[type="text"]  { color: #5b347f }
+
+
+.TYP-email .input-group input[type="text"][disabled] 
+{
+    background-color: white;
+}
+

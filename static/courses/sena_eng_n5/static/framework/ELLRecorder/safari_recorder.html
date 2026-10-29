@@ -1,0 +1,14 @@
+ <!-- This has to be loaded after everything else is loaded. Safari really dislike loading flash -->
+ <!-- ko if: $root.has_rec() && $root.flash_fallback() && !detectMobileiOS() -->
+    <div id="flashContent" class="flash_content_safari">
+        <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0" width="300" height="200" id="flash_player" align="middle" data="static/framework/ELLRecorder/VoiceRecorder.swf">
+            <param name="allowScriptAccess" value="always" />
+            <param name="movie" value="static/framework/ELLRecorder/VoiceRecorder.swf" />
+            <param name="quality" value="high" />
+            <param name="bgcolor" value="#ffffff" />
+            <param name="flashvars" value="confFile=./config.xml" />
+            <param name="wmode" value="transparent" />
+            <embed src="static/framework/ELLRecorder/VoiceRecorder.swf" wmode="transparent" quality="high" flashvars="confFile=./config.xml" bgcolor="#ffffff" width="300" height="200" id="flash_player" class="flash-embed" name="flash_player" allowScriptAccess="always" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer" />
+        </object>
+    </div>
+ <!-- /ko -->

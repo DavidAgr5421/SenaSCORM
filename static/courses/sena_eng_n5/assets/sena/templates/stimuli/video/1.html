@@ -1,0 +1,74 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/stimuli/video/1.css'}">
+<span class="edit_container"></span>
+
+<!-- ko if : $root.labs()[$root.selected_lab()].exercises()[$root.labs()[$root.selected_lab()].selected_exercise()].type() == 'STI' -->
+    <div class="sti-instructions">
+        <!-- ko with: $root.labs()[$root.selected_lab()].exercises()[$root.labs()[$root.selected_lab()].selected_exercise()] -->
+            <div data-bind="template: { name: 'instructions_container_ko_template'}"></div>
+        <!-- /ko -->
+    </div>
+<!-- /ko -->
+
+<!-- ko foreach:contents() -->
+    <!-- ko if:type() == "img" && value() -->
+        <img class="img-responsive" data-bind="attr: { src: 'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/'+ value() }" /><br />
+    <!-- /ko -->
+    <!-- ko if:type() == "p" -->
+        <div class="stimulus_title" data-bind="html:value()"></div>
+    <!-- /ko -->
+    <!-- ko if:type() == "ol" -->
+        <ol data-bind="foreach:value()">
+            <li data-bind="html:value()"></li>
+        </ol>
+    <!-- /ko -->
+    <!-- ko if:type() == "ul" -->
+        <ul data-bind="foreach:value()">
+            <li data-bind="html:value()"></li>
+        </ul>
+    <!-- /ko -->
+    <!-- ko if:type() == "picture" -->
+        <!-- ko if:value.coverimg() -->
+            <!-- <img data-bind="attr: { src: 'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/'+ $data.value.coverimg() }" /> -->
+        <!-- /ko -->  
+        <!-- ko if:value.audiosrc() && checkResourceExist('assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/'+ $data.value.coverimg()) -->  
+            <img class="img-responsive" data-bind="attr: { src: 'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/'+ $data.value.coverimg() }" />   
+            <audio class="slide_show_audio stim_audio" controls="controls" preload="auto" data-bind="attr: { id: 'audio_slideshow_' + $parents[1].id() + '_' + $parent.id()}, template: { name: 'audio_src_ko_template', data: value.audiosrc()}" >
+
+            </audio>
+        <!-- /ko -->
+    <!-- /ko -->
+<!-- /ko -->
+<div class="row sti-video-top-wrapper">
+    <div data-bind="attr : { class : $root.labs()[$root.selected_lab()].exercises()[$root.labs()[$root.selected_lab()].selected_exercise()].type() == 'STI' ? 'col-lg-4 col-sm-5 col-xs-6 sti-height' : 'col-md-12 non-sti-height non-sti-video'}">
+        <div class="video-stimulus-container-sti">
+			<div class="video-player-container">
+            <!-- ko foreach:contents() -->
+                <!-- ko if:type() == "video" -->
+						<video style="height:100%; width:100%;" class="mejs-sena video_controls stim_audio stim_media" controls="controls" preload="auto" data-bind="attr: { id: 'video_scrolltext_' + $parents[1].id() + '_' + $parent.id()}, css : { 'mejs-sena-no-handle' : detectAndroidOrMacFirefox() }" >
+                            <source data-bind=" attr: {src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/video/'+value.video_src() + '.mp4'}" type="video/mp4"/>
+                            <!-- MP4 for Safari, IE9, iPhone, iPad, Android, and Windows Phone 7 -->
+                            <source type="video/mp4" data-bind=" attr: {src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/video/'+value.video_src() + '.mp4'}" />
+                            <!-- WebM/VP8 for Firefox4, Opera, and Chrome -->
+                            <source type="video/webm" data-bind=" attr: {src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/video/'+value.video_src() + '.webm'}" />
+                            <!-- Ogg/Vorbis for older Firefox and Opera versions -->
+                            <source type="video/ogg" data-bind=" attr: {src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/video/'+value.video_src() + '.ogv'}" />
+                            <span data-bind="text:$root.localization.video_not_supported"></span>
+                        </video>
+                <!-- /ko -->                            
+            <!-- /ko --> 
+			</div>
+        </div>
+    </div>
+	
+	<div data-bind="attr : { class : $root.labs()[$root.selected_lab()].exercises()[$root.labs()[$root.selected_lab()].selected_exercise()].type() == 'STI' ? 'col-lg-8 col-sm-7 col-xs-6 sti-height' : 'col-md-12 non-sti-height non-sti-text-video'}">
+		<div class="video_text_wrapper">
+		<!-- ko foreach:contents() -->
+            <!-- ko if:type() == "video" -->
+    			<!-- ko foreach:$data.value.images() -->                   
+    				<div class = "link-cursor audio-text" data-bind="click: function() { $parents[1].set_selected_audio_text(id(),time(), $parents[1].id()); }, visible: text() != '', css: $parents[1].selected_audio_text() == id() ? 'selected' : '', html: text()"></div>
+    			<!-- /ko -->
+            <!-- /ko -->
+		<!-- /ko -->
+		</div>
+	</div>
+</div>

@@ -1,0 +1,99 @@
+.SR1-text {
+
+}
+
+.SR1-textgap {
+    width: 1rem;
+}
+
+.question-wrapper{
+    width:100%;
+}
+
+.SR1-question {
+    border-bottom: 3px solid #EAF5F3;
+}
+#main.cmn.SR1-question {
+    border-bottom: 3px solid #ffedeb;
+}
+#main.fr.SR1-question {
+    border-bottom: 3px solid #feeded;
+}
+#main.pt-question {
+    border-bottom: 3px solid #e0fee4;
+}
+#main.es.pt-question {
+    border-bottom: 3px solid #f3eff9;
+}
+
+.no-padding {
+    padding: 0px;
+}
+
+.SR1-question-padding {
+    padding-left: 10px;
+}
+.SR1-listen-padding{
+    padding-left: 0px;
+}
+
+.SR1-exercise-wrapper {
+ }
+.SR1-exercise {
+    margin-left: 3rem;
+    position: relative;
+}
+
+.SR1-audio {
+    max-width: 5rem;
+    padding-right: 2rem;
+}
+
+.SR1-button{
+
+}
+
+.SR1-counter{
+
+}
+
+.SR1-exercise-wrapper .default-audio-button
+{
+    width: 100%
+}
+
+.SR1-col
+{
+    padding-left: 0;
+    margin-bottom: 1rem;
+}
+
+.PRP-question-counter
+{
+    left: -2.5rem !important;
+}
+
+.PRP-video-player-container
+{    
+    margin-right: 1.5rem;
+    padding-bottom: 1rem;
+}
+
+.PRP-nopadding-col
+{
+    padding: 0;
+}
+
+.PRP-content-col
+{
+    padding: 0 0 0 4rem;
+}
+
+.PRP-exercise .default-audio-button
+{
+    width: 100%;
+}
+
+.PRP-nopadding-col{
+    padding-bottom: 20px;
+}

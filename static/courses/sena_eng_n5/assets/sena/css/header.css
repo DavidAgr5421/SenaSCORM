@@ -1,0 +1,576 @@
+.header-img
+{
+    margin-top:9px;
+    margin-bottom:9px;
+}
+
+.lesson-info
+{
+    background-color:#FFFFFF;
+    color:#000000;
+    margin-left:8px;
+    padding-left:5px;
+    padding-right:5px;
+    padding-top:2px;
+    padding-bottom:2px;
+}
+
+.header-info
+{
+   margin-top:8px;
+}
+
+.header-exit
+{
+    /*background-position: 80% 65%;*/
+    background-repeat: no-repeat;
+    margin-left: 2rem;
+    /*padding-bottom:30px;*/
+    padding-left:11px;
+    padding-right:10px;
+}
+
+.header-text
+{
+    margin-left:8px;
+    font-size:14pt;
+}
+
+.header-sub-text
+{
+    font-size: 14pt;
+}
+
+span.header-exit {
+    background-image: url("../../../assets/sena/icons/header_x_close.png");
+}
+
+span.header-exit:hover{
+
+    background-image: url("../../../assets/sena/icons/header_x_close-over.png");
+}
+
+.logo {
+    background-color:#F2F2F2;
+    font-size:12pt;
+    color:#01b5bd;
+    padding-left:15px;
+    padding-right:0px;
+}
+
+.logo-text{
+    float:left;
+    padding-left:3px;
+    padding-right:0px;
+    padding-top:7px;
+}
+
+.logo-text:hover{
+    text-decoration:underline;
+}
+
+div.logo:hover{
+    text-decoration:underline;
+}
+
+.logo-img{
+    float:left;
+    padding-top:12px;
+    padding-left:3px;
+}
+
+
+
+.achievement-timer {
+    padding-right: 20px;
+    padding-top: 19px;
+    background-image: url("../../../assets/sena/icons/bg-clock.png");
+    background-position: 0% 125%;
+    background-repeat: no-repeat;
+}
+
+.object_metadata {
+    width: 150px;
+}
+
+/* Colours */
+.sena-forest {
+  color: #238276;
+}
+/* Breakpoints */
+/* Font Sizes */
+.flex,
+.options-menu button {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+.table-row {
+  display: table-row;
+}
+header {
+  display: table;
+  height: 5rem;
+  max-height: 5rem;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0.1) 100%) top left / 4rem 100% repeat-x, linear-gradient(to right, #025449 0%, #116c5f 40%) top right / 100% 100%; /* darkest to dark */
+  color: white;
+  overflow: visible;
+  width: 100%;
+  position: relative;
+  z-index: 20;
+}
+#main.en header .lesson-path,
+#main.en header .options-menu button
+{
+  color: #ffc001;
+}
+#main.fr header {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0.1) 100%) top left / 4rem 100% repeat-x, linear-gradient(to right, #6a0d0f 0%, #ad2117 40%) top right / 100% 100%;
+}
+#main.fr header .options-menu button {
+  background-image: linear-gradient(to bottom, #e64f44 0%, #da2a1d 50%, #c4251a 50%, #da2a1d 100%);
+}
+#main.pt header {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0.1) 100%) top left / 4rem 100% repeat-x, linear-gradient(to right, #007734 0%, #009436 40%) top right / 100% 100%;
+}
+#main.pt header .options-menu button {
+  background-image: linear-gradient(to bottom, #00c749 0%, #00ae3f 50%, #00a13b 50%, #00ae3f 100%);
+}
+#main.cmn header {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0.1) 100%) top left / 4rem 100% repeat-x, linear-gradient(to right, #b83d11 0%, #e4510d 40%) top right / 100% 100%;
+}
+#main.cmn header .options-menu button {
+  background-image: linear-gradient(to bottom, #f69061 0%, #f36e31 50%, #f25d19 50%, #f36e31 100%);
+}
+#main.es header {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0.1) 100%) top left / 4rem 100% repeat-x, linear-gradient(to right, #522E73 0%, #5b347f 40%) top right / 100% 100%;
+}
+#main.es header .options-menu button {
+  background-image: linear-gradient(to bottom, #bc9fde 0%, #7946a6 50%, #5b347f 50%, #935ec6 100%);
+}
+
+.pre-a1-header_line{
+  border-bottom: .75rem solid #FDED00;
+}
+.a1-1-header_line{
+  border-bottom: .75rem solid #E6B62B;
+}
+.a1-2-header_line{
+  border-bottom: .75rem solid #C9592B;
+}
+.a2-1-header_line{
+  border-bottom: .75rem solid #C12C2E;
+}
+.a2-2-header_line{
+  border-bottom: .75rem solid #B11C79;
+}
+.b1-1-header_line{
+  border-bottom: .75rem solid #89157B;
+}
+.b1-2-header_line{
+  border-bottom: .75rem solid #62157B;
+}
+.b1-3-header_line{
+  border-bottom: .75rem solid #2B1C7B;
+}
+.b2-1-header_line{
+  border-bottom: .75rem solid #04458E;
+}
+.b2-2-header_line{
+  border-bottom: .75rem solid #2F9BD1;
+}
+.b2-3-header_line{
+  border-bottom: .75rem solid #61C6E5;
+}
+.placement-header_line{
+  border-bottom: .75rem solid #FDED00;
+}
+
+#main.fr .pre-a1-header_line{
+  border-bottom: .75rem solid #83F3FF;
+}
+#main.fr .a1-1-header_line{
+  border-bottom: .75rem solid #40BBF2;
+}
+#main.fr .a1-2-header_line{
+  border-bottom: .75rem solid #187989;
+}
+#main.fr .a2-1-header_line{
+  border-bottom: .75rem solid #0552AF;
+}
+#main.fr .a2-2-header_line{
+  border-bottom: .75rem solid #072672;
+}
+
+#main.cmn .intro-header_line{
+  border-bottom: .75rem solid #CFDE29;
+}
+#main.cmn .pre-a1-header_line{
+  border-bottom: .75rem solid #C1DB28;
+}
+#main.cmn .a1-1-header_line{
+  border-bottom: .75rem solid #84D331;
+}
+#main.cmn .a1-2-header_line{
+  border-bottom: .75rem solid #57871A;
+}
+#main.cmn .a2-1-header_line{
+  border-bottom: .75rem solid #006C3B;
+}
+#main.cmn .a2-2-header_line{
+  border-bottom: .75rem solid #154915;
+}
+
+#main.pt .pre-a1-header_line{
+  border-bottom: .75rem solid #FDED00;
+}
+#main.pt .a1-1-header_line{
+  border-bottom: .75rem solid #E5B449;
+}
+#main.pt .a1-2-header_line{
+  border-bottom: .75rem solid #C47712;
+}
+#main.pt .a2-1-header_line{
+  border-bottom: .75rem solid #B23040;
+}
+#main.pt .a2-2-header_line{
+  border-bottom: .75rem solid #930707;
+}
+
+#main.es .pre-a1-header_line{
+  border-bottom: .75rem solid #23A347;
+}
+#main.es .a1-1-header_line{
+  border-bottom: .75rem solid #91B435;
+}
+#main.es .a1-2-header_line{
+  border-bottom: .75rem solid #C6FC00;
+}
+#main.es .a2-1-header_line{
+  border-bottom: .75rem solid #FDED00;
+}
+#main.es .a2-2-header_line{
+  border-bottom: .75rem solid #CA611F;
+}
+
+.header-wrapper {
+  border-radius: .75rem;
+}
+.header-logo {
+  display: table-cell;
+  width: 11rem;
+  text-align: center;
+  position: relative;
+}
+
+.header-logo img {
+  width: auto;
+  height: 7.5rem;
+  margin: 0 auto;
+  position: absolute;
+  left: 1.5rem;
+}
+
+.header-title {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: left;
+  line-height: 1;
+  padding-top: 0.7rem;
+  position: relative;
+}
+
+.title-container > button
+{
+  vertical-align: .5rem;
+  margin-left: .8rem;
+}
+.header-title .section-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  display: inline;
+  position: relative;
+}
+.header-title h1 {
+  display: inline;
+  font-size: 2.0rem;
+  font-weight: 600;
+  margin-left: .8rem;
+  position: relative;
+}
+
+.lesson-path {
+  color: white;
+  font-size: 1.4rem;
+  display: table-cell;
+  vertical-align: middle;
+  padding-right: 0.7rem;
+  text-align: right;
+  padding-top: 0.9rem;
+  line-height: 1;
+  position: relative;
+}
+
+.lesson-path span{
+  display: inline;
+  padding-right: 3px;
+}
+
+#main.pt .lesson-path{
+  color: #ffc001;
+}
+
+.help-header.lesson-path {
+	width: 100%;
+}
+
+.lesson-path > li {
+  padding: 0;
+}
+.lesson-path .sena-icon{
+  padding: 0 .2rem;
+  display: inline-block;
+}
+
+.options-menu {
+  display: table-cell;
+  width: 5.5rem;
+  vertical-align: middle;
+  position: relative;
+}
+.options-menu button {
+  height: 5rem;
+  font-size: 3.5rem;
+  border-radius: 0 1rem 0 0;
+  border: none;
+  background-image: linear-gradient(to bottom, #36c8b6 0%, #2ba091 50%, #238276 50%, #2ba091 100%);
+  color: white;
+  padding: 0 1rem;
+  text-shadow: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.4);
+  outline: none;
+  position: relative;
+}
+#main.pt .options-menu button{
+  color: #ffc001;
+}
+
+.options-menu button .glyphicon {
+  position: relative;
+  top: 0.3rem;
+  left: -0.1rem;
+  line-height: 1.4;
+}
+.options-menu .dropdown-menu {
+  border: none;
+  color: white;
+  font-size: 3rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 0.5rem 0;
+  min-width: 5.5rem;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+.dropdown-menu{
+  margin: 0 !important;
+}
+.options-menu .dropdown-menu a {
+  padding: 0.5rem 0.5rem 0;
+  color: white;
+  text-align: center;
+}
+.options-menu .dropdown-menu a img {
+  width: 3rem;
+  height: 3rem;
+}
+.options-menu .dropdown-menu a:hover,
+.options-menu .dropdown-menu a:focus {
+  color: white;
+  background-color: rgba(128, 128, 128, 0.8);
+}
+
+.help-modal-item {
+	padding: 0;
+    min-height: 80px;
+}
+
+.help-vertical-align-magic{
+  justify-content: center;
+  flex-direction: column;
+}
+
+.help-menu-text {
+  min-height: 240px !important;
+}
+
+.help-text-col {
+	border-bottom: 2px solid #CFCFCF;
+	min-height: 80px;
+	padding: 10px;
+  padding-top: 30px;
+  width: 75%;
+  padding-bottom: 30px;
+}
+
+.help-modal-item:first-child .help-text-col {
+	border-top: 2px solid #CFCFCF;
+}
+
+.help-image-col {
+	min-height: 80px;
+}
+
+.help-bold-text {
+	font-weight: bold;
+}
+
+.help-modal-long {
+	min-height: 240px;
+}
+
+.help-modal-menu-img {
+	min-height: 240px !important;
+	background-size: 45px 220px !important;
+}
+
+.help-btn-inner, .help-img {
+    background-size: 60px 60px;
+    min-height: 60px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+/*.help-icon-col {
+  min-width: 190px;
+}*/
+
+.help-modal-box {
+  min-width: 500px;
+}
+.help-inline-img {
+    background-size: 60px 60px;
+}
+
+.AT-help-inline-img {
+    background-size: 45px 45px;
+}
+
+.help-horizontal-list {
+    min-width: 200px;
+}
+
+.AT-help-horizontal-list {
+    display: inline-block;
+    min-width: 263px;
+    padding: 0;
+}
+
+.help-horizontal-list li {
+    display: inline-block;
+    list-style-type: none;
+}
+.AT-help-horizontal-list li
+{
+    display: inline-block;
+    list-style-type: none;
+    margin-left: -1rem;
+}
+.AT-help-horizontal-list-title{
+    display: inline-block;
+    list-style-type: none;
+    min-width: 263px;
+}
+.AT-help-lesson-path {
+  margin-right: 50px;
+  width: 200px !important;
+}
+
+.AT-help-question-numbers
+{
+    color: white;
+    font-size: 16px;
+    padding-left: 16px;
+    padding-top: 18px;
+}
+
+.help-skills {
+/*     margin-top: -1.8rem; */
+}
+
+#help-item-1, #help-item-2, #help-item-3{
+    background-image: url('../../../assets/sena/icons/buttons/circle/forest.svg');
+}
+
+#help-item-4, #help-item-11, #help-item-11{
+    background-image: url('../../../assets/sena/icons/buttons/circle/crimson.svg');
+}
+
+#help-item-12{
+    background-image: url('../../../assets/sena/icons/buttons/circle/crimson.svg');
+    width: 60px;
+}
+
+#help-item-5, #help-item-6{
+    background-image: url('../../../assets/sena/icons/buttons/circle/green.svg');
+}
+
+#help-item-7, #help-item-8, #help-item-9{
+    background-image: url('../../../assets/sena/icons/buttons/circle/orange.svg');
+    width: 60px;
+    display: inline-block;
+}
+
+#help-item-1 .help-btn-inner{
+    background-image: url('../../../assets/sena/icons/lets-start.svg');
+}
+
+#help-item-2 .help-btn-inner{
+    background-image: url('../../../assets/sena/icons/lets-explore.svg');
+}
+
+#help-item-3 .help-btn-inner{
+    background-image: url('../../../assets/sena/icons/check-progress.svg');
+}
+
+#help-item-4 .help-btn-inner{
+    background-image: url('../../../assets/sena/icons/take-away.svg');
+}
+
+#help-item-5 .help-btn-inner{
+    background-image: url('../../../assets/sena/icons/target-words.svg');
+}
+
+#help-item-6 .help-btn-inner{
+    background-image: url('../../../assets/sena/icons/language-point.svg');
+}
+
+#help-item-7 .help-btn-inner{
+    background-image: url('../../../assets/sena/icons/lets-practice-1.svg');
+}
+
+#help-item-8 .help-btn-inner{
+    background-image: url('../../../assets/sena/icons/lets-practice-2.svg');
+}
+
+#help-item-9 .help-btn-inner{
+    background-image: url('../../../assets/sena/icons/lets-practice-3.svg');
+}
+
+#help-item-10 .help-btn-inner{
+    background-image: url('../../../assets/sena/icons/help_menu.png');
+}
+
+#help-item-11 .help-btn-inner{
+    background-image: url('../../../assets/sena/icons/assessment-results.svg');
+}
+
+#help-item-12 .help-btn-inner{
+    background-image: url('../../../assets/sena/icons/buttons/circle/orange-q.svg');
+}
+
+.AT-section-title
+{
+    padding-top: 0.5rem;
+}

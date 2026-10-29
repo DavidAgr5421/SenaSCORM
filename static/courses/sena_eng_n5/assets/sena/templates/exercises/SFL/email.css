@@ -1,0 +1,85 @@
+.SFL-email
+{
+    border: .1rem solid #116C5F; /* dark */
+    padding: 1rem;
+    border-radius: .5rem;
+    box-shadow: 0 .5rem .5rem rgba(0,0,0,0.2);
+    background: white;
+}
+#main.cmn .SFL-email { border-color: #a93800 }
+#main.fr .SFL-email  { border-color: #b7211a }
+#main.pt .SFL-email  { border-color: #196d2c }
+#main.es .SFL-email  { border-color: #935ec6 }
+
+.SFL-email > .title-bar
+{
+    background: #238276;/* base */
+    background: linear-gradient(to bottom, #238276 0%, #116C5F 100%);/* base to dark */
+    color: white;
+    margin: -0.5rem -15px 0;
+    padding: 0 1rem;
+    border-radius: .4rem .4rem 0 0;
+    /* line-height: 1.4em; */
+    font-size: 0.9em;
+    line-height: 2em;
+}
+#main.cmn .SFL-email > .title-bar 
+{
+    background: #d34800;
+    background: linear-gradient(to bottom, #d34800 0%, #a93800 100%);
+}
+#main.fr .SFL-email > .title-bar  
+{
+    background: #e42c23;
+    background: linear-gradient(to bottom, #e42c23 0%, #b7211a 100%);
+}
+#main.pt .SFL-email > .title-bar  
+{
+    background: #22893a;
+    background: linear-gradient(to bottom, #22893a 0%, #196d2c 100%);
+}
+#main.es .SFL-email > .title-bar  
+{
+    background: #935ec6;
+    background: linear-gradient(to bottom, #935ec6 0%, #7946a6 100%);
+}
+
+.SFL-email .email-header {
+    margin: 0 -15px;
+    padding: 0 15px;
+    border-collapse: separate;
+    border-bottom: .1rem solid #2eaa9a;
+}
+
+#main.cmn .SFL-email .email-header { border-bottom-color: #e85000 }
+#main.fr  .SFL-email .email-header { border-bottom-color: #f73931 }
+#main.pt  .SFL-email .email-header { border-bottom-color: #279740 }
+#main.es  .SFL-email .email-header { border-bottom-color: #9d6fcd }
+
+.SFL-email .email-header .email-field-label 
+{
+	white-space: nowrap;
+	vertical-align: top;
+	padding-right: 15px;
+	color: #2eaa9a;
+	font-weight: 700;
+	padding-top: 14px;
+}
+
+#main.cmn .SFL-email .email-header .email-field-label { color: #e85000 }
+#main.fr  .SFL-email .email-header .email-field-label  { color: #f73931 }
+#main.pt  .SFL-email .email-header .email-field-label  { color: #279740 }
+#main.es  .SFL-email .email-header .email-field-label  { color: #9d6fcd }
+
+.SFL-email .email-header .email-field-well {
+    width: 100%;
+}
+
+.SFL-email .email-header .email-field-well .SFL-drop-placeholder {
+	color: transparent;
+}
+
+
+
+
+

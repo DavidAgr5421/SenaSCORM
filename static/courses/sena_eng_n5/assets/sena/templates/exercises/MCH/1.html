@@ -1,0 +1,46 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/MCH/1.css'}">
+<span class="edit_container"></span>
+<div data-bind="template: { name: 'instructions_container_ko_template'}"></div>
+
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="mch-table" data-bind="attr:{ id: 'mch-table-'+id()}, style:{'opacity': cur_question() == -1 && mch_attempts() < 1 ? '0.6' : ''}">
+            <tbody>
+                <!-- ko foreach: mch_grid() -->
+                    <tr>
+                        <!-- ko foreach: cols() -->                            
+                            <!-- ko if: selected() -->
+                                <!-- ko if: type() == "text" -->
+                                    <td tabindex="1" class="mch-cell" data-bind="click: function() {$parents[1].check_click_match($data)}, attr:{ style: 'height:'+($parents[1].cell_heights())+'px;width:'+($parents[1].cell_width())+'px;', id:'mch-cell-'+$parents[1].id()}">
+                                        <div class="mch-image-border">
+                                            <div class="mch-card-front text-center"><span class="full-center" data-bind="html: content"></span></div>
+                                        </div>
+                                    </td> 
+                                <!-- /ko -->
+                                <!-- ko if: type() == "image" -->
+                                    <td tabindex="1" class="mch-cell text-center" data-bind="click: function() {$parents[1].check_click_match($data)}, attr:{ style: 'height:'+($parents[1].cell_heights())+'px;width:'+($parents[1].cell_width())+'px;', id:'mch-cell-'+$parents[1].id()}">
+                                        <div class="mch-image-border">
+                                            <img class="mch-image img-responsive " data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+                                        </div>
+                                    </td> 
+                                <!-- /ko -->
+                            <!-- /ko -->
+                            <!-- ko if: !selected() -->
+                                <td tabindex="1" class="mch-cell text-center" data-bind="click: function() {$parents[1].check_click_match($data)}, attr:{ style: 'height:'+($parents[1].cell_heights())+'px;width:'+($parents[1].cell_width())+'px;', id:'mch-cell-'+$parents[1].id()}">
+                                    <div class="mch-image-border">
+                                        <div class="mch-card-back" data-bind="style: { backgroundImage: 'url(assets/'+$root.lesson_type+'/icons/pattern.png)' }"></div>
+                                    </div>
+                                </td>
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    </tr>
+                <!-- /ko -->
+            </tbody>
+        </table>
+        <!-- ko if: cur_question() == -1 && mch_attempts() < 1 -->
+            <div class="link-cursor sena-btn full-center mch-try-again" data-bind="click: function(){reset_mch()}"><span data-bind="text:$root.localization.try_again_button"></span></div>
+        <!-- /ko -->
+    </div>
+</div>

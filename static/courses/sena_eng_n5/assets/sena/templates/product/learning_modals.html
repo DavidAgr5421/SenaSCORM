@@ -1,0 +1,148 @@
+<div id="myTargetWordsModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"  data-bind="css: {
+                    en: $root.localization.language() == 'English',
+                    pt: $root.localization.language() == 'Português',
+                    cmn: $root.localization.language() == 'Mandarín',
+                    es: $root.localization.language() == 'Español como segunda lengua',
+                    fr: $root.localization.language() == 'Français' }">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <h1>
+                <span class="icon-target-words"></span>
+                <span data-bind="text:$root.localization.target_words"></span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><img class="close"  data-bind="attr: { src: 'assets/'+$root.lesson_type+ '/icons/buttons/close.svg' }" /></button>
+            </h1>
+            <div class="section">
+                <!-- ko foreach: _data() -->
+                    <!-- ko if: type() == "target_word_describer" -->
+                        <!-- ko foreach: contents() -->
+                                <p class="lead target-word-lead" data-bind="html: content()"></p>
+                        <!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+                <div class="row" data-bind='foreach: $root._data()'>
+                    <!-- ko if: type() == "target_word" -->
+                        <dl class="col-xs-6 modal-no-padding-left">
+                            <dt>
+                                <!-- ko foreach: contents() -->
+                                    <!-- ko if: type() == "audio" -->
+                                        <div class="link-cursor sena-btn default-audio-button tw_audio-btn" data-bind="template: { name: 'audio_ko_template', data: $data }"></div>
+                                    <!-- /ko -->
+                                <!-- /ko -->
+                                <!-- ko foreach: contents() -->
+                                    <!-- ko if: type() == "name" -->
+                                        <span data-bind="html: content()"> </span>
+                                    <!-- /ko -->
+                                    <!-- ko if: type() == "part_speech" -->
+                                        <em data-bind="html: content()"> </em>
+                                    <!-- /ko -->
+                                <!-- /ko -->
+                            </dt>
+                            <dd>
+                                <!-- ko foreach: contents() -->
+                                    <!-- ko if: type() == "definition" -->
+                                        <span data-bind="html: content()"> </span></br>
+                                    <!-- /ko -->
+                                    <!-- ko if: type() == "example" -->
+                                        <em data-bind="html: content()"> </em>
+                                    <!-- /ko -->
+                                <!-- /ko -->
+                            </dd>
+                        </dl>
+                    <!-- /ko -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="learning-point" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"  data-bind="css: {
+                    en: $root.localization.language() == 'English',
+                    pt: $root.localization.language() == 'Português',
+                    cmn: $root.localization.language() == 'Mandarín',
+                    es: $root.localization.language() == 'Español como segunda lengua',
+                    fr: $root.localization.language() == 'Français' }">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <h1 class="modal-learning-headder">
+                <span class="icon-learning-point"></span>
+                <span data-bind="text:$root.localization.learning_points"></span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><img class="close"  data-bind="attr: { src: 'assets/'+$root.lesson_type+ '/icons/buttons/close.svg' }" /></button>
+                <!-- ko foreach: $root._data() -->
+                    <!-- ko if: type() == "objectives" -->
+                        <!-- ko foreach: contents() -->
+                            <!-- ko if: type() == "primary" -->
+                                <div class="small">
+                                    <b><span data-bind="text:$root.localization.learning_outcome"></span>:</b>
+                                    <span data-bind="text: content()"></span>
+                                </div>
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+
+            </h1>
+            <!-- ko foreach: _data() -->
+                <!-- ko if: type() == "learning_points" -->
+                    <section>
+                        <!-- ko foreach: contents() -->
+                            <!-- ko if: type() == "heading" -->
+                                <h2 data-bind="html: content()"></h2>
+                            <!-- /ko -->
+                            <!-- ko if: type() == "describer" -->
+                                <p class="learning-points-lead" data-bind="html: content()"></p>
+                            <!-- /ko -->
+                            <!-- ko if: $index() == ($parent.contents().length)-1 -->
+                                <div class="row">
+                                    <div class="col-xs-12 modal-no-padding-left modal-no-padding-right">
+                                        <div class="col-md-12 col-sm-12 col-xs-12 modal-no-padding-left modal-no-padding-right" data-bind="template: { name: 'instruction_ko_template', foreach: $parentContext.$data }">
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- /ko -->
+                            <!-- ko if: $index() == ($parent.contents().length)-1 && $parents[1].check_learning_point_example($parent.contents) == true -->
+                                <dl>
+                                    <dt><span data-bind="text:$root.localization.examples"></span></dt>
+                                    <dd>
+                                        <ul>
+                                            <!-- ko foreach: $parent.contents() -->
+                                                <!-- ko if: type() == "example" -->
+                                                    <li><em data-bind="html: content()"></em></li>
+                                                <!-- /ko -->
+                                            <!-- /ko -->
+                                        </ul>
+                                    </dd>
+                                </dl>
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    </section>
+                <!-- /ko -->
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+
+<div id="feedback-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="row" style="border-bottom: none; padding-top: 10px;">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><img class="close" data-bind="attr: { src: 'assets/'+$root.lesson_type+ '/icons/buttons/close.svg' }" /></button>
+                </div>
+            </div>
+            <div class="modal-body text-center">
+                <!-- ko if: viewModel.labs()[viewModel.selected_lab()].exercises()[viewModel.labs()[viewModel.selected_lab()].selected_exercise()].state() != 4 -->
+                    <div><img width="90" height="86" data-bind="attr:{src:'assets/'+$root.lesson_type+'/icons/attempts/incorrect.svg'}"></div>
+                <!-- /ko -->
+                <!-- ko ifnot: viewModel.labs()[viewModel.selected_lab()].exercises()[viewModel.labs()[viewModel.selected_lab()].selected_exercise()].state() != 4 -->
+                    <div><img width="90" height="86" data-bind="attr:{src:'assets/'+$root.lesson_type+'/icons/attempts/correct.svg'}"></div>
+                <!-- /ko -->
+                <div class="h2">
+                    <span data-bind="text: viewModel.labs()[viewModel.selected_lab()].exercises()[viewModel.labs()[viewModel.selected_lab()].selected_exercise()].feedback().current_feedback()"> </span>
+                </div>
+                <!-- ko if: viewModel.labs()[viewModel.selected_lab()].exercises()[viewModel.labs()[viewModel.selected_lab()].selected_exercise()].display_show_answers_btn()-->
+                    <button data-dismiss="modal" class="exercise-submit-btn sena-btn sena-btn-md" data-bind="click: function(){viewModel.labs()[viewModel.selected_lab()].show_answers_button()}"><span data-bind="text:$root.localization.show_answers"></span></button>
+                <!-- /ko -->
+            </div>
+        </div>
+    </div>
+</div>

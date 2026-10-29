@@ -1,0 +1,45 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/ELS/1.css'}">
+<span class="edit_container"></span>
+<div data-bind="template: { name: 'instructions_container_ko_template'}"></div>
+
+<div class="counter-reset">
+    <!-- ko foreach: questions() -->
+        <div class="ELS-paragraph">
+            <!-- ko if: product_helper_check_rec_question(_data()) == false --> 
+                <!-- ko foreach: _data() -->
+                    <!-- ko if: type() == "question" -->
+                        <div data-bind="template: { name: 'question_counter_ko_template'}"></div>
+                        <div class="response-feedback response-feedback-question" data-bind="template: { name: 'data_level_question_feedback_ko_template' }, css: $parents[0].state_css()"></div>
+                        <!-- ko foreach: contents() -->
+                            <!-- ko if: type() == "text" -->
+                                <div class="ELS-question">
+                                    <span data-bind="html: content()"> </span>
+                                </div>
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if: !$parents[0].showing_answer() && !$parents[0].feedback_showing_answer() -->
+                <span data-bind="foreach:responses()">
+                    <!-- ko foreach: _data() -->
+                        <span class="link-cursor ELS-response " data-bind="html:content() + ' ', css: {selected: $parent.selected()}, click: function(){ $parents[1].select_response_toggle($parent.id);}"></span>
+                    <!-- /ko -->
+                </span>
+            <!-- /ko -->
+            <!-- ko if:$parents[0].showing_answer() || $parents[0].feedback_showing_answer() -->
+                <span data-bind="foreach:responses()">
+                    <!-- ko foreach: _data() -->
+                        <span class="default-cursor ELS-response " data-bind="html:content() + ' ', css: {selected: $parent.selected()}"></span>
+                    <!-- /ko -->
+                </span>
+            <!-- /ko -->
+            <!-- ko if: product_helper_check_rec_question(_data()) -->
+                <div class="row">
+                    <div class="col-md-3 col-sm-4 col-xs-4"></div>
+                    <div class="col-xs-6" data-bind="template: { name: 'rec_ko_template' }">   </div>
+                </div>
+            <!-- /ko -->   
+        </div>
+    <!-- /ko -->
+</div>

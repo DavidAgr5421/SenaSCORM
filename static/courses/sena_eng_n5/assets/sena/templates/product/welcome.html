@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12 welcome-header-text">
+        <h2 data-bind="text:localization.welcome_header_text"></h2>               
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="welcome-header-border">
+        
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">       
+        <div class="row">
+            <div class="col-md-6 col-sm-5 col-xs-4 welcome-body-text">
+                <!-- ko if:type() == "reading" -->
+                    <p data-bind="html:localization.welcome_reading_top"></p>
+                <!-- /ko -->
+                <!-- ko if:type() == "skills" -->
+                    <p data-bind="html:localization.welcome_skills_top"></p>
+                <!-- /ko -->
+                <!-- ko if:type() == "writing" -->
+                    <p data-bind="html:localization.welcome_writing_top"></p>
+                <!-- /ko -->
+                <!-- ko foreach:localization.welcome_pre_toolbar -->          
+                    <span data-bind="html:$data"></span>      
+                <!-- /ko -->    
+                <!-- ko foreach:localization.welcome_toolbar -->          
+                    <span class="strong link-cursor" data-bind="html: $data, click: function() {$root.move_sidebar(0)}"></span>      
+                <!-- /ko -->
+                <!-- ko foreach:localization.welcome_after_toolbar -->          
+                    <span data-bind="html:$data"></span>      
+                <!-- /ko -->   
+                    <p></p> 
+                <!-- ko foreach:localization.welcome_download_lab -->          
+                    <span class="strong link-cursor" data-bind="html:$data, click: function() {$root.downloadLab()}"></span>      
+                <!-- /ko -->    
+                <!-- ko foreach:localization.welcome_download_lab_after -->          
+                    <span data-bind="html: $data"></span>      
+                <!-- /ko -->
+                    <p></p> 
+                <!-- ko foreach:localization.welcome_common_lines -->          
+                    <p data-bind="html:$data"></p>           
+                <!-- /ko -->                
+                <!-- ko if:type() == "reading" -->
+                    <p data-bind="html:localization.welcome_reading_bottom"></p>
+                <!-- /ko -->
+                <!-- ko if:type() == "skills" -->
+                    <p data-bind="html:localization.welcome_skills_bottom"></p>
+                <!-- /ko -->
+                <!-- ko if:type() == "writing" -->
+                    <p data-bind="html:localization.welcome_writing_bottom"></p>
+                <!-- /ko -->
+            </div>
+            <div class="col-md-6 col-sm-7 col-xs-8">
+                <div class="welcome-img">
+                    <div class="welcome-img-text center-block">
+                        <!-- Commented out for Sena (due to error messages. See f_065_merging_some_old_sena_changes)-->
+                        <!--<img class="center-block img-responsive" data-bind="attr:{src:'assets/' + lms_config.product_type + '/scos/'+ lms_config.sco_number +'/media/intro_'+lms_config.sco_number+'.jpg'}" /> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row visible-xs">&nbsp;</div>
+        <div class="row">
+            <div class="col-md-8 welcome-body-text">
+                <p data-bind="text:localization.welcome_start_text"></p>
+                <button type="button" class="btn product-color-white-text welcome-start-btn" data-bind="click:function(){on_welcome_page(0);product_helper_update_container_height(); if(is_drag_drop_type(helper_get_current_excercise_type())){adjust_response_container(viewModel.labs()[viewModel.selected_lab()].selected_exercise(),viewModel.select_exercise(viewModel.restore_exercise_num()));}} , html:localization.welcome_start_btn"></button>
+            </div>
+            <div class="col-md-4">
+                
+            </div>
+        </div>        
+    </div>
+</div>

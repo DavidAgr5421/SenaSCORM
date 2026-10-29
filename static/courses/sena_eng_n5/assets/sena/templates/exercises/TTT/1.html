@@ -1,0 +1,132 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/TTT/1.css'}">
+<span class="edit_container"></span>
+<div data-bind="template: { name: 'instructions_container_ko_template'}"></div>
+
+<div class="row">
+    <div class="col-xs-4 ttt-question-container">
+        <div class="ttt-question-wrapper">
+            <!-- ko foreach: questions() -->
+                 <div data-bind="visible: id() == $parent.current_question()">
+                    <!-- ko foreach: _data() -->
+                        <!-- ko if: $index() == 0 -->
+                            
+                            <div class="question-counter ttt-question-counter" data-bind="text: $parentContext.$index() + 1"></div>
+                            <div class="ttt-response-feedback response-feedback-question">
+                                <!-- ko if: !$parents[1].showing_answer() -->
+                                    <!-- ko foreach: $parents[0].responses() -->
+                                        <!-- ko if: correct() && selected()-->
+                                            <span class="response-correct glyphicon glyphicon-ok"> </span>
+                                        <!-- /ko -->
+                                        <!-- ko if: !correct() && selected()-->
+                                            <span class="response-incorrect glyphicon glyphicon-remove"></span>
+                                        <!-- /ko -->
+                                    <!-- /ko -->
+                                <!-- /ko -->
+                            </div>
+                        
+                            <!-- ko foreach: contents()-->
+                                <!-- ko if:type() == "text" -->
+                                    <span data-bind="html: content()"></span>
+                                <!-- /ko -->
+                                <!-- ko if: type() == "audio" -->
+                                    <div class="row ttt-audio">
+                                        <div class="link-cursor sena-btn sena-btn-md default-audio-button TTT-audio-btn" data-bind="template: { name: 'audio_ko_template', data: $data }"></div>
+                                    </div>
+                                <!-- /ko -->
+                            <!-- /ko -->
+
+                            <!-- ko if: $parents[1].ttt_show_answer_clicked() -->
+                                <div class="ttt-show-answer">
+                                    <h4 data-bind="text:$root.localization.answer"></h4>
+                                <!-- ko foreach: $parents[0].responses() -->
+                                    <!-- ko if: correct()-->
+                                        <!-- ko foreach: _data() -->
+                                            <!-- ko if: type() == "image" && checkResourceExist('assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()) -->
+                                                <img class="img-responsive" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}">
+                                            <!-- /ko -->
+                                            <!-- ko if: type() == "text"-->
+                                                <span data-bind="text:content()"> </span>
+                                            <!-- /ko -->
+                                        <!-- /ko -->
+                                    <!-- /ko -->
+                                <!-- /ko -->
+                                </div>
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->
+                </div>
+            <!-- /ko -->
+            <div class="ttt-nav text-center">
+                <span class="link-cursor nav-forward-btn glyphicon glyphicon-chevron-left" data-bind="click: function(){change_question(0)}"></span>
+                
+                <span data-bind="text: (current_question() + 1) + ' ' + $root.localization.of() + ' ' + questions().length"> </span>
+                
+                <span class="link-cursor nav-forward-btn glyphicon glyphicon-chevron-right" data-bind="click: function(){change_question(1)}"> </span>
+            </div>
+        </div>
+        
+    </div>
+    <div class="col-xs-8 text-right">
+        <table class="ttt-question-table ttt-table" data-bind="attr:{ id: 'ttt-table-'+id()}">
+            <thead></thead>
+            <tbody>
+                <!-- ko foreach: ttt_grid() -->
+                    <tr>
+                        <!-- ko foreach: cols() -->
+                            <!-- ko ifnot: $parentContext.$index() == 1 && $index() == 1 -->
+                                <td tabindex="1" class="ttt-cell link-cursor ttt-cell-response" data-bind="
+                                    css: { 'selected': selected() },
+                                    click: function() { $parents[1].check_click_match($data) }">
+                                    <div class="ttt-content">
+                                        <!-- ko if: type() =="text" -->
+                                            <table class="ttt-text"><tr><td data-bind="html: content()"></td></tr></table>
+                                        <!-- /ko -->
+                                        <!-- ko if: type() == "image" && checkResourceExist('assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()) -->
+                                            <div class="ttt-image-border">
+                                                <img class="img-responsive ttt-exe-image" data-bind="css:{'ttt-exe-image-selected': selected()},attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+                                            </div>
+                                        <!-- /ko -->
+                                    </div>
+                                    <!-- ko if: selected()--> 
+                                        <!-- ko if: correct() -->
+                                            <div class="ttt-response ttt-correct">
+                                                <table class="ttt-text"><tr><td><span class="response-correct ttt-correct-size glyphicon glyphicon-ok"> </span></td></tr></table>
+                                            </div>
+                                        <!-- /ko -->
+                                        <!-- ko if: !correct()-->  
+                                            <div class="ttt-response">
+                                                <table class="ttt-text"><tr><td><span class="response-correct ttt-correct-size glyphicon glyphicon-remove"> </span></td></tr></table>
+                                            </div>
+                                        <!-- /ko -->
+                                    <!-- /ko -->
+                                </td>
+                            <!-- /ko -->
+                            <!-- ko if: $parentContext.$index() == 1 && $index() == 1 -->
+                                <td tabindex="1" class="ttt-middle-cell text-center">
+                                    <!-- ko if: !$parents[1].got_it_right() && $parents[1].cur_question() != -1 -->
+                                        <div class="ttt-content">
+                                            <div class="ttt-response ttt-correct">
+                                                 <table class="ttt-text"><tr><td><span class="response-correct ttt-correct-size glyphicon glyphicon-ok"> </span></td></tr></table>
+                                            </div>
+                                        </div>
+                                    <!-- /ko -->
+                                    <!-- ko if: $parents[1].got_it_right() -->
+                                        <div class="ttt-results">
+                                             <table class="ttt-text"><tr><td data-bind="text:$root.localization.TTT_win"></td></tr></table>
+                                        </div>
+                                    <!-- /ko -->
+                                    <!-- ko if: $parents[1].cur_question() == -1 && !$parents[1].got_it_right()-->
+                                        <div class="ttt-results link-cursor" data-bind="click: function(){$parents[1].reset_ttt()}">
+                                            <table class="ttt-text"><tr><td data-bind="text:$root.localization.TTT_lose"></td></tr></table>
+                                        </div>
+                                    <!-- /ko -->
+                                </td>
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    </tr>
+                <!-- /ko -->
+            </tbody>
+            <tfoot></tfoot>
+        </table>
+    </div>
+</div>

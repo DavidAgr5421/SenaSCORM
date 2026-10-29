@@ -1,0 +1,288 @@
+span.mch-response.selected  {
+    background-color:#01b5bd;
+    color:white;
+}
+#main.cmn span.mch-response.selected  {
+    background-color:#d34800;
+    color:white;
+}
+#main.fr span.mch-response.selected  {
+    background-color:#e42c23;
+    color:white;
+}
+#main.pt span.mch-response.selected  {
+    background-color:#22893a;
+    color:white;
+}
+#main.es span.mch-response.selected  {
+    background-color:#935ec6;
+    color:white;
+}
+
+span.mch-response.selected :hover  {
+    background-color:#01b5bd;
+    color:green;
+}
+#main.cmn span.mch-response.selected :hover {
+    background-color:#d34800;
+    color:green;
+}
+#main.fr span.mch-response.selected :hover {
+    background-color:#e42c23;
+    color:green;
+}
+#main.pt span.mch-response.selected :hover {
+    background-color:#22893a;
+    color:green;
+}
+#main.es span.mch-response.selected :hover {
+    background-color:#935ec6;
+    color:green;
+}
+
+span.mch-response-container.selected :hover,
+#main.cmn span.mch-response-container.selected :hover,
+#main.fr span.mch-response-container.selected :hover,
+#main.pt span.mch-response-container.selected :hover
+{
+    color: white;
+}
+
+span.mch-response-container :hover{
+    color: #01b5bd;
+}
+#main.cmn span.mch-response-container :hover{
+    color: #d34800;
+}
+#main.fr span.mch-response-container :hover{
+    color: #e42c23;
+}
+#main.pt span.mch-response-container :hover{
+    color: #22893a;
+}
+#main.es span.mch-response-container :hover{
+    color: #935ec6;
+}
+
+span.mch-response
+{
+    padding-left:3px;
+    padding-right:3px;
+    background-color:#FAFAFA;
+    color:#000000;
+    font-weight: bold;
+    border-radius: 5px;
+    border-color: #F0F0F0;
+    border-style:solid;
+    border-width:1px;
+}
+
+.mch-table {
+    table-layout: fixed; 
+    border-collapse: separate;
+    border-spacing: 16px;
+    border-radius: 10px;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none; 
+    margin: 0 auto;
+}
+.mch-image
+{
+    width:100%;
+    height: 100%;
+}
+
+.ttt-aspect-wrapper{
+    position: relative;
+    width: 100%;
+}
+
+.mch-table td {
+	text-align: center;
+    vertical-align: middle;
+    font-size: 100%;
+}
+
+.mch-cell {
+    line-height: 20px;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    border: 2px solid black;
+    box-shadow: 0rem 0.2rem 0rem #333333;
+}
+
+.mch-letter-cell {
+    border-radius: 0.5rem;
+    background: white;
+    border: 2px solid #ccc;
+    outline: none;
+}
+
+.mch-clue {
+    background: white;
+    border: 2px solid #ccc;
+    outline: none;
+    border-radius: 3px;
+    padding: 2px 4px;
+}
+
+.mch-typing {
+    border: 2px solid #01b5bd;
+}
+#main.cmn .mch-typing{
+    border: 2px solid #d34800;
+}
+#main.fr .mch-typing{
+    border: 2px solid #e42c23;
+}
+#main.pt .mch-typing{
+    border: 2px solid #22893a;
+}
+#main.es .mch-typing{
+    border: 2px solid #935ec6;
+}
+
+.mch-edit-table {
+    border-collapse:collapse;
+    border: 1px solid black;
+    background-color: #01B5BD;
+}
+
+.mch-edit-table td {
+    border: 1px solid black;
+    height: 13px;
+    width: 13px;
+}
+
+.mch-select {
+    background-color: #54B848 !important;
+}
+#main.cmn .mch-typing{
+    background-color: #d34800 !important;
+}
+#main.fr .mch-typing{
+    background-color: #e42c23 !important;
+}
+#main.pt .mch-typing{
+    background-color: #22893a !important;
+}
+#main.es .mch-typing{
+    background-color: #935ec6 !important;
+}
+
+.mch-other {
+    background-color: #B2B2B2;
+}
+
+.mch-edit-table td:hover {
+    background-color: #E6E7E8;
+}
+.mch-cell.mch-index {
+    font-size: 14px;
+    font-weight: bold;
+}
+.mch-letter-cell:hover,
+.mch-index:hover,
+.mch-clue:hover {
+    -webkit-transition: background 100ms ease-out;
+    -moz-transition: background 100ms ease-out;
+    -o-transition: background 100ms ease-out;
+    transition: background 100ms ease-out;
+    background-color: #ddd;
+}
+
+.mch-hover-background {
+    background-color: #ddd;
+}
+
+.mch-clue-list li
+{
+    margin-bottom: 6px;
+}
+
+.clue-index {
+    font-weight: bold;
+}
+
+.mch-clue-list{
+    color: #333;
+    font-size: 14px;
+    margin-right: 6px;
+    list-style-type: none;
+    list-style-position: outside;
+    padding: 0;
+}
+
+.clue-list {
+    padding-left: 30px;
+}
+
+.fullscreen-MCH{
+    height:100%;
+}
+
+.mch-image-border {
+    border: 15px solid #ffffff;
+    border-radius: 0.5rem;
+    position: relative;
+    height: 100%;
+}
+
+.mch-card-back{
+    height:100%;
+    width:100%;
+    border-radius: 0.5rem;
+    border: 2px solid #238276;
+}
+#main.cmn .mch-card-back{
+    border: 2px solid #d34800;
+}
+#main.fr .mch-card-back{
+    border: 2px solid #e42c23;
+}
+#main.pt .mch-card-back{
+    border: 2px solid #22893a;
+}
+#main.es .mch-card-back{
+    border: 2px solid #935ec6;
+}
+.mch-card-front{
+    height:100%;
+    background-color: #fff;
+    border: 2px solid #5A5758;
+    border-radius: 0.5rem;
+}
+
+
+.testing-wrapper {
+    position: relative;
+    width: 100%; /* <-- just a default, can be anything. */
+    max-height: 100%;
+    max-width: 834px;
+}
+
+.four-by-three.aspect-ratio { 
+    padding-bottom: 68.63% ;
+}
+
+.testing-content {
+    position: absolute;
+    top: 0;  bottom: 0;  left: 0;  right: 0;
+    padding: 0 24px; /* Optional padding for content area */
+    background: #ffe5e5;
+    max-width: 834px;
+}
+
+.mch-try-again{
+    background-image: linear-gradient(to bottom, #bc1a2a 0%, #8f1420 50%, #6d0f18 50%, #8f1420 100%);
+    height: 2.5em;
+    line-height: 2.5em;
+    overflow: hidden;
+    text-align: center;
+    width: 200px;
+    border-radius: 10px;
+}

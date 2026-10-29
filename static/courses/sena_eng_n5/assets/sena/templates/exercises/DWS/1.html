@@ -1,0 +1,51 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/DWS/1.css'}">
+<span class="edit_container"></span>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12 dws-area">
+        <center>
+            <br />
+            <br />
+            <span class="dws-header" data-bind="text:$root.localization.DWS_download_takeaway"></span>
+            <br />
+            <br />
+            <span class="dws-line" data-bind="text:$root.localization.click_icon_download"></span>
+            <br />
+            <br />
+            <div data-bind="foreach:questions()">
+                <!-- ko foreach: _data() -->
+                    <!-- ko if: type() == "question" -->
+                        <!-- ko foreach: contents() -->
+                            <div class="row">
+                                <div data-bind="css:  $parents[1].get_template_columns($index()) ">
+                                    <!-- ko if: type() == "text" -->
+                                        <p data-bind="html: content()"></p>
+                                    <!-- /ko -->
+                                    <!-- ko if: type() == "audio" -->
+                                        <p>
+                                            <div data-bind="template: { name: 'audio_ko_template', data: $data }">
+                                            </div>
+                                        </p>
+                                    <!-- /ko -->
+                                    <!-- ko if: type() == "image" || type() == "image-lg" || type() == "image-md" || type() == "image-sm"-->
+                                        <p>
+                                            <img class="img-responsive " data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/'+content()}" />
+                                        </p>
+                                    <!-- /ko -->
+                                    <!-- ko if: type() == "pdf" -->
+                                        <div class="row">
+                                            <div class="col-md-offset-5 col-md-2 col-sm-offset-4 col-sm-4 col-xs-offset-3 col-xs-6">
+                                                <a data-bind="attr:{href: $root.is_gen() ? 'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/pdf_gen/'+content() : 'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/pdf/'+content()}" target="_blank">
+                                                    <img class="img-responsive dws-pdf" data-bind="attr:{src:'assets/'+$root.lesson_type+'/icons/download.svg'}" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        <!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+            </div>
+        </center>
+    </div>
+</div>

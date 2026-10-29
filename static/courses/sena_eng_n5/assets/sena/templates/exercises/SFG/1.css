@@ -1,0 +1,83 @@
+
+.SFG-question{          
+    line-height:2;
+}
+
+.SFG-questions td{
+    vertical-align: bottom;
+    padding: 10px;
+}
+
+.SFG-response {      
+    border:1px dashed black;
+    padding:3px;
+    padding-right: 10px;
+    padding-left: 10px;
+    line-height:1;
+    border-radius: 5px;
+    white-space:nowrap;
+    color:#333333;
+    background-color: white;
+}
+
+.SFG-response.dropped {      
+    border:1px dashed #black;
+    color:#01b5bd;    
+}
+
+.SFG-response:hover {      
+    border:1px dashed #01b5bd;
+    color:#01b5bd;
+    box-shadow: 0 0 1px 1px rgba(0, 160, 255, 0.9);
+}
+
+.SFG-response.pep-active {      
+    border:1px dashed #01b5bd;
+    color:#01b5bd;
+    box-shadow: 0 0 1px 1px rgba(0, 160, 255, 0.9);
+}
+
+.SFG-drop{
+    width: 100px;
+    height: 22px;
+    padding-top:5px;
+    border-bottom:1px solid #01b5bd;
+    display:inline-block;
+    margin-right: 10px;
+}
+
+.SFG-response-container{       
+    border:1px solid #DADADA;
+    border-radius: 5px;   
+    background-color:#FAFAFA;
+}
+
+div.response-incorrect {
+   position: relative;
+}
+
+div.response-correct {
+   position: relative;
+}
+
+div .dropped .SFG-response-correct:after {
+    z-index: 999;
+
+    content: "";
+    height: 24px;
+    position: absolute;
+    right: -12px;
+    top: -18px;
+    width: 24px;
+}
+
+div .dropped .SFG-response-default:after{
+    z-index: 999;
+
+    content: "";
+    height: 24px;
+    position: absolute;
+    right: -12px;
+    top: -18px;
+    width: 24px;
+}

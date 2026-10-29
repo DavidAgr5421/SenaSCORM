@@ -1,0 +1,201 @@
+.DFL-response {
+    background-color: #eaf5f3;
+    border-radius: 0.5rem;
+    border: 1px solid black;
+    box-shadow: 
+    0rem 1px 0rem #333333;
+    padding:3px;
+    z-index:0;
+    padding-right: 10px;
+    padding-left: 10px;
+    font-size: 1.6rem !important;
+}
+#main.cmn .DFL-response {
+    background-color: #ffedeb;
+}
+#main.fr .DFL-response {
+    background-color: #feeded;
+}
+#main.pt .DFL-response {
+    background-color: #e0fee4;
+}
+#main.es .DFL-response {
+    background-color: #f3eff9;
+}
+
+.DFL-response.pep-active{
+    z-index:1001;
+}
+
+.DFL-text-response{
+}
+
+.DFL-text-response.dropped{
+    display: table;
+    margin: 10px auto !important; 
+    position: static !important;
+    right:0 !important;
+    max-width:95%;
+}
+
+.DFL-img-response.dropped{
+    margin: 10px 0px 40px 10px !important; 
+    float:left !important;
+    position: static !important;
+}
+
+.DFL-question-container.DFL-question-container-active{
+    border-radius:0.5rem;
+    border: 0.1rem solid #025449 !important;
+    box-shadow: 0 0 0px 2px #025449;
+}
+#main.cmn .DFL-question-container.DFL-question-container-active{
+    border-color:#812900 !important;
+    box-shadow: 0 0 0px 2px #812900;
+}
+#main.fr .DFL-question-container.DFL-question-container-active{
+    border-color:#8c1711 !important;
+    box-shadow: 0 0 0px 2px #8c1711;
+}
+#main.pt .DFL-question-container.DFL-question-container-active{
+    border-color:#115220 !important;
+    box-shadow: 0 0 0px 2px #115220;
+}
+#main.es .DFL-question-container.DFL-question-container-active{
+    border-color:#5b347f !important;
+    box-shadow: 0 0 0px 2px #5b347f;
+}
+
+.DFL-question-container{
+    border: 0.1rem solid #000000;
+    border-radius:0.5rem;
+    box-shadow: 0rem 0.2rem 0rem #333333;
+}
+
+.DFL-drop {
+    width: auto !important;
+    min-height: 100px;
+    position: relative;
+    margin-bottom:5px;
+    overflow: hidden;
+    background-color: transparent;
+}
+
+.DFL-text-container{
+    background-color: #008273;
+    text-align: center;
+    padding: 2px;
+}
+#main.cmn .DFL-text-container{
+    background-color: #d34800;
+}
+#main.fr .DFL-text-container{
+    background-color: #e42c23;
+}
+#main.pt .DFL-text-container{
+    background-color: #22893a;
+}
+#main.es .DFL-text-container{
+    background-color: #935ec6;
+}
+
+.DFL-question-border-radius {
+    border-radius: 0.5rem 0.5rem 0rem 0rem;
+}
+
+.DFL-question-bottom-border {
+    border-bottom: 0.1rem solid #000000;
+}
+
+.DFL-image-container{
+    border-bottom: 0.1rem solid #000000;
+}
+
+.DFL-audio-button{
+    height: 3.2rem !important;
+    line-height: 3.4rem !important;
+    width: 15rem !important;
+    font-size: 2rem !important;
+    margin: 5px auto;
+    text-shadow: 0px -0.3rem #4C6784;
+    display: table !important;
+}
+
+.DFL-text{
+    color: #ffffff;
+}
+
+.DFL-response-container{
+    width: 400px;
+    height:400px;
+    margin-left:15px;
+    z-index:-5;
+    position:absolute;
+}
+
+.DFL-drop-container {
+    margin: 5px;
+    display: inline-block;
+    position: static;
+    float:left;
+}
+
+.DFL-letter{
+    display:table;
+    margin:0 auto;
+	max-width: 400px;
+}
+
+.DFL-starting-drop {
+    border:1px dashed black;
+    border-radius: 0.5rem;
+    position: relative;
+}
+
+
+.DFL-response-feedback-question.response-incorrect,
+.DFL-response-feedback-question.response-default{
+    left: 2rem;
+    top: 0rem;
+}
+.DFL-response-feedback-question.response-correct{
+    left: 2rem;
+    top: 0rem;
+}
+
+
+.DFL-image-border-wrapper
+{
+    border: 1px solid;
+    border-radius: 0.5rem;
+    border-color: #9f9f9f;
+    display: inline-block;
+    width: 400px;
+}
+.DFL-image-border{
+    border: 1rem solid;
+    border-color: #eaf5f3;
+    border-radius: 0.5rem;
+    box-shadow: 0rem 0.2rem 0rem #333333;
+    position: relative;
+}
+#main.cmn .DFL-image-border{
+    border-color: #ffedeb;
+}
+#main.fr .DFL-image-border{
+    border-color: #feeded;
+}
+#main.pt .DFL-image-border{
+    border-color: #e0fee4;
+}
+#main.es .DFL-image-border{
+    border-color: #f3eff9;
+}
+
+.DFL-image
+{
+    border: 1px solid;
+    border-radius: 0.5rem;
+    border-color: #9f9f9f;
+	width:100%;
+}

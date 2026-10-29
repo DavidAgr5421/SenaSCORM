@@ -1,0 +1,61 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/TYP/1.css'}">
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/TYP/sticky-note.css'}">
+<span class="edit_container"></span>
+<div data-bind="template: { name: 'instructions_container_ko_template'}"></div>
+
+<div class="counter-reset question-block TYP-run-on TYP-sticky-note">         
+    <!-- ko foreach:questions() -->
+            
+            <!-- ko if: product_helper_check_rec_question(_data()) -->
+                <div class="question-column col-xs-6 col-xs-offset-3" data-bind="template: { name: 'rec_ko_template' }">
+                    
+                </div>
+            <!-- /ko -->
+            
+                <!-- ko foreach: _data() -->
+                    <!-- ko if: type() == "question" -->
+                        <!-- ko foreach: contents() -->
+                            <!-- ko if:type() == "text" -->
+                                <span data-bind="html: content()"> </span>
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko foreach: _data() -->
+                    <!-- ko if: type() == "post_question" -->
+                        <!-- ko if: type() != "rec" --> 
+                            <!-- ko ifnot: $parents[1].state() == 1 && $parents[1].feedback_showing_answer() && !$parents[1].checked_answer() || $parents[1].state() == 4 -->
+                                <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-bind="value: $parents[0].entered_response, valueUpdate: 'input', event: { input: $parents[0].check_entered_response('TYP')},attr:{disabled:$parents[1].feedback_showing_answer()}" class="TYP_input" />
+                                <div class="response-feedback-question TYP-response" data-bind="template: { name: 'data_level_question_feedback_ko_template' }, css: $parents[0].state_css()"></div>
+                            <!-- /ko -->
+                            <!-- ko if: ($parents[1].state() == 1 && $parents[1].feedback_showing_answer() && !$parents[1].checked_answer()) || $parents[1].state() == 4 -->
+                                <!-- ko if: $root._data.test() == 'true' -->
+                                    <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-bind="value:  entered_response ,attr:{disabled:$parents[1].feedback_showing_answer()}" class="TYP_input" />
+                                    <div class="response-feedback-question TYP-response" data-bind="template: { name: 'data_level_question_feedback_ko_template' }, css: $parents[0].state_css()"></div>
+                                <!-- /ko -->
+                                <!-- ko if: $root._data.test() == 'false' -->
+                                    <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-bind="value: $parents[0].TYP_get_answer() ,attr:{disabled:$parents[1].feedback_showing_answer()}" class="TYP_input" />
+                                    <div class="response-feedback-question TYP-response" data-bind="template: { name: 'data_level_question_feedback_ko_template' }, css: $parents[0].state_css()"></div>
+                                    <!-- <button type="button" class="btn btn-xs btn-default" data-trigger="focus" title="Answer(s)" data-bind="attr{id: 'popover_'+$parents[1].id()+'_'+$parents[0].id(), 'data-toggle':'popover', 'data-trigger':'focus', 'data-content': $parents[0].TYP_get_answer()}">...</button> -->
+                                <!-- /ko -->
+                            <!-- /ko -->  
+                        <!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko foreach: _data() -->
+                    <!-- ko if: $parents[1]._data().length == 0 -->
+                        <!-- ko ifnot: $parents[1].state() == 1 && $parents[1].feedback_showing_answer() && !$parents[1].checked_answer() || $parents[1].state() == 4 -->
+                            <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-bind="value: entered_response, valueUpdate: 'input', event: { input: check_entered_response('TYP')},attr:{disabled:$parents[0].feedback_showing_answer()}" class="TYP_input" />
+                        <!-- /ko -->
+                        <!-- ko if: $parents[1].state() == 1 && $parents[1].feedback_showing_answer() && !$parents[1].checked_answer() || $parents[1].state() == 4 -->
+                            <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-bind="value: TYP_get_answer(),attr:{disabled:$parents[0].feedback_showing_answer()}" class="TYP_input" />
+                            <!-- <button type="button" class="btn btn-xs btn-default" data-trigger="focus" title="Answer(s)" data-bind="attr{id: 'popover_'+$parents[1].id()+'_'+$parents[0].id(), 'data-toggle':'popover', 'data-trigger':'focus', 'data-content': TYP_get_answer()}">...</button> -->
+                        <!-- /ko -->  
+                    <!-- /ko -->
+                    <!-- ko if: type() == "post_question" && contents.type() != "empty" -->
+                        <span data-bind="html: contents.content()"></span> 
+                    <!-- /ko -->
+                <!-- /ko -->
+
+    <!-- /ko -->
+</div>

@@ -1,0 +1,52 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="89px" height="85px" viewBox="0 0 89 85">
+<defs>
+<radialGradient id="Gradient_1" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="80.3" fx="0" fy="0" gradientTransform="matrix( 1.0000000000000002, 0, 0, 1.0000000000000002, 53.95,14.4) " spreadMethod="pad">
+<stop  offset="0%" stop-color="#8E121E"/>
+
+<stop  offset="100%" stop-color="#54080E"/>
+</radialGradient>
+
+<g id="Layer1_0_FILL">
+<path fill="url(#Gradient_1)" stroke="none" d="
+M 89.35 71.4
+L 89.35 14.45
+Q 89.35 0 74.9 0
+L 14.45 0
+Q 0 0 0 14.45
+L 0 71.4
+Q 0 85.85 14.45 85.85
+L 74.9 85.85
+Q 89.35 85.85 89.35 71.4 Z"/>
+</g>
+
+<g id="Layer0_0_FILL">
+<path fill="#FFFFFF" stroke="none" d="
+M 921.1 468.9
+Q 910.7 468.45 909.3 468.35 905.75 468.05 903.8 467.45 900.45 469.55 900.45 470.55 900.45 471.45 917.95 472.75 933.05 473.9 935.1 475.9 935.2 475.8 935.35 475.7 937 474.5 937 474.15 937 473.65 936.8 473.15 936.6 472.65 936.2 472.1 936 471.8 935.8 471.55 932.8 469.4 921.1 468.9
+M 892.35 465.25
+Q 892.85 467.6 895.5 466.5
+L 909.3 454.45 912.9 446.3
+Q 902.8 443.75 894.1 438.25
+L 889.95 447.85 892.35 465.25
+M 913.85 445
+L 924.3 422.6
+Q 914.25 419.9 905.4 413.95
+L 895.05 436.1
+Q 903.35 442.65 913.85 445
+M 929.95 412.85
+Q 928.2 404.8 921 401.9 915.6 399.9 908.95 402.6
+L 906.05 412.45
+Q 915.55 417.2 924.8 420.7
+L 929.95 412.85 Z"/>
+</g>
+</defs>
+
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#Layer1_0_FILL"/>
+</g>
+
+<g transform="matrix( 1, 0, 0, 1, -868.8,-393.75) ">
+<use xlink:href="#Layer0_0_FILL"/>
+</g>
+</svg>

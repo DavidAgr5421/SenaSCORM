@@ -1,0 +1,116 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/MMM/1.css'}">
+<span class="edit_container"></span>
+<div data-bind="template: { name: 'instructions_container_ko_template'}"></div>
+
+<div class="counter-reset">
+    <!-- ko foreach: questions() -->
+        <div class="row MMM-question">
+            <div class="MMM-col col-xs-4 MMM-question-col">
+                <!-- ko foreach:_data() -->
+                    <!-- ko if: type() == "question" -->
+                        <!-- ko ifnot: product_helper_check_rec_question($parent._data()) -->
+                            <div data-bind="template: { name: 'question_counter_ko_template'}"></div>
+                            <div class="response-feedback response-feedback-question" data-bind="template: { name: 'data_level_question_feedback_ko_template' }, css: $parents[0].state_css()"></div>
+                        <!-- /ko -->
+                        <!-- ko foreach: contents() -->
+                            <!-- ko if: type() == "text" -->
+                                <span data-bind="html: content()"></span>
+                            <!-- /ko -->
+                            <!-- ko if: type() == "image" || type() == "image-lg" || type() == "image-md" || type() == "image-sm"-->
+                                <div class="image-no-padding" data-bind="css: $parents[1].get_template_columns($index()) ">
+                                    <div class="question-position">
+                                        <div class="exe-image-border-wrapper">
+                                            <div class="exe-image-border">
+                                                <img class="img-responsive exe-image" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- /ko -->
+                            <!-- ko if:type() == "audio" -->
+                                <div class="link-cursor sena-btn default-audio-button" data-bind="template: { name: 'audio_ko_template', data: $data }"></div>
+                            <!-- /ko -->    
+                        <!-- /ko -->
+                    <!-- /ko -->           
+                <!-- /ko -->      
+            </div>
+            <!-- ko if: product_helper_check_rec_question(_data()) -->
+                <div class="MMM-question col-xs-offset-3 col-xs-6">
+                    <div data-bind="template: { name: 'rec_ko_template' }"></div>
+                </div>
+            <!-- /ko --> 
+            <div class="MMM-col col-xs-8" data-bind="visible: _data()[0].contents().length == 0 || product_helper_check_rec_question(_data()) == false ">    
+                <!-- ko if: responses()[0]._data()[0].type() == "text" -->
+                    <ul style="list-style-type: none;">
+                        <!-- ko foreach: responses() -->
+                            <!-- ko foreach: _data() -->
+                                <div class="row">
+                                    <!-- ko if: type() == "text" -->
+                                        <li class="MMM-response">
+                                            <label class="MMM-label">
+                                                <input type="checkbox" class="link-cursor" name="response" data-bind="checked: $parent.selected, attr: {disabled:$parents[2].feedback_showing_answer()}" />
+                                                <span class="MMM-response-text" data-bind="html: content()"></span>
+                                            </label>
+                                        </li>
+                                    <!-- /ko -->
+                                    <!-- ko if: type() == "image" || type() == "image-lg" || type() == "image-md" || type() == "image-sm"-->
+                                        <div class="image-no-padding" data-bind="css: $parent.get_template_columns($index()) ">
+                                            <div class="exe-image-border-wrapper">
+                                                <div class="exe-image-border">
+                                                    <div class="response-checkbox-for-image"><input type="checkbox" class="link-cursor response-checkbox" name="response" data-bind="checked: $parent.selected, attr: {disabled:$parents[2].feedback_showing_answer()}" /></div>
+                                                    <img class="link-cursor img-responsive exe-image" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}, click: function () {$parents[1].select_response_toggle($parent.id);}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <!-- /ko -->
+                                    <!-- ko if:type() == "audio" -->
+                                        <div class="MMM-response">    
+                                            <div class="response-checkbox vertical-center">
+                                                <input type="checkbox" class="link-cursor response-checkbox" name="response" data-bind="checked: $parent.selected, attr: {disabled:$parents[2].feedback_showing_answer()}" />
+                                            </div>
+                                            <div class="link-cursor sena-btn default-audio-button response-margin" data-bind="template: { name: 'audio_ko_template', data: $data }"></div>
+                                        </div>
+                                    <!-- /ko -->  
+                                </div>
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    </ul>
+                <!-- /ko -->
+                <!-- ko if: responses()[0]._data()[0].type() != "text" -->
+                    <!-- ko foreach: responses() -->
+                        <!-- ko foreach: _data() -->
+                            <div class="MMM-response-wrapper" data-bind="css: $parents[1].get_response_columns()">
+                                <!-- ko if: type() == "text" -->
+                                    <div class="MMM-response-center">
+                                        <div class="response-checkbox-audio">
+                                            <input type="checkbox" class="link-cursor response-checkbox" name="response" data-bind="checked: $parent.selected, attr: {disabled:$parents[2].feedback_showing_answer()}" />
+                                        </div><br/>
+                                        <span data-bind="html: content()"></span>
+                                    </div>
+                                <!-- /ko -->
+                                <!-- ko if: type() == "image" || type() == "image-lg" || type() == "image-md" || type() == "image-sm"-->
+                                    <div class="image-no-padding" data-bind="css: $parent.get_template_columns($index()) ">
+                                        <div class="exe-image-border-wrapper">
+                                            <div class="exe-image-border">
+                                                <div class="response-checkbox-for-image"><input type="checkbox" class="link-cursor response-checkbox" name="response" data-bind="checked: $parent.selected, attr: {disabled:$parents[2].feedback_showing_answer()}" /></div>
+                                                <img class="link-cursor img-responsive exe-image" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}, click: function () {$parents[1].select_response_toggle($parent.id);}" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                <!-- /ko -->
+                                <!-- ko if:type() == "audio" -->
+                                    <div class="MMM-response-center">
+                                        <div class="response-checkbox-audio">
+                                            <input type="checkbox" class="link-cursor response-checkbox" name="response" data-bind="checked: $parent.selected, attr: {disabled:$parents[2].feedback_showing_answer()}" />
+                                        </div><br/>
+                                        <div class="link-cursor sena-btn default-audio-button" data-bind="template: { name: 'audio_ko_template', data: $data }"></div>
+                                    </div>
+                                <!-- /ko --> 
+                            </div>
+                        <!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+            </div>
+        </div>
+    <!-- /ko -->
+</div>

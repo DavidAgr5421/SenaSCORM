@@ -1,0 +1,162 @@
+.TAB-response {
+    background: linear-gradient(rgb(136,190,176), rgb(184, 200, 196));
+    text-align: center;
+    vertical-align: middle !important;
+}
+#main.cmn .TAB-response {
+    background: linear-gradient(rgb(255, 138, 115), rgb(255, 237, 235));
+}
+#main.fr .TAB-response {
+    background: linear-gradient(rgb(249, 140, 138), rgb(254, 237, 237));
+}
+#main.pt .TAB-response {
+    background: linear-gradient(rgb(53, 196, 86), rgb(224, 254, 228));
+}
+#main.es .TAB-response {
+    background: linear-gradient(rgb(188, 159, 222), rgb(243, 239, 249));
+}
+
+td.TAB-response:hover {
+}
+
+td.selected {
+    background-color:#01b5bd;
+}
+#main.cmn td.selected {
+    background-color:#d34800;
+}
+#main.fr td.selected {
+    background-color:#e42c23;
+}
+#main.pt td.selected {
+    background-color:#22893a;
+}
+#main.es td.selected {
+    background-color:#935ec6;
+}
+
+td.selected:hover {
+}
+
+th.TAB-top-heading{
+    color: rgb(23, 113, 103);
+    background-color: rgb(215,227,223);
+    vertical-align: middle !important;
+    word-wrap: break-word;
+    max-width: 40px;
+}
+#main.cmn th.TAB-top-heading{
+    color: rgb(169, 56, 0);
+    background-color: rgb(255, 237, 235);
+}
+#main.fr th.TAB-top-heading{
+    color: rgb(183, 33, 26);
+    background-color: rgb(254, 237, 237);
+}
+#main.pt th.TAB-top-heading{
+    color: rgb(25, 109, 44);
+    background-color: rgb(224, 254, 228);
+}
+#main.es th.TAB-top-heading{
+    color: rgb(121, 70, 166);
+    background-color: rgb(243, 239, 249);
+}
+
+td.TAB-side-heading
+{
+    color: rgb(23, 113, 103);
+    background-color: rgb(215,227,223);
+    font-weight: bold;
+    vertical-align: middle !important;
+    word-wrap: break-word;
+    max-width: 40px;
+}
+#main.cmn td.TAB-side-heading{
+    color: rgb(169, 56, 0);
+    background-color: rgb(255, 237, 235);
+}
+#main.fr td.TAB-side-heading{
+    color: rgb(183, 33, 26);
+    background-color: rgb(254, 237, 237);
+}
+#main.pt td.TAB-side-heading{
+    color: rgb(25, 109, 44);
+    background-color: rgb(224, 254, 228);
+}
+#main.es td.TAB-side-heading{
+    color: rgb(121, 70, 166);
+    background-color: rgb(243, 239, 249);
+}
+
+.TAB-table {
+    border: none !important;
+	border-spacing: 0.25em;
+	border-collapse: separate;
+    /* table-layout: fixed; */
+}
+.TAB-empty-cell {
+    border: none !important;
+}
+
+.TAB-circle {
+    background: linear-gradient(to bottom right, rgb(72, 97, 93), rgb(247, 250, 250));
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+#main.cmn .TAB-circle {
+    background: linear-gradient(to bottom right, rgb(129, 41, 0), rgb(255, 237, 235));
+}
+#main.fr .TAB-circle {
+    background: linear-gradient(to bottom right, rgb(140, 23, 17), rgb(254, 237, 237));
+}
+#main.pt .TAB-circle {
+    background: linear-gradient(to bottom right, rgb(17, 82, 32), rgb(224, 254, 228));
+}
+#main.es .TAB-circle {
+    background: linear-gradient(to bottom right, rgb(91, 52, 127), rgb(243, 239, 249));
+}
+
+.TAB-audio-button {
+    width: 100%;
+}
+
+.TAB-row {
+    height: 50px;
+}
+.TAB-check-icon {
+    border: none !important;
+    text-align: right;
+    width: 2.2rem;
+    padding: 0 !important;
+    vertical-align: middle !important;
+    position: relative;
+}
+.TAB-check-icon > .response-feedback{
+    top: 1rem;
+    left: -1.8rem;
+}
+.TAB-check-icon .question-counter
+{
+    position: static;
+}
+
+.TAB-circle-selected {
+    background: linear-gradient(to bottom right, rgb(2, 253, 214), rgb(5, 61, 52));
+    border-style: solid;
+    border-width: 2px;
+}
+#main.cmn .TAB-circle-selected {
+    background: linear-gradient(to bottom right, rgb(211, 72, 0), rgb(73, 19, 0));
+}
+#main.fr .TAB-circle-selected {
+    background: linear-gradient(to bottom right, rgb(228, 44, 35), rgb(80, 9, 6));
+}
+#main.pt .TAB-circle-selected {
+    background: linear-gradient(to bottom right, rgb(34, 137, 58), rgb(5, 45, 14));
+}
+#main.es .TAB-circle-selected {
+    background: linear-gradient(to bottom right, rgb(147, 94, 198), rgb(34, 20, 48));
+}

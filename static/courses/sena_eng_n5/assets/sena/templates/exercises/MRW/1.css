@@ -1,0 +1,105 @@
+span.MRW_response.selected  {
+    background-color:#066C5F;
+    color:white;
+    border: 1px solid transparent;
+}
+#main.cmn span.MRW_response.selected  {
+    background-color:#812900;
+    color:white;
+}
+#main.fr span.MRW_response.selected  {
+    background-color:#8c1711;
+    color:white;
+}
+#main.pt span.MRW_response.selected  {
+    background-color:#115220;
+    color:white;
+}
+#main.es span.MRW_response.selected  {
+    background-color:#5b347f;
+    color:white;
+}
+
+span.MRW_response{
+    padding-left:9px;
+    padding-right:9px;
+    background-color:#EAF5F3;
+    color: #066C5F;
+    font-weight: bold;
+    border-radius: 2px;
+    box-shadow: 0 2px 0px rgba(0,0,0,0.1);
+}
+#main.cmn span.MRW_response{
+    background-color:#ffedeb;
+    color: #812900;
+}
+#main.fr span.MRW_response{
+    background-color:#feeded;
+    color: #8c1711;
+}
+#main.pt span.MRW_response{
+    background-color:#e0fee4;
+    color: #115220;
+}
+#main.es span.MRW_response{
+    background-color:#f3eff9;
+    color: #5b347f;
+}
+
+span.MRW_response_container :hover{
+    color: #01b5bd;
+}
+#main.cmn span.MRW_response_container :hover{
+    color: #d34800;
+}
+#main.fr span.MRW_response_container :hover{
+    color: #e42c23;
+}
+#main.pt span.MRW_response_container :hover{
+    color: #22893a;
+}
+#main.es span.MRW_response_container :hover{
+    color: #935ec6;
+}
+
+span.MRW_response_container.selected :hover{
+    color: white;
+}
+#main.cmn span.MRW_response_container.selected :hover{
+    color: white;
+}
+#main.fr span.MRW_response_container.selected :hover{
+    color: white;
+}
+#main.pt span.MRW_response_container.selected :hover{
+    color: white;
+}
+#main.es span.MRW_response_container.selected :hover{
+    color: white;
+}
+
+.MRW_paragraph
+{
+    line-height:1.8;
+}
+
+.MRW-question{             
+    margin-bottom: 2rem;
+    margin-left: 3rem;
+    position: relative;
+}
+
+.MRW-col
+{
+    padding-left: 0;
+    position: relative;
+}
+.MRW-question-wrapper{
+    padding: 0 20px;
+    display: inline-block;
+}
+
+.MRW-response-wrapper{
+    display: inline-block;
+    top:0;
+}

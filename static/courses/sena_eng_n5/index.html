@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <title data-bind="text:lms_config.course_name + ' ' + lms_config.level_name + ' ' + lms_config.unit_name"></title>
+
+        <!-- Bootstrap -->
+        <link href="static/framework/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="static/framework/bootstrap/css/slider.css" rel="stylesheet">
+        <link href="static/framework/media-elements/mediaelementplayer.min.css" rel="stylesheet">
+        <link href="static/framework/jquery/enscroll0.6.0.css" rel="stylesheet">
+        <!-- <link href="static/application/css/main.css" rel="stylesheet"> -->
+        <!-- dynamic script attempt! -->    
+        <link href="static/application/css/dragdrop.css" rel="stylesheet">
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- ko if: !detectMobileiOS() -->
+            <div id="flash_wrapper" style="position: absolute;z-index:-10;width: 350px;margin-left:-175px;left:50%;"></div>
+        <!-- /ko -->
+        <div class="framework_sidebar_modals" id="framework_sidebar_modals">
+       
+        </div>
+        <div id="index_html" class="page_wrapper">  
+
+        </div>
+        <div id="loading_pane">
+        
+        </div>
+        <div id="ko_templates">
+            
+        </div>
+        
+        <!-- jQuery first -->
+        <script src="static/framework/jquery/jquery1.9.1.min.js"></script>
+        <script src="static/framework/jquery/jquery.pep.new.js"></script>
+        <script src="static/framework/jquery/enscroll0.6.0.min.js"></script>
+        <!-- Framework second-->
+        <script src="static/framework/bootstrap/js/bootstrap.min.js"></script>
+        <script src="static/framework/bootstrap/js/bootstrap-slider.js"></script>
+        <script src="static/framework/knockout/knockout3.0.min.js"></script>
+        <script src="static/framework/knockout/knockout.mapping2.4.1.min.js"></script>        
+        <script src="static/framework/media-elements/mediaelement-and-player.min.js"></script>
+        <script src="static/framework/MediaStreamRecorder/MediaStreamRecorder-v1.2.js"></script>
+        <script src="static/framework/ELLRecorder/VoiceRecorder.js"></script>
+
+        <!-- application last sub order still important-->
+        <script src="static/application/js/SCORM_2004_APIWrapper.js"></script>
+        <script src="static/application/js/scorm.js"></script>
+        <script src="static/application/js/globals.js"></script>
+        <script src="static/application/js/utils.js"></script>
+        <script src="static/application/js/ajax.js"></script>
+        <script src="static/application/js/minimal_objects.js"></script>
+        <script src="static/application/js/startup.js"></script>
+        <script src="static/application/js/Miles.js"></script>
+        <script src="static/application/js/Doohan.js"></script>
+    </body>
+</html>

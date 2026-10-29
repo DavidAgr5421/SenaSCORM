@@ -1,0 +1,55 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/RSLT/1.css'}">
+
+<div id="rslt_graphic_container">
+    <div class="row">
+        <!-- ko if: $root._data.test() == 'false' -->
+            <div class="col-xs-6 col-xs-offset-3">
+                <h2 class="rslt-header"><span data-bind="text:$root.localization.result"></span>:</h2>
+                <div class="rslt-outer">
+                    <div class="rslt-inner">
+                        <div class="rslt-needle-container" data-bind="style: {'transform' : $parent.selected_exercise() == id() ? 'rotate('+ (Math.round((180*$parent.quiz_score()/100)))+'deg)':'rotate(0deg)',
+                        '-webkit-transform' : $parent.selected_exercise() == id() ? 'rotate('+ (Math.round((180*$parent.quiz_score()/100)))+'deg)':'rotate(0deg)' }">
+
+                        </div>
+                        <div class="rslt-text-container">
+                            <span class="rslt-text" data-bind="text: $parent.quiz_score() + '%'"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- /ko -->
+        <!-- ko if: $root._data.test() == 'true' -->
+            <!-- ko if: $root.finished_test() == false -->
+                <div class="col-xs-12">
+                    <div class="rslt-summary">
+                        <!-- ko if: $root.show_achievement_test_submit() == false -->
+                            <span data-bind="text:$root.localization.RSLT_complete_test"></span>
+                        <!-- /ko -->
+                        <!-- ko if: $root.show_achievement_test_submit() -->
+                            <p><span data-bind="text:$root.localization.RSLT_click_submit"></span></p>
+                            <p><span data-bind="text:$root.localization.RSLT_last_chance"></span></p>
+                            <div class="rslt-aside"><span data-bind="text:$root.localization.RSLT_thanks"></span></div>
+                            <button class="sena-btn pre-quiz-button" data-bind="click:function(){ $root.calc_achievement_test_score(); }"><span><span data-bind="text:$root.localization.submit_button"></span><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></span></button>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            <!-- /ko -->
+            <!-- ko if: $root.finished_test() == true -->
+                <div class="col-xs-6 col-xs-offset-3">
+                    <h2 class="rslt-header"><span data-bind="text:$root.localization.result"></span>:</h2>
+                    <div class="rslt-outer">
+                        <div class="rslt-inner">
+                            <div class="rslt-needle-container" data-bind="style: {'transform' : $parent.selected_exercise() == id() ? 'rotate('+ (Math.round((180*$root.AT_score()/100)))+'deg)':'rotate(0deg)',
+                            '-webkit-transform' : $parent.selected_exercise() == id() ? 'rotate('+ (Math.round((180*$root.AT_score()/100)))+'deg)':'rotate(0deg)' }">
+
+                            </div>
+                            <div class="rslt-text-container">
+                                <span class="rslt-text" data-bind="text: $root.AT_score() + '%'"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- /ko -->
+        <!-- /ko -->
+    </div>
+</div>

@@ -1,0 +1,56 @@
+.SLS-paragraph
+{
+    line-height:1.8;
+    margin-left: 3rem;
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.SLS-question {
+    font-weight: bold;
+}
+
+span .selected.SLS-response {
+     color:#01b5bd;
+     font-weight: bold;
+}
+#main.cmn span .selected.SLS-response {
+     color:#d34800;
+}
+#main.fr span .selected.SLS-response {
+     color:#e42c23;
+}
+#main.pt span .selected.SLS-response {
+     color:#22893a;
+}
+#main.es span .selected.SLS-response {
+     color:#935ec6;
+}
+
+span .SLS-response.hover:hover {
+     color:#000000;
+     font-weight: bold;
+}
+
+span .selected.SLS-response:hover {
+     color:#01b5bd;
+     font-weight: bold;
+}
+#main.cmn span .selected.SLS-response:hover {
+     color:#d34800;
+}
+#main.fr span .selected.SLS-response:hover {
+     color:#e42c23;
+}
+#main.pt span .selected.SLS-response:hover {
+     color:#22893a;
+}
+#main.es span .selected.SLS-response:hover {
+     color:#935ec6;
+}
+
+div.SLS-response
+{    
+    margin-right:25px;    
+}
+

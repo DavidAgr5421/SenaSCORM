@@ -1,0 +1,629 @@
+<script type="text/html" id="instructions_container_ko_template">
+    <div class="instructions-block">
+        <span class="glyphicon glyphicon-chevron-right instruction-chevron"></span>
+        <!-- ko foreach:_data() -->
+            <!-- ko if: type() == "instructions" -->
+                <div class="exercise-specific-instructions" data-bind="template: { name: 'instruction_ko_template', with: $data }"></div>
+            <!-- /ko -->
+        <!-- /ko -->
+        <!-- ko foreach:_data() -->
+            <!-- ko if: type() == "post_instructions" -->
+                <div class="post-instructions" data-bind="template: { name: 'instruction_ko_template', with: $data }"></div>
+            <!-- /ko -->
+        <!-- /ko -->
+    </div>
+</script>
+
+<script type="text/html" id="instruction_ko_template">
+    <!-- ko if: type() == "instructions" || type() == "post_instructions" || type() == "learning_points" -->
+        <!-- ko foreach: contents() -->
+            <!-- ko if: type() == "text" -->
+                <div class="row instruction-row">
+                    <span data-bind="html: content(), css: {italic: $parent.type() =='post_instructions'}"></span>
+                </div>
+            <!-- /ko -->
+            <!-- ko if: (type() == "image" || type() == "image-lg" || type() == "image-md" || type() == "image-sm") && checkResourceExist('assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()) -->
+                <div class="row">
+                    <div data-bind="css: {$parents[1].get_instructions_columns_size($index()): $parent.type() != "learning_points", $root.get_learning_points_columns_size($index()): $parent.type() == "learning_points" }">
+                        <img class="DFL-image img-responsive " data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+                    </div>
+                </div>
+            <!-- /ko -->
+            <!-- ko if: type() == "audio"  && $parent.type() == "learning_points" -->
+                <div data-bind="template: { name: 'audio_ko_template', data: $data }" class="btn btn-sm btn-primary target-btn">
+                </div>
+            <!-- /ko -->
+            <!-- ko if: type() == "audio"  && $parent.type() != "learning_points" -->
+                <div class="sena-btn default-audio-button" data-bind="template: { name: 'audio_ko_template', data: $data }"></div>
+            <!-- /ko -->
+            <!-- ko if: type() == "thumbnail" -->
+                <div class="row">
+                    <div class="col-xs-5 col-md-3 link-cursor thumbnail" data-bind="click: function () {$('#e_' + type() + '_thumbnail_i_'+$index()+'_modal').modal('show');}">
+                        <img  data-bind="attr:{src:'assets/' + lms_config.product_type + '/icons/zoom.svg'}" class="thumbnail_zoom"/>
+                        <img class="img-responsive" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+                    </div>
+                </div>
+                <div class="modal fade thumbnail_modal_container" data-bind="attr:{id:'e_' + type() + '_thumbnail_i_'+$index()+'_modal' }" tabindex="-1" role="dialog">
+                    <div class="thumbnail_modal">
+                        <button type="button" class="close" data-bind="click: function () {$('#e_' + type() + '_thumbnail_i_'+$index()+'_modal').modal('hide');}" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <img class="img-responsive link-cursor" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}, click: function () {$('#e_' + type() + '_thumbnail_i_'+$index()+'_modal').modal('hide');}" />
+                    </div>
+                </div>
+            <!-- /ko -->
+            <!-- ko if:type() == "video" --> 
+                <div class="video-stimulus-container">
+                    <video class="video_controls video_instruction" controls="controls" preload="auto" data-bind="attr: { id: 'video_instruction'+'_'+$parents[1].id()+'_'+$index()}" >
+                        <source data-bind=" attr: {src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/video/'+content() + '.mp4'}" type="video/mp4"/>
+                        <!-- MP4 for Safari, IE9, iPhone, iPad, Android, and Windows Phone 7 -->
+                        <source type="video/mp4" data-bind=" attr: {src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/video/'+content() + '.mp4'}" />
+                        <!-- WebM/VP8 for Firefox4, Opera, and Chrome -->
+                        <source type="video/webm" data-bind=" attr: {src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/video/'+content() + '.webm'}" />
+                        <!-- Ogg/Vorbis for older Firefox and Opera versions -->
+                        <source type="video/ogg" data-bind=" attr: {src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/video/'+content() + '.ogv'}" />
+                        <span data-bind="text:$root.localization.video_not_supported"></span>
+                    </video>
+                </div>
+            <!-- /ko -->
+            <!-- ko if: type() == "table" && typeof content() !== 'undefined' -->
+             <table id="tabledata" data-bind="attr: { class : $parent.type() == 'learning_points' ? 'learning_points_table instruction_table table-responsive' + content().styles() : 'instruction_table table-responsive' + content().styles() }"> 
+                    <thead></thead>
+                    <tbody>
+                        <!-- ko foreach: content().cells() -->
+                            <!-- ko if: $index() % $parent.content().columns() == 0 -->
+                            <tr>
+                                <!-- ko foreach: $parent.content().cols_array() -->
+                                    <td >
+                                        <!-- ko if: typeof $parents[1].content().cells()[$parentContext.$index()+$index()] !== 'undefined' -->
+                                            <!-- ko if: $parents[1].content().cells()[$parentContext.$index()+$index()].type() == 'text' -->
+                                                <span data-bind="html: $parents[1].content().cells()[$parentContext.$index()+$index()].content()" />
+                                            <!-- /ko -->
+                                            <!-- ko if: $parents[1].content().cells()[$parentContext.$index()+$index()].type() == 'image' && checkResourceExist('assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +$parents[1].content().cells()[$parentContext.$index()+$index()].content()) -->
+                                                <img class="img-responsive" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +$parents[1].content().cells()[$parentContext.$index()+$index()].content()}" />
+                                            <!-- /ko -->
+                                        <!-- /ko -->
+                                    </td>
+                                <!-- /ko -->
+                            </tr>
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    </tbody>
+                </table>
+            <!-- /ko -->
+        <!-- /ko -->
+    <!-- /ko -->
+</script>
+
+<script type="text/html" id="audio_ko_template">
+    <div class="link-cursor paused_audio" data-bind="click: function() { play_audio($element);}">
+        <audio class="audio_player" preload="none" data-bind="template: { name : 'audio_src_ko_template', data: content() }">
+
+        </audio>
+        <span class="glyphicon glyphicon-play" ></span> <span data-bind="text:$root.localization.listen"></span>
+    </div>
+</script>
+
+<script type="text/html" id="audio_src_ko_template">
+    <!-- ko if: $data -->
+        <source data-bind=" attr: {src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/audio/'+ $data + '.mp3'}" type="audio/mp3"/>
+        <!-- ko if: detectChrome() -->    
+            <source data-bind=" attr: {src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/audio/'+ $data + '.ogg'}" type="audio/ogg"/>
+        <!-- /ko -->
+        <span data-bind="text:$root.localization.audio_not_supported"></span>
+    <!-- /ko -->
+</script>
+
+<script type="text/html" id="instruction_contents_edit_ko_template">
+    <span class="input-group-addon">
+        <select class="form-control" data-bind="options: $root.instruction_types, optionsCaption: '', value: type, event: { change: function(){$parents[1].maintain_instructions($parent.contents()[$index()])} }"></select>
+    </span>
+    <!-- ko if: type() != "table" && $parent.type() != "learning_points"  -->
+        <textarea rows="1" class="form-control" data-bind="value: content , valueUpdate: 'keyup', attr:{id: 'instruction_input_'+$parents[1].id()+'_'+$index()}" />
+    <!-- /ko -->
+    <!-- ko if: type() != "table" && $parent.type() == "learning_points"  -->
+        <input type="text" class="form-control" data-bind="value: content , valueUpdate: 'keyup'" />
+    <!-- /ko -->
+    <!-- ko if: type() == "table" && typeof content() !== 'undefined' -->
+        <!-- ko template: { name: 'table_edit_ko_template' } -->
+        <!-- /ko -->
+    <!-- /ko -->
+
+    <div class="input-group-addon">
+        <!-- ko if: $parent.type() == "instructions" -->
+            <!-- ko if:$parent.contents().length > 1 -->
+                <span class="glyphicon glyphicon-remove-sign pull-right link-cursor" data-bind="click: function() { $root.remove_tooltip_data(content, $parents[1]._data); $parents[1].remove_instruction($data) }"></span>
+            <!-- /ko -->
+            <!-- ko if:$parent.contents().length == 1 -->
+                <span class="glyphicon glyphicon-lock pull-right"></span>
+            <!-- /ko -->
+        <!-- /ko -->
+        <!-- ko if: $parent.type() == "pre_screen" -->
+                <span class="glyphicon glyphicon-remove-sign pull-right link-cursor" data-bind="click: $parents[1].remove_pre_screen"></span>
+        <!-- /ko -->
+        <!-- ko if: $parent.type() == "post_instructions" -->
+                <span class="glyphicon glyphicon-remove-sign pull-right link-cursor" data-bind="click: $parents[1].remove_post_instructions"></span>
+        <!-- /ko -->
+        <!-- ko if: $parent.type() == "learning_points" -->
+                <span class="glyphicon glyphicon-remove-sign pull-right link-cursor" data-bind="click: function() { $root.remove_substance($parentContext.$index(), $index())}"></span>
+        <!-- /ko -->
+    </div>
+</script>
+
+<script type="text/html" id="takeaway_item_edit_ko_template">
+    <div class="input-group">
+        <span class="input-group-addon">
+            <select class="form-control" data-bind="options: ['text', 'table'], optionsCaption: '', value: type, event: { change: function(){ $root.maintain_instructions($data) } }"></select>
+        </span>
+        <!-- ko if: type() == "text" -->
+            <input type="text" class="form-control" data-bind="value: content , valueUpdate: 'keyup'" />
+        <!-- /ko -->
+        <!-- ko if: type() == "table" && typeof content() !== 'undefined' -->
+            <!-- ko template: { name: 'table_edit_ko_template' } -->
+            <!-- /ko -->
+        <!-- /ko -->
+        <!-- <div data-bind="uniqueName: console.log('with', $context)"></div> -->                  
+        <div class="input-group-addon">
+            <!-- ko if:$parent.contents().length > 1 -->
+                <span class="glyphicon glyphicon-remove-sign pull-right link-cursor" data-bind="click: function() { $parent.contents.remove($data) }"></span>
+            <!-- /ko -->
+            <!-- ko if:$parent.contents().length == 1 -->
+                <span class="glyphicon glyphicon-lock pull-right"></span>
+            <!-- /ko -->
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="table_edit_ko_template">
+    <div class="well" style="margin-bottom:0px;">
+        <table >
+            <thead></thead>
+            <tbody>
+                <!-- ko foreach: content().cells() -->
+                    <!-- ko if: $index() % $parent.content().columns() == 0 -->
+                    <tr>
+                        <td>
+                            <!-- ko if: $parent.content().cells().length > $parent.content().cols_array().length -->
+                                <button type="button" class="btn btn-xs welcome-start-btn product-color-white-text" data-bind="click: function(){$parent.content().remove_row($index());}">
+                                    <span class="glyphicon glyphicon-remove"></span>Remove Row
+                                </button>
+                                <br />
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-xs welcome-start-btn product-color-white-text" data-bind="click: function(){$parent.content().move_row_up($index());}, disable: $index() == 0">
+                                        <span class="glyphicon glyphicon-arrow-up"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-xs welcome-start-btn product-color-white-text" data-bind="click: function(){$parent.content().move_row_down($index());}, disable: $index() == $parent.content().cells().length - $parent.content().cols_array().length">
+                                        <span class="glyphicon glyphicon-arrow-down"></span>
+                                    </button>
+                                </div>
+                            <!-- /ko -->
+                        </td>
+                        <!-- ko foreach: $parent.content().cols_array() -->
+                            <td>
+                                <!-- ko if: typeof $parents[1].content().cells()[$parentContext.$index()+$index()] !== 'undefined' -->
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <select data-bind="options:$root.cell_types, optionsCaption: '', value: $parents[1].content().cells()[$parentContext.$index()+$index()].type"></select>
+                                        </div>
+                                        <input type="text" class="form-control" data-bind="value: $parents[1].content().cells()[$parentContext.$index()+$index()].content, valueUpdate: 'keyup'" />
+                                    </div>
+                                <!-- /ko -->
+                            </td>
+                        <!-- /ko -->
+                    </tr>
+                    <!-- /ko -->
+                <!-- /ko -->
+                <tr>
+                    <td></td>
+                    <!-- ko if: content().cols_array().length > 1 -->
+                        <!-- ko foreach: content().cols_array() -->
+                            <td>
+                                <button type="button" class="btn btn-xs welcome-start-btn product-color-white-text" data-bind="click: function(){$parent.content().remove_column($index());}">
+                                    <span class="glyphicon glyphicon-remove"></span>Remove Column
+                                </button>
+                            </td>
+                        <!-- /ko -->
+                    <!-- /ko -->
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <button type="button" class="btn btn-xs welcome-start-btn product-color-white-text pull-right" data-bind="click: function(){content().add_row();}">
+                <span class="glyphicon glyphicon-plus"></span>Add Row
+            </button>
+            <button type="button" class="btn btn-xs welcome-start-btn product-color-white-text pull-right" data-bind="click: function(){content().add_column();}">
+                <span class="glyphicon glyphicon-plus"></span>Add Column
+            </button>
+            <input type="checkbox" class="link-cursor" data-bind="click: function(){$root.table_style_check('intro_table_border', $data); return true;}, checked: content().styles().indexOf('intro_table_border') > -1" /> Cell Borders &nbsp;&nbsp;
+            <input type="checkbox" class="link-cursor" data-bind="click: function(){$root.table_style_check('instruction_table_background', $data); return true;}, checked: content().styles().indexOf('instruction_table_background') > -1" /> First Line Shading &nbsp;&nbsp;
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="pre_quiz_edit_ko_template">
+    <select class="form-control" data-bind="options: $root.pre_quiz_type, optionsCaption: '', value: type, disable: type()"></select>
+
+    <div class="input-group-addon">
+        <span class="glyphicon glyphicon-remove-sign pull-right link-cursor" data-bind="click: $parents[2].remove_pre_screen"></span>
+    </div>
+</script>
+
+<script type="text/html" id="sena_feedback_edit_ko_template">
+    <!-- <div class="input-group">
+        <div class="input-group-addon">
+            <label><span data-bind="text:$root.localization.attempt"></span> 1:</label>
+        </div>                                            
+        <input type="text" class="form-control" data-bind="value: content.attempt_feedback()[0].content , valueUpdate: 'keyup'" />
+    </div>
+    <div class="input-group">
+        <div class="input-group-addon">
+            <label><span data-bind="text:$root.localization.attempt"></span> 2:</label>
+        </div>                                            
+        <input type="text" class="form-control" data-bind="value: content.attempt_feedback()[1].content , valueUpdate: 'keyup'" />
+    </div> -->
+    <div class="input-group">
+        <div class="input-group-addon">
+            <label><span data-bind="text:$root.localization.error"></span> 1:</label>
+        </div>                                            
+        <input type="text" class="form-control" data-bind="value: content.incorrect_feedback()[0].content , valueUpdate: 'keyup'" />
+    </div>
+    <div class="input-group">
+        <div class="input-group-addon">
+            <label><span data-bind="text:$root.localization.error"></span> 2:</label>
+        </div>                                            
+        <input type="text" class="form-control" data-bind="value: content.incorrect_feedback()[1].content , valueUpdate: 'keyup'" />
+    </div>
+    <div class="input-group">
+        <div class="input-group-addon">
+            <label><span data-bind="text:$root.localization.correct"></span></label>
+        </div>                                            
+        <input type="text" class="form-control" data-bind="value: content.correct_feedback, valueUpdate: 'keyup'" />
+    </div>
+</script>
+
+<script type="text/html" id="template_override_edit_ko_template">
+    <div class="panel panel-default" data-bind="visible: product_helper_get_override_templates(type()).length > 1">
+        <div class="panel-heading">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label>Template Override:</label>
+                    <select class="form-control" data-bind="options: product_helper_get_override_templates(type()), value: template_override, event: { change: change_template_override }"></select>
+                </div>
+            </form>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="pre_screen_instructions_edit_ko_template">
+    <div data-bind="template: { name: 'template_override_edit_ko_template' }"></div>
+
+    <div class="panel panel-default" data-bind="with: _data().filter(function(d){ return d.type() == 'pre_screen' })">
+        <div class="panel-heading">
+            <label>Pre-Screen:</label>
+            <button type="button" class="btn btn-xs welcome-start-btn product-color-white-text pull-right" data-bind="visible: $data.length < 1, click: $parent.add_pre_screen">
+                <span class="glyphicon glyphicon-plus"></span> Add Pre-Screen
+            </button>
+        </div>
+        <!-- ko if: $data.length > 0 -->
+            <div class="panel-body">
+                <div class="form-group">
+                    <div data-bind="foreach: $data">
+                        <!-- ko foreach: contents() -->
+                            <div class="input-group" data-bind="template: { name: 'pre_quiz_edit_ko_template' }">
+                            </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
+        <!-- /ko -->
+    </div>
+    
+    <div data-bind="template: { name: 'tip_list_ko_template' }"></div>
+    
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <label>Instructions:</label>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <div data-bind="foreach:_data()">
+                    <!-- ko if: type() == "instructions" -->
+                        <!-- ko foreach: contents() -->
+                            <div class="input-group" data-bind="">
+                                <!-- ko template: { name: 'instruction_contents_edit_ko_template' } -->
+                                <!-- /ko -->
+                                <!-- ko if: type() == "text" -->
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default btn-sm welcome-start-btn product-color-white-text pull-right" data-bind="click: function() { $parents[1].create_instruction_tool_tip(content, $index(), type()) }">
+                                            <span class="glyphicon glyphicon-comment"></span>
+                                        </button>
+                                    </span>
+                                <!-- /ko -->
+                            </div>
+                        <!-- /ko -->
+                    <!-- /ko -->
+                </div>
+            </div>
+            <button type="button" class="btn btn-xs welcome-start-btn product-color-white-text pull-right" data-bind="click: add_instruction">
+                <span class="glyphicon glyphicon-plus"></span> Add Instruction
+            </button>
+        </div>
+    </div>
+    
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <label>Post-Instructions:</label>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <div data-bind="foreach:_data()">
+                    <!-- ko if: type() == "post_instructions" -->
+                        <!-- ko foreach: contents() -->
+                            <div class="input-group" data-bind="template: { name: 'instruction_contents_edit_ko_template' }">
+                            </div>
+                        <!-- /ko -->
+                    <!-- /ko -->
+                </div>
+            </div>
+            <button type="button" class="btn btn-xs welcome-start-btn product-color-white-text pull-right" data-bind="click: add_post_instructions">
+                <span class="glyphicon glyphicon-plus"></span> Add Post-Instruction
+            </button>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <label>Feedback</label>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <div data-bind="foreach:_data()">
+                    <!-- ko if: type() == "feedback" -->                        
+                        <div class="input-group" data-bind="template: { name: 'sena_feedback_edit_ko_template'}">
+                        </div>                       
+                    <!-- /ko -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</script>
+
+<script type="text/html" id="rec_ko_template">
+    <!-- ko if: $root.has_rec() && $parent.speech_question() == true -->
+        <!-- ko if: $root.flash_fallback() && !($root.flash_has_mic() && $root.flash_initialized()) -->
+            <div class="flash-no-mic-reminder">
+                <span>Oops. Something has gone wrong. Please check one of the following:</span><br>
+                <span>1. Check microphone connection.</span><br>
+                <span>2. Check flash security settings.</span><br>
+                <span>If problem persists, please try using a browser such as Chrome or Firefox.</span>
+            </div>
+        <!-- /ko -->
+        <!-- ko if: !$root.flash_fallback() && !$root.recording_allowed() -->
+            <div class="row" data-bind="visible:!$root.recording_allowed() && !detectMobileiOS()">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <p class="allow_recording_text" data-bind="text:localize_json.allow_recording"></p>
+                </div>
+            </div>
+            <div class="row alert alert-danger" data-bind="visible: detectMobileiOS()">
+                <span data-bind="text:$root.localization.please_use_pc"></span>
+            </div>
+        <!-- /ko -->
+        <!-- ko if: ($root.flash_fallback() && $root.flash_has_mic() && $root.flash_initialized()) || (!$root.flash_fallback() && $root.recording_allowed()) -->
+            <!-- ko if: !$root.flash_fallback() -->
+                <audio data-bind="attr: {id: 'voice_recorder_e'+ $parent.id() + '_q_' + id()}, visible: 0" src=""></audio>
+            <!-- /ko -->
+            <!-- ko if: !$parent.feedback_showing_answer() -->
+                <div class="row">
+                    <!-- ko if: selected_response() < 0 -->
+                        <!-- ko if: !recording() -->
+                            <div class="link-cursor rec_container sena-btn btn-rec-start" data-bind="click: $parent.record_speech.bind(null, id(), 'voice_recorder_e'+ $parent.id() + '_q_' + id())">
+                                <span class="sena-icon sena-icon-microphone"></span> <span data-bind="text:$root.localization.record"></span>
+                            </div>
+                        <!-- /ko -->
+                        <!-- ko if: recording() -->
+                            <div class="link-cursor rec_container sena-btn btn-rec-stop" data-bind="click: $parent.stop_recording.bind(null, id(), 'voice_recorder_e'+ $parent.id() + '_q_' + id(), true)">
+                                <span class="glyphicon glyphicon-stop"></span> <span data-bind="text:$root.localization.end_recording"></span>
+                            </div>
+                        <!-- /ko -->
+                    <!-- /ko -->
+                    <!-- ko if: selected_response() >= 0 && responses()[selected_response()].correct() -->
+                        <div class="rec_container sena-btn">
+                            <div class="rec-clear link-cursor" data-bind="click: $parent.clear_recording.bind(null, id())">
+                                <span class="glyphicon glyphicon-remove"></span> <span data-bind="text:$root.localization.clear"></span>
+                            </div>
+                            <div class="rec-play link-cursor" data-bind="click: $parent.play_recording.bind(null, id(), 'voice_recorder_e'+ $parent.id() + '_q_' + id()), disable: recording()">
+                                <span class="glyphicon glyphicon-play"></span> <span data-bind="text:$root.localization.play"></span>
+                            </div>
+                        </div>
+                    <!-- /ko -->
+                </div>
+            <!-- /ko -->
+            <!-- ko if: $parent.feedback_showing_answer() -->
+                <div class="row">
+                    <!-- ko if: has_recorded() -->
+                        <div class="rec_container sena-btn" data-bind="click: $parent.play_recording.bind(null, id(), 'voice_recorder_e'+ $parent.id() + '_q_' + id()), disable: recording()">
+                            <span class="glyphicon glyphicon-play"></span> <span data-bind="text:$root.localization.play"></span>
+                        </div>
+                    <!-- /ko -->
+                    <!-- ko if: !has_recorded() -->
+                        <div class="rec_container sena-btn sena-btn-disabled" disabled="true" data-bind="click: $parent.play_recording.bind(null, id(), 'voice_recorder_e'+ $parent.id() + '_q_' + id()), disable: recording()">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <!-- <span class="hidden-xs">
+                                <span>Recording Submitted</span>
+                            </span> -->
+                        </div>
+                    <!-- /ko -->
+                </div>
+            <!-- /ko -->
+        <!-- /ko -->
+    <!-- /ko -->
+</script>
+
+<script type="text/html" id="learning_skills_ko_template">
+    <!-- ko if: _data.learning_skills().length > 0 -->
+        <div class="learning_skills">
+            <ul class="ls_placeholders">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <ul class="ls_icons">
+                <li class="reading" data-bind="css: { active: _data.learning_skills().indexOf('Reading') > -1 }"></li>
+                <li class="writing" data-bind="css: { active: _data.learning_skills().indexOf('Writing') > -1 }"></li>
+                <li class="listening" data-bind="css: { active: _data.learning_skills().indexOf('Listening') > -1 }"></li>
+                <li class="speaking" data-bind="css: { active: _data.learning_skills().indexOf('Speaking') > -1 }"></li>
+            </ul>
+        </div>
+    <!-- /ko -->  
+</script> 
+
+<script type="text/html" id="tip_list_ko_template">
+    <!-- ko with: _data().filter(function(d){ return d.type() == 'tips' }) -->
+        <!-- ko if: $data.length > 0 -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <label>Tips</label>
+                </div>
+                <div class="panel-body" data-bind="foreach: $data">
+                    <!-- ko foreach: content() -->
+                        <div class="input-group">
+                            <span class="input-group-addon" data-bind="text: 'Tip_'+$parents[2].id()+'_'+tip_id()"></span>
+                            <input type="text" class="form-control" data-bind="value: content , valueUpdate: 'keyup'">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-remove-sign pull-right link-cursor" data-bind="click: function() { $parents[2].remove_tip($index()) }"></span>
+                            </span>
+                        </div>
+                    <!-- /ko -->
+                </div>
+            </div>
+        <!-- /ko -->
+    <!-- /ko -->
+</script>
+
+<script type="text/html" id="stimuli_tool_tip_ko_template">
+    <div class="row">
+        <button type="button" class="btn btn-xs welcome-start-btn product-color-white-text pull-right" data-bind="click: function() { obj.create_stimuli_tool_tip( content, exercise_id, contents_id, value_id) }">
+            <span class="glyphicon"></span>Make ToolTip
+        </button>
+    </div>
+</script>
+
+<script type="text/html" id="response_feedback_ko_template">
+    <!-- ko if: $parent.state() > 1 && $parents[2].checked_answer() -->
+        <!-- ko if: $parent.state_css() == 'response-correct' -->
+            <span class="response-correct glyphicon glyphicon-ok"> </span>
+        <!-- /ko -->
+        <!-- ko if: $parent.state_css() == 'response-incorrect' -->
+            <span class="response-incorrect glyphicon glyphicon-remove">
+            </span>
+        <!-- /ko -->
+    <!-- /ko -->
+    <!-- ko ifnot: $parent.state() > 1 && $parents[2].checked_answer() -->
+        <span class="glyphicon"> </span>
+    <!-- /ko -->
+</script> 
+
+<script type="text/html" id="question_feedback_ko_template">
+
+    <!-- ko if: $parents[1].state_css() == 'response-correct' && $parents[1].state() >= 1 && $parents[2].checked_answer() -->
+        <span class="response-correct glyphicon glyphicon-ok"> </span>
+    <!-- /ko -->
+    <!-- ko if: ($parents[1].state_css() == 'response-incorrect' || $parents[1].state_css() == 'response-default') && ($parents[1].state() >= 1 && $parents[2].checked_answer()) -->
+        <span class="response-incorrect glyphicon glyphicon-remove">
+        </span>
+    <!-- /ko -->
+
+</script> 
+
+<script type="text/html" id="data_level_question_feedback_ko_template">
+    <!-- ko if: $parents[0].state_css() == 'response-correct' && $parents[0].state() >= 1 && $parents[1].checked_answer() -->
+        <span class="response-correct glyphicon glyphicon-ok"> </span>
+    <!-- /ko -->
+    <!-- ko if: ($parents[0].state_css() == 'response-incorrect' || $parents[0].state_css() == 'response-default') && ($parents[0].state() >= 1 && $parents[1].checked_answer()) -->
+        <span class="response-incorrect glyphicon glyphicon-remove"></span>
+    <!-- /ko -->
+</script> 
+
+<script type="text/html" id="rec_edit_ko_template">
+    <!-- ko if: product_helper_check_rec_question(_data(), id()) -->
+        <!-- ko foreach: _data() -->
+            <!-- ko if: type() == "question" -->
+                <!-- ko foreach: contents() -->
+                    <label> Title: </label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <select data-bind="options: $root.question_types, optionsCaption: '', value: type, event: { change: function() { $parents[2].add_rec_question($parentContext.$parentContext.$index()); }}"></select>
+                        </div>
+                        <input type="text" class="form-control" data-bind="value: content , valueUpdate: 'keyup'" />
+                    </div>
+                <!-- /ko -->
+            <!-- /ko -->
+        <!-- /ko -->
+    <!-- /ko -->
+</script>
+
+
+<script type="text/html" id="sena_DR_feedback_ko_template">  
+    <!-- ko ifnot: $root.exercise_group_types()[$root.labs()[viewModel.selected_lab()].selected_group()].group == "Quiz" -->
+        <!-- <p data-bind="text:feedback().attempt_feedback()[feedback().attempts()].content()"></p> -->
+        <p class="exercise-feedback" data-bind="visible: feedback().show_feedback && state() > 0, text:feedback().current_feedback"></p>   
+    <!-- /ko -->
+    <!-- ko if: $root.exercise_group_types()[$root.labs()[viewModel.selected_lab()].selected_group()].group == "Quiz" -->
+        <p data-bind="text:common_instructions()"></p>        
+    <!-- /ko -->
+</script>
+
+<script type="text/html" id="sena_question_objective_ko_template">
+    <br />
+    <label>Objectives:</label>
+    <!-- ko foreach:_data() --> 
+        <!-- ko if: type() == "objective" -->
+            <div class="input-group">                                         
+                <div class="input-group-addon">
+                    <select disabled="true" data-bind="options:$root._data.objectives, optionsCaption: '', value: $parents[1].exercise_objective"></select>                                        
+                </div>
+                <input type="text" class="form-control" disabled="true" data-bind="value: product_helper_get_objective_content_by_type(content())" />
+            </div>
+        <!-- /ko -->
+    <!-- /ko -->
+    <br />
+</script>
+
+<script type="text/html" id="prp_ko_template">   
+    <!-- ko if: _data()[0].contents()[0].type() != "rec" -->
+        <div class="col-xs-3 SR1-col">
+            <!-- ko foreach: _data() -->
+                <!-- ko if: type() == "question" -->
+                    <div data-bind="template: { name: 'question_counter_ko_template'}"></div>
+                <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko foreach: responses() -->
+                <!-- ko if: $index() == 1 -->
+                    <!-- ko foreach: _data() -->
+                        <div type="button" class="link-cursor sena-btn sena-btn-md default-audio-button" data-bind="template: { name: 'audio_ko_template', data: $data }, click: function() {if ($parent.selected() == 0) {$parents[1].select_response($parent.id);}}"></div>
+                   <!-- /ko -->
+                <!-- /ko -->
+            <!-- /ko -->
+        </div>
+        <div class="col-xs-5 SR1-col">
+            <!-- ko foreach: _data() -->
+                <!-- ko if: type() == "question" -->
+                    <!-- ko foreach: contents() -->
+                        <!-- ko if: type() == "text" -->
+                            <div class="SR1-text" data-bind="html: content()"></div>
+                        <!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+            <!-- /ko -->
+        </div>
+    <!-- /ko -->
+    <!-- ko if: _data()[0].contents()[0].type() == "rec" -->
+        <div class="col-xs-4 PRP-nopadding-col sena-btn-md" data-bind="template: { name: 'rec_ko_template' }"></div>
+        <div class="clearfix"></div>
+    <!-- /ko -->
+</script>
+
+<script type="text/html" id="question_counter_ko_template">
+    <!-- ko if: $root._data.test() == 'false' -->
+        <div class="question-counter"></div>
+    <!-- /ko -->
+</script>

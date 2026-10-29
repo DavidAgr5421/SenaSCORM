@@ -1,0 +1,64 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/ATA/1.css'}">
+<span class="edit_container"></span>
+<div data-bind="template: { name: 'instructions_container_ko_template'}"></div>
+
+
+<div class="ATA-exercise">
+    <!-- ko foreach:questions() -->
+        <div class="ATA-spacing">
+            <!-- ko foreach: _data() -->
+                <!-- ko if: type() == "question" -->
+                    <!-- ko foreach: contents() -->  
+                        <!-- ko if: type() == "image" || type() == "image-lg" || type() == "image-md" || type() == "image-sm"-->
+                            <div class="row">
+                                <div data-bind="css: $parents[1].get_template_columns($index()) ">
+                                    <img class="img-responsive" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+                                </div>
+                            </div>
+                        <!-- /ko -->
+                        <!-- ko if:type() == "audio" -->
+                            <div data-bind="template: { name: 'audio_ko_template', data: $data }">
+                            </div>
+                        <!-- /ko --> 
+                        <!-- ko if:type() == "text" -->
+                            <div class="ATA-question" data-bind="html:content()"></div>
+                        <!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if: para_selector() == 1 -->
+                <!-- ko foreach: responses() -->
+                    <!-- ko if: $index() == 1 -->
+                        <!-- ko foreach: _data() -->
+                            <!-- ko if: type() == "text" -->
+                                <div class="ATA-paragraph" data-bind="html:content()"></div>
+                                <div class="text-center">
+                                    <button type="button" class="ATA-btn sena-btn" data-bind="click: function(){$parents[2].change_anotation($parents[1].id())}">
+                                        <span data-bind="text:$root.localization.ATA_plain_text"></span>
+                                    </button>
+                                </div>
+                                <hr class="ATA-line"/>
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+            <!-- /ko -->           
+            <!-- ko foreach: responses() -->
+                <!-- ko if: $index() == 0 -->
+                    <!-- ko foreach: _data() -->
+                        <!-- ko if: type() == "text" -->
+                            <div class="ATA-paragraph" data-bind="html:content()"></div>
+                            <div class="text-center">
+                                <button type="button" class="ATA-btn sena-btn" data-bind="click: function(){$parents[2].change_anotation($parents[1].id())}">
+                                    <span data-bind="text:$root.localization.ATA_Annotated_text"></span>
+                                </button>
+                            </div>
+                        <!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+            <!-- /ko -->
+
+        </div>
+    <!-- /ko -->
+</div>
+

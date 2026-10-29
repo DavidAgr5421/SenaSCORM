@@ -1,0 +1,25 @@
+.MMC-question{             
+    padding-top:10px;
+}
+
+.MMC-question td{
+    vertical-align: bottom;
+    padding: 10px;
+}
+
+.MMC-response{          
+    margin-bottom:15px;
+    margin-left: -40px;
+}
+
+div.response-checkbox
+{
+    margin-right:10px;
+    float:left;
+}
+
+div.MMC-response-feedback{          
+    width:30px;
+    display:inline-block;
+    float:left;
+}

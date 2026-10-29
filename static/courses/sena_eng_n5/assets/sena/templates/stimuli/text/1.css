@@ -1,0 +1,36 @@
+.text-stimulus-container
+{
+	font-size: 1.45rem;
+}
+
+.text-stimulus-container .stimulus_title,
+.text-stimulus-container img,
+.text-stimulus-container p,
+.text-stimulus-container ul,
+.text-stimulus-container ol
+{
+	margin: 0 0 1em 0;
+}
+
+.text-stimulus-container p
+{
+	font-weight: 300;
+}
+
+.text-stimulus-container p b,
+.text-stimulus-container p strong,
+.text-stimulus-container p span.strong
+{
+	font-weight: 600;
+}
+
+.text-stimulus-container .static-img
+{
+	border-radius: .5rem;
+}
+
+.text-stimulus-container .default-audio-button
+{
+	font-size: 1.8rem;
+	display: block;
+}

@@ -1,0 +1,41 @@
+<span class="edit_container"></span>
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/stimuli/text/1.css'}">
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="text-stimulus-container">
+            <!-- ko foreach:contents() -->
+            
+                <!-- ko if:type() == "title" -->
+                    <h4 class="stimulus_title" data-bind="html:value()"></h4>
+                <!-- /ko -->
+                <!-- ko if:type() == "img" -->
+                    <img class="static-img img-responsive center-block" data-bind="attr: { src: 'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/'+ value() }" />
+                <!-- /ko -->
+                <!-- ko if:type() == "p" -->
+                    <p><span class="stimulus_text" data-bind="html:value()"></span></p>
+                <!-- /ko -->
+                <!-- ko if:type() == "audio" -->
+                    <div>
+                        <div class="sena-btn default-audio-button" data-bind="template: { name: 'audio_ko_template', data: { content: value } }"></div>
+                    </div>
+                <!-- /ko -->
+                <!-- ko if: type() == "thumbnail" -->
+                    <div class="row">
+                        <div class="col-xs-12 link-cursor thumbnail" data-bind="click: function () {$('#s_'+$parents[0].id()+'_i_'+$index()+'_modal').modal('show');}">
+                            <img  data-bind="attr:{src:'assets/' + lms_config.product_type + '/icons/zoom.svg'}" class="thumbnail_zoom"/>
+                            <img class="img-responsive link-cursor" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +value()}" />
+                        </div>
+                    </div>
+                    <div class="modal fade thumbnail_modal_container" data-bind="attr:{id:'s_'+$parents[0].id()+'_i_'+$index()+'_modal' }" tabindex="-1" role="dialog">
+                        <div class="thumbnail_modal">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <img class="img-responsive link-cursor" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +value()}, click: function () {$('#s_'+$parents[0].id()+'_i_'+$index()+'_modal').modal('hide');}" />
+                        </div>
+                    </div>
+                <!-- /ko -->
+         
+            <!-- /ko -->
+        </div>
+    </div>
+</div>

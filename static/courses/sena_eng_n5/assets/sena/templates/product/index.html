@@ -1,0 +1,25 @@
+<div id="main" class="main" data-bind="css: { 
+                                                en: $root.localization.language() == 'English',
+                                                pt: $root.localization.language() == 'Português', 
+                                                cmn: $root.localization.language() == 'Mandarín', 
+                                                es: $root.localization.language() == 'Español como segunda lengua', 
+                                                fr: $root.localization.language() == 'Français' }">
+    <div class="sfx-player-wrapper">
+        <audio id="sfx_player" preload="none" data-bind="visible:0">
+            <source src="" type="">
+        </audio>
+    </div>
+    <div id="framework_header" data-bind="visible:product_templates.header">
+    
+    </div>
+    <div id="framework_body">
+        <div class="row" data-bind="visible:product_templates.lab_selector">
+            <div class="col-md-12" id="lab_selector" >
+                
+            </div>
+        </div>
+        <div id="lab_container">
+                    
+        </div>                    
+    </div>                       
+</div>

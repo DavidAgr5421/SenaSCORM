@@ -1,0 +1,68 @@
+.DFL-exercise .timeline
+{
+	position: relative;
+	color: #008273;
+	margin: 10px 0;
+}
+#main.cmn .DFL-exercise .timeline { color: #d34800; }
+#main.fr .DFL-exercise .timeline { color: #e42c23; }
+#main.pt .DFL-exercise .timeline { color: #22893a; }
+#main.es .DFL-exercise .timeline { color: #935ec6; }
+
+.DFL-exercise .timeline .timeline-bar 
+{
+	background-color: #008273;
+	height: 7px;
+	margin: 15px;
+}
+
+.DFL-exercise .timeline .timeline-start,
+.DFL-exercise .timeline .timeline-end
+{
+	position: absolute;
+	top: -1px;
+	font-size: 32px;
+}
+
+.DFL-exercise .timeline .timeline-start
+{
+	left: 5px;
+}
+
+.DFL-exercise .timeline .timeline-end
+{
+	right: 5px;
+}
+
+.DFL-exercise .timeline-tick {
+	position: absolute;
+	width: 7px;
+	height: 30px;
+	top: -30px;
+	background-color: #008273;
+	left: calc(50% - 3.5px);
+}
+
+#main.cmn .DFL-exercise .timeline-tick,
+#main.cmn .DFL-exercise .timeline .timeline-bar
+{
+	background-color: #d34800;
+}
+
+#main.fr .DFL-exercise .timeline-tick,
+#main.fr .DFL-exercise .timeline .timeline-bar
+{
+	background-color: #e42c23;
+}
+
+#main.pt .DFL-exercise .timeline-tick,
+#main.pt .DFL-exercise .timeline .timeline-bar
+{
+	background-color: #22893a;
+}
+
+#main.es .DFL-exercise .timeline-tick,
+#main.es .DFL-exercise .timeline .timeline-bar
+{
+	background-color: #935ec6;
+}

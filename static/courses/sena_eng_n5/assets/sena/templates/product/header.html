@@ -1,0 +1,100 @@
+<div class="header-wrapper" data-bind="css: { 'intro-header_line': $root._data.level() == 'Intro',
+                                              'pre-a1-header_line': $root._data.level() == 'Beginner',
+                                              'a1-1-header_line': $root._data.level() == 'A1.1',
+                                              'a1-2-header_line': $root._data.level() == 'A1.2',
+                                              'a2-1-header_line': $root._data.level() == 'A2.1',
+                                              'a2-2-header_line': $root._data.level() == 'A2.2',
+                                              'b1-1-header_line': $root._data.level() == 'B1.1',
+                                              'b1-2-header_line': $root._data.level() == 'B1.2',
+                                              'b1-3-header_line': $root._data.level() == 'B1.3',
+                                              'b2-1-header_line': $root._data.level() == 'B2.1',
+                                              'b2-2-header_line': $root._data.level() == 'B2.2',
+                                              'b2-3-header_line': $root._data.level() == 'B2.3',
+                                              'placement-header_line': $root._data.level() == 'Placement Test',
+                                            }">
+    <header>
+        <div class="table-row">
+            <div class="header-logo img-responsive">
+                <img class="sena-logo" data-bind="attr: {src: $root.is_gen() ? 'assets/'+$root.lesson_type+'/icons/sena-logo_gen.svg' : 'assets/'+$root.lesson_type+'/icons/sena-logo.svg'}">
+            </div>
+            <div class="header-title">
+                <!-- ko if: $root._data.test() == 'false' -->
+                    <span class="section-title" data-bind="text: $root.exercise_group_types()[$root.labs()[$root.selected_lab()].selected_group()].heading"></span>
+                    <h1 data-bind="text: $root._data.unit_name()"></h1>
+                <!-- /ko -->
+                <!-- ko if: $root._data.test() == 'true' -->
+                    <p class="section-title AT-section-title" data-bind="text: $root._data.unit_name()"></p>
+                <!-- /ko -->
+            </div>
+            <div class="lesson-path">
+                <div class="header-breadcrumb-text" style="display:inline-block" data-bind="text:$root.localization.language"> </div>
+                <div style="display:inline-block" class="sena-icon sena-icon-chevron-right" aria-hidden="true"></div>
+                <div class="header-breadcrumb-text" style="display:inline-block" data-bind="text:$root.localization.level() +' '+ $root.level_name()"></div>
+                <div style="display:inline-block" class="sena-icon sena-icon-chevron-right" aria-hidden="true"></div>
+                <!-- ko foreach: _data() -->
+                    <!-- ko if: type() == "metadata" -->
+                        <!-- ko foreach: contents() -->
+                            <!-- ko if: type() == "lesson_name" -->
+                                <div class="header-breadcrumb-text" style="display:inline-block" data-bind="text: content()"></div>
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+            </div>
+            <div class="dropdown options-menu">
+                <!-- ko if: $root.is_gen() -->
+                    <span class="header-exit link-cursor" data-bind="click:function(){ helper_close_product(); }">&nbsp;</span>
+                <!-- /ko -->
+                <!-- ko if: !$root.is_gen() -->
+                    <button class="" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" data-placement="left" data-container="body" data-bind="attr: { title: $root.localization.options }">
+                        <span class="glyphicon glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu1">
+                        <!-- ko if: !detectMobileDevice() -->
+                            <li role="presentation" data-toggle="tooltip" data-placement="left" data-container="body" data-bind="attr: { title: $root.localization.full }">
+                                <a role="menuitem" tabindex="-1" href="#" data-bind="click: make_fullscreen.bind(null)">
+                                    <span class="sena-icon sena-icon-fullscreen" aria-hidden="true"></span>
+                                </a>
+                            </li>
+                        <!-- /ko -->
+                        <li role="presentation" data-toggle="tooltip" data-placement="left" data-container="body" data-bind="attr: { title: $root.localization.credits }" >
+                            <a role="menuitem" tabindex="-1" href="#" data-target="#sena_credits_modal" data-toggle="modal">
+                                <span class="sena-icon sena-icon-credits" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                        <li role="presentation" data-toggle="tooltip" data-placement="left" data-container="body" data-bind="attr: { title: $root.localization.help }" >
+                            <a role="menuitem" tabindex="-1" href="#" data-target="#sena_help_modal" data-toggle="modal">
+                                <span class="sena-icon sena-icon-help" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                        <li role="presentation" data-toggle="tooltip" data-placement="left" data-container="body" data-bind="attr: { title: $root.localization.sound }" >
+                            <a role="menuitem" tabindex="-1" href="#" data-bind="click:function(){ $root.sfx_on(!$root.sfx_on()); }">
+                                <!-- ko if: $root.sfx_on() -->
+                                    <span class="sena-icon sena-icon-audio" aria-hidden="true"></span>
+                                <!-- /ko -->
+                                <!-- ko if: !$root.sfx_on() -->
+                                    <span class="sena-icon sena-icon-audio-disabled" aria-hidden="true"></span>
+                                <!-- /ko -->
+                            </a>
+                        </li>
+                        <li role="presentation" data-toggle="tooltip" data-placement="left" data-container="body" data-bind="attr: { title: $root.localization.info }" >
+                            <a role="menuitem" tabindex="-1" href="#" data-target="#sena_info_modal" data-toggle="modal">
+                            <span class="sena-icon sena-icon-info" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                        <li role="presentation" data-toggle="tooltip" data-placement="left" data-container="body" data-bind="attr: { title: $root.localization.accessibility }" >
+                            <a role="menuitem" tabindex="-1" href="#" data-target="#sena_accessibility_modal" data-toggle="modal">
+                                <span class="sena-icon sena-icon-accessibility" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                    </ul>
+                <!-- /ko -->
+            </div>
+        </div>
+        <div data-bind="visible: false">
+            <div class="pull-right">
+                <span class="header-exit link-cursor" data-bind="click:function(){ helper_close_product(); }">&nbsp;</span>
+            </div>
+        </div>
+    </header>
+</div>

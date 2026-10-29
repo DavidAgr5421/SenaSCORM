@@ -1,0 +1,95 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/CAS/1.css'}">
+<span class="edit_container"></span>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12 exercise-specific-instructions" data-bind="template: { name: 'instruction_ko_template', foreach: _data }">
+        
+    </div>
+</div>
+
+<div class="row">       
+    <div class="col-md-12 col-sm-12 col-xs-12">
+
+        <!-- ko foreach: selected_questions() -->
+            <!-- ko foreach: _data -->
+                <!-- ko if: type() == "question" -->
+                    <!-- ko foreach: contents() -->
+                        <!-- ko if: type() == "text" -->
+                            <span data-bind="html: content()"> </span>
+                        <!-- /ko -->
+                        <!-- ko if: (type() == "image" || type() == "image-lg" || type() == "image-md" || type() == "image-sm") && checkResourceExist('assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()) -->
+                            <div class="row">
+                                <div data-bind="css: $parents[1].get_template_columns($index()) ">
+                                    <img class="img-responsive" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+                                </div>
+                            </div>
+                        <!-- /ko -->
+                        <!-- ko if: type() == "audio" -->
+                                <div data-bind="template: { name: 'audio_ko_template', data: $data }">
+                                </div>
+                        <!-- /ko -->
+                        <!-- ko if: product_helper_check_rec_question($parents[1]._data()) == false -->
+                            <!-- ko foreach: $parents[1].responses() -->
+                                <!-- ko foreach: _data -->
+                                    <!-- ko if: type() == "text" -->
+                                        <span class="CAS_response_container" data-bind="css: { selected: $parents[3].selected_response() == $parent.id() }" >      
+                                            <!-- ko ifnot: $parents[4].current_index() == ($parentContext.$parentContext.$parentContext.$parentContext.$index()) -->                                 
+                                                <span class="CAS_response " data-bind="value: $index(),css: { selected: $parents[3].selected_response() == $parent.id() }, html: content()"></span>
+                                            <!-- /ko -->
+                                            <!-- ko if: $parents[4].current_index() == ($parentContext.$parentContext.$parentContext.$parentContext.$index()) -->                                   
+                                                <span class="CAS_response " data-bind="click:  function() { $parents[4].select_cas_question($parents[3].id(), $parent.id()); $parents[3].select_response($parent.id);}, value: $index(),css: { selected: $parents[3].selected_response() == $parent.id(), 'link-cursor': $parents[3].selected_response() != $parent.id()}, html: content()"></span><span data-bind="visible:$index() == 0">&nbsp;</span>
+                                            <!-- /ko -->
+                                        </span>
+                                    <!-- /ko -->
+                                <!-- /ko -->
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if: product_helper_check_rec_question(_data()) -->
+                <div class="col-md-12 col-sm-12 col-xs-12" data-bind="template: { name: 'rec_ko_template' }">
+                            
+                </div>
+            <!-- /ko -->
+            <br/>
+        <!-- /ko -->
+        <br/>
+        <div data-bind="visible: conclusion_summary()">
+            <!-- ko foreach: _data() -->
+                <!-- ko if: type() == "summary" -->
+                    <!-- ko foreach: contents() -->
+                        <!-- ko if:type() == "text" -->
+                            <p data-bind="text: $parents[1].conclusion_summary()"> </p>
+                        <!-- /ko -->
+                        <!-- ko if: (type() == "image" || type() == "image-lg" || type() == "image-md" || type() == "image-sm") && checkResourceExist('assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()) -->
+                            <div class="row">
+                                <div data-bind="css: $parents[1].get_instructions_columns_size($index(), $parentContext.$index()) ">
+                                    <img class="img-responsive" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+                                </div>
+                            </div>
+                        <!-- /ko -->
+                        <!-- ko if: type() == "audio" -->
+                            <div data-bind="template: { name: 'audio_ko_template', data: $data }">
+                            </div>
+                        <!-- /ko -->
+                        <!-- ko if: type() == "video" -->
+                            <div class="video-stimulus-container">
+                                <video class="video_controls video_instruction" controls="controls" preload="auto" data-bind="attr: { id: 'video_instruction'+'_'+$parents[1].id()+'_'+$index()}" >
+                                    <source data-bind=" attr: {src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/video/'+content().trim() + '.mp4'}" type="video/mp4"/>
+                                    <!-- MP4 for Safari, IE9, iPhone, iPad, Android, and Windows Phone 7 -->
+                                    <source type="video/mp4" data-bind=" attr: {src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/video/'+content().trim() + '.mp4'}" />
+                                    <!-- WebM/VP8 for Firefox4, Opera, and Chrome -->
+                                    <source type="video/webm" data-bind=" attr: {src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/video/'+content().trim() + '.webm'}" />
+                                    <!-- Ogg/Vorbis for older Firefox and Opera versions -->
+                                    <source type="video/ogg" data-bind=" attr: {src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/video/'+content().trim() + '.ogv'}" />
+                                    <span data-bind="text:$root.localization.video_not_supported"></span>
+                                </video>
+                            </div>
+                        <!-- /ko -->   
+                    <!-- /ko -->
+                <!-- /ko -->
+            <!-- /ko -->
+        </div>
+        
+    </div>
+</div>

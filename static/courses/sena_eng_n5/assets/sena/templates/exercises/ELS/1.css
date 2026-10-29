@@ -1,0 +1,48 @@
+span .selected.ELS-response {
+     color:#01b5bd;
+     text-decoration: line-through;
+}
+#main.cmn span .selected.ELS-response {
+     color:#d34800;
+}
+#main.fr span .selected.ELS-response {
+     color:#e42c23;
+}
+#main.pt span .selected.ELS-response {
+     color:#22893a;
+}
+#main.es span .selected.ELS-response {
+     color:#935ec6;
+}
+
+span .selected.ELS-response:hover {
+     color:#01b5bd;
+}
+#main.cmn span .selected.ELS-response:hover {
+     color:#d34800;
+}
+#main.fr span .selected.ELS-response:hover {
+     color:#e42c23;
+}
+#main.pt span .selected.ELS-response:hover {
+     color:#22893a;
+}
+#main.es span .selected.ELS-response:hover {
+     color:#935ec6;
+}
+
+span.ELS-response:hover {
+     color:#000000;
+}
+
+.ELS-paragraph
+{
+    line-height:1.8;
+    margin-left: 3rem;
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.ELS-question {
+    font-weight: bold;
+}

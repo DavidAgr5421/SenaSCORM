@@ -1,0 +1,19 @@
+<div class="nav-bar" id="nav_bar">
+    <div class="act-nav-items">
+        <div class="nav-scrollbar">
+            <ul class="list-inline nav-fixed-bottom nav-scroll-items " data-bind="foreach:exercises()">
+                <li data-bind="css: { active: $parent.selected_exercise() == id(), success:nav_state() == 4, danger:nav_state() == 2}, click: function() { if($parent.selected_exercise() != $index()){$parent.select_exercise($index());product_helper_update_container_height(); }},text: (id() + 1)"></li>
+            </ul>      
+        </div>       
+    </div>
+    
+    <div class="act-nav-buttons pull-left">
+        <ul class="list-inline nav-controls-list">
+            <li><img onload="nav_act_onload_back(this)" class="link-cursor" data-bind="attr: { src: 'assets/'+$root.lesson_type+'/lessonNav_back_button-over.png' }, click: function() { (selected_exercise() > 0) ? select_exercise(selected_exercise()-1) : select_exercise(exercises().length); product_helper_update_container_height(); }, disable: selected_exercise() < 1" /></li>
+            
+            <li class="nav-controls"><p class="nav-text text-center"  data-bind="text: selected_exercise() + 1 + ' / '+(max_exercises() + 1)"></p></li>
+            
+            <li><img onload="nav_act_onload_next(this)" class="link-cursor"  data-bind="attr: { src: 'assets/'+$root.lesson_type+'/lessonNav_next_button-over.png' }, click: function() { (selected_exercise() < exercises().length - 1) ? select_exercise(selected_exercise()+1) :  select_exercise(0); product_helper_update_container_height();  }, disable: selected_exercise() > 8" /></li>
+        </ul>
+    </div>
+</div>

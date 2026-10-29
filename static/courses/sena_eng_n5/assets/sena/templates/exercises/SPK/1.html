@@ -1,0 +1,96 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/SPK/1.css'}">
+<span class="edit_container"></span>
+<div class="SPK-instructions">
+    <div class="row">
+        <div class="col-xs-9">
+            <div data-bind="template: { name: 'instructions_container_ko_template'}"></div>
+        </div>
+        <div class="col-xs-3">
+            <span class="btn btn-lg btn-block SPK-start product-color-white-text btn-rec-start sena-btn SPK-button" data-bind="click: start_spk, visible:started() == false"><span data-bind="text:$root.localization.start"></span>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="SPK-exercise-container" data-bind="attr: {style: 'height:'+($parent.container_height()-drag_area_height_offset())+'px;'}" >
+    <div class="SPK-exe-padding">
+        <div class="row">       
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 SPK-exercise " data-bind="css:'SPK-exercise-'+id(),attr: {style: 'height:'+($parent.container_height()-drag_area_height_offset())+'px;'}"> 
+                
+                <div class="row">
+                    <div class="spk-timer" data-bind="visible: started() == true && current_question() != -3">
+                        <span class="glyphicon glyphicon-time SPK-timer-icon" aria-hidden="true"> </span>
+                        </span> <span class="SPK-timer-text" data-bind="text: spk_timer().toMMSS()"></span>
+                    </div>
+                </div> 
+                <div class="SPK-rslt" data-bind="visible:current_question() == -3">
+                    
+                            <div class="counter-reset">
+                                <div class="SPK-block">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <span>
+                                                <span><span data-bind="text:$root.localization.SPK_your_time"></span>:</span>
+                                                <span data-bind="text: timer().toFixed(2).toMMSS()"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    </br>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <span><span data-bind="text:$root.localization.SPK_best_time"></span>:</span>
+                                        </div>
+                                    </div>
+                                    </br>
+                                    <ol>
+                                        <!-- ko foreach: attempt_times() -->
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="test-class"><li></li></div>&nbsp;<span data-bind="text: $data.toFixed(2).toMMSS()"></span></br>
+                                                </div>
+                                            </div>
+                                        <!--/ko -->
+                                    </ol>
+                                </div>
+                            </div>
+                            </br>
+                            <button class="link-cursor sena-btn btn btn-rec-start btn-lg product-color-white-text SPK-button" data-bind="visible: attempt_times().length < 2, click: function() {product_clear_questions($data), start_spk()}">
+                                <span aria-hidden="true"></span>
+                                <span data-bind="text:$root.localization.try_again_button"></span>
+                            </button>
+                                    
+                </div>            
+                <!-- ko foreach: questions() -->                
+                    <!-- ko foreach: responses() -->
+                        <!-- ko foreach: _data() -->                        
+                            <!-- ko if:type() == "SPK_drag_pair" -->
+                                <!-- ko foreach: content -->
+                                    <!-- ko if:type() == 'text' -->
+                                        <style data-bind="html:'div.drag-'+$parents[3].type()+'-'+$parents[2].id()+'-'+$parents[1].id()+'-'+$index()+'{height:'+content.size.y()+'%;width:'+content.size.x()+'%;}'">
+                                        </style>
+                                        <div class="SPK-drag pep drop-target SPK-text-pep" style="" data-bind="css:'SPK-pair-'+$parents[2].id()+'-'+$parents[1].id()+' drag-'+$parents[3].type()+'-'+$parents[2].id()+'-'+$parents[1].id()+'-'+$index(), attr{ id: $parents[2].id() }, visible:$parents[1].selected() == 0 && $parents[3].current_question() == $parents[2].id() || $parents[3].current_question() == -1 && $parents[3].current_question() != -2">
+                                            <div class="SPK-drag-text-container">
+                                                <p class="SPK-drag-inner text-center" data-bind="html:content.data()"></p>
+                                            </div>
+                                        </div>
+                                    <!-- /ko -->
+                                    <!-- ko if:type() == 'image' -->
+
+                                        <style data-bind="html:'.drag-'+$parents[3].type()+'-'+$parents[2].id()+'-'+$parents[1].id()+'-'+$index()+'{height:'+content.size.y()+'%;width:'+content.size.x()+'%;}'">
+                                        </style>
+                                        <div class="SPK-drag SPK-img-pep pep drop-target " data-bind="
+                                            css: 'SPK-tilt-pep-'+$index()+' SPK-pair-'+$parents[2].id()+'-'+$parents[1].id()+' drag-'+$parents[3].type()+'-'+$parents[2].id()+'-'+$parents[1].id()+'-'+$index(), 
+                                            attr { id: $parents[2].id() }, 
+                                            visible:$parents[1].selected() == 0 && $parents[3].current_question() == $parents[2].id() || $parents[3].current_question() == -1 && $parents[3].current_question() != -2">
+                                            <img data-bind="attr: { src: 'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' + content.data() }">
+                                        </div>
+
+                                    <!-- /ko -->
+                                <!-- /ko -->
+                            <!-- /ko -->                    
+                        <!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->                           
+            </div>              
+        </div>
+    </div>
+</div>

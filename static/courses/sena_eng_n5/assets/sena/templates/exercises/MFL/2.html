@@ -1,0 +1,51 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/MFL/2.css'}">
+<span class="edit_container"></span>
+<div data-bind="template: { name: 'instructions_container_ko_template'}"></div>
+
+<div class="MFL-paragraph counter-reset question-block">
+    <!-- ko foreach:questions() -->
+            <!-- ko foreach: _data() -->
+                <!-- ko if: type() == "question" -->
+                    <!-- ko foreach: contents() -->
+                        <!-- ko if: type() == "text" -->
+                            <span data-bind="html:content()"></span>
+                        <!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if: _data()[0].contents().length > 0 && product_helper_check_rec_question(_data()) -->
+                <div class="col-md-3 col-sm-4 col-xs-4">
+                
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6" data-bind="template: { name: 'rec_ko_template' }">
+                            
+                </div>
+            <!-- /ko -->
+            <!-- ko if: responses().length > 1 && _data()[0].contents().length > 0 && product_helper_check_rec_question(_data()) == false -->
+                <span class="MFL-dropdown"><select data-bind='options: responses, 
+                optionsText: function(item) {
+                    return item._data()[0].content();
+                },
+                value: selectbox_response, 
+                css: "link-cursor", 
+                attr: {disabled:$parents[0].feedback_showing_answer()}' >
+                   
+                </select></span>
+                <div class="response-feedback-question MFL-response" data-bind="css: state_css()">
+                    <!-- ko if: state_css() == 'response-correct' && state() >= 1 && $parent.checked_answer() -->
+                        <span class="response-correct glyphicon glyphicon-ok"> </span>
+                    <!-- /ko -->
+                    <!-- ko if: (state_css() == 'response-incorrect' || state_css() == 'response-default') && (state() >= 1 && $parent.checked_answer()) -->
+                        <span class="response-incorrect glyphicon glyphicon-remove">
+                        </span>
+                    <!-- /ko -->
+                </div>
+            <!-- /ko -->
+            
+            <!-- ko foreach: _data() -->
+                <!-- ko if: type() == "post_question" -->
+                    <span data-bind="html: contents.content()"></span>              
+                <!-- /ko -->
+            <!-- /ko -->
+    <!-- /ko -->   
+</div>

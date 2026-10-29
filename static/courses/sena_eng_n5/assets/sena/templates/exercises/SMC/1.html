@@ -1,0 +1,69 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/SMC/1.css'}">
+<span class="edit_container"></span>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12 exercise-specific-instructions" data-bind="template: { name: 'instruction_ko_template', foreach: _data }">
+        
+    </div>
+</div>
+
+<!-- ko foreach:questions() -->      
+    <div class="row">
+        <div class="SMC-question col-md-12 col-sm-12 col-xs-12">
+            <!-- ko foreach:_data() -->
+                <!-- ko if: type() == "question" -->
+                    <!-- ko foreach:contents() --> 
+                            <!-- ko if: type() == "text" -->
+                                <span data-bind="html: content()"></span>
+                            <!-- /ko -->
+                            <!-- ko if: type() == "audio" -->
+                                <div data-bind="template: { name: 'audio_ko_template', data: $data }">
+                                </div>
+                            <!-- /ko -->
+                            <!-- ko if: type() == "image" || type() == "image-lg" || type() == "image-md" || type() == "image-sm"-->
+                                <div class="row">
+                                    <div data-bind="css: $parents[1].get_template_columns($index()) ">
+                                        <img class="img-responsive " data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/'+content()}" />
+                                    </div>
+                                </div>
+                            <!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+            <!-- /ko -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <form>
+                <ul data-bind="foreach:responses()" style="list-style-type: none;">
+                    <li class="SMC-response" data-bind="visible: $parent.responses().length > 1">
+                        <div class="SMC-response-feedback">
+                            <span data-bind="css: 'response '+state_css(), visible: state() > 1 && $parents[1].checked_answer()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;
+                        </div>
+                        <div class="response-checkbox"><input type="radio" name="response" data-bind="checked: $parent.selected_response, value: id(), css: 'link-cursor', attr: {disabled:$parents[1].showing_answer()}" /></div>
+                        <!-- ko ifnot: has_data() -->
+                            <div class="response-checkbox-text"><span data-bind="html: text()"></span></div> 
+                        <!-- /ko -->
+                        <!-- ko if: has_data() -->
+                            <ul style="list-style-type: none;">
+                                <!-- ko foreach: _data() --> 
+                                    <li>
+                                    <!-- ko if: type() == "image" -->
+                                        <li><img class="SMC-image" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/'+content()}" /></li>
+                                    <!-- /ko -->
+                                    <!-- ko if: type() == "audio" -->
+                                        <div data-bind="template: { name: 'audio_ko_template', data: $data }">
+                                        </div>    
+                                    <!-- /ko -->
+                                    <!-- ko if: type() == "text" -->
+                                        <li><div class="response-checkbox-text"><span data-bind="html: content()"></span></div> </li>
+                                    <!-- /ko -->
+                                    </li>
+                                <!-- /ko -->
+                            </ul>
+                        <!-- /ko -->
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+<!-- /ko -->

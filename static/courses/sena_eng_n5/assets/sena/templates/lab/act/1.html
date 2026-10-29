@@ -1,0 +1,27 @@
+<div class="row exercise-controls" data-bind="attr:{ id: 'exercise_controls_'+id()}">   
+    <div class="col-md-3 col-sm-3 col-xs-3">
+        <span class="exercise-header" data-bind="text: 'Exercise ' + (selected_exercise()+1)"></span>
+    </div>
+    <div class="col-md-9 col-sm-9 col-xs-9 exercise-controls-container">
+        <div class="check-answer-container">
+            <button type="button" data-bind="enable:exercises()[selected_exercise()].check_answer_enabled(), click: function(){exercises()[selected_exercise()].check_answers();}, visible: exercises()[selected_exercise()].state() <= 2, text:$root.localization.check_answer" class="btn btn-xs check-answer">Check Answer</button>
+            <button type="button" class="btn btn-xs next-exercise" data-bind="click: function(){select_exercise(selected_exercise()+1);}, disable: selected_exercise() > 8, visible: exercises()[selected_exercise()].state() > 2, text:$root.localization.next">Next</button>
+        </div>    
+        <div class="clear-show-container">
+            <button type="button" data-bind="click: function(){$root.select_lab(0);}, text:$root.localization.see_text" class="btn btn-xs show-reading left-btn link-cursor">See Text</button>
+            <button type="button" data-bind="enable:exercises()[selected_exercise()].show_answer_enabled(), click: function(){exercises()[selected_exercise()].show_answers(id());}, text:$root.localization.solution" class="show-answer btn btn-xs link-cursor left-btn">Show Answer</button>            
+            <button type="button" data-bind="enable:exercises()[selected_exercise()].state(), click: function(){exercises()[selected_exercise()].clear_questions(id());}, text:$root.localization.clear" class="btn btn-xs clear-responses link-cursor right-btn">Clear</button>
+        </div>                
+    </div>            
+</div>
+<div id="fader">
+    <div class="row" >
+        <div class="col-md-12 col-sm-12 col-xs-12 exercises act_exercises" id="act_exercises" data-bind="attr: {style: 'height:'+container_height()+'px;'}">
+            
+        </div>
+    </div>
+</div>
+
+<div class="row" id="act_nav">
+    <div class="col-md-12 col-sm-12 col-xs-12" ></div>
+</div>

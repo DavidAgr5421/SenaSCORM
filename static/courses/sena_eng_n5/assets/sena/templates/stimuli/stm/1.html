@@ -1,0 +1,36 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/stimuli/stm/1.css'}">
+<span class="edit_container"></span>
+
+<div class="row" >   
+    <div class="col-md-12 col-sm-12 col-xs-12">          
+            <!-- ko foreach:contents() -->
+                <!-- ko if:type() == "instructions" -->
+                    <span data-bind="html:value()"></span><br />
+                <!-- /ko -->
+            <!-- /ko -->                
+    </div>            
+</div>
+
+<div class="row">
+    <div class="col-md-4 col-sm-5 col-xs-6">
+        <!-- ko foreach:contents() -->
+                <!-- ko if:type() == "img" && checkResourceExist('assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/'+ value())-->
+                    <img class="center-block img-responsive " data-bind="attr: { src: 'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/'+ value() }" /><br />
+                <!-- /ko -->
+        <!-- /ko -->
+    </div>
+    <div class="col-md-8 col-sm-7 col-xs-6">
+        <!-- ko foreach:contents() -->   
+            
+                <!-- ko if:type() == "p" -->
+                    <p>
+                        <span data-bind="html:value()"></span><br />
+                    </p>
+                <!-- /ko -->
+                <!-- ko if:type() == "title" -->
+                    <div class="stimulus_title" data-bind="html:value()"></div>
+                <!-- /ko -->
+                
+        <!-- /ko -->
+    </div>
+</div>

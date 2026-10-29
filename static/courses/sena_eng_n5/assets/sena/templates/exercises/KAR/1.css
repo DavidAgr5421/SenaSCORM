@@ -1,0 +1,22 @@
+.KAR-video-player
+{
+    
+}
+
+.KAR-input
+{
+	margin: 20px auto 10px;
+    line-height:1;
+    background-color: #EAF5F3;
+    border: 1px solid black;
+    box-shadow: 0 2px 0px rgba(0,0,0,0.1);
+    width: 95% !important;
+    display: block;
+    font-size: 1.6rem;
+    resize: vertical;
+    overflow: auto;
+}
+
+.video-padding{
+	padding-bottom: 30px;
+}

@@ -1,0 +1,51 @@
+@font-face {
+	font-family: "sena-icons";
+	src: url('../../../assets/sena/fonts/sena-icons.eot');
+	src: url('../../../assets/sena/fonts/sena-icons.eot?#iefix') format('eot'),
+		url('../../../assets/sena/fonts/sena-icons.woff') format('woff'),
+		url('../../../assets/sena/fonts/sena-icons.ttf') format('truetype'),
+		url('../../../assets/sena/fonts/sena-icons.svg#sena-icons') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.sena-icon:before {
+	display: inline-block;
+	font-family: "sena-icons";
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.sena-icon-lg {
+	font-size: 1.3333333333333333em;
+	line-height: 0.75em;
+	vertical-align: -15%;
+}
+.sena-icon-2x { font-size: 2em; }
+.sena-icon-3x { font-size: 3em; }
+.sena-icon-4x { font-size: 4em; }
+.sena-icon-5x { font-size: 5em; }
+.sena-icon-fw {
+	width: 1.2857142857142858em;
+	text-align: center;
+}
+
+.sena-icon-microphone:before { content: "\E001" }
+.sena-icon-headphones:before { content: "\E002" }
+.sena-icon-chevron-right:before { content: "\E003" }
+.sena-icon-accessibility:before { content: "\E004" }
+.sena-icon-audio:before { content: "\E005" }
+.sena-icon-check-progress:before { content: "\E006" }
+.sena-icon-credits:before { content: "\E007" }
+.sena-icon-fullscreen:before { content: "\E008" }
+.sena-icon-help:before { content: "\E009" }
+.sena-icon-info:before { content: "\E00A" }
+.sena-icon-tools:before { content: "\E00B" }
+.sena-icon-audio-disabled:before { content: "\E00C" }
+.sena-icon-lightbulb:before { content: "\E00D" }
+.sena-icon-vertical-drag:before { content: "\E00E" }
+.sena-icon-radio-button-checked:before { content: "\E00F" }
+.sena-icon-radio-button:before { content: "\E010" }

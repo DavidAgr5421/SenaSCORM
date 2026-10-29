@@ -1,0 +1,39 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/REC/1.css'}">
+<span class="edit_container"></span>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12 exercise-specific-instructions" data-bind="template: { name: 'instruction_ko_template', foreach: _data }">
+        
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <ul data-bind="foreach:questions()">
+            <!-- ko foreach: _data() -->
+                <!-- ko if: type() == "question" -->
+                    <!-- ko foreach: contents() -->
+                        <!-- ko if: type() == "text" -->
+                            <p data-bind="html: content()"> </p>  
+                        <!-- /ko -->
+                        <!-- ko if: type() == "image" || type() == "image-lg" || type() == "image-md" || type() == "image-sm"-->
+                            <div class="row">
+                                <div data-bind="css: $parents[1].get_template_columns($index()) ">
+                                    <img class="img-responsive " data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+                                </div>
+                            </div>
+                        <!-- /ko -->
+                        <!-- ko if: type() == "audio" -->
+                            <div data-bind="template: { name: 'audio_ko_template', data: $data }">
+                            </div>
+                        <!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if: product_helper_check_rec_question(_data()) -->
+                <div class="col-md-12 col-sm-12 col-xs-12" data-bind="template: { name: 'rec_ko_template' }">
+                    
+                </div>
+            <!-- /ko -->
+        </ul>
+    </div>
+</div>

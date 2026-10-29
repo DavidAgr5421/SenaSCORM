@@ -1,0 +1,47 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/RSLT2/1.css'}">
+
+<div id="rslt_graphic_container">
+    <div class="row">
+        <!-- ko if: $root._data.test() == 'PT' -->
+            <!-- ko if: $root.finished_test() == false -->
+                <div class="col-xs-12">
+                    <div class="rslt-summary">
+                        <p><span data-bind="text:$root.localization.RSLT_click_submit, visible:$root.hide_placment_test_result()"></span></p>
+                        <p><span data-bind="visible:!$root.hide_placment_test_result()">Please click on the submit button again.</span></p>
+                        <p><span data-bind="text:$root.localization.RSLT_last_chance"></span></p>
+                        <div class="rslt-aside"><span data-bind="text:$root.localization.RSLT_thanks"></span></div>
+                        <button class="sena-btn pre-quiz-button" data-bind="click:function(){ $root.calc_achievement_test_score(); }"><span><span data-bind="text:$root.localization.submit_button"></span><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></span></button>
+                    </div>
+                </div>
+            <!-- /ko -->
+            <!-- ko if: $root.finished_test() == true -->
+
+                <div class="col-xs-6 col-xs-offset-3" data-bind="visible:$root.hide_placment_test_result()">
+                    <h2 class="rslt-header"><span data-bind="text:$root.localization.result"></span>:
+                        <!-- ko if: $root.AT_score() < 20 -->
+                            Pre-A1
+                        <!-- /ko -->
+                        <!-- ko if: $root.AT_score() >= 20 && $root.AT_score() < 41-->
+                            A1
+                        <!-- /ko -->
+                        <!-- ko if: $root.AT_score() >= 41 && $root.AT_score() < 61-->
+                            A2
+                        <!-- /ko -->
+                        <!-- ko if: $root.AT_score() >= 61 && $root.AT_score() < 85-->
+                            B1
+                        <!-- /ko -->
+                        <!-- ko if: $root.AT_score() >= 85 -->
+                            B2
+                        <!-- /ko -->
+                    </h2>
+                </div>
+                <div class="col-xs-12 rslt-summary" data-bind="visible:!$root.hide_placment_test_result()">
+                        <div class="close-placement-test"><span>Congratulations!</span></div>
+                        <div class="close-placement-test"><span>You have completed the placement test.</span></div>
+                        <div class="rslt-aside close-placement-test"><span>Your school administrator will be sending you further information.</span></div>
+                        <div class="close-placement-test"><span class="sena-btn pre-quiz-button" data-bind="click:function(){ helper_close_product(); }"> Close Placement Test </span></div>
+                </div>
+            <!-- /ko -->
+        <!-- /ko -->
+    </div>
+</div>

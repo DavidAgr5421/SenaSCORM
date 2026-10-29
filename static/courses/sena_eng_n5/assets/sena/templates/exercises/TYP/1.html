@@ -1,0 +1,87 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/TYP/1.css'}">
+<span class="edit_container"></span>
+<div data-bind="template: { name: 'instructions_container_ko_template'}"></div>
+
+<div class="counter-reset">         
+    <!-- ko foreach:questions() -->
+        <div class="row TYP-question">
+                <!-- ko foreach: _data() -->
+                    <!-- ko if: type() == "question" -->
+                        <!-- ko ifnot: product_helper_check_rec_question($parent._data())-->
+                            <div data-bind="template: { name: 'question_counter_ko_template'}"></div>
+                            <div class="response-feedback response-feedback-question" data-bind="template: { name: 'data_level_question_feedback_ko_template' }, css: $parents[0].state_css()"></div>
+                        <!-- /ko -->
+                        <!-- ko foreach: contents() -->
+                            <!-- ko if: type() == "image" || type() == "image-lg" || type() == "image-md" || type() == "image-sm"-->
+                                <div class="question-column col-md-3 col-sm-4 col-xs-4">
+                                    <div class="exe-image-border-wrapper">
+                                        <div class="exe-image-border">
+                                            <img class="img-responsive exe-image" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- /ko -->
+                            <!-- ko if:type() == "audio" -->
+                                <div class="question-column col-md-3 col-sm-4 col-xs-4">
+                                    <div class="sena-btn default-audio-button" data-bind="template: { name: 'audio_ko_template', data: $data }"></div>
+                                </div>
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+            
+            <!-- ko if: product_helper_check_rec_question(_data()) -->
+                <div class="question-column col-xs-6 col-xs-offset-3" data-bind="template: { name: 'rec_ko_template' }">
+                    
+                </div>
+            <!-- /ko -->
+            <div class="col-xs-12 col-sm-8 col-md-9 no-padding">
+                <!-- ko foreach: _data() -->
+                    <!-- ko if: type() == "question" -->
+                        <!-- ko foreach: contents() -->
+                            <!-- ko if:type() == "text" -->
+                                <span data-bind="html: content()"> </span>
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko foreach: _data() -->
+                    <!-- ko if: type() == "post_question" -->
+                        <!-- ko if: type() != "rec" --> 
+                            <!-- ko ifnot: $parents[1].state() == 1 && $parents[1].feedback_showing_answer() && !$parents[1].checked_answer() || $parents[1].state() == 4 -->
+                                <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-bind="value: $parents[0].entered_response, valueUpdate: 'input', event: { input: $parents[0].check_entered_response('TYP')},attr:{disabled:$parents[1].feedback_showing_answer()}" class="TYP_input" />
+                            <!-- /ko -->
+                            
+                            <!-- ko if: ($parents[1].state() == 1 && $parents[1].feedback_showing_answer() && !$parents[1].checked_answer()) || $parents[1].state() == 4 -->
+                                <!-- ko if: $root._data.test() == 'true' -->
+                                    <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-bind="value:  $parents[0].entered_response ,attr:{disabled:$parents[1].feedback_showing_answer()}" class="TYP_input" />
+                                <!-- /ko -->
+                                <!-- ko if: $root._data.test() == 'false' -->
+                                    <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-bind="value: $parents[0].TYP_get_answer() ,attr:{disabled:$parents[1].feedback_showing_answer()}" class="TYP_input" />
+                                    <!-- <span class="btn btn-xs btn-default" tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Answer(s)" data-bind="attr{id: 'popover_'+$parents[1].id()+'_'+$parents[0].id(), 'data-content': $parents[0].TYP_get_answer()}">...</span> -->
+                                <!-- /ko -->
+                            <!-- /ko -->  
+                        <!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko foreach: _data() -->
+                    <!-- ko if: $parents[1]._data().length == 0 -->
+                        <!-- ko ifnot: $parents[1].state() == 1 && $parents[1].feedback_showing_answer() && !$parents[1].checked_answer() || $parents[1].state() == 4 -->
+                            <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-bind="value: $parents[0].entered_response, valueUpdate: 'input', event: { input: $parents[0].check_entered_response('TYP')},attr:{disabled:$parents[1].feedback_showing_answer()}" class="TYP_input" />
+                        <!-- /ko -->
+                        <!-- ko if: $parents[1].state() == 1 && $parents[1].feedback_showing_answer() && !$parents[1].checked_answer() || $parents[1].state() == 4 -->
+                            <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-bind="value: $parents[0].TYP_get_answer(),attr:{disabled:$parents[1].feedback_showing_answer()}" class="TYP_input" />
+                            <!-- <span class="btn btn-xs btn-default" tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Answer(s)" data-bind="attr{id: 'popover_'+$parents[1].id()+'_'+$parents[0].id(), 'data-content': $parents[0].TYP_get_answer()}">...</span> -->
+                        <!-- /ko -->  
+                    <!-- /ko -->
+
+                    <!-- ko if: type() == "post_question" && contents.type() != "empty" -->
+                        <span data-bind="html: contents.content()"></span> 
+                    <!-- /ko -->
+                <!-- /ko -->
+                </div>
+            
+        </div>
+        
+    <!-- /ko -->
+</div>

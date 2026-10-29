@@ -1,0 +1,24 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/SLWG/1.css'}">
+<span class="edit_container"></span>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12 exercise-specific-instructions" data-bind="template: { name: 'instruction_ko_template', foreach: _data }">
+        
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div>
+            <ol data-bind="foreach:questions()">
+                <li>
+                    <span class="SLWG-paragraph" data-bind="foreach:responses()">
+                        <!-- ko foreach: _data() -->
+                            <span class="SLWG-response link-cursor" data-bind="html:content(), css: { selected: $parents[1].selected_response() == $parent.id()}, click: function(){$parents[1].select_response($parent.id);}"></span>
+                            <span data-bind="css: 'response '+$parent.state_css(), visible: $parent.state() > 1 && $parents[2].checked_answer()">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <!-- /ko -->
+                    </span>
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>

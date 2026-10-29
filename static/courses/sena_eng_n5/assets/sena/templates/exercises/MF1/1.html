@@ -1,0 +1,73 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/MF1/1.css'}">
+<span class="edit_container"></span>
+<div data-bind="template: { name: 'instructions_container_ko_template'}"></div>
+
+<div class="MF1-exercise">
+    <div class="MF1-response-container response_container" data-bind="attr{id: 'response_container', style: 'height:'+dragdrop.response_container().height()+'px;width:'+dragdrop.response_container().width()+'px;'}">
+        <!-- ko foreach:questions() -->
+            <!-- ko if: product_helper_check_rec_question(_data()) == false -->
+                <div class="MF1-response-group" data-bind="attr: { id: 'MF1-response-group-'+$index() }, css: 'MF1-response-group-'+$index()"> 
+                    <!-- ko foreach: responses() -->
+                        <!-- ko foreach: _data() -->
+                            <!-- ko if: type() == "text" -->
+                                <div class="link-cursor pep MF1-response" data-bind="attr: { id: $parents[1].id() }, css: 'response-'+$parentContext.$index()+'-'+$parents[1].id()">
+                                    <span class="MF1-response-inner" data-bind="html: content()">some text</span>         
+                                </div>  
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->
+                </div>
+            <!-- /ko -->
+        <!-- /ko -->   
+    </div>
+</div>    
+
+<div class="counter-reset"> 
+    <!-- ko foreach:questions() -->
+        <div class="MF1-question-column">
+            <!-- ko foreach: _data() -->
+                <!-- ko if: type() == "question" -->
+                    <!-- ko if: contents()[0].type() != "rec" -->
+                        <div data-bind="template: { name: 'question_counter_ko_template'}"></div>
+                        <div class="response-feedback response-feedback-question" data-bind="template: { name: 'data_level_question_feedback_ko_template' }, css: $parents[0].state_css()"></div>
+                    <!-- /ko -->
+                    <!-- ko foreach: contents() -->
+                        <!-- ko if: (type() == "image" || type() == "image-lg" || type() == "image-md" || type() == "image-sm") && checkResourceExist('assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()) -->
+                            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-5">
+                                <img class="img-responsive" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+                            </div>
+                        <!-- /ko -->
+                        <!-- ko if:type() == "audio" -->  
+                            <div class="sena-btn default-audio-button" data-bind="template: { name: 'audio_ko_template', data: $data }">
+                            </div>
+                        <!-- /ko -->
+                        <!-- ko if:type() == "text" -->
+                            <span class="MF1-question" data-bind="html:content()"></span>
+                        <!-- /ko -->
+                    <!-- /ko -->
+                    <!-- ko if: contents()[0].type() != "rec" -->
+                        <span data-bind="attr: { 'class' : 'drop-container_'+$parents[1].id()+'_'+$parents[0].id()+'_'+$parents[1].id() }">
+                            <div class="MF1-wrapper">
+                                <div class="drop-target MF1-drop MF1-question MF1-question-num " data-bind="css: 'MF1-drop MF1-group-'+$parentContext.$index()+'_'+$parents[1].id(),attr{id: $parents[0].id() }">
+                                    <div data-bind="css: $parents[0].state_css()" ></div>
+                                </div>
+                            </div>
+                        </span>
+                    <!-- /ko -->
+                <!-- /ko -->
+                
+                <!-- ko if: type() == "post_question" -->
+                    <span class="MF1-question" data-bind="html: contents.content()"></span>
+                <!-- /ko -->
+            <!-- /ko -->
+
+            <!-- ko if: product_helper_check_rec_question(_data()) -->
+                <div class="row">
+                    <div class="col-xs-6 col-xs-offset-3" data-bind="template: { name: 'rec_ko_template' }">
+                        
+                    </div>
+                </div>
+            <!-- /ko -->
+        </div>
+    <!-- /ko -->
+</div>

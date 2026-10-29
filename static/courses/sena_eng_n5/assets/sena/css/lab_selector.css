@@ -1,0 +1,96 @@
+
+#lab_selector{
+    padding-right:0px;
+    padding-left: 0px;
+    background-color:#F2F2F2;
+    border-bottom: 1px solid #000000;
+}
+
+.lab-selector{
+    padding-right:0px;  
+    padding-left:0px;     
+}
+
+.lab-selector-items-container{         
+    float:left;     
+}
+
+.lab-selector-gutter{         
+    margin-top:44px;
+    border-bottom: 6px solid #E6E7E8;         
+}
+
+ul.nav-tabs li.lab-selector-item{    
+    border-left: 1px solid #E6E7E8;    
+    background-color:#F2EFE8;
+    margin-right: -2px;  
+    width:125px;
+    height:50px;
+    text-align:center;    
+    line-height:1;
+    display:table-cell;
+    vertical-align: middle;
+    border-bottom: 6px solid #E6E7E8;
+}
+
+
+ul.nav-tabs li.lab-selector-item a:hover{  
+    background-color:#F2F2F2;
+    color:#333333;
+    text-decoration: underline;
+    width:123px;
+    border-bottom: 1px solid #E6E7E8;
+}
+
+ul.nav-tabs li.lab-selector-item a.disabled{  
+    background-color:#F2F2F2;
+    color:#9B99AA;
+    cursor: default;
+    border-color:#E6E7E8;
+    border-bottom: 3px solid #E6E7E8;    
+    width:123px;
+}
+
+ul.nav-tabs li.lab-selector-item a.disabled:hover{
+    text-decoration: none;
+    border-color:#E6E7E8;
+    width:123px;
+    color:#9B99AA;
+}
+
+.lab-selector-items{
+    border-color:#E6E7E8;   
+    display:table;    
+}
+
+ul.nav-tabs li.lab-selector-item.active a.lab-selector-item-text {   
+    background-color:#FFFFFF;
+    height:50px;
+    line-height:1;    
+    color: #01b5bd; 
+    border-bottom: 6px solid #01b5bd;
+    display:table-cell;
+    vertical-align: middle; 
+    width:123px;
+}
+
+ul.nav-tabs li.lab-selector-item.active a.lab-selector-item-text:hover {
+    background-color:#FFFFFF;
+    color: #01b5bd; 
+    border-bottom: 6px solid #01b5bd;    
+}
+
+ul.nav-tabs li.lab-selector-item a.lab-selector-item-text{    
+    width:123px;
+    padding-top:5px;
+    padding-bottom:5px;    
+    height:50px;
+    line-height:1;
+    color: #000000;
+    display:table-cell;
+    vertical-align: middle;     
+}
+
+ul.nav-tabs li.lab-selector-item a.lab-selector-item-text.disabled{        
+    color:#9B99AA;    
+}

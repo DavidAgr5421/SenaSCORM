@@ -1,0 +1,87 @@
+<!-- ko if: $root._data.test() == 'false' -->
+    <nav class="row group-bar"> 
+        <ul class="col-xs-3 col-sm-3">
+            <li><button type="button" class="group-btn learning-points-btn" data-toggle="tooltip" data-placement="top" data-container="body" data-bind="click: function() {$('#learning-point').modal('show'); }, attr: { title: $root.localization.learning_points }">
+                <div class="group-btn-inner"></div>
+            </button></li>
+            <li><button type="button" class="group-btn target-words-btn" data-toggle="tooltip" data-placement="top" data-container="body" data-bind="click: function() {$('#myTargetWordsModal').modal('show'); }, attr: { title: $root.localization.target_words }">
+                <div class="group-btn-inner"></div>
+            </button></li>
+        </ul>
+        <ol class="col-xs-7 col-sm-6">
+            <li><button type="button" id="group-bar-item-0" class="group-btn" data-bind="click: function() { if(!is_sliding()) { $root.labs()[$root.selected_lab()].change_group(0);}}, css: { 'group-bar-item-hover': !($root.check_if_group_disabled('Welcome'))}, attr:{title: $root.exercise_group_types()[0].heading}"data-toggle="tooltip" data-placement="top" data-container="body">
+                <div class="group-btn-inner"></div>
+            </button></li>
+            <li><button type="button" id="group-bar-item-1" class="group-btn" data-bind="click: function() { if(!is_sliding()) { $root.labs()[$root.selected_lab()].change_group(1);}}, css: {'group-disabled': $root.check_if_group_disabled('Content'), 'group-bar-item-hover': !($root.check_if_group_disabled('Content'))}, attr:{title: $root.exercise_group_types()[1].heading}"data-toggle="tooltip" data-placement="top" data-container="body">
+                <div class="group-btn-inner"></div>
+            </button></li>             
+            <li><button type="button" id="group-bar-item-2" class="group-btn" data-bind="click: function() {if(!is_sliding()) { $root.labs()[$root.selected_lab()].change_group(2);}}, css: {'group-disabled': $root.check_if_group_disabled('Activity 1'), 'group-bar-item-hover': !($root.check_if_group_disabled('Activity 1'))}, attr:{title: $root.exercise_group_types()[2].heading}"data-toggle="tooltip" data-placement="top" data-container="body">
+                <div class="group-btn-inner"></div>
+            </button></li>             
+            <li><button type="button" id="group-bar-item-3" class="group-btn" data-bind="click: function() { if(!is_sliding()){$root.labs()[$root.selected_lab()].change_group(3);}}, css: {'group-disabled': $root.check_if_group_disabled('Activity 2'), 'group-bar-item-hover': !($root.check_if_group_disabled('Activity 2'))}, attr:{title: $root.exercise_group_types()[3].heading}"data-toggle="tooltip" data-placement="top" data-container="body">
+                <div class="group-btn-inner"></div>
+            </button></li>             
+            <li><button type="button" id="group-bar-item-4" class="group-btn" data-bind="click: function() { if(!is_sliding()){$root.labs()[$root.selected_lab()].change_group(4);}}, css: {'group-disabled': $root.check_if_group_disabled('Activity 3'), 'group-bar-item-hover': !($root.check_if_group_disabled('Activity 3'))}, attr:{title: $root.exercise_group_types()[4].heading}"data-toggle="tooltip" data-placement="top" data-container="body">
+                <div class="group-btn-inner"></div>
+            </button></li>             
+            <li><button type="button" id="group-bar-item-5" class="group-btn" data-bind="click: function() { if(!is_sliding()){$root.labs()[$root.selected_lab()].change_group(5);}}, css: {'group-disabled': $root.check_if_group_disabled('Quiz'), 'group-bar-item-hover': !($root.check_if_group_disabled('Quiz'))}, attr:{title: $root.exercise_group_types()[5].heading}" data-toggle="tooltip" data-placement="top" data-container="body">
+                <div class="group-btn-inner"></div>
+            </button></li>             
+        </ol>
+        <ul class="col-xs-2 col-sm-3">
+            <li><button type="button" class="group-btn take-away-btn" data-bind="css: {'group-disabled': $root.check_if_group_disabled('Take Away'), 'group-bar-item-hover': !($root.check_if_group_disabled('Take Away'))}, click: function() { if(!is_sliding()){$root.labs()[$root.selected_lab()].change_group(6);}}, attr:{title: $root.exercise_group_types()[6].heading}" data-toggle="tooltip" data-placement="top" data-container="body">
+                <div class="group-btn-inner"></div>
+            </button></li>
+        </ul>
+    </nav>
+<!-- /ko -->
+<!-- ko if: $root._data.test() == 'true' || $root._data.test() == 'PT' -->
+    <nav class="row group-bar group-bar-test"> 
+        <ul class="col-xs-3 col-sm-3">
+            <li class="pull-right"><button type="button" id="group-bar-item-0" class="group-btn AT-lrg-btn" data-bind="click: function() { if (!$root.finished_test() && !$data.is_sliding()) { $root.change_AT_group(0); }}, css: { 'group-bar-item-hover': !($root.check_if_group_disabled('Welcome')) && !$root.finished_test()}, attr:{title: $root.exercise_group_types()[0].heading}"data-toggle="tooltip" data-placement="top" data-container="body">
+                <div class="group-btn-inner"></div>
+            </button></li>
+        </ul>
+        <ol class="col-xs-7 col-sm-6">
+
+            <li><button type="button" class="group-btn achievement-test-button" data-bind="click: function() { if (!$root.finished_test() && !$data.is_sliding()) { $root.change_AT_group(1); } }, css: {'group-disabled': $root.check_if_group_disabled('Activity 1'), 'group-bar-item-hover': !($root.check_if_group_disabled('Activity 1'))}, attr:{title: $root.exercise_group_types()[1].heading}"data-toggle="tooltip" data-placement="top" data-container="body">
+
+                <div class="group-btn-inner" data-bind="css: {'AT-group-answered' : $root.achievement_group_answered(1), 'AT-disabled' : $root.finished_test()}">
+                    <span class="AT-question-numbers" data-bind="text: $root.get_group_questions(1);"></span>
+                </div>
+            </button></li>             
+
+            <li><button type="button" class="group-btn achievement-test-button" data-bind="click: function() { if (!$root.finished_test() && !$data.is_sliding()) { $root.change_AT_group(2); }}, css: {'group-disabled': $root.check_if_group_disabled('Activity 2'), 'group-bar-item-hover': !($root.check_if_group_disabled('Activity 2')), 'AT-disabled' : $root.finished_test()}, attr:{title: $root.exercise_group_types()[2].heading}"data-toggle="tooltip" data-placement="top" data-container="body">
+
+                <div class="group-btn-inner" data-bind="css: {'AT-group-answered' : $root.achievement_group_answered(2), 'AT-disabled' : $root.finished_test()}">
+                    <span class="AT-question-numbers" data-bind="text: $root.get_group_questions(2);"></span>
+                </div>
+            </button></li>             
+
+            <li><button type="button" class="group-btn achievement-test-button" data-bind="click: function() { if (!$root.finished_test() && !$data.is_sliding()) { $root.change_AT_group(3); }}, css: {'group-disabled': $root.check_if_group_disabled('Activity 3'), 'group-bar-item-hover': !($root.check_if_group_disabled('Activity 3')), 'AT-disabled' : $root.finished_test()}, attr:{title: $root.exercise_group_types()[3].heading}"data-toggle="tooltip" data-placement="top" data-container="body">
+                <div class="group-btn-inner" data-bind="css: {'AT-group-answered' : $root.achievement_group_answered(3), 'AT-disabled' : $root.finished_test()}">
+                    <span class="AT-question-numbers" data-bind="text: $root.get_group_questions(3);"></span>
+                </div>
+            </button></li>             
+
+            <li><button type="button" class="group-btn achievement-test-button" data-bind="click: function() { if (!$root.finished_test() && !$data.is_sliding()) { $root.change_AT_group(4); }}, css: {'group-disabled': $root.check_if_group_disabled('Activity 4'), 'group-bar-item-hover': !($root.check_if_group_disabled('Activity 4')), 'AT-group-answered' : $root.achievement_group_answered(4), 'AT-disabled' : $root.finished_test()}, attr:{title: $root.exercise_group_types()[4].heading}"data-toggle="tooltip" data-placement="top" data-container="body">
+
+                <div class="group-btn-inner" data-bind="css: {'AT-group-answered' : $root.achievement_group_answered(4), 'AT-disabled' : $root.finished_test()}">
+                    <span class="AT-question-numbers" data-bind="text: $root.get_group_questions(4);"></span>
+                </div>
+            </button></li>             
+
+            <li><button type="button" class="group-btn achievement-test-button" data-bind="click: function() { if (!$root.finished_test() && !$data.is_sliding()) { $root.change_AT_group(5); }}, css: {'group-disabled': $root.check_if_group_disabled('Activity 5'), 'group-bar-item-hover': !($root.check_if_group_disabled('Activity 5')), 'AT-disabled' : $root.finished_test()}, attr:{title: $root.exercise_group_types()[5].heading}"data-toggle="tooltip" data-placement="top" data-container="body">
+
+                <div class="group-btn-inner" data-bind="css: {'AT-group-answered' : $root.achievement_group_answered(5), 'AT-disabled' : $root.finished_test()}">
+                    <span class="AT-question-numbers" data-bind="text: $root.get_group_questions(5);"></span>
+                </div>
+            </button></li>
+        </ol>
+        <ul class="col-xs-2 col-sm-3">
+            <li><button type="button" class="group-btn achievement-rslt-button AT-lrg-btn" data-bind="css: {'group-disabled': $root.check_if_group_disabled('Results'), 'group-bar-item-hover': !($root.check_if_group_disabled('Results')) }, click: function() {  $root.change_AT_group(6);}, attr:{title: $root.exercise_group_types()[6].heading}" data-toggle="tooltip" data-placement="top" data-container="body">
+                <div class="group-btn-inner"></div>
+            </button></li>
+        </ul>
+    </nav>
+<!-- /ko -->

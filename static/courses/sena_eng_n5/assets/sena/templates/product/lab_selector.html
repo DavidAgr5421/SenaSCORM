@@ -1,0 +1,10 @@
+<div class="row" data-bind="visible: labs().length > 1">              
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lab-selector">
+        <div class="lab-selector-items-container">
+            <ul class="nav nav-tabs lab-selector-items" data-bind="foreach:labs()">
+                <li class="lab-selector-item link-cursor " data-bind="css: {active: $parent.selected_lab() == $index()}"><a class="lab-selector-item-text " data-bind="html:local_type(), click: function() {  $parent.select_lab($index()); },  attr: {id: 'lab_'+id()}, css: { disabled: disabled()}"></a></li>                     
+            </ul>
+        </div>
+        <div class="lab-selector-gutter"></div>
+    </div>
+</div>

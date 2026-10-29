@@ -1,0 +1,27 @@
+span.SLW-paragraph{
+    line-height:1.8;
+}
+
+span .selected.SLW-response {
+     color:#01b5bd;
+     font-weight: bold;
+}
+
+
+span .selected.SLW-response:hover {
+     color:#01b5bd;
+     font-weight: bold;
+}
+
+span.SLW-response:hover {
+     color:#000000;
+     font-weight: bold;
+}
+
+.SLW-line ul{
+    list-style-type: none;
+}
+
+.SLW-line li{
+ 
+}

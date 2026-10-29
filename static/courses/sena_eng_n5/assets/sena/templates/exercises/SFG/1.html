@@ -1,0 +1,68 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/SFG/1.css'}">
+<span class="edit_container"></span>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12 exercise-specific-instructions" data-bind="template: { name: 'instruction_ko_template', foreach: _data }">
+        
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xs-6">
+        <!-- ko foreach: questions() -->
+            <!-- ko foreach: _data() -->
+                <!-- ko if: type() == "question" -->
+                    <!-- ko foreach: contents() -->
+                        <!-- ko if: type() == "text" -->
+                            <span data-bind="css: 'drop-container_'+$parents[1].id()+'_'+$parents[1].id()+'_'+$parents[2].id()">
+                                <span class="SFG-question" data-bind="html:content()"></span>
+                                <div class="drop-target SFG-drop " data-bind="css: 'SFG-drop',attr{id: $parentContext.$parentContext.$index()}">
+                                   
+                                </div>
+                            </span>
+                        <!-- /ko -->
+                        <!-- ko if: type() == "group" -->
+                            <span data-bind="css: 'drop-container_'+$parents[1].id()+'_'+$parents[1].id()+'_'+$parents[2].id()">
+                                <span class="SFG-question" data-bind="html:content()"></span>
+                                <div class="drop-target SFG-drop SFG-group" data-bind="attr{id: $parents[1].id()}">
+                                   
+                                </div>
+                            </span>
+                        <!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko foreach: _data() -->
+                <!-- ko if: type() == "post_question" -->
+                    <span data-bind="html: contents.content()"></span>
+                    <br/><br/>                    
+                <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if: product_helper_check_rec_question(_data()) -->
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12" data-bind="template: { name: 'rec_ko_template' }">
+                        
+                    </div>
+                </div>
+            <!-- /ko -->
+        <br/><br/>
+        <!-- /ko -->
+    </div>
+    
+    <div class="col-md-6 col-sm-6 col-xs-6">
+        <div class=" SFG-response-container response_container" data-bind="attr{id: 'response_container', style: 'height:'+dragdrop.response_container().height()+'px;width:'+dragdrop.response_container().width()+'px;'}">
+            <!-- ko foreach:questions() -->
+                <!-- ko if: product_helper_check_rec_question(_data()) == false -->
+                    <!-- ko foreach: responses() -->
+                        <!-- ko if: $index() > 0 -->
+                            <!-- ko foreach: _data() -->
+                                <div class="link-cursor pep SFG-response" data-bind="attr{id: $parents[1].id()}">
+                                    <span data-bind="html: content()">some text</span><div class="tesst" data-bind="css: 'SFG-'+$parent.state_css(), visible: $parents[2].checked_answer()" ></div>      
+                                </div>  
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+            <!-- /ko -->      
+        </div>
+    </div>
+</div>

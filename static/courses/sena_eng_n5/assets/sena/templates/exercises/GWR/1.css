@@ -1,0 +1,59 @@
+textarea.GWR-input{
+    line-height:1;
+    background-color: #EAF5F3;
+    border: 1px solid black;
+    box-shadow: 0 2px 0px rgba(0,0,0,0.1);
+    /*width: 99%;*/
+}
+#main.cmn textarea.GWR-input{
+    background-color: #ffedeb;
+}
+#main.fr textarea.GWR-input{
+    background-color: #feeded;
+}
+#main.pt textarea.GWR-input{
+    background-color: #e0fee4;
+}
+#main.es textarea.GWR-input{
+    background-color: #f3eff9;
+}
+
+.GWR-instructions
+{
+    font-weight: 300;
+}
+
+.GWR-instructions span.strong
+{
+    font-weight: 600;
+}
+
+.GWR-question 
+{
+    position: relative;
+    margin-left: 3rem;
+    margin-bottom: 2rem;
+}
+
+p.GWR-paragraph
+{
+    line-height:2;
+}
+
+img.GWR-audio-img {
+    padding-bottom: 10px;
+}
+.GWR-writing-button {
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.GWR-writing-planner {
+    min-height: 200px;
+    max-width: 99%;
+    min-width: 99%;
+}
+
+.GWR-exercise {
+    
+}

@@ -1,0 +1,79 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/WDS/1.css'}">
+<span class="edit_container"></span>
+<div data-bind="template: { name: 'instructions_container_ko_template'}"></div>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div data-bind="css: {'wds-center': (stimuli_ids().length == 0 || stimuli_ids()[0] == 0)}">
+            <div class="wds-table-wrapper">
+                <table class="wds-table pull-left" data-bind="attr:{ id: 'wds-table-'+id()}">
+                    <tbody>
+                        <!-- ko foreach: wds_grid() -->
+                            <tr>
+                                <!-- ko foreach: cols() -->
+                                    <td tabindex="1" class="wds-cell text-center" data-bind="css: {'selected': selected(), 'wds-correct': (correct() || $parents[1].cell_state_check(question(),$data))}, style: { backgroundColor: (correct() || $parents[1].cell_state_check(question(),$data)) ? $parents[1].board_colors[$parents[1].color_number($parents[1].questiond_id_finder(question()))] : '' }, click: function() { $parents[1].click_cell($index(), $parentContext.$index());}">
+                                        <span data-bind="text: letter()"> </span>
+                                    </td>
+                                <!-- /ko -->
+                            </tr>
+                        <!-- /ko -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="wds-word-list pull-left wraper">
+                <div class="counter-reset" >
+                    <strong><span class="wds-label" data-bind="text:$root.localization.WDS_words"></span></strong>
+                    <!-- ko foreach: questions() -->
+                        <!-- ko foreach: _data() -->
+                            <!-- ko if: type() == "question" -->
+                                <!-- ko foreach: contents() -->
+                                    <!-- ko if: type() == "text" -->
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
+												<div class="question-counter WDS-question-number"></div>
+                                                <div class="question-wrapper">
+                                                    <span class="wds-word" data-bind="visible: $parents[1].state() >= 1, text: content(), style: { 'background-image': 'linear-gradient(to bottom, '+$parents[2].colors[$parents[2].color_number($parents[1].id())]+' 50%, '+$parents[2].board_colors[$parents[2].color_number($parents[1].id())]+' 50%)', color: '#ffffff' }"></span> 
+                                                    <span class="wds-word" data-bind="text: content(), visible: $parents[1].state() < 1"> </span> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <!-- /ko -->
+									<!-- ko if: type() == "audio" -->
+										<div class="row">
+											<div class="col-md-12 col-sm-12 col-xs-12">
+												<div class="question-counter WDS-question-number"></div>
+												<div class="question-wrapper">
+													<div class="link-cursor sena-btn WDS-audio-button" data-bind="template: { name: 'audio_ko_template', data: $data }, style: { 'background-image': 'linear-gradient(to bottom, '+$parents[2].colors[$parents[2].color_number($parents[1].id())]+' 50%, '+$parents[2].board_colors[$parents[2].color_number($parents[1].id())]+' 50%)', color: '#ffffff' }, visible: $parents[1].state() >= 1"></div>
+													<div class="link-cursor sena-btn WDS-audio-button" data-bind="template: { name: 'audio_ko_template', data: $data }, visible: $parents[1].state() < 1"></div>
+												</div>
+											</div>
+										</div>
+									<!-- /ko -->
+                                    <!-- ko if: type() == "image" -->
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                <div class="question-counter WDS-question-number"></div>
+                                                <div class="question-wrapper">
+                                                    <span class="wds-word" data-bind="visible: $parents[1].state() >= 1, style: { 'background-image': 'linear-gradient(to bottom, '+$parents[2].colors[$parents[2].color_number($parents[1].id())]+' 50%, '+$parents[2].board_colors[$parents[2].color_number($parents[1].id())]+' 50%)', color: '#ffffff' }">
+                                                        <img class="wds-image img-responsive link-cursor" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+                                                    </span> 
+                                                    <span class="wds-word" data-bind="visible: $parents[1].state() < 1">
+                                                        <img class="wds-image img-responsive link-cursor" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+                                                    </span> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <!-- /ko -->
+                                <!-- /ko -->
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->  
+                </div>      
+            </div>      
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12"></div>
+</div>

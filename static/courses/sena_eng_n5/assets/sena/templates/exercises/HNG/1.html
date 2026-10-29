@@ -1,0 +1,54 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/HNG/1.css'}">
+<span class="edit_container"></span>
+<div data-bind="template: { name: 'instructions_container_ko_template'}"></div>
+
+
+<!-- ko foreach:questions() -->
+    <div class="row">
+        
+        <div class="col-md-8 col-sm-7 col-xs-7 HNG-letters-container">
+    
+            <div class="HNG-entered-word-row">
+                <span data-bind="html: display_word()"></span>
+                <span data-bind="css: 'response '+state_css(), visible: state() > 1 && $parent.checked_answer()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            </div>
+            
+            <div class="HNG-keyboard">
+                <!-- ko foreach:letter_array() -->
+                    <button class="HNG-key link-cursor" data-bind="html: letter(), click: function() {$parents[1].guessing_letter($index(),$parents[0].id())}, css : { 'HNG-key-used' : selected() == 1 }, enable: selected() == 0"></button>
+                <!-- /ko -->
+            </div>  
+            
+        </div>
+        
+        <div class="col-md-4 col-sm-5 col-xs-5 HNG-image-col">
+            <!-- ko foreach:_data() -->
+                <!-- ko if: type() == "question" -->
+                    <!-- ko foreach: contents() -->
+                        <!-- ko if: type() == "image" -->
+                            <!-- ko if: $parents[1].hng_default_settings() == 1 --> 
+                                <img class="img-responsive HNG-image" data-bind="attr:{src:'assets/'+$root.lesson_type+'/icons/hangman/' +content() +  $parents[1].incorrect_count() +'.jpg'}" />
+                            <!-- /ko -->
+                            <!-- ko if: $parents[1].hng_default_settings() == 0 && checkResourceExist('assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +$parents[1].error_images()[$parents[1].incorrect_count()].name()) --> 
+                                <img class="img-responsive HNG-image" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +$parents[1].error_images()[$parents[1].incorrect_count()].name()}" />
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+            <!-- /ko -->
+            
+            <div class="HNG-try-again-wrapper">
+                <!-- ko if: !$parent.feedback_showing_answer() && $parent.feedback().attempts() == 1 && $parent.checked_answer() && $parent.state() != 4 -->
+                    <button class="link-cursor sena-btn btn btn-rec-start btn-lg product-color-white-text" data-bind="click: function() { $parent.hint_enabled(true); product_clear_questions($parent)}">
+                        <span aria-hidden="true"></span>
+                        <span data-bind="text:$root.localization.try_again_button"></span>
+                    </button>
+                <!-- /ko -->
+            </div>
+            
+            <div class="HNG-hint-counter-wrapper">
+                <button class="HNG-hint-counter HNG-response link-cursor" data-bind="html: $parents[0].hintname($index()), click: function() {$parents[0].hint($index())}, enable: hintcounter() > 0 && $parent.hint_enabled()"></button>
+            </div>
+        </div>
+    </div>
+<!-- /ko -->

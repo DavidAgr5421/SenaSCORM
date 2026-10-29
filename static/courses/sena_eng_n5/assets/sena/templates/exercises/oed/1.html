@@ -1,0 +1,359 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/oed/1.css'}">
+<!-- ko if:$root.selected_lab() == 2 -->
+<div class="row" id="oea-instructions">   
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <p class="oea-instructions-header" data-bind="html:$root.localization.oed_instructions_header()"></p>            
+        <!-- ko foreach:_data() -->
+            <!-- ko if: type() == "instructions" -->
+                <!-- ko foreach: contents() -->
+                    <!-- ko if: type() == "text" -->
+                        <p data-bind="html: content()"></p>
+                    <!-- /ko -->
+                    <!-- ko if: type() == "image" -->
+                        <img class="DFL-image img-responsive " data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+                    <!-- /ko -->
+                    <!-- ko if: type() == "audio" -->
+                        <div data-bind="template: { name: 'audio_ko_template', data: $data }">
+                        </div>
+                    <!-- /ko -->  
+                <!-- /ko -->
+            <!-- /ko -->           
+        <!-- /ko -->            
+    </div>            
+</div>
+<span class="edit_container_1"></span> 
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="row" data-bind="foreach:questions()">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <p><span data-bind="text:id()+1+'. '"></span><span data-bind="text:question()[0].content()"></span></p>
+                <textarea class="form-control oed-planner-textarea" data-bind="value:responses()[0].text, valueUpdate: 'keyup'"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                &nbsp;
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /ko -->
+<!-- ko if:$root.selected_lab() == 3 -->
+<div class="row" id="oea-instructions">   
+    <span class="edit_container_2"></span>   
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <p class="oea-instructions-header" data-bind="html:$root.localization.oed_instructions_header()"></p>            
+        <p class="" data-bind="html:$root.localization.oed3_common_instructions_top()"></p>
+        <!-- ko foreach:_data() -->
+            <!-- ko if: type() == "instructions" -->
+                <!-- ko foreach: contents() -->
+                    <!-- ko if: type() == "text" -->
+                        <p data-bind="html: content()"></p>
+                    <!-- /ko -->
+                    <!-- ko if: type() == "image" -->
+                        <img class="DFL-image img-responsive " data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+                    <!-- /ko -->
+                    <!-- ko if: type() == "audio" -->
+                        <div data-bind="template: { name: 'audio_ko_template', data: $data }">
+                        </div>
+                    <!-- /ko -->  
+                <!-- /ko -->
+            <!-- /ko -->           
+        <!-- /ko -->   
+
+    </div>            
+</div>
+<div class="row" data-bind="with:questions()[1]">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="summernote"> <p data-bind='html:responses()[0].text()'></p></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        &nbsp;
+    </div>
+</div>
+
+
+<!-- /ko -->
+<div class="modal fade modal-grading-chart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-bind="attr { id: 'grading_chart_'+$parent.id()}">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close-button link-cursor pull-right" data-bind="click:function(){$root.hide_grading_chart($parent.id())}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <h4 class="modal-title grading-chart-header" id="myModalLabel" data-bind="text:$root.localization.oed_grading_chart()"></h4>
+      </div>
+      
+    <!-- ko if:$root.selected_lab() == 2 -->
+        <div class="modal-body">
+            <div class="grading-chart-instructions">
+                <p data-bind="text: $root.localization.planner_grading_chart_instructions()"></p>
+            </div>
+            <!-- ko if:$root.edit.editable() -->
+                <div data-bind="visible:$root.edit.editing_exercises.indexOf('oed_'+id()) >= 0">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <label>Edit window</label>
+                                    <button class="btn btn-xs product-color-white-text welcome-start-btn pull-right" data-bind="click: function(){$root.edit.edit_exercise('oed_'+id())}, css: {selected:true}">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <table class="">
+                                <thead>
+                                    <!-- ko foreach:$root.labs()[3].grading_chart.header.rows -->
+                                        <tr class="table-header-row planner">
+                                            <!-- ko foreach:cells() -->
+                                                <th class="text-center" data-bind="attr: { colspan: colspan() }, css: 'grading-chart-header-text-'+$parentContext.$index()+'-'+$index()">
+                                                    <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="form-control" data-bind="value: content.value , valueUpdate: 'keyup', visible: $index() || $parentContext.$index()" />
+                                                </th>
+                                            <!-- /ko -->
+                                        </tr>
+                                    <!-- /ko -->
+                                </thead>
+                                <tbody>
+                                    <!-- ko foreach:$root.labs()[3].grading_chart.body.rows -->                    
+                                        <tr class="table-body-row">                   
+                                            <!-- ko foreach:cells() -->
+                                                <!-- ko if:$index() == 0 -->                                
+                                                    <th data-bind="attr: { colspan: colspan()}">
+                                                        <div class="form-group">
+                                                            <div class="input-group">
+                                                                <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="form-control" data-bind="value: content.value , valueUpdate: 'keyup'" />
+                                                            </div>
+                                                        </div>
+                                                    </th>                                                                
+                                                <!-- /ko -->
+                                                <!-- ko ifnot:$index() == 0 -->                                
+                                                    <td data-bind="attr: { colspan: colspan() }">
+                                                        <div class="form-group">
+                                                            <div class="input-group">
+                                                                <label>Points:</label>
+                                                                <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="form-control pull-right" data-bind="value: points , valueUpdate: 'keyup'" />
+                                                            </div>
+                                                            <label>Content:</label>
+                                                            <!-- ko foreach:content -->
+                                                                <div class="input-group">
+                                                                    <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="form-control" data-bind="value: value , valueUpdate: 'keyup'" />
+                                                                    <!-- ko if:$parent.content().length > 1 -->
+                                                                        <div class="input-group-addon">
+                                                                            <span class="glyphicon glyphicon-remove-sign pull-right link-cursor" data-bind="click: $root.labs()[3].grading_chart.remove_content_value"></span>
+                                                                        </div>
+                                                                    <!-- /ko -->
+                                                                </div>
+                                                            <!-- /ko -->
+                                                            
+                                                            <div class="row">
+                                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                    <button type="button" class="btn btn-xs welcome-start-btn product-color-white-text pull-right" data-bind="click: $root.labs()[3].grading_chart.add_content_value">
+                                                                        <span class="glyphicon glyphicon-plus"></span>Add line
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                <!-- /ko -->
+                                            <!-- /ko -->
+                                        </tr>
+                                    <!-- /ko -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <button type="button" class="btn btn-xs welcome-start-btn product-color-white-text pull-right" data-bind="click: add_instruction">
+                                        <span class="glyphicon glyphicon-plus"></span>Add instruction
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <button class="btn btn-xs product-color-white-text pull-right welcome-start-btn" data-bind="click: function(){$root.edit.edit_exercise('oed_'+id())}, css: {selected:true}">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                    </div>
+                </div>
+                <br />
+            <!-- /ko -->
+            
+            <table class="">
+                <thead>
+                    <!-- ko foreach:$root.labs()[3].grading_chart.header.rows -->
+                        <tr class="table-header-row planner">
+                            <!-- ko foreach:cells() -->
+                                <th class="text-center" data-bind="attr: { colspan: colspan() }, html:content.value(), css: 'grading-chart-header-text-'+$parentContext.$index()+'-'+$index()">
+                                    
+                                </th>
+                            <!-- /ko -->
+                        </tr>
+                    <!-- /ko -->
+                </thead>
+                    <tbody>
+                        <!-- ko foreach:$root.labs()[3].grading_chart.body.rows -->                    
+                            <tr class="table-body-row">                   
+                                <!-- ko foreach:cells() -->
+                                    <!-- ko if:$index() == 0 -->                                
+                                        <th data-bind="attr: { colspan: colspan()}, html:content.value(), css: 'grading-chart-side-header-text'"></th>                                                                
+                                    <!-- /ko -->
+                                    <!-- ko ifnot:$index() == 0 -->                                
+                                        <td data-bind="attr: { colspan: colspan() }">
+                                            <!-- ko foreach: content -->
+                                                <p data-bind= "html:value()"> </p>
+                                            <!-- /ko -->
+                                        </td>                                                                
+                                    <!-- /ko -->                            
+                                <!-- /ko -->
+                            </tr>
+                        <!-- /ko -->
+                    </tbody>
+            </table>
+        </div>
+    <!-- /ko -->
+    
+    <!-- ko if:$root.selected_lab() == 3 -->
+        <div class="modal-body">
+            <div class="grading-chart-instructions">
+                <p data-bind="text: $root.localization.task_grading_chart_instructions()"></p>
+            </div>
+            <!-- ko if:$root.edit.editable() -->
+                <div data-bind="visible:$root.edit.editing_exercises.indexOf('oed_'+id()) >= 0">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <label>Edit window</label>
+                                    <button class="btn btn-xs product-color-white-text welcome-start-btn pull-right" data-bind="click: function(){$root.edit.edit_exercise('oed_'+id())}, css: {selected:true}">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <table class="">
+                                <thead>
+                                    <!-- ko foreach:$root.labs()[3].grading_chart.header.rows -->
+                                        <tr class="table-header-row planner">
+                                            <!-- ko foreach:cells() -->
+                                                <th class="text-center" data-bind="attr: { colspan: colspan() }, css: 'grading-chart-header-text-'+$parentContext.$index()+'-'+$index()">
+                                                    <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="form-control" data-bind="value: content.value , valueUpdate: 'keyup', visible: $index() || $parentContext.$index()" />
+                                                </th>
+                                            <!-- /ko -->
+                                        </tr>
+                                    <!-- /ko -->
+                                </thead>
+                                <tbody>
+                                    <!-- ko foreach:$root.labs()[3].grading_chart.body.rows -->                    
+                                        <tr class="table-body-row">                   
+                                            <!-- ko foreach:cells() -->
+                                                <!-- ko if:$index() == 0 -->                                
+                                                    <th data-bind="attr: { colspan: colspan()}">
+                                                        <div class="form-group">
+                                                            <div class="input-group">
+                                                                <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="form-control" data-bind="value: content.value , valueUpdate: 'keyup'" />
+                                                            </div>
+                                                        </div>
+                                                    </th>                                                                
+                                                <!-- /ko -->
+                                                <!-- ko ifnot:$index() == 0 -->                                
+                                                    <td data-bind="attr: { colspan: colspan() }">
+                                                        <div class="form-group">
+                                                            <div class="input-group">
+                                                                <label>Points:</label>
+                                                                <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="form-control pull-right" data-bind="value: points , valueUpdate: 'keyup'" />
+                                                            </div>
+                                                            <label>Content:</label>
+                                                            <div class="input-group">
+                                                            <!-- ko foreach:content -->
+                                                                
+                                                                    <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="form-control" data-bind="value: value , valueUpdate: 'keyup'" />
+                                                                    
+                                                                
+                                                            <!-- /ko -->
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                    <button type="button" class="btn btn-xs welcome-start-btn product-color-white-text pull-right" data-bind="click: $root.labs()[3].grading_chart.add_content_value">
+                                                                        <span class="glyphicon glyphicon-plus"></span>Add line
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                <!-- /ko -->
+                                            <!-- /ko -->
+                                        </tr>
+                                    <!-- /ko -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <button type="button" class="btn btn-xs welcome-start-btn product-color-white-text pull-right" data-bind="click: add_instruction">
+                                        <span class="glyphicon glyphicon-plus"></span>Add instruction
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <button class="btn btn-xs product-color-white-text pull-right welcome-start-btn" data-bind="click: function(){$root.edit.edit_exercise('oed_'+id())}, css: {selected:true}">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                    </div>
+                </div>
+                <br />
+            <!-- /ko -->
+            
+            <div class="grading-chart-points">
+                <div class="pull-left"><span><span data-bind="text:$root.localization.oed_total_points()"></span><span class="grading-chart-points-total" data-bind="html:' '+$root.labs()[3].grading_chart_total()+' points'"></span></span></div>
+                <button type="button" class="btn grading-chart-reset-btn" data-bind="click:function(){$parent.reset_grading_chart();}"><img data-bind="attr:{src:'assets/' + lms_config.product_type + '/icons/reset_icon.png'}" /><span class="grading-chart-reset-text" data-bind="text:$root.localization.oed_grading_chart_reset()">Reset</span></button>
+            </div>
+            <br /><br />
+            <table class="">
+                <thead>
+                    <!-- ko foreach:$root.labs()[3].grading_chart.header.rows -->
+                        <tr class="table-header-row task">
+                            <!-- ko foreach:cells() -->
+                                <th class="text-center" data-bind="attr: { colspan: colspan() }, html:content.value(), css: 'grading-chart-header-text-'+$parentContext.$index()+'-'+$index()">
+                                    
+                                </th>
+                            <!-- /ko -->
+                        </tr>
+                    <!-- /ko -->
+                </thead>                
+                    <tbody>
+                        <!-- ko foreach:$root.labs()[3].grading_chart.body.rows -->                    
+                            <tr class="table-body-row">                   
+                                <!-- ko foreach:cells() -->
+                                    <!-- ko if:$index() == 0 -->                                
+                                        <th data-bind="attr: { colspan: colspan()}, html:content.value(), css: 'grading-chart-side-header-text'"></th>                                                                
+                                    <!-- /ko -->
+                                    <!-- ko ifnot:$index() == 0 -->                                
+                                        <td class="link-cursor " data-bind="attr: { colspan: colspan() }, click:function(){$parent.selected_cell($index());}, css: { selected: $index() == $parent.selected_cell()}">
+                                            <!-- ko foreach: content -->
+                                                <p data-bind= "html:value()"> </p>
+                                            <!-- /ko -->
+                                        </td>                                                                
+                                    <!-- /ko -->                            
+                                <!-- /ko -->
+                            </tr>
+                        <!-- /ko -->
+                    </tbody>
+            </table>
+        </div>        
+    <!-- /ko -->
+         
+    </div>
+  </div>
+</div>

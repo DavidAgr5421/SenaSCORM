@@ -1,0 +1,277 @@
+div.HNG-padding
+{
+    padding-bottom: 20px;
+}
+
+span.HNG-response-container.selected :hover
+{
+    color: white;
+}
+
+span.HNG-response-container :hover{
+    color: #01b5bd;
+}
+#main.cmn span.HNG-response-container :hover{
+    color: #d34800;
+}
+#main.fr span.HNG-response-container :hover{
+    color: #e42c23;
+}
+#main.pt span.HNG-response-container :hover{
+    color: #22893a;
+}
+#main.es span.HNG-response-container :hover{
+    color: #935ec6;
+}
+
+p.HNG-paragraph
+{
+    line-height:1.8;
+}
+
+.HNG-image{
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid black;
+    border-radius: .5rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.HNG-letters-container {
+    padding: 0 1rem;
+    text-align: center;
+    background-color: rgba(35, 130, 118, 0.1);
+    border-radius: .5rem;
+    box-shadow: inset 0 0.25rem 0.5rem rgba(2, 84, 73, 0.2);
+    position: relative;
+}
+#main.cmn .HNG-letters-container {
+    background-color: rgba(211, 72, 0, 0.1);
+    box-shadow: inset 0 0.25rem 0.5rem rgba(129, 41, 0, 0.2);
+}
+#main.fr .HNG-letters-container {
+    background-color: rgba(228, 44, 35, 0.1);
+    box-shadow: inset 0 0.25rem 0.5rem rgba(140, 23, 17, 0.2);
+}
+#main.pt .HNG-letters-container {
+    background-color: rgba(34, 137, 58, 0.1);
+    box-shadow: inset 0 0.25rem 0.5rem rgba(17, 82, 32, 0.2);
+}
+#main.es .HNG-letters-container {
+    background-color: rgba(147, 94, 198, 0.1);
+    box-shadow: inset 0 0.25rem 0.5rem rgba(91, 52, 127, 0.2);
+}
+
+.HNG-keyboard
+{
+    margin-top: 2rem;
+}
+
+.HNG-entered-word-row {
+    text-align: center;
+    font-size: 30px;
+    color: rgb(35, 130, 118);
+}
+#main.cmn .HNG-entered-word-row {
+    color: rgb(211, 72, 0);
+}
+#main.fr .HNG-entered-word-row {
+    color: rgb(228, 44, 35);
+}
+#main.pt .HNG-entered-word-row {
+    color: rgb(34, 137, 58);
+}
+#main.es .HNG-entered-word-row {
+    color: rgb(147, 94, 198);
+}
+
+.HNG-letter{
+    font-weight: 300;
+    border-bottom: .3rem solid rgba(35, 130, 118, 0.2);
+    margin: 0 0.05em;
+}
+#main.cmn .HNG-letter{
+    border-bottom: .3rem solid rgba(211, 72, 0, 0.2);
+}
+#main.pt .HNG-letter{
+    border-bottom: .3rem solid rgba(228, 44, 35, 0.2);
+}
+#main.fr .HNG-letter{
+    border-bottom: .3rem solid rgba(34, 137, 58, 0.2);
+}
+#main.es .HNG-letter{
+    border-bottom: .3rem solid rgba(147, 94, 198, 0.2);
+}
+
+.HNG-letter.HNG-letter-blank:before
+{
+   content: "_";
+   visibility: hidden;
+}
+
+.HNG-letter.HNG-letter-blank{
+    border-bottom-color: rgba(35, 130, 118, 1)
+}
+#main.cmn .HNG-letter.HNG-letter-blank{
+    border-bottom-color: rgba(211, 72, 0, 1)
+}
+#main.fr .HNG-letter.HNG-letter-blank{
+    border-bottom-color: rgba(228, 44, 35, 1)
+}
+#main.pt .HNG-letter.HNG-letter-blank{
+    border-bottom-color: rgba(34, 137, 58, 1)
+}
+#main.es .HNG-letter.HNG-letter-blank{
+    border-bottom-color: rgba(147, 94, 198, 1)
+}
+
+.HNG-letter-space
+{
+    margin: 0 0.2em;
+}
+
+
+.HNG-try-again-wrapper, .HNG-hint-counter-wrapper {
+    text-align: center;
+    margin: 10px;
+}
+
+.HNG-hint-counter {
+    color: black !important;
+    text-transform: uppercase;
+    background-color: rgb(246, 193, 25) !important;
+    border-radius: 6px;
+    border: none;
+    padding: 5px 10px;
+    font-weight: 700;  
+}
+
+.HNG-key{
+    display: inline-block;
+    padding: 0px 8px;
+    background-color: hsla(0, 0%, 100%, 0.7);
+    color: black;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    width: 30px;
+    font-weight: 400;
+    box-shadow: 0 0.1rem 0.1rem rgba(2, 84, 73, 0.4);
+    z-index: 1;
+    transition: .1s transform ease-in-out;
+}
+#main.cmn .HNG-key{
+    box-shadow: 0 0.1rem 0.1rem rgba(129, 41, 0, 0.4);
+}
+#main.fr .HNG-key{
+    box-shadow: 0 0.1rem 0.1rem rgba(140, 23, 17, 0.4);
+}
+#main.pt .HNG-key{
+    box-shadow: 0 0.1rem 0.1rem rgba(17, 82, 32, 0.4);
+}
+#main.es .HNG-key{
+    box-shadow: 0 0.1rem 0.1rem rgba(91, 52, 127, 0.4);
+}
+
+.HNG-key:hover
+{
+    font-weight: 600;
+    color: rgba(35, 130, 118, 1);
+    background-color: white;
+    box-shadow: 0 0.2rem 0.2rem rgba(2, 84, 73, 0.4);
+    transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    z-index: 50;
+}
+#main.cmn .HNG-key:hover{
+    color: rgba(211, 72, 0, 1);
+    box-shadow: 0 0.2rem 0.2rem rgba(129, 41, 0, 0.4);
+}
+#main.fr .HNG-key:hover{
+    color: rgba(228, 44, 35, 1);
+    box-shadow: 0 0.2rem 0.2rem rgba(140, 23, 17, 0.4);
+}
+#main.pt .HNG-key:hover{
+    color: rgba(34, 137, 58, 1);
+    box-shadow: 0 0.2rem 0.2rem rgba(17, 82, 32, 0.4);
+}
+#main.es .HNG-key:hover{
+    color: rgba(91, 52, 127, 1);
+    box-shadow: 0 0.2rem 0.2rem rgba(91, 52, 127, 0.4);
+}
+
+
+.HNG-key.selected  {
+    background-color:#01b5bd;
+    color:white;
+}
+#main.cmn .HNG-key.selected  {
+    background-color:#d34800;
+    color:white;
+}
+#main.fr .HNG-key.selected  {
+    background-color:#e42c23;
+    color:white;
+}
+#main.pt .HNG-key.selected  {
+    background-color:#22893a;
+    color:white;
+}
+#main.es .HNG-key.selected  {
+    background-color:#935ec6;
+    color:white;
+}
+
+.HNG-key.selected:hover  {
+    background-color:#01b5bd;
+    color:green;
+}
+#main.cmn .HNG-key.selected:hover {
+    background-color:#d34800;
+    color:green;
+}
+#main.fr .HNG-key.selected:hover {
+    background-color:#e42c23;
+    color:green;
+}
+#main.pt .HNG-key.selected:hover {
+    background-color:#22893a;
+    color:green;
+}
+#main.es .HNG-key.selected:hover {
+    background-color:#935ec6;
+    color:green;
+}
+
+.HNG-key.HNG-key-used {
+    background-color: transparent !important;
+    box-shadow: none;
+    color: rgba(35, 130, 118, 0.4) !important;
+}
+#main.cmn .HNG-key.HNG-key-used {
+    background-color: transparent !important;
+    box-shadow: none;
+    color: rgba(211, 72, 0, 0.4) !important;
+}
+#main.fr .HNG-key.HNG-key-used {
+    background-color: transparent !important;
+    box-shadow: none;
+    color: rgba(228, 44, 35, 0.4) !important;
+}
+#main.pt .HNG-key.HNG-key-used {
+    background-color: transparent !important;
+    box-shadow: none;
+    color: rgba(34, 137, 58, 0.4) !important;
+}
+#main.es .HNG-key.HNG-key-used {
+    background-color: transparent !important;
+    box-shadow: none;
+    color: rgba(147, 94, 198, 0.4) !important;
+}
+
+.HNG-image-col
+{
+    padding-right: 0;
+}

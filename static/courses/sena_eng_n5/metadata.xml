@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cem:cem xmlns:cem="https://sena.blackboard.com/ova/bilinguismo/cem/ns/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://sena.blackboard.com/ova/bilinguismo/cem/ns/2.0/ https://sena.blackboard.com/ova/bilinguismo/CEM_SENA.xsd">
+<cem:general>
+<cem:language/>
+<cem:identifier>
+<cem:catalog catName="RED" catSource="http://www.mineducacion.gov.co/">HT951CE3L82</cem:catalog>
+</cem:identifier>
+<cem:identifier>
+<cem:catalog catName="SENA" catSource="https://sena.blackboard.com/ova/bilinguismo/">IDI-CON-OBJ-001-n5-01-01</cem:catalog>
+</cem:identifier>
+<cem:identifier>
+<cem:catalog catName="eDistribution" catSource="http://www.edistribution.co/">engenn5le01ob01</cem:catalog>
+</cem:identifier>
+<cem:title lang="" subtitle="">Welcome Home Party</cem:title>
+<cem:description lang="">This virtual learning object "Welcome Home Party" that makes part of the lesson No: 1, John Comes Home for a Visit, which in turn belongs to the Elementary (A2.2) of the teaching of English as a Foreign Language, is intended to work on: make and respond to request; talk or report about things, actions, events, or people. The grammar of this LO refers to: modals for requests: can, could; simple past tense in affirmative sentences to talk about past events, e.g. I loved Mexico. Also, the vocabulary considers: food, e.g.taco, pork, shrimp.</cem:description>
+<cem:keyword lang="">
+<cem:li>Describing plans</cem:li>
+<cem:li>Organizing events</cem:li>
+<cem:li>Making simple requests</cem:li>
+<cem:li>Responding to requests</cem:li>
+<cem:li>Can</cem:li>
+<cem:li>Could</cem:li>
+<cem:li>Simple past tense</cem:li>
+<cem:li>Talking about food</cem:li>
+</cem:keyword>
+<cem:coverage>
+<cem:timeName schema="ITESO"/>
+<cem:timeMoment schema="fixed">0000</cem:timeMoment>
+<cem:axialPlace axis="X" schema="UTM"/>
+<cem:hierarchical city="" content="" continent="unknown" country="" region="" schema="WORLD" state="" zone=""/>
+</cem:coverage>
+<cem:structure schema="CEM">Árbol</cem:structure>
+<cem:aggregationLevel schema="CEM">Alto</cem:aggregationLevel>
+</cem:general>
+<cem:lifeCycle>
+<cem:version date="2017-07-14">1.0</cem:version>
+<cem:status>Publicado</cem:status>
+<cem:contribute>
+<cem:role schema="CEM">Productor ejecutivo</cem:role>
+<cem:entity country="CA" entityForm="24933" institution="ELL Technologies Ltd." src="info@elltechnologies.com" type="Persona">Martin, Bill</cem:entity>
+<cem:date>2017-07-14</cem:date>
+</cem:contribute>
+<cem:contribute>
+<cem:role schema="CEM">Productor ejecutivo</cem:role>
+<cem:entity country="CA" entityForm="24934" institution="ELL Technologies Ltd." src="info@elltechnologies.com" type="Persona">Ma, Yueh-Chin</cem:entity>
+<cem:date>2017-07-14</cem:date>
+</cem:contribute>
+<cem:contribute>
+<cem:role schema="CEM">Productor ejecutivo</cem:role>
+<cem:entity country="CA" entityForm="24935" institution="ELL Technologies Ltd." src="info@elltechnologies.com" type="Persona">Zlatkin, Lial</cem:entity>
+<cem:date>2017-07-14</cem:date>
+</cem:contribute>
+<cem:contribute>
+<cem:role schema="CEM">Desarrollador web</cem:role>
+<cem:entity country="CA" entityForm="24936" institution="ELL Technologies Ltd." src="info@elltechnologies.com" type="Persona">McMahon, Robert Christopher</cem:entity>
+<cem:date>2017-07-14</cem:date>
+</cem:contribute>
+<cem:contribute>
+<cem:role schema="CEM">Desarrollador web</cem:role>
+<cem:entity country="CA" entityForm="24937" institution="ELL Technologies Ltd." src="info@elltechnologies.com" type="Persona">Roadhouse, Sean Roy</cem:entity>
+<cem:date>2017-07-14</cem:date>
+</cem:contribute>
+<cem:contribute>
+<cem:role schema="CEM">Desarrollador web</cem:role>
+<cem:entity country="CA" entityForm="24938" institution="ELL Technologies Ltd." src="info@elltechnologies.com" type="Persona">Zlatkin, Martin</cem:entity>
+<cem:date>2017-07-14</cem:date>
+</cem:contribute>
+<cem:contribute>
+<cem:role schema="CEM">Desarrollador web</cem:role>
+<cem:entity country="CA" entityForm="24939" institution="ELL Technologies Ltd." src="info@elltechnologies.com" type="Persona">Tomlinson, Kristine Rose Seko</cem:entity>
+<cem:date>2017-07-14</cem:date>
+</cem:contribute>
+<cem:contribute>
+<cem:role schema="CEM">Desarrollador web</cem:role>
+<cem:entity country="CA" entityForm="24940" institution="ELL Technologies Ltd." src="info@elltechnologies.com" type="Persona">Kwong, Truman</cem:entity>
+<cem:date>2017-07-14</cem:date>
+</cem:contribute>
+<cem:contribute>
+<cem:role schema="CEM">Productor ejecutivo</cem:role>
+<cem:entity country="CA" entityForm="24941" institution="ELL Technologies Ltd." src="info@elltechnologies.com" type="Persona">Edmonds, Jayne</cem:entity>
+<cem:date>2017-07-14</cem:date>
+</cem:contribute>
+<cem:contribute>
+<cem:role schema="CEM">Diseñador instruccional</cem:role>
+<cem:entity country="CA" entityForm="24942" institution="ELL Technologies Ltd." src="info@elltechnologies.com" type="Persona">Gagliano, Rita</cem:entity>
+<cem:date>2017-07-14</cem:date>
+</cem:contribute>
+<cem:contribute>
+<cem:role schema="CEM">Experto pedagógico</cem:role>
+<cem:entity country="CA" entityForm="24943" institution="ELL Technologies Ltd." src="info@elltechnologies.com" type="Persona">Gullotti, Giuliano</cem:entity>
+<cem:date>2017-07-14</cem:date>
+</cem:contribute>
+<cem:contribute>
+<cem:role schema="CEM">Experto pedagógico</cem:role>
+<cem:entity country="CA" entityForm="24944" institution="ELL Technologies Ltd." src="info@elltechnologies.com" type="Persona">Ryan, Natalie</cem:entity>
+<cem:date>2017-07-14</cem:date>
+</cem:contribute>
+<cem:contribute>
+<cem:role schema="CEM">Experto pedagógico</cem:role>
+<cem:entity country="CA" entityForm="24945" institution="ELL Technologies Ltd." src="info@elltechnologies.com" type="Persona">Loganathan, Chamini</cem:entity>
+<cem:date>2017-07-14</cem:date>
+</cem:contribute>
+<cem:contribute>
+<cem:role schema="CEM">Experto pedagógico</cem:role>
+<cem:entity country="CA" entityForm="24946" institution="ELL Technologies Ltd." src="info@elltechnologies.com" type="Persona">Power, Anne-Louise</cem:entity>
+<cem:date>2017-07-14</cem:date>
+</cem:contribute>
+<cem:contribute>
+<cem:role schema="CEM">Experto pedagógico</cem:role>
+<cem:entity country="CA" entityForm="24947" institution="ELL Technologies Ltd." src="info@elltechnologies.com" type="Persona">Vizard, Carol</cem:entity>
+<cem:date>2017-07-14</cem:date>
+</cem:contribute>
+<cem:contribute>
+<cem:role schema="CEM">Experto pedagógico</cem:role>
+<cem:entity country="CA" entityForm="24948" institution="ELL Technologies Ltd." src="info@elltechnologies.com" type="Persona">Gibbs, Charles</cem:entity>
+<cem:date>2017-07-14</cem:date>
+</cem:contribute>
+<cem:contribute>
+<cem:role schema="CEM">Diseñador gráfico</cem:role>
+<cem:entity country="CA" entityForm="24952" institution="ELL Technologies Ltd." src="info@elltechnologies.com" type="Persona">Pereira, Ricardo Jorge da Rocha Silva</cem:entity>
+<cem:date>2017-07-14</cem:date>
+</cem:contribute>
+<cem:contribute>
+<cem:role schema="CEM">Diseñador gráfico</cem:role>
+<cem:entity country="CA" entityForm="24953" institution="ELL Technologies Ltd." src="info@elltechnologies.com" type="Persona">Romanova, Maria Alexandrovna</cem:entity>
+<cem:date>2017-07-14</cem:date>
+</cem:contribute>
+<cem:contribute>
+<cem:role schema="CEM">Diseñador gráfico</cem:role>
+<cem:entity country="CA" entityForm="24954" institution="ELL Technologies Ltd." src="info@elltechnologies.com" type="Persona">Moffat, Siusan</cem:entity>
+<cem:date>2017-07-14</cem:date>
+</cem:contribute>
+<cem:contribute>
+<cem:role schema="CEM">Diseñador gráfico</cem:role>
+<cem:entity country="CA" entityForm="24955" institution="ELL Technologies Ltd." src="info@elltechnologies.com" type="Persona">Wasson, Jeff</cem:entity>
+<cem:date>2017-07-14</cem:date>
+</cem:contribute>
+<cem:contribute>
+<cem:role schema="CEM">Desarrollador web</cem:role>
+<cem:entity country="CA" entityForm="24957" institution="ELL Technologies Ltd." src="info@elltechnologies.com" type="Persona">Singh, Seema</cem:entity>
+<cem:date>2017-07-14</cem:date>
+</cem:contribute>
+</cem:lifeCycle>
+<cem:metaMetadata>
+<cem:identifier>
+<cem:catalog catName="RED" catSource="http://www.mineducacion.gov.co/">HT951CE3L82_META</cem:catalog>
+</cem:identifier>
+<cem:identifier>
+<cem:catalog catName="SENA" catSource="https://sena.blackboard.com">IDI-CON-OBJ-001-n5-01-01_META</cem:catalog>
+</cem:identifier>
+<cem:identifier>
+<cem:catalog catName="eDistribution" catSource="http://www.edistribution.co/">engenn5le01ob01_META</cem:catalog>
+</cem:identifier>
+<cem:contribute>
+<cem:role schema="CEM">Catalogador</cem:role>
+<cem:entity country="CO" entityForm="" institution="eDistribution" src="contacto@edistribution.co" type="Persona">Hurtado Castro, Paola</cem:entity>
+<cem:date>2017-07-14</cem:date>
+</cem:contribute>
+<cem:metadataSchema>CEM 2.0</cem:metadataSchema>
+<cem:language>es</cem:language>
+</cem:metaMetadata>
+<cem:technical>
+<cem:format codec="" extension="zip">application/zip</cem:format>
+<cem:size>13MB</cem:size>
+<cem:location src="https://sena.blackboard.com/webapps/cmsmain/webui/institution/SENA-FUENTES/Idiomas/51250047?action=frameset&amp;subaction=view&amp;uniq=-cvz022&amp;mask=%2Finstitution" storage="https://sena.blackboard.com/webapps/cmsmain/webui/institution/SENA/Idiomas/51250047/Contenido/OVA?action=frameset&amp;subaction=view&amp;uniq=-cvzzya&amp;mask=%2Finstitution%2FSENA%2FIdiomas%2F51250043%2FContenido">https://sena.blackboard.com/bbcswebdav/institution/SENA/Idiomas/51250047/Contenido/OVA/engenn5le01ob01.zip</cem:location>
+<cem:requirement>
+<cem:orComposite>
+<cem:type>Software</cem:type>
+<cem:name>Google Chrome</cem:name>
+<cem:minimumVersion>32.0.1700</cem:minimumVersion>
+<cem:maximumVersion>54</cem:maximumVersion>
+</cem:orComposite>
+<cem:orComposite>
+<cem:type>Software</cem:type>
+<cem:name>Mozilla Firefox</cem:name>
+<cem:minimumVersion>42.0</cem:minimumVersion>
+<cem:maximumVersion>49</cem:maximumVersion>
+</cem:orComposite>
+<cem:orComposite>
+<cem:type>Software</cem:type>
+<cem:name>Internet Explorer</cem:name>
+<cem:minimumVersion>11.0.9600.16428</cem:minimumVersion>
+<cem:maximumVersion>11.0.9600.16428</cem:maximumVersion>
+</cem:orComposite>
+<cem:orComposite>
+<cem:type>Software</cem:type>
+<cem:name>Android</cem:name>
+<cem:minimumVersion>4.4.4</cem:minimumVersion>
+<cem:maximumVersion>5.1</cem:maximumVersion>
+</cem:orComposite>
+</cem:requirement>
+<cem:installationRemarks kind="" lang="es" src=""/>
+<cem:otherPlatformRequirements kind="" lang="es" src=""/>
+<cem:duration>0</cem:duration>
+<cem:accessibility>
+<cem:subtittled lang="en">false</cem:subtittled>
+<cem:audioDescription lang="en">false</cem:audioDescription>
+<cem:signLanguage>false</cem:signLanguage>
+<cem:textBrowser>false</cem:textBrowser>
+<cem:changeSizeOfLetter>false</cem:changeSizeOfLetter>
+<cem:changeColorAndContrast>false</cem:changeColorAndContrast>
+</cem:accessibility>
+<cem:image fileName="" size="TS" src="" type=""/>
+</cem:technical>
+<cem:educational>
+<cem:interactivityType schema="LOM">Mixto</cem:interactivityType>
+<cem:resourceType schema="MEN">
+<cem:levelOne value="Recurso Educativo Digital">
+<cem:levelTwo levelFive="" levelFour="" levelThree="Objeto de aprendizaje">Granularidad</cem:levelTwo>
+<cem:levelTwo levelFive="" levelFour="Juegos educativos" levelThree="Software">Información</cem:levelTwo>
+<cem:levelTwo levelFive="" levelFour="" levelThree="Guía">Intencionalidad didáctica</cem:levelTwo>
+<cem:levelTwo levelFive="" levelFour="" levelThree="Conceptual">Intencionalidad pedagógica</cem:levelTwo>
+</cem:levelOne>
+</cem:resourceType>
+<cem:interactivityLevel schema="LOM">Alta</cem:interactivityLevel>
+<cem:semanticDensity schema="LOM">Alta</cem:semanticDensity>
+<cem:intentedEndUserRole populationGroup="Todas" schema="MEN">Estudiante de Educación Superior</cem:intentedEndUserRole>
+<cem:context educativeLevel="Educación Superior" gradeGroup="Elementary (A2.2)" schema="SENA" subLevel="Técnica Profesional"/>
+<cem:context educativeLevel="Educación Superior" gradeGroup="Elementary (A2.2)" schema="SENA" subLevel="Tecnológica"/>
+<cem:typicalAgeRange ageFrom="15" ageTo="99"/>
+<cem:difficulty schema="LOM">Alta</cem:difficulty>
+<cem:typicalLearningTime>0:25h/m</cem:typicalLearningTime>
+<cem:description>
+<cem:recommendedUse lang="en">This digital resource can be used as an activity that allows the learner to reflect on the use of grammar of English language in different communicative contexts. The instructor can work further on activities and tasks that help learners to improve their procedural knowledge.</cem:recommendedUse>
+<cem:triggerQuestion lang="en">What did you do yesterday?; What did you do last week?; What did you do last month?</cem:triggerQuestion>
+<cem:pedagogicalAspect lang="en">This learning object "Welcome Home Party" that is part of the lesson No: 1, John Comes Home for a Visit, which in turn belongs to the Elementary (A2.2) of the teaching of English as a Foreign Language, allows the learner to develop the following topics: modals for requests: can, could; simple past tense in affirmative sentences to talk about past events, e.g. I loved Mexico. It is presented within the context of make and respond to request; talk or report about things, actions, events, or people. The student will be exposed to vocabulary related to: food, e.g.taco, pork, shrimp. Learners will develop their language skills by using an online content as well as the guidance of a SENA instructor.</cem:pedagogicalAspect>
+<cem:learningGoal lang="en">The purpose of this learning object is to identify and describe plans for the organization of events.</cem:learningGoal>
+</cem:description>
+</cem:educational>
+<cem:rights>
+<cem:cost currency="COP">Gratuito</cem:cost>
+<cem:copyrightsAndOtherRestrictions lang="es" license="CC BY-NC-ND" providerCountry="CO" rightsHolder="Servicio Nacional de Aprendizaje SENA" scope="CO" src="http://creativecommons.org/licenses/by-nc-nd/2.5/co/" type="Institución" version="2.5 Colombia" year="2014"> Creative Commons — Atribución­NoComercial­SinDerivadas 2.5 Colombia — CC BY­NC­ND 2.5 CO</cem:copyrightsAndOtherRestrictions>
+<cem:permission copy="true" download="false" edit="false" periodFrom="2014" periodTo="Indefinido" print="true" view="true"/>
+</cem:rights>
+<cem:relation>
+<cem:kind schema="CEM">Es parte de</cem:kind>
+<cem:resource>
+<cem:identifier>
+<cem:catalog catName="eDistribution" catSource="https://sena.blackboard.com">engenn5le01</cem:catalog>
+</cem:identifier>
+<cem:description lang="en">This lesson: "John Comes Home for a Visit" belongs to Elementary (A2.2). It is composed of twelve learning objects, that have the following learning outcomes: identify ways of improving aspects of communication in English based on the learning outcomes for level A2; describe characteristics of different people and their jobs; identify and describe plans for the organization of events; describe rooms, homes and objects in buildings in common social and work situations. On the other hand, the communicative functions of this lesson are: tell stories and anecdotes; discuss jobs and work.</cem:description>
+</cem:resource>
+</cem:relation>
+<cem:relation>
+<cem:kind schema="CEM">Está compuesto por</cem:kind>
+<cem:resource>
+<cem:identifier>
+<cem:catalog catName="eDistribution" catSource="https://sena.blackboard.com">engenn5le01ob01re1</cem:catalog>
+</cem:identifier>
+<cem:description lang="en">Let's Start: it is the first resource of "Welcome Home Party" that makes part of the lesson No: 1, John Comes Home for a Visit, which belongs to English teaching Elementary (A2.2), is intended to present the LO topic, the learning outcome, the can do statements, and the trigger questions.</cem:description>
+</cem:resource>
+</cem:relation>
+<cem:relation>
+<cem:kind schema="CEM">Está compuesto por</cem:kind>
+<cem:resource>
+<cem:identifier>
+<cem:catalog catName="eDistribution" catSource="https://sena.blackboard.com">engenn5le01ob01re2</cem:catalog>
+</cem:identifier>
+<cem:description lang="en">Let's Explore: it is the second resource of "Welcome Home Party" that makes part of the lesson No: 1, John Comes Home for a Visit, which belongs to English teaching Elementary (A2.2), is intended to present a stimulus to help students integrate new knowledge with the old one.</cem:description>
+</cem:resource>
+</cem:relation>
+<cem:relation>
+<cem:kind schema="CEM">Está compuesto por</cem:kind>
+<cem:resource>
+<cem:identifier>
+<cem:catalog catName="eDistribution" catSource="https://sena.blackboard.com">engenn5le01ob01re3</cem:catalog>
+</cem:identifier>
+<cem:description lang="en">Let's Practice: it is the third resource of "Welcome Home Party" that makes part of the lesson No: 1, John Comes Home for a Visit, which belongs to English teaching Elementary (A2.2), is intended to work on activities that permit students to reinforce language skills.</cem:description>
+</cem:resource>
+</cem:relation>
+<cem:relation>
+<cem:kind schema="CEM">Está compuesto por</cem:kind>
+<cem:resource>
+<cem:identifier>
+<cem:catalog catName="eDistribution" catSource="https://sena.blackboard.com">engenn5le01ob01re4</cem:catalog>
+</cem:identifier>
+<cem:description lang="en">Let's Practice: it is the fourth resource of "Welcome Home Party" that makes part of the lesson No: 1, John Comes Home for a Visit, which belongs to English teaching Elementary (A2.2), is intended to work on activities that permit students to reinforce language skills.</cem:description>
+</cem:resource>
+</cem:relation>
+<cem:relation>
+<cem:kind schema="CEM">Está compuesto por</cem:kind>
+<cem:resource>
+<cem:identifier>
+<cem:catalog catName="eDistribution" catSource="https://sena.blackboard.com">engenn5le01ob01re5</cem:catalog>
+</cem:identifier>
+<cem:description lang="en">Let's Practice: it is the fifth resource of "Welcome Home Party" that makes part of the lesson No: 1, John Comes Home for a Visit, which belongs to English teaching Elementary (A2.2), is intended to work on activities that permit students to reinforce language skills.</cem:description>
+</cem:resource>
+</cem:relation>
+<cem:relation>
+<cem:kind schema="CEM">Está compuesto por</cem:kind>
+<cem:resource>
+<cem:identifier>
+<cem:catalog catName="eDistribution" catSource="https://sena.blackboard.com">engenn5le01ob01re6</cem:catalog>
+</cem:identifier>
+<cem:description lang="en">Check Your Progress: it is the sixth resource of "Welcome Home Party" that makes part of the lesson No: 1, John Comes Home for a Visit, which belongs to English teaching Elementary (A2.2), is intended to assess the student's knowledge.</cem:description>
+</cem:resource>
+</cem:relation>
+<cem:relation>
+<cem:kind schema="CEM">Está compuesto por</cem:kind>
+<cem:resource>
+<cem:identifier>
+<cem:catalog catName="eDistribution" catSource="https://sena.blackboard.com">engenn5le01ob01re7</cem:catalog>
+</cem:identifier>
+<cem:description lang="en">Takeaway: it is the seventh resource of "Welcome Home Party" that makes part of the lesson No: 1, John Comes Home for a Visit, which belongs to English teaching Elementary (A2.2), is intended to give a review of the studied content in the LO.</cem:description>
+</cem:resource>
+</cem:relation>
+<cem:annotation>
+<cem:entity country="unknown" entityForm="" institution="eDistribution SAS" src="" type="Persona">SENA</cem:entity>
+<cem:date>2017-07-14</cem:date>
+<cem:description lang="es"/>
+<cem:getRatingURI/>
+<cem:getCommentsURI/>
+</cem:annotation>
+<cem:classification>
+<cem:purpose lang="es">Facilitar la búsqueda y recuperación de los recursos educativos digitales para la enseñanza de lenguas mediante criterios taxonómicos relacionados con los núcleos básicos del conocimiento y los estándares básicos de competencias.</cem:purpose>
+<cem:taxonPath schema="MEN">
+<cem:levelOne value="Núcleos básicos de conocimiento">
+<cem:levelTwo levelThree="Lenguas modernas, Literatura, Lingüística y afines">Ciencias sociales y humanas</cem:levelTwo>
+</cem:levelOne>
+</cem:taxonPath>
+<cem:taxonPath schema="DEWEY">
+<cem:levelOne value="400">
+<cem:levelTwo levelThree="420">Inglés e inglés antiguo</cem:levelTwo>
+</cem:levelOne>
+</cem:taxonPath>
+<cem:taxonPath schema="MEN">
+<cem:levelOne value="Área de conocimiento e Educación Preescolar, Básica y Media">
+<cem:levelTwo levelThree="Lingüística">Humanidades, lengua castellana e idiomas extranjeros</cem:levelTwo>
+</cem:levelOne>
+</cem:taxonPath>
+<cem:taxonPath schema="SENA">
+<cem:levelOne value="Comunicación en inglés A2.2 BASICO">
+<cem:levelTwo levelThree="51250047">Red institucional de enseñanza de idiomas</cem:levelTwo>
+</cem:levelOne>
+</cem:taxonPath>
+<cem:description lang="es"/>
+<cem:keyword lang="es">
+<cem:li>Bilingüismo |Inglés| Elementary (A2.2)</cem:li>
+</cem:keyword>
+</cem:classification>
+</cem:cem>

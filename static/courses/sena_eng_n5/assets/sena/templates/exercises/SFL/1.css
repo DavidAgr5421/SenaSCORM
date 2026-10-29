@@ -1,0 +1,142 @@
+.SFL-question
+{             
+    position: relative;
+    margin-left: 3rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    line-height: 30px;
+}
+
+.SFL-response {      
+    color: #025449;
+    font-weight: 700;
+    border: 2px solid #025449;
+    padding:3px;
+    border-radius: 5px;
+    width: 250px;
+    background: linear-gradient(to bottom, rgba(234,245,243,1) 0%, rgba(234,245,243,1) 50%, rgba(212,235,231,1) 51%, rgba(212,235,231,1) 100%);
+    padding-right: 10px;
+    padding-left: 10px;
+    box-shadow: 0 2px 2px rgba(0,0,0,0.2);
+    text-align: center;
+    line-height: 20px;
+}
+#main.cmn .SFL-response {      
+    color: #812900;
+    border-color: #812900;
+    background: linear-gradient(to bottom, rgba(255, 237, 235,1) 0%, rgba(255, 237, 235,1) 50%, rgba(255, 218, 214,1) 51%, rgba(255, 218, 214,1) 100%);
+
+}
+#main.fr .SFL-response {      
+    color: #8c1711;
+    border-color: #8c1711;
+    background: linear-gradient(to bottom, rgba(254, 237, 237,1) 0%, rgba(254, 237, 237,1) 50%, rgba(252, 219, 218,1) 51%, rgba(252, 219, 218,1) 100%);
+
+}
+#main.pt .SFL-response {      
+    color: #115220;
+    border-color: #115220;
+    background: linear-gradient(to bottom, rgba(224, 254, 228,1) 0%, rgba(224, 254, 228,1) 50%, rgba(188, 253, 197,1) 51%, rgba(188, 253, 197,1) 100%);
+
+}
+#main.es .SFL-response {      
+    color: #5b347f;
+    border-color: #5b347f;
+    background: linear-gradient(to bottom, rgba(243, 239, 249,1) 0%, rgba(243, 239, 249,1) 50%, rgba(231, 223, 244,1) 51%, rgba(231, 223, 244,1) 100%);
+
+}
+
+.SFL-response.dropped {      
+    margin-top: 0;
+    left: 20px !important;
+}
+
+.SFL-response.pep-active {
+    z-index:1001;
+}
+
+.SFL-drop{
+    width: 290px;
+    height: 28px;
+    padding-top:5px;
+    border-bottom: 2px solid #238276;
+    display:inline-block;
+    vertical-align: bottom;
+    position:relative;
+}
+#main.cmn .SFL-drop{
+    border-bottom-color: #d34800;
+}
+#main.fr .SFL-drop{
+    border-bottom-color: #e42c23;
+}
+#main.pt .SFL-drop{
+    border-bottom-color: #22893a;
+}
+#main.es .SFL-drop{
+    border-bottom-color: #935ec6;
+}
+
+.SFL-counter {
+    margin-left: 20px;
+}
+
+.SFL-response-container{
+    width: 100%;
+    margin-left:15px;
+    z-index:999;
+}
+
+.SFL-drop-container {
+    margin: 5px;
+    display: inline-block;
+    position: static;
+    float:left;
+}
+
+.SFL-starting-drop {
+    width:250px;
+    height:30px;
+}
+
+.SFL-container-row {
+    margin-top: -1rem;
+    margin-bottom: 2rem;
+    padding: 0.5rem 1rem;
+    background-color: rgba(35, 130, 118, 0.1);
+    border-radius: .5rem;
+    box-shadow: inset 0 0.25rem 0.5rem rgba(2, 84, 73, 0.2);
+}
+#main.cmn .SFL-container-row {
+    background-color: rgba(211, 72, 0, 0.1);
+    box-shadow: inset 0 0.25rem 0.5rem rgba(129, 41, 0, 0.2);
+}
+#main.fr .SFL-container-row {
+    background-color: rgba(228, 44, 35, 0.1);
+    box-shadow: inset 0 0.25rem 0.5rem rgba(140, 23, 17, 0.2);
+}
+#main.pt .SFL-container-row {
+    background-color: rgba(34, 137, 58, 0.1);
+    box-shadow: inset 0 0.25rem 0.5rem rgba(17, 82, 32, 0.2);
+}
+#main.es .SFL-container-row {
+    background-color: rgba(147, 94, 198, 0.1);
+    box-shadow: inset 0 0.25rem 0.5rem rgba(91, 52, 127, 0.2);
+}
+
+.SFL-active-drop {
+    background-color: transparent;
+    border-bottom-color: #63B0A5;
+}
+#main.cmn .SFL-active-drop {
+    border-bottom-color: #ff8a73;
+}
+#main.fr .SFL-active-drop {
+    border-bottom-color: #f98c8a;
+}
+#main.pt .SFL-active-drop {
+    border-bottom-color: #35c456;
+}
+#main.es .SFL-active-drop {
+    border-bottom-color: #bc9fde;
+}

@@ -1,0 +1,204 @@
+/* Overrides */
+
+.SFL-document .pep-dpa
+{
+    background-color: transparent;
+}
+
+
+/* Response */
+
+.SFL-response.SFL-document-response
+{
+    color: #333;
+    font-weight: inherit;
+    border: none;
+    padding: .5rem 1rem;
+    border-radius: 0;
+    width: 42.1%;
+    background: white;
+    box-shadow: 0 2px 2px rgba(0,0,0,0.2);
+    text-align: left;
+    line-height: 20px;
+    -webkit-transform-origin: left top;
+    -ms-transform-origin: left top;
+    transform-origin: left top;
+    -webkit-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    transform: scale(0.8);
+    opacity: 0.8;
+}
+
+.SFL-document .SFL-document-response
+{
+    width: 100%;
+    -webkit-transform: none;
+    -ms-transform: none;
+    transform: none;
+    opacity: 1;
+}
+
+.SFL-document .SFL-response.dropped,
+.SFL-response.dropped,
+.SFL-document .dropped.not_showing_answer
+{
+    margin-top: 0;
+    left: 0 !important;
+}
+
+.SFL-response.pep-active {
+    z-index:1001;
+}
+
+.SFL-drop .SFL-document-response
+{
+    background: transparent;
+    box-shadow: none;
+    border-radius: .5rem;
+}
+
+.SFL-drop .SFL-document-response:hover
+{
+    background-color: rgba(2, 84, 73, 0.1);
+}
+
+
+/* Document Column */
+
+.SFL-document .SFL-page
+{
+    border: 1px solid #666;
+    margin-left: 3rem;
+    background: white;
+    background: linear-gradient(160deg, #eee, white);
+    box-shadow: 0 .25rem .5rem rgba(0,0,0,0.25);
+    padding: .5rem 15px;
+}
+
+.SFL-document .SFL-col-no-padding
+{
+    padding-left: 0;
+}
+
+.SFL-document .SFL-drop,
+#main.cmn .SFL-document .SFL-drop,
+#main.fr .SFL-document .SFL-drop,
+#main.pt .SFL-document .SFL-drop
+#main.es .SFL-document .SFL-drop
+{
+    width: 100%;
+    height: 3rem;
+    padding: 0;
+    border: none;
+    display: block;
+    position:relative;
+    margin: 1rem 0;
+}
+
+.SFL-active-drop,
+#main.cmn .SFL-active-drop,
+#main.fr .SFL-active-drop,
+#main.pt .SFL-active-drop
+#main.es .SFL-active-drop
+{
+    background-color: transparent;
+    border: none;
+    border-bottom-color: transparent;
+}
+
+.SFL-drop-placeholder
+{
+    text-align: center;
+    color: rgba(2, 84, 73, 0.5); /* darkest */
+    font-weight: 700;
+    border: 0.2rem dotted rgba(2, 84, 73, 0.5); /* darkest */
+    border-radius: .5rem;
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    min-height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#main.cmn .SFL-drop-placeholder { color: rgba(129, 41, 0, 0.5); }
+#main.fr  .SFL-drop-placeholder { color: rgba(140, 23, 17, 0.5); }
+#main.pt  .SFL-drop-placeholder { color: rgba(17, 82, 32, 0.5); }
+#main.es  .SFL-drop-placeholder { color: rgba(91, 52, 127, 0.5); }
+
+
+.SFL-drop-placeholder:last-child
+{
+    visibility: visible;
+}
+
+.SFL-active-drop .SFL-drop-placeholder
+{
+    opacity: 0.5;
+}
+
+.SFL-document .SFL-feedback{
+    position: absolute;
+    left: -4.25rem;
+    top: calc(50% - .75em) !important;
+}
+
+/* Well Column */
+
+.SFL-document .SFL-well
+{
+    background-color: rgba(35, 130, 118, 0.1);
+    border-radius: .5rem;
+    box-shadow: inset 0 0.25rem 0.5rem rgba(2, 84, 73, 0.2);
+    padding: 0 40px 0 0;
+}
+#main.cmn .SFL-document .SFL-well {
+    background-color: rgba(211, 72, 0, 0.1);
+    box-shadow: inset 0 0.25rem 0.5rem rgba(129, 41, 0, 0.2);
+}
+#main.fr .SFL-document .SFL-well {
+    background-color: rgba(228, 44, 35, 0.1);
+    box-shadow: inset 0 0.25rem 0.5rem rgba(140, 23, 17, 0.2);
+}
+#main.pt .SFL-document .SFL-well {
+    background-color: rgba(34, 137, 58, 0.1);
+    box-shadow: inset 0 0.25rem 0.5rem rgba(17, 82, 32, 0.2);
+}
+#main.es .SFL-document .SFL-well {
+    background-color: rgba(147, 94, 198, 0.1);
+    box-shadow: inset 0 0.25rem 0.5rem rgba(91, 52, 127, 0.2);
+}
+
+.SFL-document .SFL-container-row {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    background-color: transparent;
+    box-shadow:  none;
+    border-radius: 0;
+}
+
+
+/*Other junk*/
+
+.SFL-response-container{
+    width: 100%;
+    margin-left:15px;
+    z-index:999;
+}
+
+.SFL-drop-container {
+    margin: 0; 
+    display: block;
+    position: static;
+    float: none;
+}
+
+/*.SFL-starting-drop {
+     width: 100%; 
+    height:30px;
+}*/
+

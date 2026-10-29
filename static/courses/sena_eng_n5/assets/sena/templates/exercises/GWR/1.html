@@ -1,0 +1,214 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/GWR/1.css'}">
+<span class="edit_container"></span>
+<div class="GWR-instructions instructions-block">
+<!-- ko if: finished_writing_planner() == 0 -->
+    <div>
+        <span class="glyphicon glyphicon-chevron-right instruction-chevron"></span>
+        <!-- ko foreach: _data() -->
+            <!-- ko if: type() == "instructions" && $index() == 0 -->
+                <!-- ko foreach: contents() -->
+                    <!-- ko if: type() == "text" -->
+                        <div data-bind="html: content()"></div>
+                    <!-- /ko -->
+                    <!-- ko if: type() == "image" || type() == "image-lg" || type() == "image-md" || type() == "image-sm"-->
+                        <div>
+                            <div data-bind="css: $parents[1].get_instructions_columns_size($index(),$parentContext.$index())">
+                                <img class="DFL-image img-responsive " data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+                            </div>
+                        </div>
+                    <!-- /ko -->
+                    <!-- ko if: type() == "audio" -->
+                        <div data-bind="template: { name: 'audio_ko_template', data: $data }">
+                        </div>
+                    <!-- /ko -->
+                    <!-- ko if: type() == "thumbnail" -->
+                        <div class="row">
+                            <div class="col-xs-5 col-md-3 link-cursor thumbnail" data-bind="click: function () {$('#e_'+$parents[1].id()+'_i_'+$index()+'_modal').modal('show');}">
+                                <img  data-bind="attr:{src:'assets/' + lms_config.product_type + '/icons/zoom.svg'}" class="thumbnail_zoom"/>
+                                <img class="img-responsive" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+                            </div>
+                        </div>
+                        <div class="modal fade thumbnail_modal_container" data-bind="attr:{id:'e_'+$parents[1].id()+'_i_'+$index()+'_modal' }" tabindex="-1" role="dialog">
+                            <div class="thumbnail_modal">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <img class="img-responsive link-cursor" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}, click: function () {$('#e_'+$parents[1].id()+'_i_'+$index()+'_modal').modal('hide');}" />
+                            </div>
+                        </div>
+                    <!-- /ko -->
+                    <!-- ko if: type() == "table" && typeof content() !== 'undefined' -->
+                        <table id="tabledata" class='instruction_table table-responsive' data-bind="css: content().styles ">
+                            <thead></thead>
+                            <tbody>
+                                <!-- ko foreach: content().cells() -->
+                                    <!-- ko if: $index() % $parent.content().columns() == 0 -->
+                                    <tr>
+                                        <!-- ko foreach: $parent.content().cols_array() -->
+                                            <td >
+                                                <!-- ko if: typeof $parents[1].content().cells()[$parentContext.$index()+$index()] !== 'undefined' -->
+                                                    <!-- ko if: $parents[1].content().cells()[$parentContext.$index()+$index()].type() == 'text' -->
+                                                        <span data-bind="html: $parents[1].content().cells()[$parentContext.$index()+$index()].content()" />
+                                                    <!-- /ko -->
+                                                    <!-- ko if: $parents[1].content().cells()[$parentContext.$index()+$index()].type() == 'image' -->
+                                                        <img class="img-responsive" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +$parents[1].content().cells()[$parentContext.$index()+$index()].content()}" />
+                                                    <!-- /ko -->
+                                                <!-- /ko -->
+                                            </td>
+                                        <!-- /ko -->
+                                    </tr>
+                                    <!-- /ko -->
+                                <!-- /ko -->
+                            </tbody>
+                        </table>
+                    <!-- /ko -->
+                <!-- /ko -->
+            <!-- /ko -->
+        <!-- /ko -->
+    </div>
+<!-- /ko --> 
+<!-- ko if: finished_writing_planner() == 1 -->
+    <!-- ko foreach: _data() -->
+        <!-- ko if: type() == "instructions" && $index() != 0 -->
+                <span class="glyphicon glyphicon-chevron-right instruction-chevron"></span>
+                    <!-- ko foreach: contents() -->
+                        <!-- ko if: type() == "text" -->
+                            <div data-bind="html: content()"></div>
+                        <!-- /ko -->
+                        <!-- ko if: type() == "image" || type() == "image-lg" || type() == "image-md" || type() == "image-sm"-->
+                            <div class="row">
+                                <div data-bind="css: $parents[1].get_instructions_columns_size($index(),$parentContext.$index())">
+                                    <img class="DFL-image img-responsive " data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+                                </div>
+                            </div>
+                        <!-- /ko -->
+                        <!-- ko if: type() == "audio" -->
+                            <div data-bind="template: { name: 'audio_ko_template', data: $data }">
+                            </div>
+                        <!-- /ko -->
+                        <!-- ko if: type() == "thumbnail" -->
+                            <div class="row">
+                                <div class="col-xs-5 col-md-3 link-cursor thumbnail" data-bind="click: function () {$('#e_'+$parents[1].id()+'_i_'+$index()+'_modal').modal('show');}">
+                                    <img  data-bind="attr:{src:'assets/' + lms_config.product_type + '/icons/zoom.svg'}" class="thumbnail_zoom"/>
+                                    <img class="img-responsive" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+                                </div>
+                            </div>
+                            <div class="modal fade thumbnail_modal_container" data-bind="attr:{id:'e_'+$parents[1].id()+'_i_'+$index()+'_modal' }" tabindex="-1" role="dialog">
+                                <div class="thumbnail_modal">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <img class="img-responsive link-cursor" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}, click: function () {$('#e_'+$parents[1].id()+'_i_'+$index()+'_modal').modal('hide');}" />
+                                </div>
+                            </div>
+                        <!-- /ko -->
+                        <!-- ko if: type() == "table" && typeof content() !== 'undefined' -->
+                            <table id="tabledata" class='instruction_table table-responsive' data-bind="css: content().styles ">
+                                <thead></thead>
+                                <tbody>
+                                    <!-- ko foreach: content().cells() -->
+                                        <!-- ko if: $index() % $parent.content().columns() == 0 -->
+                                        <tr>
+                                            <!-- ko foreach: $parent.content().cols_array() -->
+                                                <td >
+                                                    <!-- ko if: typeof $parents[1].content().cells()[$parentContext.$index()+$index()] !== 'undefined' -->
+                                                        <!-- ko if: $parents[1].content().cells()[$parentContext.$index()+$index()].type() == 'text' -->
+                                                            <span data-bind="html: $parents[1].content().cells()[$parentContext.$index()+$index()].content()" />
+                                                        <!-- /ko -->
+                                                        <!-- ko if: $parents[1].content().cells()[$parentContext.$index()+$index()].type() == 'image' -->
+                                                            <img class="img-responsive" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +$parents[1].content().cells()[$parentContext.$index()+$index()].content()}" />
+                                                        <!-- /ko -->
+                                                    <!-- /ko -->
+                                                </td>
+                                            <!-- /ko -->
+                                        </tr>
+                                        <!-- /ko -->
+                                    <!-- /ko -->
+                                </tbody>
+                            </table>
+                        <!-- /ko -->
+                    <!-- /ko -->
+
+
+        <!-- /ko --> 
+    <!-- /ko --> 
+<!-- /ko --> 
+</div>
+
+<div class="GWR-exercise counter-reset">
+    <!-- ko if: finished_writing_planner() == 0 -->
+        <div class="GWR-paragraph">
+            <!-- ko foreach:questions() -->
+                <!-- ko if: id() != 0 -->
+                    <div class="GWR-question">
+                        <!-- ko foreach: _data() -->
+                            <!-- ko if: type() == "question" -->
+                                <div data-bind="template: { name: 'question_counter_ko_template'}"></div>
+                                <div class="response-feedback response-feedback-question" data-bind="template: { name: 'data_level_question_feedback_ko_template' }, css: $parents[0].state_css()"></div>
+                                <!-- ko foreach: contents() -->  
+                                    <!-- ko if: type() == "image" || type() == "image-lg" || type() == "image-md" || type() == "image-sm"-->
+                                        <div class="question-wrapper">
+                                            <div class="image-no-padding" data-bind="css: $parents[1].get_template_columns($index()) ">
+                                                <div class="question-position">
+                                                    <div class="exe-image-border-wrapper">
+                                                        <div class="exe-image-border">
+                                                            <img class="img-responsive exe-image" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <!-- /ko -->
+                                    <!-- ko if:type() == "audio" -->
+                                        <div class="question-wrapper">
+                                            <div class="question-position">
+                                                <div class="link-cursor sena-btn default-audio-button" data-bind="template: { name: 'audio_ko_template', data: $data }"></div>
+                                            </div>
+                                        </div>
+                                    <!-- /ko --> 
+                                    <!-- ko if:type() == "text" -->
+                                        <div data-bind="html:content()"></div>
+                                    <!-- /ko -->
+                                <!-- /ko -->
+                            <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko if: _data()[0].contents()[0].type() != "rec" -->
+                            <!-- ko with: responses()[1]._data()[0] -->
+                                <textarea type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="form-control GWR-input" rows="1" data-bind="value: content, valueUpdate: 'keyup', event: {style:{resize:'vertical'}" />
+                            <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko if: _data()[0].contents()[0].type() == "rec" -->
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12" data-bind="template: { name: 'rec_ko_template' }">
+                                    
+                                </div>
+                            </div>
+                        <!-- /ko -->
+                    </div>
+                <!-- /ko -->
+            <!-- /ko --> 
+        </div>
+    <!-- /ko --> 
+	
+    <!-- ko if: finished_writing_planner() == 1 -->
+        <div class="GWR-question" data-bind="with:questions()[0].responses()[1]._data()[0]">
+            <textarea type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="form-control GWR-input GWR-writing-planner" data-bind="value: content, valueUpdate: 'keyup', disable: $parent.feedback_showing_answer()"></textarea>
+        </div>
+    <!-- /ko --> 
+	
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <!-- ko if: finished_writing_planner() == 0 -->
+                <div class="GWR-writing-button">
+                    <!-- ko if: enable_writing_button() -->
+                        <button type="button" class="sena-btn sena-btn-md" data-bind="click: set_up_final_writing">
+                            <span data-bind="text:$root.localization.GWR_writing_task"></span>
+                        </button>
+                    <!-- /ko -->
+                    <!-- ko ifnot: enable_writing_button() -->
+                        <button type="button" class="sena-btn sena-btn-md sena-btn-disabled">
+                            <span data-bind="text:$root.localization.GWR_writing_task"></span>
+                        </button>
+                    <!-- /ko -->
+                </div>
+            <!-- /ko --> 
+        </div>
+    </div>
+</div>
+

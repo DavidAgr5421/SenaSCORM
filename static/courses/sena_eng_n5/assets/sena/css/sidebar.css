@@ -1,0 +1,188 @@
+.framework_sidebar {
+    margin-right:-50px;
+    position:fixed;    
+    right:50px;
+    width:50px;
+    height:100%;
+    background-color:#CBCBCB;
+	border-style: solid;
+	border-width: 1px;
+	border-color: black;
+}
+
+.sidebar-opener {
+	height: 30px;
+	background-color: #7F7F7F;
+	padding-left: 10px;
+	padding-top: 3px;
+    border-bottom: solid 1px black;
+}
+
+.sidebar-bottom {
+    height: 100%;
+}
+
+.sidebar-opener:hover {
+    background-color: #01b5bd;
+}
+
+.sidebar-item {
+	height: 30px;
+	background-color: #CBCBCB;
+	padding-left: 48px;
+	padding-top: 5px;
+    overflow:hidden;
+	white-space:nowrap;    
+	border-bottom-style: solid;
+	border-width: 1px;
+	border-color: #989898;
+    background-repeat: no-repeat;  
+}
+
+.learning-tool-item{
+    background-image: url("../../../assets/sena/icons/learning-tools.png");
+    background-position: 10px 2px; 
+}
+
+.target_words-item{
+    background-image: url("../../../assets/sena/icons/targetwords.png");
+    background-position: 12px 4px; 
+}
+
+.learning-tool-item.selected{
+    background-image: url("../../../assets/sena/icons/learning-tools-selected.png");
+    background-position: 10px 2px; 
+}
+
+.sidebar-item:hover {
+    background-color: #01b5bd;
+}
+
+.sidebar-item.selected {
+    background-color: #01b5bd;
+    color:white;
+}
+
+.sidebar-sub-item {
+	border-color: #989898;
+    height: 30px;
+    padding-top: 4px;
+	background-color: #E4E4E4;
+	background-repeat: no-repeat;
+	border-bottom-style: solid;
+	border-width: 1px;
+}
+
+.learning-tool-sub-item{
+    background-image: url("../icons/toolbar_tool_icon.png");
+    background-position: 15px 5px;
+    padding-left: 47px;
+}
+
+.learning-tool-sub-item.selected{
+    background-image: url("../icons/toolbar_tool_icon-selected.png");
+}
+
+.sidebar-sub-item:hover {
+    background-color:#F3E7DD;
+    text-decoration: underline;
+}
+
+.sidebar-sub-item.selected {
+    color: #01b5bd;
+    background-color: white;
+    background-image: url("../icons/toolbar_tool_icon-selected.png"); 
+}
+
+.sidebar-opener.closed {
+    background-image: url("../icons/toolbar_open_arrows.png");
+    background-repeat: no-repeat;
+    background-position: 6px 8px; 
+}
+.sidebar-opener.closed:hover{
+    background-image: url("../icons/toolbar_open_arrows-over.png");
+    background-repeat: no-repeat;
+    background-position: 5px 7px;    
+}
+.sidebar-opener.open {
+    background-image: url("../icons/toolbar_close_arrows.png");
+    background-repeat: no-repeat;
+    background-position: 6px 8px; 
+}
+.sidebar-opener.open:hover {
+    background-image: url("../icons/toolbar_close_arrows-over.png");
+    background-repeat: no-repeat;
+    background-position: 5px 7px;
+}
+
+.sidebar-opener.closed.test {
+    background-image: url("../icons/toolbar_open_arrows-over.png");
+    background-repeat: no-repeat;
+    background-position: 5px 7px;
+    background-color: #3CBB33;
+}
+
+.sidebar-opener.open.test {
+    background-image: url("../icons/toolbar_close_arrows-over.png");
+    background-repeat: no-repeat;
+    background-position: 5px 7px;
+    background-color: #3CBB33;
+}
+
+.sidebar-opener.closed.test {
+    background-color: #01b5bd;
+}
+
+.sidebar-opener.open.test {
+    background-color: #01b5bd;
+}
+
+.lab-task-item {
+    background-image: url("../icons/toolbar-lab-task.png");
+    background-position: 14px 2px; 
+}
+
+.lab-task-item.selected {
+    background-image: url("../icons/toolbar-lab-task-selected.png");
+    background-position: 14px 2px; 
+}
+
+.lab-task-sub-item {
+    background-image: url("../icons/toolbar-download.png");
+    background-position: 15px 5px;
+    padding-left: 47px;
+}
+
+.help-item {
+    background-image: url("../icons/toolbar_help_icon.png");
+    background-position: 13px 4px; 
+}
+
+.speaking-lab-item {
+    background-image: url("../icons/toolbar_studio_icon.png");
+    background-position: 16px 2px; 
+}
+
+.help-item.selected {
+    background-image: url("../icons/toolbar_help_icon-selected.png");
+    background-position: 13px 4px; 
+}
+
+.help-sub-item {
+    background-image: url("");
+    padding-left: 12px;
+}
+
+.help-sub-item.selected {
+    background-image: url("");
+}
+
+.help-toolbar-img{
+    vertical-align:text-bottom;
+    padding-left: 8px;
+}
+
+.help-toolbar-img-help{
+    vertical-align:text-bottom;
+    padding-left: 12px;
+}

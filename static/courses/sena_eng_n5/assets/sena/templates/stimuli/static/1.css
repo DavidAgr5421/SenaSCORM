@@ -1,0 +1,27 @@
+.static-img  {
+    border-radius: .5rem;
+    border: 1px solid black;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);    
+}
+
+.static-chevron {
+    color: #066C5F;
+    padding-right: 5px;
+}
+
+.static-list-text {
+    font-size: 2rem;
+    margin-left: 25px;
+    margin-top: -30px;
+    padding-bottom: 15px;
+}
+
+.static-paragraph {
+    font-size: 2.5rem;
+}
+
+.static-ol li {
+    padding-bottom: 10px;
+    font-size: 2rem;
+}

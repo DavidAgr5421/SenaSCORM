@@ -1,0 +1,21 @@
+<div class="nav-bar" id="nav_bar">
+    <div class="row">       
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <button class="oed-nav-button btn nav-tip" type="button"  data-bind="text:$root.localization.oed_tip , visible: false"></button>        
+            &nbsp;&nbsp;
+            <button class="oed-nav-button btn oed-grading-chart" type="button" data-bind="click:function(){$root.show_grading_chart(id());}, text:$root.localization.oed_grading_chart"></button>
+        </div>        
+        <div class="col-md-6 col-sm-6 col-xs-6 ">
+            <div class="pull-right">
+                <!-- ko if:$root.selected_lab() == 3 -->
+                    <button class="oed-nav-button oed-send btn" type="button" data-bind="text:$root.localization.oed_send , visible: false"></button>        
+                    &nbsp;&nbsp;
+                    <button class="oed-nav-button oed-save btn" type="button" data-bind="text:$root.localization.oed_save , visible: false"></button>
+                <!-- /ko -->
+                <!-- ko if:$root.selected_lab() == 2 -->
+                    <button class="oed-nav-button oed-goto-writing btn" type="button" data-bind="click: function(){ $root.select_lab(3); }, text:$root.localization.oed_goto_writing, css: { disabled: $root.labs()[3].disabled() }"></button>                        
+                <!-- /ko -->
+            </div>
+        </div>       
+    </div>
+</div>

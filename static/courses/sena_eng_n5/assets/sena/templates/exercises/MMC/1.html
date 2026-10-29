@@ -1,0 +1,60 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/MMC/1.css'}">
+<span class="edit_container"></span>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12 exercise-specific-instructions" data-bind="template: { name: 'instruction_ko_template', foreach: _data }">
+        
+    </div>
+</div>
+
+<!-- ko foreach:questions() -->
+    <div class="MMC-question col-md-12 col-sm-12 col-xs-12">
+        <!-- ko foreach:_data() --> 
+                <!-- ko if: type() == "question" -->
+                    <!-- ko foreach: contents() -->
+                        <!-- ko if: type() == "text" -->
+                            <span data-bind="html: content()"> </span>  
+                        <!-- /ko -->
+                        <!-- ko if: type() == "image" || type() == "image-lg" || type() == "image-md" || type() == "image-sm"-->
+                            <div class="row">
+                                <div data-bind="css: $parents[1].get_template_columns($index()) ">
+                                    <img class="img-responsive " data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+                                </div>
+                            </div>
+                        <!-- /ko -->
+                        <!-- ko if: type() == "audio" -->
+                            <div data-bind="template: { name: 'audio_ko_template', data: $data }">
+                            </div>
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->
+                    <br/>
+                <!-- /ko -->
+        <!-- /ko -->
+        
+        <form>
+            <ul data-bind="foreach:responses()" style="list-style-type: none;">
+                <!-- ko foreach: _data() -->
+                    <li class="MMC-response">
+                        <div class="MMC-response-feedback">
+                            <span data-bind="css: 'response '+$parents[0].state_css(), visible: $parents[0].state() > 1 && $parents[2].checked_answer()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;
+                        </div>
+                        <div class="response-checkbox"><input type="checkbox" class="link-cursor response-checkbox" name="response" data-bind="checked: $parent.selected, attr: {disabled:$parents[2].feedback_showing_answer()}" /></div>
+                        <!-- ko if: type() == "text" -->
+                                <div class="response-checkbox-text">
+                                    <span data-bind="html: content()"></span>
+                                </div>
+                        <!-- /ko -->
+                        <!-- ko if: type() == "image" || type() == "image-lg" || type() == "image-md" || type() == "image-sm"-->
+                            <div class="row">
+                                <div data-bind="css: $parent.get_template_columns($index()) ">
+                                    <img data-bind="attr: {src: 'assets/' + lms_config.product_type + '/scos/' + lms_config.sco_number + '/media/image/'+content()}">
+                                </div>
+                            </div>
+                        <!-- /ko -->
+                    </li>
+                <!-- /ko -->
+            </ul>
+        </form>
+        
+    </div>    
+<!-- /ko -->

@@ -1,0 +1,53 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/SLW/1.css'}">
+<span class="edit_container"></span>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12 exercise-specific-instructions" data-bind="template: { name: 'instruction_ko_template', foreach: _data }">
+        
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="SLW-line">
+            <ul data-bind="foreach:questions()">
+                <li>
+                    
+                    <!-- ko foreach: _data() -->
+                        <!-- ko if: type() == "question" -->
+                            <!-- ko foreach: contents() -->
+                                <!-- ko if: type() == "text" -->
+                                    <p data-bind="text: content()"></p>
+                                <!-- /ko -->
+                                <!-- ko if: type() == "image" -->
+                                    <img class="DFL-image img-responsive " data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+                                <!-- /ko -->
+                                <!-- ko if: type() == "audio" -->
+                                    <div data-bind="template: { name: 'audio_ko_template', data: $data }">
+                                    </div>
+                                <!-- /ko -->
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->
+                    
+                    <!-- ko ifnot:$parents[0].showing_answer() -->
+                        <span data-bind="css: 'response '+state_css(), visible: state() > 1 && $parent.checked_answer()">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <span class="SLW-paragraph" data-bind="foreach:responses()">
+                            <!-- ko foreach: _data() -->
+                                <span class="link-cursor SLW-response " data-bind="html: content() + ' ', css: { selected: $parents[1].selected_response() == $parent.id()}, click: function(){$parents[1].select_response($parent.id);}"></span>
+                            <!-- /ko -->
+                        </span>
+                    <!-- /ko -->
+                    <!-- ko if:$parents[0].showing_answer() -->
+                        <span data-bind="css: 'response '+state_css(), visible: state() > 1 && $parent.checked_answer()">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <span class="SLW-paragraph" data-bind="foreach:responses()">
+                            <!-- ko foreach: _data() -->
+                                <span class="link-cursor SLW-response " data-bind="html: content() + ' ', css: { selected: $parents[1].selected_response() == $parent.id()}"></span>
+                            <!-- /ko -->
+                        </span>
+                    <!-- /ko -->
+                    
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

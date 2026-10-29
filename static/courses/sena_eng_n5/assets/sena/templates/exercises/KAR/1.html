@@ -1,0 +1,44 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/KAR/1.css'}">
+<span class="edit_container"></span>
+<div data-bind="template: { name: 'instructions_container_ko_template'}"></div>
+
+<div class="row">   
+    <!-- ko foreach:questions() -->
+        <!-- ko foreach: _data() -->
+            <!-- ko if: type() == "question" -->
+                <!-- ko foreach: contents() -->
+                    <!-- ko if: type() == "video"-->
+                        <div class="row video-padding"> 
+                            <div class="col-xs-6 col-xs-offset-3">
+                                <video style="height:100%; width:auto;" class="KAR-video-player mejs-sena video_controls video_instruction stim_audio" controls="controls" preload="auto" data-bind="attr: { id: 'video_scrolltext_' + $parents[2].id()+'_'+$parents[1].id()}, css : { 'mejs-sena-no-handle' : detectAndroidOrMacFirefox() }" >
+                                    <source data-bind=" attr: {src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/video/' + content() + '.mp4'}" type="video/mp4"/>
+                                    <!-- MP4 for Safari, IE9, iPhone, iPad, Android, and Windows Phone 7 -->
+                                    <source type="video/mp4" data-bind=" attr: {src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/video/' + content() + '.mp4'}" />
+                                    <!-- WebM/VP8 for Firefox4, Opera, and Chrome -->
+                                    <source type="video/webm" data-bind=" attr: {src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/video/' + content() + '.webm'}" />
+                                    <!-- Ogg/Vorbis for older Firefox and Opera versions -->
+                                    <source type="video/ogg" data-bind=" attr: {src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/video/' + content() + '.ogv'}" />
+                                    <span data-bind="text:$root.localization.video_not_supported"></span>
+                                </video> 
+                            </div>
+                        </div>  
+                    <!-- /ko -->
+                    <!-- ko if:type() == "text" -->
+                        <div class="row"> 
+                            <div class="col-xs-12">
+                                <textarea type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" rows="6" class="form-control KAR-input" rows="1" placeholder="Type here..." data-bind="value: content, valueUpdate: 'keyup', event: { keyup: function(){$parents[2].complete_question($parents[1].id())}}" />
+                            </div>
+                        </div>
+                    <!-- /ko -->
+                <!-- /ko -->
+            <!-- /ko -->
+        <!-- /ko -->
+        <!-- ko if: product_helper_check_rec_question(_data()) -->
+            <div class="row"> 
+                <div class="col-xs-offset-4 col-xs-6">
+                    <div class="col-md-12 col-sm-12 col-xs-12" data-bind="template: { name: 'rec_ko_template' }"> </div>
+                </div>
+            </div>
+        <!-- /ko -->
+    <!-- /ko -->
+</div>

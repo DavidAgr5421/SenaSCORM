@@ -1,0 +1,39 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/PRP/1.css'}">
+<span class="edit_container"></span>
+<div data-bind="template: { name: 'instructions_container_ko_template'}"></div>
+
+<div class="PRP-exercise-wrapper counter-reset">
+    <div class="row PRP-exercise">
+        <!-- ko foreach: _data() -->
+            <!-- ko if: type() == "PRP_videos" -->
+                <!-- ko foreach: content.videos() -->
+                    <div class="PRP-row-container">
+                        <div class="col-xs-12 col-sm-4 PRP-nopadding-col">
+                            <div class="PRP-video-player-container">
+                                <video style="height:100%; width:100%;" class="mejs-sena video_controls video_instruction stim_audio" controls="controls" preload="auto" data-bind="attr: { id: 'video_scrolltext_' + $parents[1].id() + '_' + id()}, css : { 'mejs-sena-no-handle' : detectAndroidOrMacFirefox() }" >
+                                    <!-- MP4 for Safari, IE9, iPhone, iPad, Android, and Windows Phone 7 -->
+                                    <source type="video/mp4" data-bind=" attr: {src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/video/'+src() + '.mp4'}" />
+                                    <!-- WebM/VP8 for Firefox4, Opera, and Chrome -->
+                                    <source type="video/webm" data-bind=" attr: {src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/video/'+src() + '.webm'}" />
+                                    <!-- Ogg/Vorbis for older Firefox and Opera versions -->
+                                    <source type="video/ogg" data-bind=" attr: {src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/video/'+src() + '.ogv'}" />
+                                    <span data-bind="text:$root.localization.video_not_supported"></span>
+                                </video>
+                            </div>
+                        </div>                     
+                        <div class="col-xs-12 col-sm-8 PRP-content-col">
+                            <!-- ko foreach: questions() -->
+                                <div data-bind="with: $parents[2]">                               
+                                    <div class="" data-bind="template: { name: 'prp_ko_template', data: questions()[$parentContext.$data]}">
+                                
+                                    </div>
+                                </div>
+                            <!-- /ko -->
+                        </div>                    
+                    </div>                    
+                    <div class="clearfix PRP-clear"></div>
+                <!-- /ko -->
+            <!-- /ko -->
+        <!-- /ko -->
+    </div>
+</div>

@@ -1,0 +1,294 @@
+<!-- ko if: $root.debug_mode()-->
+	<style>
+		#state{
+			position: absolute;
+			z-index: 100000000;
+			top: 0;
+			left: 0;
+			background-color: rgba(255,255,255,0.7);
+		}
+		#attempt{
+			position: absolute;
+			z-index: 100000000;
+			top: 0;
+			right: 50%;
+			background-color: rgba(255,255,255,0.7);
+		}
+		#score{
+			position: absolute;
+			z-index: 100000000;
+			top: 0;
+			right: 0;
+			background-color: rgba(255,255,255,0.7);
+		}
+	</style>
+
+	<div id="state">
+		<div data-bind="text: 'exercise is : ' + $root.labs()[0].selected_exercise()"></div>
+		<div data-bind="text: 'exercise state is : ' + $root.labs()[0].exercises()[$root.labs()[0].selected_exercise()].state()"></div>
+		<!-- ko foreach: $root.labs()[0].exercises()[$root.labs()[0].selected_exercise()].questions() -->
+			<div data-bind="text: 'question ' + id() + ' has state: ' + state()"></div>
+		<!-- /ko -->
+	</div>
+
+	<div id="attempt">
+		<div data-bind="text: 'attempts : ' + $root.labs()[0].exercises()[$root.labs()[0].selected_exercise()].feedback().attempts()"></div>
+		<div data-bind="text: 'checked answers : ' + $root.labs()[0].exercises()[$root.labs()[0].selected_exercise()].checked_answer()"></div>
+	</div>
+
+	<div id="score">
+		<div data-bind="text: 'exercise is : ' + $root.labs()[0].selected_exercise()"></div>
+		<div data-bind="text: 'exercise score is : ' + $root.labs()[0].exercises()[$root.labs()[0].selected_exercise()].score()"></div>
+		<!-- ko foreach: $root.labs()[0].exercises()[$root.labs()[0].selected_exercise()].questions() -->
+			<div data-bind="text: 'question ' + id() + ' has score: ' + score()"></div>
+		<!-- /ko -->
+	</div>
+<!-- /ko -->
+
+<!-- ko if: $root._data.background_image() -->
+    <style data-bind="html: '#index_html{background-image: url(assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/'+$root._data.background_image()+') !important;}'">
+    </style>
+<!-- /ko -->
+
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/media/fonts/source-sans-pro/source-sans-pro.css'}">
+
+<div class="big-boss-flip-container" data-bind="css: {'not-loaded' : !$root.loaded()}"> <!-- outermost container that contains flipper, front, back -->
+	<div class="flipper"><!-- inner container, this is what actually flips (aka. apply animate class to this)-->
+		<div class="flip-front"> <!-- this is front, for WLC only -->
+		
+			<div class="wlc-html">
+			
+			</div>
+		
+		</div>
+				
+		<div class="flip-back" > <!-- this is back, for non WLC, everything is in here now -->
+			<div id="framework_exercise" class="exercise-container other-exercise-container" data-bind="css: {'exercise-full-height': $root.number_of_sco_groups() <= 1}">
+				<div id="exercise-container-inner" class="exercise-container-inner">
+	                <div id="stim_ex_wrapper" class="stim_ex_wrapper" data-bind="style : { backgroundImage : exercises()[selected_exercise()].has_background_image() ? 'url(assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/'+ exercises()[selected_exercise()].background_image() +')'  : '' }"> 
+						<div class="prescreen" data-bind="visible:!hiding_pre_screen()">
+							<!-- ko with: exercises()[selected_exercise()] -->
+								<!-- ko foreach: _data() -->
+									<!-- ko if: type() == "pre_screen" -->
+										<!-- ko foreach: contents() -->
+											<!-- ko if: type() == "pre_quiz" -->
+												<div class="row pre-quiz-wrapper">
+													<div class="col-xs-12 pre-quiz-center">
+														<div class="col-xs-3">
+															<img class="img-responsive pre-quiz-image" data-bind="attr:{src:'assets/'+$root.lesson_type+'/icons/check-your-progress.jpg'}" />
+														</div>
+														<div class="col-sm-offset-1 col-xs-9 col-sm-8 pre-quiz-text-wrapper">
+															<div>
+	                                                            <p class="pre-quiz-text"><span class="strong" data-bind="text:$root.localization.test_checks_understanding"></span></p>
+	                                                            <p class="pre-quiz-instructions"><span data-bind="text:$root.localization.instructions"></span>:</p>
+	                                                            <span class="italic">
+	                                                                <ol>
+	                                                                    <li><span data-bind="text:$root.localization.read_carefully"></span></li>
+	                                                                    <li><span data-bind="text:$root.localization.answer_question"></span></li>
+	                                                                    <li><span data-bind="text:$root.localization.submit_test"></span></li>
+	                                                                </ol>
+	                                                            </span>
+	                                                            <p class="pre-quiz-text">
+	                                                                <span data-bind="html:$root.localization.submit_last_warning"></span>
+	                                                            </p>
+	                                                            <div class="text-center">
+	                                                                <button class="sena-btn pre-quiz-button" data-bind="click:function(){$parents[2].hiding_pre_screen(1); $parents[1].shown_pre_screen(1); $parents[2].pre_screen_close($parents[2].selected_exercise()); product_helper_fire_resize_events(); $root.init_tool_tip($root.labs()[$root.selected_lab()].exercises()[$root.labs()[$root.selected_lab()].selected_exercise()]._data(), false)}"><span><span data-bind="text:$root.localization.check_your_progress"></span> <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></span></button>
+	                                                            </div>
+															</div>
+														</div>
+													</div>
+												</div>
+											<!-- /ko -->
+											<!-- ko if: type() == "text" -->
+												<p data-bind="html: content()"></p>
+											<!-- /ko -->
+											<!-- ko if: (type() == "image" || type() == "image-lg" || type() == "image-md" || type() == "image-sm") && checkResourceExist('assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content())-->
+												<div class="row">
+													<div data-bind="css: $parents[1].get_instructions_columns_size($index(),$parentContext.$index())">
+														<img class="img-responsive " data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+													</div>
+												</div>
+											<!-- /ko -->
+											<!-- ko if: type() == "audio" -->
+												<div class="link-cursor paused_audio" style="height:32px; width:32px" data-bind="click: function() { play_audio($element);}">
+													<audio class="audio_player" preload="none" data-bind="template: { name: 'audio_src_ko_template', data: content() }">
+													
+													</audio>
+												</div>
+											<!-- /ko -->
+											<!-- ko if: type() == "thumbnail" -->
+												<div class="row">
+													<div class="col-xs-5 col-md-3 link-cursor thumbnail" data-bind="click: function () {$('#e_'+$parents[1].id()+'_i_'+$index()+'_modal').modal('show');}">
+														<img  data-bind="attr:{src:'assets/' + lms_config.product_type + '/icons/zoom.svg'}" class="thumbnail_zoom"/>
+														<img class="img-responsive" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+													</div>
+												</div>
+												<div class="modal fade thumbnail_modal_container" data-bind="attr:{id:'e_'+$parents[1].id()+'_i_'+$index()+'_modal' }" tabindex="-1" role="dialog">
+													<div class="thumbnail_modal">
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+														<img class="img-responsive link-cursor" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}, click: function () {$('#e_'+$parents[1].id()+'_i_'+$index()+'_modal').modal('hide');}" />
+													</div>
+												</div>
+											<!-- /ko -->
+											<!-- ko if:type() == "video" --> 
+												<div class="video-stimulus-container">
+													<video class="video_controls video_instruction" controls="controls" preload="auto" data-bind="attr: { id: 'video_instruction'+'_'+$parents[1].id()+'_'+$index()}" >
+														<source data-bind=" attr: {src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/video/'+content() + '.mp4'}" type="video/mp4"/>
+														<!-- MP4 for Safari, IE9, iPhone, iPad, Android, and Windows Phone 7 -->
+														<source type="video/mp4" data-bind=" attr: {src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/video/'+content() + '.mp4'}" />
+														<!-- WebM/VP8 for Firefox4, Opera, and Chrome -->
+														<source type="video/webm" data-bind=" attr: {src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/video/'+content() + '.webm'}" />
+														<!-- Ogg/Vorbis for older Firefox and Opera versions -->
+														<source type="video/ogg" data-bind=" attr: {src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/video/'+content() + '.ogv'}" />
+														<span data-bind="text:$root.localization.video_not_supported"></span>
+													</video>
+												</div>
+											<!-- /ko -->
+											<!-- ko if: type() == "table" && typeof content() !== 'undefined' -->
+												<table id="tabledata" class='instruction_table table-responsive' data-bind="css: content().styles ">
+													<thead></thead>
+													<tbody>
+														<!-- ko foreach: content().cells() -->
+															<!-- ko if: $index() % $parent.content().columns() == 0 -->
+															<tr>
+																<!-- ko foreach: $parent.content().cols_array() -->
+																	<td >
+																		<!-- ko if: typeof $parents[1].content().cells()[$parentContext.$index()+$index()] !== 'undefined' -->
+																			<!-- ko if: $parents[1].content().cells()[$parentContext.$index()+$index()].type() == 'text' -->
+																				<span data-bind="html: $parents[1].content().cells()[$parentContext.$index()+$index()].content()" />
+																			<!-- /ko -->
+																			<!-- ko if: $parents[1].content().cells()[$parentContext.$index()+$index()].type() == 'image' && checkResourceExist('assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +$parents[1].content().cells()[$parentContext.$index()+$index()].content())-->
+																				<img class="img-responsive" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +$parents[1].content().cells()[$parentContext.$index()+$index()].content()}" />
+																			<!-- /ko -->
+																		<!-- /ko -->
+																	</td>
+																<!-- /ko -->
+															</tr>
+															<!-- /ko -->
+														<!-- /ko -->
+													</tbody>
+												</table>
+											<!-- /ko -->
+										<!-- /ko -->
+									<!-- /ko -->
+								<!-- /ko -->
+							<!-- /ko -->
+						</div>
+	                    <div class="lesson row" data-bind="visible: hiding_pre_screen()">
+	                        <!-- ko if: has_stimuli() -->
+	                        	<div class="stimulus" data-bind="css: stimuli_col_size()">
+	                        		<!-- ko if: stimuli_nav_showing() -->
+	                            		<div class="btn-group" role="group">
+		                                    <div class="stimulus-selector">
+		                                        <!-- ko foreach: exercises()[selected_exercise()].stimuli_ids() -->
+			                                        <!-- ko if: $parent.stimuli()[$data].title() == 'tssL' || $parent.stimuli()[$data].title() == 'tssM' || $parent.stimuli()[$data].title() == 'tssR' -->
+			                                        	<button class="btn btn-default" data-bind="click: function(){$parent.select_stimuli($data);}, css: {active: $parent.selected_stimuli() == $parent.get_stimuli_idx_from_id($data)}">
+			                                        		<span data-bind="css: 'tssI'+$parent.stimuli()[$data].title()+'stm-img'"></span>
+			                                        		<span data-bind="text: $parent.stimuli()[$data].local_type()"></span>
+			                                        	</button>
+			                                        <!-- /ko -->
+			                                        <!-- ko if: $parent.stimuli()[$data].title() != 'tssL' && $parent.stimuli()[$data].title() != 'tssM' && $parent.stimuli()[$data].title() != 'tssR' -->
+			                                        	<button class="btn btn-default" data-bind="click: function(){$parent.select_stimuli($data);}, css: {active: $parent.selected_stimuli() == $parent.get_stimuli_idx_from_id($data)}">
+			                                        		<!-- ko if: $parent.stimuli()[$data].title() == 'Read' -->
+			                                        		<span data-bind="css: 'tssItssRstm-img'"></span>
+			                                        		<!-- /ko -->
+			                                        		<!-- ko if: $parent.stimuli()[$data].title() == 'Listen' -->
+			                                        		<span data-bind="css: 'tssItssLstm-img'"></span>
+			                                        		<!-- /ko -->
+			                                        		<!-- ko ifnot: $parent.stimuli()[$data].title() -->
+			                                        			<span data-bind="text: ('Stimuli '+ $data)"></span>
+			                                        		<!-- /ko -->
+			                                        		<!-- ko if: $parent.stimuli()[$data].title()-->
+			                                        			<span data-bind="text: $parent.stimuli()[$data].title()"></span>
+			                                        		<!-- /ko -->
+			                                        	</button>
+			                                        <!-- /ko -->
+		                                        <!-- /ko -->
+		                                    </div>
+		                            	</div>
+	                            	<!-- /ko -->
+	                                <div id="scholar_tss_stimulus"></div>
+	                            </div>
+	                        <!-- /ko -->
+	                            
+	                        <div data-bind="attr: {class: ex_col_size()+' exercises scholar_exercises'}">
+	                            <div data-bind="css: {'quiz-exercises' : $root.exercise_group_types()[$root.labs()[viewModel.selected_lab()].selected_group()].group === 'Quiz' }" >
+	                                <div id="scholar_exercises" class="exercise-padding" data-bind="css: {'counter-reset' : $root._data.test() == 'true' || $root._data.test() == 'PT' }">
+	                                </div>
+	                            </div>
+	                        </div>
+	                        
+	                    </div>
+					</div>
+
+				<div class="exercise-bar" data-bind="visible:hiding_pre_screen() && exercises()[selected_exercise()].type()!='RSLT' && exercises()[selected_exercise()].type()!='RSLT2'"> 
+	                <div class="row ex-row">
+	                    <div class="col-xs-3" data-bind="visible: ($root.exercise_group_types()[$root.labs()[$root.selected_lab()].selected_group()].group != 'Quiz'">
+	                        <div class="exercise-learning-skills pull-left">
+	                            <!-- ko if: exercises()[selected_exercise()]._data.learning_skills().length > 0 && $root._data.test() == 'false' && $root.exercise_group_types()[$root.labs()[viewModel.selected_lab()].selected_group()].group !== 'Quiz' -->
+	                                <div data-bind="visible : exercises()[selected_exercise()]._data.learning_skills().length > 0 " class="learning_skills">
+	                                    <ul class="ls_icons">
+											<li data-bind="css :  {active: exercises()[selected_exercise()]._data.learning_skills().indexOf('Reading') > -1}, attr : { 'data-original-title' : exercises()[selected_exercise()]._data.learning_skills().indexOf('Reading') > -1 ? $root.localization.reading : ''} " class="reading" data-container="body" data-toggle="tooltip" data-placement="top"></li>
+
+											<li data-bind="css :  {active: exercises()[selected_exercise()]._data.learning_skills().indexOf('Writing') > -1}, attr : { 'data-original-title' : exercises()[selected_exercise()]._data.learning_skills().indexOf('Writing') > -1 ? $root.localization.writing : ''} " class="writing" data-container="body" data-toggle="tooltip" data-placement="top"></li> 
+
+											<li data-bind="css :  {active: exercises()[selected_exercise()]._data.learning_skills().indexOf('Listening') > -1}, attr : { 'data-original-title' : exercises()[selected_exercise()]._data.learning_skills().indexOf('Listening') > -1 ? $root.localization.listening : ''} " class="listening" data-container="body" data-toggle="tooltip" data-placement="top"></li>
+
+											<li data-bind="css :  {active: exercises()[selected_exercise()]._data.learning_skills().indexOf('Speaking') > -1}, attr : { 'data-original-title' : exercises()[selected_exercise()]._data.learning_skills().indexOf('Speaking') > -1 ? $root.localization.speaking : ''}  " class="speaking" data-container="body" data-toggle="tooltip" data-placement="top"></li>
+										</ul>
+									</div>
+                            	<!-- /ko -->
+                       		</div>
+						</div>
+						<div class="text-right " data-bind="css: { ' col-xs-9 ': $root.exercise_group_types()[$root.labs()[$root.selected_lab()].selected_group()].group != 'Quiz', ' quiz-nav-width col-xs-12 pull-right ': $root.exercise_group_types()[$root.labs()[$root.selected_lab()].selected_group()].group == 'Quiz' }">
+							<span class="exercise-edit-buttons" data-bind="visible: is_editable">
+								<span data-bind="visible: viewModel._data.test() == 'false'">
+									<button type="button" data-bind="enable:exercises()[selected_exercise()].check_answer_enabled(), click: function(){ exercises()[selected_exercise()].check_answers(); }, visible: exercises()[selected_exercise()].state() <= 2" class="btn btn-xs check-answer exercise-edit-btn" title="Check Answer"><span class="glyphicon glyphicon-check" aria-hidden="true"></span></button>
+									<button type="button" class="btn btn-xs exercise-edit-btn clear-responses" data-bind="click: function() { (selected_exercise() > exercises().length - 2) ?  select_exercise(0) :  select_exercise(selected_exercise() + 1) }, visible: exercises()[selected_exercise()].state() > 2" title="Next"><span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span></button>
+								</span>    
+								<span data-bind="visible: viewModel._data.test() == 'false'">
+									<button type="button" data-bind="enable:exercises()[selected_exercise()].show_answer_enabled(), click: function(){ exercises()[selected_exercise()].show_answers(id()); }" class="btn btn-xs show-answer link-cursor left-btn exercise-edit-btn" title="Show Answer"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>            
+									<button type="button" data-bind="enable:exercises()[selected_exercise()].clear_button_enabled(), click:  function() { exercises()[selected_exercise()].clear_questions(id()); }" class="btn btn-xs clear-responses link-cursor right-btn exercise-edit-btn" title="Clear"><span class="glyphicon glyphicon-erase" aria-hidden="true"></span></button>
+								</span>
+								<span data-bind="visible: viewModel._data.test() == 'true' || viewModel._data.test() == 'PT'">
+									<button type="button" data-bind="enable:exercises()[selected_exercise()].check_answer_enabled(), click: function(){ exercises()[selected_exercise()].check_answers(); }, visible: exercises()[selected_exercise()].state() <= 2" class="btn btn-xs check-answer exercise-edit-btn" title="Check Answer"><span class="glyphicon glyphicon-check" aria-hidden="true"></span></button>
+									<button type="button" data-bind="click: function(){ exercises()[selected_exercise()].clear_questions(id()); }" class="show-answer btn btn-xs link-cursor center-btn exercise-edit-btn" title="Clear"><span class="glyphicon glyphicon-erase" aria-hidden="true"></span></button>      
+								</span>          
+							</span>
+							<div class="exercise-submit" data-bind="visible: !($root.exercise_group_types()[$root.labs()[$root.selected_lab()].selected_group()].group == 'Quiz' && selected_group_current_exercise_idx() >= $root.exercise_group_types()[$root.labs()[$root.selected_lab()].selected_group()].count()-1)">
+								<!-- ko if: enable_submit_button() -->
+									<button class="exercise-submit-btn sena-btn sena-btn-md" data-bind="visible: $root.show_submit_button(), click: function(){ submit_button()}"><span data-bind="text:$root.localization.submit_button"></span></button>
+								<!-- /ko -->
+								<!-- ko ifnot: enable_submit_button() -->
+									<button class="exercise-submit-btn sena-btn sena-btn-md sena-btn-disabled" data-bind="visible: $root.show_submit_button()"><span data-bind="text:$root.localization.submit_button"></span></button>
+								<!-- /ko -->
+							</div> 
+							<div class="exercise-nav-btn">
+								<div id="scholar_nav" data-bind="visible: viewModel.show_nav()"> </div>
+							</div>
+						</div>   
+					</div>
+            	</div>
+			</div>
+		</div>
+		<!-- ko if: $root.number_of_sco_groups() > 1 -->
+			<div id="group_bar">
+
+			</div>
+		<!-- /ko -->
+	</div>
+</div>
+
+<!-- ko if: $root.has_rec() && $root.flash_fallback() && !detectSafari() && !detectMobileiOS() -->
+    <div id="flashContent" class="flash_content"  data-bind="css: {'hide-flash': $root.flash_initialized() || !$root.flash_has_mic()}">
+        <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0" width="300" height="200" id="flash_player" align="middle" data="static/framework/ELLRecorder/VoiceRecorder.swf">
+            <param name="allowScriptAccess" value="always" />
+            <param name="movie" value="static/framework/ELLRecorder/VoiceRecorder.swf" />
+            <param name="quality" value="high" />
+            <param name="bgcolor" value="#ffffff" />
+            <param name="flashvars" value="confFile=./config.xml" />
+            <param name="wmode" value="transparent" />
+            <embed src="static/framework/ELLRecorder/VoiceRecorder.swf" wmode="transparent" quality="high" flashvars="confFile=./config.xml" bgcolor="#ffffff" width="300" height="200" id="flash_player" class="flash-embed" name="flash_player" allowScriptAccess="always" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer" />
+        </object>
+    </div>
+<!-- /ko -->

@@ -1,0 +1,125 @@
+.DMC-question{
+    margin-bottom: 2rem;
+	margin-left: 3rem;
+}
+
+.DMC-response, .DMC-audio-response {
+    margin-bottom:10px;
+    position: relative;
+}
+.DMC-response {
+    padding-left: 2rem;
+}
+.DMC-response > label {
+    position: absolute;
+    left: 0;
+    top: -0.1rem;
+    margin: 0;
+}
+.DMC-response > label:after {
+	content: '\00a0';
+}
+
+.DMC-response-center{
+    text-align:center;
+}
+
+.DMC-col
+{
+	position: relative;
+	padding-left: 0;
+}
+
+.DMC-question-col .default-audio-button
+{
+	width: 100%;
+}
+
+.DMC-row
+{
+	line-height: 1.9;
+	margin-bottom: 2rem;
+}
+
+.DMC-label
+{
+	margin: 0;
+}
+
+.DMC-label input[type='radio']
+{
+	display: none;
+}
+
+.DMC-label .DMC-response-text
+{
+	border: 0.2rem solid hsla(0, 0%, 0%, 0.3);
+	font-weight: normal;
+	border-radius: 0.4rem;
+	padding: 0.1em 0.25em;
+}
+
+.DMC-label .DMC-response-text:before
+{
+	position: relative;
+	display: inline-block;
+	font-family: "sena-icons";
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	color: hsla(0, 0%, 0%, 0.3);
+	content: "\E010";
+	padding: 0 0.2em 0 0.1em;
+}
+
+.DMC-label input[type='radio']:checked + .DMC-response-text:before
+{
+	color: inherit;
+	content: "\E00F";
+}
+
+.DMC-label input[type='radio']:enabled + .DMC-response-text:hover
+{
+	cursor: pointer;
+	background-color: hsla(0, 0%, 0%, 0.1);
+}
+
+.DMC-label input[type='radio']:checked + .DMC-response-text{
+	border-color: #238276;
+	color: #238276;
+	background-color: hsla(0, 0%, 100%, 0.9);
+}
+#main.cmn .DMC-label input[type='radio']:checked + .DMC-response-text{
+	border-color: #d34800;
+	color: #d34800;
+}
+#main.fr .DMC-label input[type='radio']:checked + .DMC-response-text{
+	border-color: #e42c23;
+	color: #e42c23;
+}
+#main.pt .DMC-label input[type='radio']:checked + .DMC-response-text{
+	border-color: #22893a;
+	color: #22893a;
+}
+#main.es .DMC-label input[type='radio']:checked + .DMC-response-text{
+	border-color: #935ec6;
+	color: #935ec6;
+}
+
+.DMC-label input[type='radio']:enabled:checked + .DMC-response-text:hover{
+	background-color: #e9f3f1;
+}
+#main.cmn .DMC-label input[type='radio']:enabled:checked + .DMC-response-text:hover{
+	background-color: #ffedeb;
+}
+#main.fr .DMC-label input[type='radio']:enabled:checked + .DMC-response-text:hover{
+	background-color: #feeded;
+}
+#main.pt .DMC-label input[type='radio']:enabled:checked + .DMC-response-text:hover{
+	background-color: #e0fee4;
+}
+#main.es .DMC-label input[type='radio']:enabled:checked + .DMC-response-text:hover{
+	background-color: #f3eff9;
+}

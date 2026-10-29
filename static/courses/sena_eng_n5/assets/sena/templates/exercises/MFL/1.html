@@ -1,0 +1,67 @@
+<link rel="stylesheet" data-bind="attr: {href: 'assets/'+$root.lesson_type+'/templates/exercises/MFL/1.css'}">
+<span class="edit_container"></span>
+<div data-bind="template: { name: 'instructions_container_ko_template'}"></div>
+
+<div class="MFL-paragraph counter-reset">
+    <!-- ko foreach:questions() -->
+        <div class="question-block row">
+            <!-- ko foreach: _data() -->
+                <!-- ko if: type() == "question" -->
+                    <!-- ko ifnot: product_helper_check_rec_question($parent._data())-->
+                        <div data-bind="template: { name: 'question_counter_ko_template'}"></div>
+                        <div class="response-feedback response-feedback-question" data-bind="template: { name: 'data_level_question_feedback_ko_template' }, css: $parents[0].state_css()"></div>
+                    <!-- /ko -->
+                    <!-- ko foreach: contents() -->
+                        <!-- ko if: type() == "text" -->
+                            <span data-bind="html:content()"></span>
+                        <!-- /ko -->
+                        <!-- ko if: type() == "image" || type() == "image-lg" || type() == "image-md" || type() == "image-sm"-->
+                            <div class="col-md-3 col-sm-4 col-xs-4 MFL-question-col">
+                                <div class="MFL-no-padding" data-bind="css: $parents[1].get_template_columns($index()) ">
+                                    <div class="question-position">
+                                        <div class="exe-image-border-wrapper">
+                                            <div class="exe-image-border">
+                                                <img class="img-responsive exe-image" data-bind="attr:{src:'assets/'+$root.lesson_type+'/scos/'+$root.sco_number+'/media/image/' +content()}" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- /ko -->
+                        <!-- ko if:type() == "audio" -->
+                            <div class="col-md-3 col-sm-4 col-xs-4 MFL-question-col">
+                                <div class="link-cursor sena-btn default-audio-button MFL-audio" data-bind="template: { name: 'audio_ko_template', data: $data }"></div>
+                            </div>
+                        <!-- /ko --> 
+                    <!-- /ko -->
+                <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if: _data()[0].contents().length > 0 && product_helper_check_rec_question(_data()) -->
+                <div class="col-md-3 col-sm-4 col-xs-4">
+                
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6" data-bind="template: { name: 'rec_ko_template' }">
+                            
+                </div>
+            <!-- /ko -->
+            <!-- ko if: responses().length > 1 && _data()[0].contents().length > 0 && product_helper_check_rec_question(_data()) == false -->
+                <span data-bind="css: 'response '+state_css(), visible: state() > 1 && $parent.checked_answer()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <span class="MFL-dropdown"><select data-bind='options: responses, 
+                optionsText: function(item) {
+                    return item._data()[0].content();
+                },
+                value: selectbox_response, 
+                css: "link-cursor", 
+                attr: {disabled:$parents[0].feedback_showing_answer()}' >
+                   
+                </select></span>
+            <!-- /ko -->
+            
+            <!-- ko foreach: _data() -->
+                <!-- ko if: type() == "post_question" -->
+                    <span data-bind="html: contents.content()"></span>              
+                <!-- /ko -->
+            <!-- /ko -->
+        </div>
+    <!-- /ko -->   
+</div>

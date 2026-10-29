@@ -1,0 +1,40 @@
+#bodyDiv {
+    position:absolute;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+}
+
+#nav_scroll {
+    overflow: auto;
+    width: 400px;
+    height: 800px;
+    padding: 0 5px;
+    border: 1px solid #b7b7b7;
+}
+
+.horizontal-track2 {
+    width: 100%;
+    height: 17px;
+    background: #e4e6e3;
+    border: 1px solid #dfdfdd;
+}
+
+.horizontal-handle2 {
+    height: 17px;
+}
+
+.horizontal-handle2 .left {
+    width: 17px;
+    height: 17px;
+}
+
+.horizontal-handle2 .right {
+    width: 100%;
+    height: 17px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    clip: rect(0 9999px 17px 17px);
+}
