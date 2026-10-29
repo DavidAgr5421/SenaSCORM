@@ -1,3 +1,58 @@
+// Virtual SCORM LMS Adapter Injection
+(function() {
+    var defaultLaunchData = '{"course_name": "", "level_name": "SENA", "client_id": 1, "client_config": "default", "sco_number": "5505", "unit_name": "English", "product_type": "sena", "lang": "eng"}';
+    var getParentData = function() {
+        try {
+            if (window.parent && window.parent.__currentScormData) {
+                return window.parent.__currentScormData;
+            }
+        } catch(e) {}
+        return null;
+    };
+    var store = { values: {}, suspend: '' };
+    var mock2004 = {
+        Initialize: function(p) { return 'true'; },
+        Terminate: function(p) { return 'true'; },
+        GetValue: function(elem) {
+            var parentData = getParentData();
+            if (elem === 'cmi.launch_data' || elem === 'cmi.data_from_lms') {
+                return (parentData && parentData.launch_data) ? parentData.launch_data : defaultLaunchData;
+            }
+            if (elem === 'cmi.suspend_data') {
+                return (parentData && parentData.suspend_data) ? parentData.suspend_data : (store.suspend || '');
+            }
+            if (elem === 'cmi.completion_status') return 'incomplete';
+            if (elem === 'cmi.success_status') return 'unknown';
+            if (elem === 'cmi.learner_id') return 'SENA_APRENDIZ_01';
+            if (elem === 'cmi.learner_name') return 'Aprendiz SENA';
+            if (elem === 'cmi.entry') return 'ab-initio';
+            if (elem === 'cmi.mode') return 'normal';
+            if (elem === 'cmi.credit') return 'credit';
+            return store.values[elem] || '';
+        },
+        SetValue: function(elem, val) {
+            store.values[elem] = String(val);
+            var parentData = getParentData();
+            if (parentData) {
+                parentData.values[elem] = String(val);
+                if (elem === 'cmi.suspend_data') parentData.suspend_data = String(val);
+            }
+            if (elem === 'cmi.suspend_data') store.suspend = String(val);
+            return 'true';
+        },
+        Commit: function(p) { return 'true'; },
+        GetLastError: function() { return '0'; },
+        GetErrorString: function(c) { return 'No error'; },
+        GetDiagnostic: function(c) { return 'No error'; }
+    };
+    if (!window.API_1484_11) {
+        window.API_1484_11 = mock2004;
+    }
+    if (window.parent && !window.parent.API_1484_11) {
+        try { window.parent.API_1484_11 = mock2004; } catch(e) {}
+    }
+})();
+
 /****************************************************************************
 SCORM_2004_APIwrapper.js
  2000, 2011 Advanced Distributed Learning (ADL). Some Rights Reserved.

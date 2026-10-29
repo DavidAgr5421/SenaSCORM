@@ -412,6 +412,93 @@
 
         const CACHE_NAME = 'scorm-virtual-cache-v1';
 
+        // Adaptador Mock LMS SCORM 2004 y SCORM 1.2 integrado
+        window.__currentScormData = {
+            launch_data: '{"course_name": "", "level_name": "SENA", "client_id": 1, "client_config": "default", "sco_number": "5505", "unit_name": "English", "product_type": "sena", "lang": "eng"}',
+            suspend_data: '',
+            lesson_status: 'incomplete',
+            lesson_location: '',
+            entry: 'ab-initio',
+            values: {}
+        };
+
+        const api2004 = {
+            Initialize: function(p) { console.log('[LMS SCORM 2004] Initialize'); return "true"; },
+            Terminate: function(p) { console.log('[LMS SCORM 2004] Terminate'); return "true"; },
+            GetValue: function(elem) {
+                console.log('[LMS SCORM 2004] GetValue:', elem);
+                if (elem === "cmi.launch_data" || elem === "cmi.data_from_lms") {
+                    return window.__currentScormData.launch_data || '';
+                }
+                if (elem === "cmi.suspend_data") return window.__currentScormData.suspend_data || '';
+                if (elem === "cmi.completion_status") return window.__currentScormData.lesson_status || 'incomplete';
+                if (elem === "cmi.success_status") return 'unknown';
+                if (elem === "cmi.learner_id") return 'SENA_APRENDIZ_01';
+                if (elem === "cmi.learner_name") return 'Aprendiz SENA';
+                if (elem === "cmi.entry") return window.__currentScormData.entry || 'ab-initio';
+                if (elem === "cmi.mode") return 'normal';
+                if (elem === "cmi.credit") return 'credit';
+                if (elem === "cmi.location") return window.__currentScormData.lesson_location || '';
+                if (elem === "cmi.objectives._count") return '0';
+                if (elem === "cmi.interactions._count") return '0';
+                return window.__currentScormData.values[elem] || '';
+            },
+            SetValue: function(elem, val) {
+                console.log('[LMS SCORM 2004] SetValue:', elem, '=', val);
+                window.__currentScormData.values[elem] = String(val);
+                if (elem === "cmi.suspend_data") window.__currentScormData.suspend_data = String(val);
+                if (elem === "cmi.completion_status") window.__currentScormData.lesson_status = String(val);
+                if (elem === "cmi.location") window.__currentScormData.lesson_location = String(val);
+                return "true";
+            },
+            Commit: function(p) { return "true"; },
+            GetLastError: function() { return "0"; },
+            GetErrorString: function() { return "No error"; },
+            GetDiagnostic: function() { return "No error"; }
+        };
+
+        const api12 = {
+            LMSInitialize: function(p) { console.log('[LMS SCORM 1.2] LMSInitialize'); return "true"; },
+            LMSFinish: function(p) { console.log('[LMS SCORM 1.2] LMSFinish'); return "true"; },
+            LMSGetValue: function(elem) {
+                console.log('[LMS SCORM 1.2] LMSGetValue:', elem);
+                if (elem === "cmi.launch_data" || elem === "cmi.data_from_lms") {
+                    return window.__currentScormData.launch_data || '';
+                }
+                if (elem === "cmi.suspend_data") return window.__currentScormData.suspend_data || '';
+                if (elem === "cmi.core.lesson_status") return window.__currentScormData.lesson_status || 'incomplete';
+                if (elem === "cmi.core.student_id") return 'SENA_APRENDIZ_01';
+                if (elem === "cmi.core.student_name") return 'Aprendiz SENA';
+                if (elem === "cmi.core.lesson_location") return window.__currentScormData.lesson_location || '';
+                if (elem === "cmi.core.entry") return window.__currentScormData.entry || 'ab-initio';
+                return window.__currentScormData.values[elem] || '';
+            },
+            LMSSetValue: function(elem, val) {
+                console.log('[LMS SCORM 1.2] LMSSetValue:', elem, '=', val);
+                window.__currentScormData.values[elem] = String(val);
+                if (elem === "cmi.suspend_data") window.__currentScormData.suspend_data = String(val);
+                if (elem === "cmi.core.lesson_status") window.__currentScormData.lesson_status = String(val);
+                if (elem === "cmi.core.lesson_location") window.__currentScormData.lesson_location = String(val);
+                return "true";
+            },
+            LMSCommit: function(p) { return "true"; },
+            LMSGetLastError: function() { return "0"; },
+            LMSGetErrorString: function() { return "No error"; },
+            LMSGetDiagnostic: function() { return "No error"; }
+        };
+
+        window.API_1484_11 = api2004;
+        window.API = api12;
+
+        iframe.addEventListener('load', () => {
+            try {
+                if (iframe.contentWindow) {
+                    iframe.contentWindow.API_1484_11 = window.API_1484_11;
+                    iframe.contentWindow.API = window.API;
+                }
+            } catch (e) {}
+        });
+
         // Registro de Service Worker para interceptar peticiones de recursos en memoria
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('./sw.js')
@@ -545,7 +632,15 @@
                         let txt = await zipObj.async('string');
                         txt = txt.replace('function findAPI(win)\n{', 'function findAPI(win)\n{\n try {');
                         txt = txt.replace('return win.API_1484_11;\n}', 'return win.API_1484_11;\n } catch(e) { return null; }\n}');
-                        fileData = new Blob([txt], { type: 'application/javascript; charset=utf-8' });
+                        const fallbackInject = `
+                        if (!window.API_1484_11 && window.parent && window.parent.API_1484_11) {
+                            window.API_1484_11 = window.parent.API_1484_11;
+                        }
+                        if (!window.API && window.parent && window.parent.API) {
+                            window.API = window.parent.API;
+                        }
+                        `;
+                        fileData = new Blob([fallbackInject + '\n' + txt], { type: 'application/javascript; charset=utf-8' });
                     } else if (relPath.includes('mediaelement') && relPath.endsWith('.js')) {
                         let txt = await zipObj.async('string');
                         txt = txt.replace('a.isInIframe=window.location!=window.parent.location;', 'try{a.isInIframe=window.location!=window.parent.location}catch(e){a.isInIframe=true};');
@@ -634,6 +729,20 @@
                         href = href.replace(/^(\.|\/)+/, '');
                         info.entry_file = href;
                     }
+                }
+
+                // Extraer datos iniciales del LMS (cmi.launch_data)
+                let lmsData = null;
+                const allNodes = doc.getElementsByTagName('*');
+                for (let i = 0; i < allNodes.length; i++) {
+                    if (allNodes[i].localName === 'dataFromLMS') {
+                        lmsData = allNodes[i].textContent.trim();
+                        break;
+                    }
+                }
+                if (lmsData) {
+                    info.dataFromLMS = lmsData;
+                    window.__currentScormData.launch_data = lmsData;
                 }
             } catch (e) {
                 console.warn('Error al parsear imsmanifest:', e);
