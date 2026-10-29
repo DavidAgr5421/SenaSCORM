@@ -4,3 +4,7 @@ __pycache__/
 .streamlit/secrets.toml
 static/uploads/*
 !static/uploads/.gitkeep
+uploads/*
+!uploads/.gitkeep
+test_streamlit.png
+cookies.txt
