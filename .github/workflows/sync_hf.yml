@@ -13,10 +13,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          lfs: true
 
-      - name: Sincronizar a Hugging Face
-        env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: |
-          git push --force https://David5421Agr:$HF_TOKEN@huggingface.co/spaces/David5421Agr/SenaSCOR main
+      - name: Publicar en Hugging Face Space
+        uses: huggingface/hub-sync@v0.3.0
+        with:
+          github_repo_id: ${{ github.repository }}
+          huggingface_repo_id: David5421Agr/SenaSCOR
+          repo_type: space
+          space_sdk: static
+          hf_token: ${{ secrets.HF_TOKEN }}
